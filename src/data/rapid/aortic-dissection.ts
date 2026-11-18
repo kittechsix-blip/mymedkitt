@@ -1,0 +1,126 @@
+import type { RapidStrip } from './types.js';
+
+// RAPID strip (format v3), Aortic Dissection. Faces authored; every expansion line is a verbatim node excerpt. Not approved.
+// One variant (the consult forks by dissection type only after imaging). Findings: research/rapid/aortic-dissection.findings.json
+
+export const RAPID_AORTIC_DISSECTION: RapidStrip = {
+  treeId: 'aortic-dissection',
+  variants: [
+    {
+      id: 'dissection',
+      label: 'Aortic dissection',
+      tiles: [
+        {
+          id: 'imaging',
+          layout: 'steps',
+          action: 'Stat CTA',
+          figure: 'first-line imaging',
+          condition: 'TEE at bedside if unstable',
+          nodeIds: ['dissect-imaging', 'dissect-immediate-workup'],
+          warning: { nodeId: 'dissect-immediate-workup', text: 'Do NOT delay imaging for labs.' },
+          lines: [
+            { nodeId: 'dissect-immediate-workup', text: 'For high-suspicion patients, initiate workup and treatment simultaneously.' },
+            { nodeId: 'dissect-imaging', text: 'CTA is the first-line imaging test for aortic dissection.' },
+            { nodeId: 'dissect-imaging', text: 'TEE (Transesophageal Echo):' },
+            { nodeId: 'dissect-imaging', text: 'Good for unstable patients (bedside)' },
+          ],
+        },
+        {
+          id: 'pain',
+          layout: 'steps',
+          action: 'Pain control',
+          figure: 'Reduces sympathetic drive',
+          nodeIds: ['dissect-management'],
+          lines: [
+            { nodeId: 'dissect-management', text: 'Pain control:' },
+            { nodeId: 'dissect-management', text: 'Reduces sympathetic drive' },
+            { nodeId: 'dissect-management', text: 'Reduces BP and heart rate' },
+            { nodeId: 'dissect-management', text: 'IV opioids (morphine, fentanyl)' },
+          ],
+        },
+        {
+          id: 'esmolol',
+          layout: 'steps',
+          action: 'Esmolol first',
+          figure: '500 mcg/kg bolus',
+          condition: 'Target HR <60 bpm, before vasodilator',
+          nodeIds: ['dissect-beta-blocker', 'dissect-management'],
+          warning: { nodeId: 'dissect-management', text: 'Beta-blocker BEFORE vasodilator' },
+          lines: [
+            { nodeId: 'dissect-beta-blocker', text: 'Esmolol (preferred for titration):' },
+            { nodeId: 'dissect-beta-blocker', text: 'Bolus: 500 mcg/kg IV over 1 minute' },
+            { nodeId: 'dissect-beta-blocker', text: 'Infusion: 50-200 mcg/kg/min' },
+            { nodeId: 'dissect-beta-blocker', text: 'Contraindications to beta-blockers:' },
+            { nodeId: 'dissect-beta-blocker', text: 'Severe bradycardia' },
+            { nodeId: 'dissect-beta-blocker', text: 'High-grade AV block' },
+            { nodeId: 'dissect-beta-blocker', text: 'Acute decompensated heart failure (relative)' },
+            { nodeId: 'dissect-beta-blocker', text: 'Severe AR with hemodynamic compromise (slow HR worsens regurgitation)' },
+          ],
+        },
+        {
+          id: 'diltiazem-alt',
+          layout: 'steps',
+          action: 'Or diltiazem',
+          figure: '0.25 mg/kg',
+          condition: 'ONLY if beta-blockers cannot be used',
+          nodeIds: ['dissect-beta-blocker'],
+          lines: [
+            { nodeId: 'dissect-beta-blocker', text: 'If beta-blockade is contraindicated → non-dihydropyridine CCB:' },
+            { nodeId: 'dissect-beta-blocker', text: 'Diltiazem: 0.25 mg/kg IV over 2 min, then infusion 5-15 mg/hr — titrate to HR <60' },
+            { nodeId: 'dissect-beta-blocker', text: 'Use ONLY when beta-blockers cannot be used (severe asthma/bronchospasm, decompensated HF, high-grade AV block, acute cocaine/sympathomimetic intoxication)' },
+          ],
+        },
+        {
+          id: 'nicardipine',
+          layout: 'steps',
+          action: 'Then nicardipine',
+          figure: '5 mg/hr',
+          condition: 'After beta-blocker; SBP goal 100-120',
+          nodeIds: ['dissect-vasodilator'],
+          warning: { nodeId: 'dissect-vasodilator', text: 'Vasodilators cause reflex tachycardia' },
+          lines: [
+            { nodeId: 'dissect-vasodilator', text: 'Add vasodilator AFTER beta-blockade to reach BP goal.' },
+            { nodeId: 'dissect-vasodilator', text: 'Nicardipine (preferred):' },
+            { nodeId: 'dissect-vasodilator', text: 'Start: 5 mg/hr IV' },
+            { nodeId: 'dissect-vasodilator', text: 'Titrate: 2.5 mg/hr every 5-15 min' },
+            { nodeId: 'dissect-vasodilator', text: 'Max: 15 mg/hr' },
+            { nodeId: 'dissect-vasodilator', text: 'SBP 100-120 mmHg' },
+          ],
+        },
+        {
+          id: 'hypotension',
+          layout: 'steps',
+          action: 'Hypotension: surgery',
+          figure: 'Do NOT delay OR',
+          condition: 'Hypotensive Type A',
+          nodeIds: ['dissect-hypotension'],
+          warning: { nodeId: 'dissect-hypotension', text: 'Pericardiocentesis may relieve tamponade temporarily but can precipitate complete rupture' },
+          lines: [
+            { nodeId: 'dissect-hypotension', text: 'Hypotension in aortic dissection is a grave sign.' },
+            { nodeId: 'dissect-hypotension', text: 'Do NOT delay surgery for stabilization' },
+            { nodeId: 'dissect-hypotension', text: 'Hypotensive Type A = OR immediately' },
+            { nodeId: 'dissect-hypotension', text: 'Pericardiocentesis ONLY if tamponade and imminent arrest' },
+            { nodeId: 'dissect-hypotension', text: 'Avoid:' },
+            { nodeId: 'dissect-hypotension', text: 'Aggressive fluid resuscitation (worsens tamponade)' },
+          ],
+        },
+        {
+          id: 'type-a',
+          layout: 'steps',
+          action: 'Call CT surgery',
+          figure: 'Type A: emergent surgery',
+          condition: 'Type A (involves ascending aorta)',
+          nodeIds: ['dissect-type-a'],
+          lines: [
+            { nodeId: 'dissect-type-a', text: 'Type A dissection is a surgical emergency.' },
+            { nodeId: 'dissect-type-a', text: 'Emergent CT surgery consultation' },
+            { nodeId: 'dissect-type-a', text: 'Continue anti-impulse therapy' },
+            { nodeId: 'dissect-type-a', text: 'NPO' },
+            { nodeId: 'dissect-type-a', text: 'Blood products available (type and crossmatch)' },
+            { nodeId: 'dissect-type-a', text: 'Stroke: NOT a contraindication (surgery may restore perfusion)' },
+          ],
+        },
+      ],
+    },
+  ],
+};

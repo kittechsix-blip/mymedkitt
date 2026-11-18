@@ -1,0 +1,51 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": ["sepsis-start", "sepsis-abx-empiric", "sepsis-vp-init"],
+    "text": "Most important: this consult is a bundle plus an escalation ladder (cultures, fluids, antibiotics, source control, then vasopressors and steroids), not one short memorised resuscitation sequence, and the 7-tile limit forced real omissions (see the 'not on the strip' finding). Look hardest at the antibiotics tile: it carries only the timing, the 'beta-lactam FIRST before vancomycin' rule (quoted from the node's summary line, because the body line carries the word 'survival' and cannot be quoted) and the vancomycin stop rule. No antibiotic choice or dose is on it. The strip has one variant: the start node offers Stable, Hypotensive and Peri-Arrest, but the first two go to the same next node and Peri-Arrest (airway, fluids, antibiotics) rejoins the same bundle, so the consult does not truly fork into different resuscitation paths."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": ["sepsis-airway", "sepsis-abx-empiric", "sepsis-fluid-assess", "sepsis-transfusion", "sepsis-inotrope", "sepsis-refractory", "sepsis-map-target", "sepsis-labs", "sepsis-mrsa", "sepsis-fluids", "sepsis-vp-init", "sepsis-vp-second", "sepsis-eval"],
+    "text": "Time-critical content NOT on the strip: (1) the Peri-Arrest path: optimise MAP before intubation, push-dose phenylephrine or start norepinephrine before intubation, avoid prolonged apnea (airway node); (2) the empiric antibiotic choices and doses, MRSA risk factors, and the vancomycin loading dose; (3) critical action 'RESTRICT fluids after initial 30 mL/kg' (fluid responsiveness node), left off for the 7-tile limit; (4) critical action 'Transfuse only if Hgb 7 g/dL or below' (transfusion node), left off for the 7-tile limit; (5) lactate and other labs, source evaluation; (6) MAP target personalisation; (7) inotropes (dobutamine, epinephrine challenge) for low cardiac output, and epinephrine as an alternative second agent; (8) refractory shock reassessment and methylene blue; (9) the 'avoid HES' line (a trial citation, cannot be quoted) and the 'why NOT dopamine' line (also a trial line); (10) the fluid-tile modifiers: use ideal body weight for BMI >30, smaller initial bolus acceptable in heart failure / ESRD, fluid-conservative approach for pneumonia with mild hypotension. Whether fluid restriction or transfusion belongs on the strip in place of another tile is the physician's call."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "norepinephrine",
+    "drugId": "norepinephrine",
+    "nodeIds": ["sepsis-vp-init"],
+    "text": "Two disagreements. (a) The consult starts norepinephrine at 0.05 mcg/kg/min (4-6 mcg/min); the drug store's septic shock entry gives only the range 0.01-3 mcg/kg/min and no starting dose. The tile face deliberately shows the endpoint (titrate to MAP 65 or more) rather than either number; the store's range shows under 'Dosing' and the consult's start dose is quoted under 'In this consult'. (b) Peripheral administration: the consult says can start peripherally for less than 6 hours; the store says peripheral acceptable up to 12 h. Both are visible on the tile. Not resolved. The store also has no weight calculator for this per-kg-per-minute dose."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "fluids",
+    "nodeIds": ["sepsis-start", "sepsis-eval", "sepsis-fluids", "sepsis-airway", "sepsis-abx-empiric"],
+    "text": "Flow ambiguity for tile order: in the consult the fluids node is reached only from the Peri-Arrest path (airway, then fluids, then antibiotics). The Stable and Hypotensive options go source evaluation, labs, source, then antibiotics, and never meet the fluids node. The strip puts fluids before antibiotics (as the Peri-Arrest path does, and as the critical-actions list does). The physician should decide whether the 30 mL/kg tile should come before or after antibiotics, and whether the consult itself should route shock patients through the fluids node."
+  },
+  {
+    "kind": "gap",
+    "tileId": "fluids",
+    "drugId": "lactated-ringers",
+    "nodeIds": ["sepsis-fluids"],
+    "text": "The drug store has no entry for IV crystalloid / lactated Ringer's, so fluids is a steps tile and its figure carries a dose (30 mL/kg) taken from the node. The consult has no weight calculator for 30 mL/kg."
+  },
+  {
+    "kind": "gap",
+    "tileId": "antibiotics",
+    "nodeIds": ["sepsis-abx-empiric", "sepsis-mrsa"],
+    "text": "Antibiotic drugs (piperacillin-tazobactam, cefepime, meropenem, vancomycin) are named in the consult as a choose-one list with several options, so no single one is a drug tile and none is quoted; the drug store's entries for them were not checked. The vancomycin stop line is a de-escalation rule at 48 hours, not a first-minutes action; it is on the tile only because the consult lists it as a critical action."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "hydrocortisone",
+    "drugId": "hydrocortisone",
+    "nodeIds": ["sepsis-steroids"],
+    "text": "Consult and store agree on 50 mg IV q6h or 200 mg/day infusion for vasopressor-dependent septic shock. The store's text also mentions fludrocortisone 50 mcg PO daily, which the consult presents as an add-on per APROCCHSS; the strip shows only the hydrocortisone dose in the figure."
+  },
+  {
+    "kind": "other",
+    "tileId": "vasopressin",
+    "nodeIds": ["sepsis-vp-second", "sepsis-map-target"],
+    "text": "Tile order follows the consult's flow where it is clear: cultures, antibiotics and fluids (see the flow-ambiguity finding), source control, norepinephrine, vasopressin, hydrocortisone. The critical-actions list puts the beta-lactam rule third and source control seventh. In the consult, steroids are reached only after refractory shock is confirmed; on the strip they follow vasopressin."
+  }
+]

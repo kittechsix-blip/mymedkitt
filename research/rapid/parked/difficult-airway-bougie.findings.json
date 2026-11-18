@@ -1,0 +1,71 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "dab-start",
+      "dab-technique",
+      "dab-cric-technique"
+    ],
+    "text": "Most important: this consult is mostly a procedure walkthrough (assessment, bougie technique, confirmation, failed-airway pathway, cricothyrotomy), not a memorised resuscitation sequence. The strip is the best faithful 7-tile reduction, but the bougie and cricothyrotomy tiles are step lists, not single actions. The cricothyrotomy tile holds steps 2 to 9 of the consult's 10 steps (eight-line cap), so it omits step 1 (stabilize larynx) and step 10 (confirm with waveform capnography). A physician should decide whether this consult belongs on a RAPID strip at all."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "dab-lemon",
+      "dab-start",
+      "dab-backup",
+      "dab-predicted",
+      "dab-standard-rsi",
+      "dab-bougie-rsi",
+      "dab-awake",
+      "dab-rsi-complete",
+      "dab-equipment",
+      "dab-adjuncts",
+      "dab-attempt-result",
+      "dab-confirmed",
+      "dab-cico-green",
+      "dab-sga-result",
+      "dab-sga-success",
+      "dab-cric-landmarks",
+      "dab-cric-confirm",
+      "dab-cric-post"
+    ],
+    "text": "Time-critical content NOT on the strip: video laryngoscopy for all intubations and bougie-first for predicted difficult airways (critical actions on dab-start; only the kit and assessment lines are quoted); RSI drugs and doses (all of dab-standard-rsi and dab-bougie-rsi; drugs are left off, not drafted); the option to consider awake intubation in extreme-risk patients; Cormack-Lehane grade and when the bougie is indicated; adjuncts (jaw thrust, ELM, BURP) and common errors; the green-zone rescue (supraglottic airway, call for help, do not make repeated blind attempts); SGA bridge; cricothyroid membrane landmarks and laryngeal handshake; ETCO2 check after cric; post-intubation and post-cric care. Critical actions left off or only partly shown: 'Feel for tracheal clicks' (the consult itself calls clicks unreliable, so that line is quoted with its caution); 'Hold bougie in place while loading ETT over it' (the consult's technique node has no such line; not on the strip); 'Use video laryngoscopy for all intubations' and 'Use bougie-first technique' (dab-start lines not quoted). Tile order follows the consult's flow for a failed attempt (kit, LEMON, bougie, attempt limit, capnography, failed airway, cric), not the critical-actions list order; in the consult, capnography is reached directly after a successful tube pass, so the physician should check whether capnography should sit before the attempt-limit tile (the checker raises order flags on both). Reviewer additions: the bougie tile (eight-line cap) leaves off step 5 'Remove bougie once ETT at appropriate depth', step 1 'Laryngoscopy', the 90-degree ETT rotation when it catches on arytenoids, and the adjunct maneuvers. The failed-airway tile shows the Green Zone line (adequate oxygenation by ANY lifeline: time to think, plan, call for help) beside the CICO line, but the green-zone rescue itself (supraglottic airway, do NOT make repeated blind intubation attempts, call anesthesiology/ENT) is not on the strip, so declaring failed airway on this strip does not by itself mean cut."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "limit-attempts",
+    "nodeIds": [
+      "dab-max-attempts"
+    ],
+    "text": "The critical action 'Call for help early if failed attempt - do not exceed 3 attempts' says to call for help, but the attempt-count node does not say so; it only limits attempts and lists what to change between them. 'Call for help early' appears in the consult only under awake intubation and green-zone rescue. Nothing was added."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "bougie",
+    "nodeIds": [
+      "dab-technique",
+      "dab-adjuncts"
+    ],
+    "text": "The consult's critical action says 'Hold bougie in place while loading ETT over it', but no line of the technique node says this. The step 'Slide pre-lubricated ETT over bougie' is quoted instead. Also: the technique warns tracheal clicks are unreliable, and the 'Do NOT preload' warning sits on the equipment node, not the technique node."
+  },
+  {
+    "kind": "other",
+    "tileId": "cric",
+    "nodeIds": [
+      "dab-cric-go",
+      "dab-cric-technique"
+    ],
+    "text": "The cricothyrotomy tile jumps to dab-cric-go but quotes only the technique node, because the eight-line cap forced a choice between the announcement and the steps. The 'cannot oxygenate' trigger is quoted on the failed-airway tile instead. No drugs are on this strip, so no drug-store comparison applies."
+  },
+  {
+    "kind": "other",
+    "tileId": "bougie",
+    "nodeIds": [
+      "dab-technique",
+      "dab-rsi-complete",
+      "dab-bougie-rsi"
+    ],
+    "text": "The bougie tile's condition 'Predicted difficult airway' is the consult's bougie-first trigger, but the consult also calls for the bougie when the laryngoscopic view is poor (CL IIb-IV, dab-rsi-complete), which is not on the strip. Physician to confirm the condition wording is acceptable."
+  }
+]

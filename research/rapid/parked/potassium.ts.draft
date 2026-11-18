@@ -1,0 +1,124 @@
+import type { RapidStrip } from './types.js';
+
+// RAPID strip (format v3), Potassium Disorders. Faces authored; every expansion line is a verbatim node excerpt. Not approved.
+// Single variant: SEVERE HYPERKALEMIA only, in node FLOW order (7 tiles). Hypokalemia / periodic paralysis are not on the strip.
+// Findings: research/rapid/potassium.findings.json
+
+export const RAPID_POTASSIUM: RapidStrip = {
+  treeId: 'potassium',
+  variants: [
+    {
+      id: 'severe-hyperkalemia',
+      label: 'Hyperkalemia',
+      tiles: [
+        {
+          id: 'check-ecg',
+          layout: 'steps',
+          action: 'Check ECG',
+          figure: 'telemetry and ECG',
+          condition: 'Hyperkalemia on lab report',
+          nodeIds: ['k-hyper-ecg'],
+          lines: [
+            { nodeId: 'k-hyper-ecg', text: 'The first response to a lab report of hyperkalemia should be to look at telemetry and obtain an ECG.' },
+            { nodeId: 'k-hyper-ecg', text: 'If ECG shows hyperkalemia features → confirms diagnosis, treat as severe.' },
+            { nodeId: 'k-hyper-ecg', text: 'If severe lab value but normal ECG → consider pseudohyperkalemia, repeat lab.' },
+          ],
+        },
+        {
+          id: 'calcium',
+          layout: 'drug',
+          action: 'IV calcium gluconate',
+          figure: '3 grams over 10 minutes',
+          condition: 'ECG changes',
+          nodeIds: ['k-hyper-calcium'],
+          warning: { nodeId: 'k-hyper-calcium', text: 'Avoid pushing ionized calcium >3 mM.' },
+          drug: { id: 'calcium-gluconate', indication: 'Hyperkalemia (peripheral access)' },
+          lines: [
+            { nodeId: 'k-hyper-calcium', text: 'ECG changes (especially bradycardia, QRS widening, conduction delays).' },
+            { nodeId: 'k-hyper-calcium', text: 'Peripheral access: Calcium Gluconate 3 grams IV over 10 minutes' },
+            { nodeId: 'k-hyper-calcium', text: 'Central access: Calcium Chloride 1 gram IV over 10 minutes' },
+            { nodeId: 'k-hyper-calcium', text: 'Duration: 30-60 minutes only — may need to repeat 1-2 times.' },
+          ],
+        },
+        {
+          id: 'insulin',
+          layout: 'drug',
+          action: 'IV insulin',
+          figure: '5 units + 25 g dextrose',
+          condition: 'IV only, NOT subcutaneous',
+          nodeIds: ['k-hyper-insulin'],
+          warning: { nodeId: 'k-hyper-insulin', text: 'Regular Insulin IV — dose by hypoglycemia risk (must be IV, NOT subcutaneous). Give WITH 25 g dextrose (D50W 50 mL) unless glucose >250 mg/dL.' },
+          drug: {
+            id: 'regular-insulin',
+            indication: 'Hyperkalemia',
+            weightCalcs: [{ dosePerKg: 0.1, unit: 'units', maxDose: 10, label: 'Weight-based alternative (adult low-risk-dose branch)' }],
+          },
+          lines: [
+            { nodeId: 'k-hyper-insulin', text: '5 units (or 0.1 units/kg, max 10) — eGFR <60, dialysis-dependent, pre-treatment glucose <150 mg/dL, weight <60 kg, or no diabetes' },
+            { nodeId: 'k-hyper-insulin', text: '10 units — normal renal function AND adequate glucose' },
+            { nodeId: 'k-hyper-insulin', text: 'Check glucose at 30, 60, 120 and 240 minutes.' },
+          ],
+        },
+        {
+          id: 'terbutaline',
+          layout: 'drug',
+          action: 'SQ terbutaline',
+          figure: '0.5 mg',
+          condition: 'Preferred over albuterol',
+          nodeIds: ['k-hyper-beta2'],
+          drug: { id: 'terbutaline', indication: 'Hyperkalemia' },
+          lines: [
+            { nodeId: 'k-hyper-beta2', text: 'Preferred: Terbutaline 0.5 mg SQ — single injection, logistically superior.' },
+            { nodeId: 'k-hyper-beta2', text: 'Alternative: Albuterol 10-20 mg nebulized (4-8 standard nebs back-to-back). Nearly always underdosed in practice — a single 2.5 mg neb is inadequate.' },
+            { nodeId: 'k-hyper-beta2', text: 'If hypotensive/bradycardic: Epinephrine infusion — treats both hyperkalemia AND hemodynamic instability simultaneously.' },
+          ],
+        },
+        {
+          id: 'isotonic-bicarb',
+          layout: 'steps',
+          action: 'Isotonic bicarb fluid',
+          figure: 'Bicarb < 22 mEq/L',
+          condition: 'Do NOT use normal saline',
+          nodeIds: ['k-hyper-step2', 'k-hyper-bicarb'],
+          warning: { nodeId: 'k-hyper-step2', text: 'Do NOT use normal saline — high chloride content worsens hyperkalemia.' },
+          lines: [
+            { nodeId: 'k-hyper-step2', text: 'Isotonic bicarbonate is the preferred resuscitative fluid for hyperkalemic patients with metabolic acidosis.' },
+            { nodeId: 'k-hyper-bicarb', text: 'Preparation: 3 ampules NaHCO3 in 1 liter D5W = 150 mM isotonic bicarbonate solution.' },
+            { nodeId: 'k-hyper-bicarb', text: 'Dosing: 500-1000 mL/hour if severely hypovolemic. Target serum bicarb 24-28 mEq/L.' },
+            { nodeId: 'k-hyper-bicarb', text: 'AVOID hypertonic bicarbonate (ampules alone) — proven ineffective in multiple RCTs.' },
+          ],
+        },
+        {
+          id: 'furosemide',
+          layout: 'drug',
+          action: 'IV furosemide',
+          figure: '40-80 mg',
+          condition: 'Normal renal function',
+          nodeIds: ['k-hyper-step3'],
+          warning: { nodeId: 'k-hyper-step3', text: 'In life-threatening hyperK, err on the side of excessive diuretic.' },
+          drug: { id: 'furosemide', indication: 'Hyperkalemia (normal renal function)' },
+          lines: [
+            { nodeId: 'k-hyper-step3', text: 'Furosemide 40-80 mg IV alone may suffice' },
+            { nodeId: 'k-hyper-step3', text: 'Moderate-severe renal dysfunction ("nephron bomb"):' },
+            { nodeId: 'k-hyper-step3', text: 'Furosemide 160-250 mg IV (or Bumetanide 4-5 mg IV)' },
+            { nodeId: 'k-hyper-step3', text: '+ Chlorothiazide 500-1000 mg IV (or Metolazone 5-10 mg PO)' },
+          ],
+        },
+        {
+          id: 'dialysis',
+          layout: 'steps',
+          action: 'Emergent dialysis',
+          figure: 'chronic HD or anuric',
+          condition: 'Do NOT wait for binders',
+          nodeIds: ['k-hyper-step5'],
+          warning: { nodeId: 'k-hyper-step5', text: 'Do NOT delay dialysis while hoping potassium binders will work.' },
+          lines: [
+            { nodeId: 'k-hyper-step5', text: 'Indications for emergent dialysis:' },
+            { nodeId: 'k-hyper-step5', text: 'Chronic hemodialysis patient (kaliuresis is futile)' },
+            { nodeId: 'k-hyper-step5', text: 'Failure of all other measures (anuric despite diuretic bomb, not a candidate for large-volume isotonic bicarb)' },
+          ],
+        },
+      ],
+    },
+  ],
+};

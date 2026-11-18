@@ -1,0 +1,87 @@
+[
+  {
+    "kind": "conflict",
+    "tileId": "iv-epi-infusion",
+    "nodeIds": [
+      "anaph-epi-infusion"
+    ],
+    "drugId": "epinephrine",
+    "text": "Most important: the node and the critical-action line give the maintenance infusion rate as 10 mcg/min; the drug store 'Anaphylaxis — IV infusion' entry gives 5-15 mcg/min. The face figure and the Dosing text come from the drug store (a drug figure must come from the drug entry); the node's own 10 mcg/min is quoted under 'In this consult'. Not resolved."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "anaph-peri-arrest",
+      "anaph-bronchospasm",
+      "anaph-dispo-4hr",
+      "anaph-adjunctive-start",
+      "anaph-refractory",
+      "anaph-steroids",
+      "anaph-antihistamines"
+    ],
+    "text": "Time-critical consult content NOT on the strip: push-dose epinephrine for peri-arrest and the position/leg elevation advice (in the consult's node flow it comes before the fluids tile); continuous albuterol for bronchospasm; the cardiac arrest dose and ECMO advice; the discharge criteria; antihistamines and steroids (not first-line); glucagon; refractory anaphylaxis options. The consult has 10 critical actions; the first 7 are kept."
+  },
+  {
+    "kind": "gap",
+    "tileId": "im-epi",
+    "nodeIds": [
+      "anaph-source-control"
+    ],
+    "text": "The critical-action line's 'within 5 minutes of recognition' is in no node, so it is not on the tile."
+  },
+  {
+    "kind": "other",
+    "tileId": "im-epi",
+    "nodeIds": [
+      "anaph-source-control"
+    ],
+    "drugId": "epinephrine",
+    "text": "The adult dose is flat; the weight box is the pediatric per-kg dose with its per-dose cap, and the pediatric line is quoted under 'In this consult'."
+  },
+  {
+    "kind": "gap",
+    "tileId": "nebulized-epi",
+    "nodeIds": [
+      "anaph-airway-critical"
+    ],
+    "drugId": "racemic-epinephrine",
+    "text": "The drug store racemic epinephrine entry covers croup and post-extubation stridor only, with no anaphylaxis indication, so this is a steps tile built from the node."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "methylene-blue",
+    "nodeIds": [
+      "anaph-beta-blocked"
+    ],
+    "drugId": "methylene-blue",
+    "text": "The drug store has two weight calculators for this dose (low and high end), so the tile shows two weight boxes. Its repeat advice (once more after 30-60 minutes if partial response) is in the drug store text only. The drug store's own indication is refractory anaphylaxis (epinephrine infusion, volume and standard adjuncts have failed); the face shows the node's beta-blocked context."
+  },
+  {
+    "kind": "other",
+    "tileId": "iv-fluids",
+    "nodeIds": [
+      "anaph-fluids",
+      "anaph-epi-infusion",
+      "anaph-peri-arrest",
+      "anaph-airway"
+    ],
+    "text": "Tile order follows the consult's node chain (IM epinephrine, repeat, infusion, fluids, airway, methylene blue); the gate's own traversal order puts the fluids node later, so the fluids tile carries an order flag."
+  },
+  {
+    "kind": "gap",
+    "tileId": "nebulized-epi",
+    "nodeIds": [
+      "anaph-airway-critical"
+    ],
+    "drugId": "epinephrine",
+    "text": "The nebulized epinephrine tile names epinephrine with a dose, but the drug store has no entry for nebulized epinephrine in anaphylaxis (its racemic entry is for croup and post-extubation stridor), so it is a steps tile built from the node."
+  },
+  {
+    "kind": "gap",
+    "tileId": "iv-fluids",
+    "nodeIds": [
+      "anaph-fluids"
+    ],
+    "text": "The IV fluid bolus is shown as a steps tile because the drug store has no crystalloid entry for anaphylaxis; the volume comes from the consult node only, with no weight calculator for the pediatric per-kg bolus."
+  }
+]

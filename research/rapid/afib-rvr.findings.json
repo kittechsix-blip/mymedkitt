@@ -1,0 +1,96 @@
+[
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "afib-stability",
+      "afib-unstable-wpw",
+      "afib-stable-drugs"
+    ],
+    "text": "The consult screens for WPW / pre-excitation only on the unstable path. The stable strip (like the stable path of the consult) offers metoprolol, diltiazem and digoxin with no pre-excitation check or warning. This is a question about the consult itself, raised by review; nothing was added to the strip."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "afib-start",
+      "afib-stability"
+    ],
+    "text": "Most important: the unstable variant has two tiles only (WPW screen and cardioversion). The consult's critical-action list says TSH and troponin in ALL patients; that tile is on the stable variant only. Physician to decide whether the unstable strip needs it."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "afib-wpw-result",
+      "afib-cardioversion-protocol",
+      "afib-hfref-drugs",
+      "afib-onset-assessment",
+      "afib-hfref-cardioversion"
+    ],
+    "text": "Time-critical consult content NOT on the strip: procainamide for WPW when cardioversion is not immediately available is only inside the WPW tile's quoted line; escalation energy after the first shock is not given by the consult; post-cardioversion amiodarone and IV magnesium; flumazenil reversal and MidaKet; esmolol and amiodarone for rate control; magnesium as adjunct; the rate-controlled and refractory branches (HFrEF refractory options, cardioversion in HFrEF); new-onset AF anticoagulation advice; the rule that emergent cardioversion is done if compromised regardless of AF duration."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "digoxin",
+    "nodeIds": [
+      "afib-refractory-dig",
+      "afib-hfref-drugs"
+    ],
+    "drugId": "digoxin",
+    "text": "The consult doses digoxin as 0.25-0.5 mg IV once; the drug store's acute entry says 0.25 mg IV every 2 hours up to a total, and calls digoxin unsuitable as the sole acute agent. The tile figure and Dosing text come from the drug store; the node's own dose is quoted under 'In this consult'. Not resolved."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "diltiazem",
+    "nodeIds": [
+      "afib-stable-drugs"
+    ],
+    "drugId": "diltiazem",
+    "text": "The consult's critical-action line gives the diltiazem bolus as 0.25 mg/kg IV (15-25mg); the drug store says typically 20-25 mg. Only the drug store text is shown. The node says the bolus may be repeated in 15 min without a dose; the second-bolus dose shown comes from the drug store only."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "anticoag",
+    "nodeIds": [
+      "afib-cha2ds2vasc"
+    ],
+    "text": "The critical-action line says CHA2DS2-VASc 2 or more means anticoagulate with no sex split; the node splits it (men 2 or more, women 3 or more). The tile quotes the node."
+  },
+  {
+    "kind": "other",
+    "tileId": "check-ef",
+    "nodeIds": [
+      "afib-stability",
+      "afib-ef-screen",
+      "afib-stable-drugs"
+    ],
+    "text": "Tile order follows the consult's node flow: TSH/troponin, EF check, metoprolol, diltiazem, anticoagulation, TEE, then digoxin last. The critical-action list puts diltiazem second and the HFrEF caution seventh. Metoprolol was added as a tile (7 tiles, nothing displaced). The consult presents metoprolol as first-line when EF is 40% or less, and as a safe first-line option regardless of EF (also preferred in CAD or compensated HFrEF); the consult says beta-blockers and calcium channel blockers must not be combined, so that line is the warning on both the metoprolol and diltiazem tiles. Digoxin is the refractory branch and so sits last."
+  },
+  {
+    "kind": "gap",
+    "tileId": "tee-48h",
+    "nodeIds": [
+      "afib-onset-assessment",
+      "afib-cha2ds2vasc"
+    ],
+    "text": "The critical-action line 'new AFib under 48 hours may be cardioverted if no thrombus on TEE' is in no node, so it is not on the strip. The TEE tile quotes the node's statement for AF over 48 hours that is NOT anticoagulated."
+  },
+  {
+    "kind": "gap",
+    "tileId": "cardiovert",
+    "nodeIds": [
+      "afib-cardioversion-protocol"
+    ],
+    "drugId": "midazolam",
+    "text": "The drug store has no midazolam entry for cardioversion sedation, so the sedation dose is a quoted node line, not a drug tile."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "afib-ef-screen",
+      "afib-stable-drugs",
+      "afib-hfref-drugs",
+      "afib-cha2ds2vasc",
+      "afib-wpw-result"
+    ],
+    "text": "Lines left out by the 4-line limit on drug tiles and the 8-line limit on steps tiles: metoprolol and diltiazem tiles omit the esmolol option and the 'Preferred in CAD or compensated HFrEF' wording; the digoxin tile omits the node's 0.25-0.5 mg once dose context and low-dose advice; the anticoagulation tile omits the preferred agents (apixaban, rivaroxaban); the check EF tile omits the HFrEF rate-control branch; the cardioversion tile omits post-cardioversion amiodarone, magnesium and flumazenil."
+  }
+]

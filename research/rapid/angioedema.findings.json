@@ -1,0 +1,118 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "angio-start",
+      "angio-classify",
+      "angio-bradykinin-screen",
+      "angio-histamine-treat",
+      "angio-acei-treat",
+      "angio-hae-treat"
+    ],
+    "text": "Look at this first. This consult is only partly a memorised sequence. The airway tiles are a real sequence; the three treatment tiles (epinephrine, tranexamic acid or icatibant, Berinert) are conditional alternatives sorted by mechanism, not steps, and each is right only for its own cause (histamine, ACEi, HAE). A clinician who glances at the strip without classifying first could give the wrong drug. Other causes (post-tPA, acquired, idiopathic, pediatric, pregnancy, abdominal) have no tile. The physician should decide whether this belongs as a RAPID card at all, or as an airway-only strip, or as a fork by mechanism (the consult forks at 'Classify the Angioedema', but the airway is common to all paths so one variant was drafted)."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "im-epi",
+    "nodeIds": [
+      "angio-anaphy-treat"
+    ],
+    "drugId": "epinephrine",
+    "text": "Most important: the IM epinephrine tile mixes two sources that disagree. The consult says 0.3-0.5 mg IM, repeat every 5-20 minutes, pediatric max 0.3 mg; the drug store entry 'Anaphylaxis — IM (first-line)' says 0.5 mg IM, repeat every 5 minutes, pediatric max 0.5 mg. The face figure and Dosing box come from the drug store (a drug figure must); the consult's own 0.3-0.5 mg lines are quoted under 'In this consult'. Not resolved. Also: epinephrine only helps the histamine/anaphylaxis branch; the consult says it is generally ineffective in ACEi, HAE and other bradykinin angioedema, so the tile carries that as its warning and its condition. Reviewer change: the condition was 'Histamine-mediated only', which contradicts the consult's undifferentiated path (empiric epinephrine when the cause is unclear); it now reads 'Histamine-mediated or unclear cause'."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "angio-start",
+      "angio-airway-risk-tree",
+      "angio-classify",
+      "angio-bradykinin-screen",
+      "angio-empiric",
+      "angio-histamine-treat",
+      "angio-histamine-mild",
+      "angio-anaphy-treat",
+      "angio-acei",
+      "angio-acei-treat",
+      "angio-hae",
+      "angio-hae-treat",
+      "angio-hae-new",
+      "angio-aae",
+      "angio-tpa",
+      "angio-idiopathic",
+      "angio-peds",
+      "angio-pregnancy",
+      "angio-abdominal",
+      "angio-abdominal-treat",
+      "angio-dispo",
+      "angio-dispo-mild",
+      "angio-dispo-admit",
+      "angio-dispo-icu"
+    ],
+    "text": "Time-critical content NOT on the strip. (1) Critical action 'Histamine-mediated: epinephrine + antihistamines + steroids' lives on the question node angio-histamine-treat; the epinephrine part is on the strip (from the anaphylaxis node), but antihistamines, steroids, H2 blocker, IV crystalloid, refractory IV epinephrine drip and glucagon for beta-blocker patients are left off. (2) Critical action 'Avoid ACE inhibitors permanently / STOP the ACEi' is only on the strip as the quoted line 'Discontinue ACEi permanently' on the tranexamic acid tile; the ARB caution is not. (3) Fresh frozen plasma 2 units (ACEi) and 2-4 units (HAE), aminocaproic acid, Berinert for ACEi, Ruconest, ecallantide, and icatibant for HAE (repeat q6h, max 3 doses/24h) are left off. (4) Post-tPA angioedema, acquired angioedema, idiopathic, pediatric, pregnancy, abdominal angioedema, observation times and disposition are left off. (5) The ACEi icatibant/TXA tiles do not carry the node's cost or mixed-evidence cautions. (6) Extubation advice, nasotracheal option and topical lidocaine for awake intubation are left off. (7) The 'Immediate Airway Threat' triggers beyond those quoted: the intubate-now sentence of angio-airway-risk-tree could not be quoted alone because the rules require the preceding 'Do not wait' negation, which is on the tile as the warning. (8) Awake approach: the consult's 'Preferred approach: awake flexible endoscopic or awake video-assisted technique with topical lidocaine and surgical airway backup' shares a source line with the 'Do NOT paralyze' negation and is too long to quote whole, so 'awake fiberoptic preferred' (a listed critical action) is on the face only through the Do NOT paralyze warning and not stated as an action. (9) The undifferentiated path: when the cause is unclear the consult says to start empiric epinephrine IM plus diphenhydramine IV and reassess in 30-60 minutes (node angio-empiric); only the epinephrine is on the strip, as 'Histamine-mediated or unclear cause'. (10) Hard airway triggers beyond the angio-start option description, and the NIPPV warning appears only on the Airway watch tile."
+  },
+  {
+    "kind": "gap",
+    "tileId": "airway-risk",
+    "nodeIds": [
+      "angio-airway-risk-tree",
+      "angio-start"
+    ],
+    "text": "The consult line 'Do not wait for a score if the airway is declaring itself. Intubate now for stridor, hypoxemia, inability to handle secretions, rapidly progressive tongue/floor-of-mouth swelling, altered mental status, exhaustion, or confirmed laryngeal edema.' is one source line over the 160-character limit, so the intubate-now triggers cannot be quoted with its 'Do not wait' sentence; only that sentence is the warning. To give the tile its triggers, the first line quoted is the 'Immediate Airway Threat' option description from angio-start (stridor, hypoxemia, secretion failure, rapidly progressive voice/laryngeal symptoms), which is shorter than the consult's own intubate-now list (it omits altered mental status, exhaustion, confirmed laryngeal edema, tongue/floor-of-mouth swelling). Physician to confirm. The Ishoo staging is left off."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "icatibant",
+    "nodeIds": [
+      "angio-acei-treat"
+    ],
+    "drugId": "icatibant",
+    "text": "The consult's critical action for ACEi angioedema is 'icatibant 30 mg SQ or FFP 2-4 units', but the node itself lists tranexamic acid as first-line, icatibant as a bradykinin receptor antagonist with mixed RCT results, and FFP as 2 units (2-4 units is the HAE node). The strip shows both tranexamic acid and icatibant as options, not consecutive steps; FFP is left off. The icatibant 'ACEi-induced angioedema (off-label)' store entry agrees on 30 mg SQ."
+  },
+  {
+    "kind": "gap",
+    "tileId": "txa",
+    "nodeIds": [
+      "angio-acei-treat",
+      "angio-tpa"
+    ],
+    "drugId": "tranexamic-acid",
+    "text": "The node line carrying the tranexamic acid dose ('Tranexamic Acid 1 g IV load, then 1 g over 8 hours — ... Case series: all 31 non-intubated patients avoided intubation. A single dose may be inadequate ...') contains the word 'avoided' as a negation word and is too long to quote whole, so the consult's own dose line is not on the tile; the tile shows only the drug store's regimen and the line 'Discontinue ACEi permanently. Observation is the cornerstone.' The store says to AVOID tranexamic acid in post-tPA angioedema; that warning is in the drug-wide cautions of the store, not quoted from the consult. Reviewer change: the tile now carries the consult's post-tPA line as its warning ('AVOID Tranexamic Acid — contraindicated in acute ischemic stroke ...', node angio-tpa), because the consult attaches that contraindication to this drug and the tile's condition (ACEi-induced) did not show it. The tile's primary node is still the ACEi node; the warning is from the post-tPA node."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "angio-airway-risk-tree",
+      "angio-airway-secure",
+      "angio-airway-monitor",
+      "angio-acei-treat",
+      "angio-hae-treat",
+      "angio-histamine-treat"
+    ],
+    "text": "Tile order follows the consult's flow (airway risk, secure airway, airway watch, then treatment by mechanism), not the critical-actions list order (which puts ACEi and HAE treatment before histamine treatment and ACEi avoidance before the awake-intubation line). The airway-watch (moderate-risk) tile is on the strip at the cost of leaving off FFP, aminocaproic acid and the HAE alternatives; that choice is for the physician."
+  },
+  {
+    "kind": "other",
+    "tileId": "berinert",
+    "nodeIds": [
+      "angio-hae-treat"
+    ],
+    "drugId": "berinert",
+    "text": "Berinert dose box shows the weight-based amount only; the store's note to round to the nearest 500-unit vial and the consult's 'IV push at 4 mL/min' are in the Dosing text. No weight calculator is missing for any drug on the strip. Berinert for known HAE Type 1 or 2 only; the 'unknown / first presentation' path (angio-hae-new) is left off."
+  },
+  {
+    "kind": "other",
+    "tileId": "airway-watch",
+    "nodeIds": [
+      "angio-airway-monitor"
+    ],
+    "text": "The airway-watch tile's quoted line is the node's one-line summary field ('Moderate-risk airway watch: q15 min reassessment ...'), because the body sentence with q15 minute reassessment shares a line with the NIPPV negation and was too long to quote whole. The NIPPV warning is quoted as the danger box. Physician to confirm the summary wording is acceptable."
+  },
+  {
+    "kind": "other",
+    "tileId": "icatibant",
+    "nodeIds": [
+      "angio-acei-treat"
+    ],
+    "text": "Judgment for the physician: the ACEi node lists tranexamic acid first and icatibant second (with mixed RCT results and cost), but the consult's critical action names icatibant or FFP. The strip shows tranexamic acid before icatibant in the node's order; the two read as alternatives. Berinert is shown for HAE only; the consult also lists it for ACEi and post-tPA, not on the strip."
+  }
+]

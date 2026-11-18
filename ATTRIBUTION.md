@@ -199,6 +199,17 @@ This attribution document will be updated as:
 **Last substantive update:** 2026-02-26  
 **Next scheduled review:** 2026-03-30
 
+
+## RAPID card fonts
+
+The RAPID card self-hosts three typefaces (SIL Open Font License 1.1), in `docs/fonts/`:
+
+| Font | File | Licence |
+|------|------|---------|
+| Playfair Display | `PlayfairDisplay.woff2` | SIL OFL 1.1 |
+| Hanken Grotesk | `HankenGrotesk.woff2` | SIL OFL 1.1 |
+| IBM Plex Mono (400, 500) | `IBMPlexMono-400.woff2`, `IBMPlexMono-500.woff2` | SIL OFL 1.1 |
+
 ---
 
 ## License Summary

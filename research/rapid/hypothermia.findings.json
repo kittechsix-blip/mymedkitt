@@ -1,0 +1,96 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "hypo-classify",
+      "hypo-arrest-decision",
+      "hypo-arrest-defib",
+      "hypo-arrest-cpr"
+    ],
+    "text": "Most important: this consult is a severity-staged workup (mild, moderate, severe, arrest) with a long arrest branch, not one memorised sequence. The strip is arrest-first and is a judgment call: it follows the arrest branch plus core temperature and basic rewarming. Mild and moderate non-arrest care, severe non-arrest management and disposition are not on it. Also the consult disagrees with itself on shocks: the defibrillation node says attempt 1-3 shocks below 30°C then defer, the critical-actions list says avoid defibrillation below 30°C, and the node summaries for CPR and defibrillation say one attempt only. The strip quotes the node body. Not resolved."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "hypo-arrest-decision",
+      "hypo-arrest-terminate"
+    ],
+    "tileId": "pulse-check",
+    "text": "Left off for space (8-line cap): the consult's own list 'These are NOT contraindications:' (muscular rigidity, fixed/dilated pupils, prolonged down time, very low temperature) that follows the DO NOT RESUSCITATE list on the arrest-decision node, and the matching 'Do NOT terminate based on' list on the termination node. A reader seeing only the red-X list could still withhold CPR for rigidity or fixed pupils, so the physician should decide whether this list replaces some other line on the pulse tile."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "hypo-moderate-mgmt",
+      "hypo-transport-details",
+      "hypo-ecmo-transport"
+    ],
+    "tileId": "rewarm-trunk",
+    "text": "The rewarm-trunk tile quotes the moderate-hypothermia (non-arrest) node; the arrest-specific trunk-only rewarming wording lives in the ECMO transport nodes ('heated blankets to TRUNK only'; 'DO NOT rewarm extremities'). The tile's danger box now quotes the transport checklist line. The tile sits last and is the only non-arrest tile; the physician should decide whether it belongs on an arrest strip."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "hypo-classify",
+      "hypo-mild-mgmt",
+      "hypo-mild-monitoring",
+      "hypo-mild-dispo",
+      "hypo-moderate-complications",
+      "hypo-moderate-dispo",
+      "hypo-severe-mgmt",
+      "hypo-severe-decision",
+      "hypo-arrest-contraindications",
+      "hypo-futile",
+      "hypo-transport-details",
+      "hypo-transport-continue",
+      "hypo-ecmo-rewarming",
+      "hypo-invasive-rewarming",
+      "hypo-thoracic-lavage",
+      "hypo-arrest-terminate",
+      "hypo-disposition"
+    ],
+    "text": "Time-critical content NOT on the strip: severity classification and the mild, moderate and severe non-arrest pathways (severe: minimize all movement, secure airway if GCS <=8, internal rewarming); the K+ and before/after-arrest resuscitation decision node; non-ECMO invasive rewarming (thoracic and peritoneal lavage) and the thoracic lavage technique; transport checklist and during-transport care; ECMO rewarming protocol; rewarming hyperkalemia and do-not-replace-K+ advice; the termination-of-resuscitation node ('warm and dead' 32°C, do NOT terminate for down time, pupils, rigidity or failed shocks while cold); post-rewarming care. Critical actions with no matching text in any node: 'continue CPR during rewarming (may need hours of CPR)' and 'activate ECMO ... temp <28°C' (nodes say <30-32°C), both left as node wording. Tile order is arrest-first and temperature, not the critical-actions list order; basic rewarming is last."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "ecmo",
+    "nodeIds": [
+      "hypo-arrest-ecmo-decision",
+      "hypo-severe-decision"
+    ],
+    "text": "ECMO temperature threshold differs: the ECMO decision node says core temp <30-32°C, the critical-actions list says <28°C, severe-decision says <28°C. The tile figure uses the node's <30-32°C. Not resolved."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "rewarm-trunk",
+    "nodeIds": [
+      "hypo-moderate-mgmt"
+    ],
+    "text": "Warm fluid temperature: the node says 40-43°C, the critical-actions list says 40-42°C. The tile uses the node's 40-43°C. The warm-fluid line comes from the moderate-hypothermia node, so it sits outside the arrest branch."
+  },
+  {
+    "kind": "gap",
+    "tileId": "withhold-drugs",
+    "drugId": "epinephrine",
+    "nodeIds": [
+      "hypo-arrest-drugs"
+    ],
+    "text": "The consult gives an epinephrine interval for 30-35°C (q6-10 min) but no dose, and the drug store has no hypothermia-specific epinephrine entry. It is quoted as steps, with no dose on the face. Never resolved here."
+  },
+  {
+    "kind": "gap",
+    "tileId": "limit-shocks",
+    "nodeIds": [
+      "hypo-arrest-defib"
+    ],
+    "text": "The node also states a European approach (max 3 shocks below 30°C) versus an AHA approach (may be reasonable to continue if no response); the AHA line is not on the tile. No shock energy appears in the consult."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "core-temp",
+    "nodeIds": [
+      "hypo-temp-measurement"
+    ],
+    "text": "The 'rectal lags 15-30 min' figure appears only in the node summary, not the body; not quoted."
+  }
+]

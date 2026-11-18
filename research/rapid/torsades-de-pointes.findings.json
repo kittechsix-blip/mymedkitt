@@ -1,0 +1,122 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "tdp-pulseless",
+      "tdp-unstable",
+      "tdp-avoid"
+    ],
+    "tileId": "defibrillate",
+    "text": "Look first at the amiodarone/procainamide warning. The consult's direct lines 'Do NOT give amiodarone' (pulseless node) and 'Do NOT give amiodarone or procainamide' (unstable node) start with a warning emoji, and the quoting rules reject them (confirmed on re-check). Both Defibrillate and Cardiovert tiles therefore carry the softer avoid-list line 'If the standard ACLS \"VT\" protocol is followed with amiodarone, the patient may worsen or die.' Procainamide is not warned against on the strip at all. Please decide whether the strip needs a more direct prohibition."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "tdp-avoid",
+      "tdp-congenital",
+      "tdp-congenital-mgmt",
+      "tdp-dispo-recurrent",
+      "tdp-dispo-refractory",
+      "tdp-electrolytes",
+      "tdp-mg-protocol",
+      "tdp-mg-response",
+      "tdp-overdrive",
+      "tdp-pulseless-rosc",
+      "tdp-stable",
+      "tdp-unknown"
+    ],
+    "text": "Not on the strip: (1) Correct hypokalemia to >4.5 and target serum Mg 3.5-5.0 mg/dL, plus calcium and rechecking electrolytes every 2 hours (critical action, node tdp-electrolytes); the potassium drug entry was not used. Magnesium's infusion target is quoted on the magnesium tile, but potassium is absent. (2) STAT electrolytes at the start (K, Mg, Ca, iCa). (3) The stable-TdP path (start magnesium immediately). (4) Congenital LQTS: beta-blockers first line and the instruction to avoid all sympathomimetics; only the isoproterenol contraindication is on the strip. (5) The EMCrit alternative magnesium front-load (it is in the drug store text). (6) Magnesium toxicity monitoring and the calcium gluconate antidote. (7) Disposition: ICU, EP consult, ECMO consideration and stellate ganglion block for refractory TdP, and the full list of drugs to avoid (procainamide, sotalol, beta-blockers in acquired TdP, class IA/III). (8) Which QT drugs to stop. (9) Check baseline QTc. Seven tiles were already used. (10) In arrest: 'Standard ACLS otherwise (epinephrine, CPR)' and the post-ROSC step (acute management protocol, then Post-Cardiac Arrest Care) are not on the strip. (11) Isoproterenol cautions: may cause hypotension (norepinephrine if needed) and monitor K+. (12) The avoid list beyond amiodarone/procainamide, and the note that Mg is safe in both acquired and congenital. (13) Critical action 'Correct hypokalemia to >4.5, target serum Mg 3.5-5.0' is covered only for the Mg target (on the Mg tile); potassium correction is absent."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "overdrive-pacing",
+    "nodeIds": [
+      "tdp-overdrive"
+    ],
+    "text": "The critical-actions list says overdrive pacing at 100-120 bpm; the consult node says transvenous pacing at 90-110 bpm (up to 140 if needed). The tile quotes the node."
+  },
+  {
+    "kind": "other",
+    "tileId": "overdrive-pacing",
+    "nodeIds": [
+      "tdp-overdrive"
+    ],
+    "text": "The critical-actions list says isoproterenol is for when no pacing is available; the node calls it a bridge to pacing, and the drug store says it is an alternative when transvenous pacing is not immediately available. The tile condition follows the node/store sense. Isoproterenol and pacing are shown as two tiles; they are alternatives, not consecutive steps."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "magnesium",
+    "drugId": "magnesium-sulfate",
+    "nodeIds": [
+      "tdp-mg-protocol",
+      "tdp-pulseless",
+      "tdp-unstable"
+    ],
+    "text": "The consult gives the guideline dose and an EMCrit front-load (4 g over 20 min) side by side; the drug store entry shows both too. The tile quotes only the guideline dose lines from the node, so the front-load appears only in the drug store text. Note also that the node target serum Mg 3.5-5.0 mg/dL differs from the drug store AF entry (3-4), which is not this use."
+  },
+  {
+    "kind": "gap",
+    "tileId": "magnesium",
+    "drugId": "magnesium-sulfate",
+    "nodeIds": [
+      "tdp-mg-protocol"
+    ],
+    "text": "The drug store magnesium entry for torsades has no weight calculator, and the dose is fixed 2 g, so none is expected."
+  },
+  {
+    "kind": "missing-weightcalc",
+    "tileId": "isoproterenol",
+    "drugId": "isoproterenol",
+    "nodeIds": [
+      "tdp-overdrive"
+    ],
+    "text": "Isoproterenol is dosed in mcg/min, not per kg, so no weight box. No conflict found between the node and drug store for isoproterenol (same 1-10 mcg/min, start 2 mcg/min)."
+  },
+  {
+    "kind": "other",
+    "tileId": "lidocaine",
+    "drugId": "lidocaine",
+    "nodeIds": [
+      "tdp-lidocaine"
+    ],
+    "text": "The lidocaine weight calculator shows the high end (1.5 mg/kg, max 100 mg) only; the 1 mg/kg low end is not a separate box. The maximum 100 mg per push comes from the drug store, not the consult node."
+  },
+  {
+    "kind": "other",
+    "tileId": "defibrillate",
+    "nodeIds": [
+      "tdp-pulseless",
+      "tdp-unstable",
+      "tdp-mg-protocol",
+      "tdp-overdrive",
+      "tdp-lidocaine",
+      "tdp-stop-drugs"
+    ],
+    "text": "Tile order follows the consult flow: defibrillation (pulseless), cardioversion (unstable), magnesium, pacing, isoproterenol, lidocaine, stop QT drugs. The critical-actions list puts stop-drugs and electrolytes before overdrive pacing. This is a single strip covering pulseless and unstable paths together; the consult forks at hemodynamic status into three paths (pulseless, unstable, stable), but they converge on the same magnesium step, so no fork was made. The strip's tiles 1 and 2 are alternatives chosen by pulse status, not consecutive. No energy in joules is given in the consult ('standard ACLS energy dosing'). The stop-drugs tile raised an order flag because the consult also reaches it earlier through the magnesium-success branch."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "stop-qt-drugs",
+    "nodeIds": [
+      "tdp-stop-drugs"
+    ],
+    "text": "The stop-drugs tile has no condition or warning and quotes only the single 'discontinue ALL' line, to avoid inventing wording; the list of common culprit drugs is on the node, not the strip."
+  },
+  {
+    "kind": "other",
+    "tileId": "stop-qt-drugs",
+    "nodeIds": [
+      "tdp-unstable",
+      "tdp-stop-drugs"
+    ],
+    "text": "Stop-QT-drugs sits last (consult module 4 order), but the consult tells the clinician to stop QT-prolonging drugs at the start of the unstable and stable paths, alongside the first magnesium dose. The Cardiovert tile quotes that early line. Physician to decide whether stopping drugs should move up."
+  },
+  {
+    "kind": "other",
+    "tileId": "isoproterenol",
+    "nodeIds": [
+      "tdp-overdrive"
+    ],
+    "text": "The isoproterenol condition 'if no pacing' follows the critical-actions list; the node itself calls isoproterenol a bridge to pacing. The node line 'ACQUIRED LQTS ONLY' starts with a warning emoji and cannot be quoted; the quoted warning is from the congenital node. Physician to confirm wording."
+  }
+]

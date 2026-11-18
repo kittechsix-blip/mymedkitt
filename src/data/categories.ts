@@ -4231,6 +4231,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
     icon: 'trauma-surg.png',
     decisionTrees: [
       {
+        id: 'surgical-complications',
+        title: 'Complications',
+        subtitle: 'Postoperative anatomy, complications, ED workup and initial treatment',
+        categoryId: 'trauma-surg',
+        version: '1.0',
+        nodeCount: 131,
+        entryNodeId: 'sc-start',
+      },
+      {
         id: 'chest-tube',
         title: 'Chest Tube · Tube Thoracostomy',
         subtitle: 'Indications \u2192 Preparation \u2192 Insertion \u2192 Management',

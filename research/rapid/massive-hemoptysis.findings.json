@@ -1,0 +1,108 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "hemo-initial",
+      "hemo-positioning",
+      "hemo-airway-decision",
+      "hemo-arrest"
+    ],
+    "text": "Look first at what this strip is: the consult forks at the Initial Assessment into three paths (stable, unstable, arrest/peri-arrest), and this strip is ONE variant that follows the unstable airway path (position, intubate, isolate, TXA, reverse, bronchoscopy, embolization). It is not a single memorised sequence: the arrest path (suction, advance the ETT into the contralateral mainstem, ACLS, rigid bronchoscopy, VA-ECMO) and the stable path are not on it. Tiles 6 and 7 (bronchoscopy, embolization) are definitive-care steps that follow stabilisation, not first minutes. The physician should decide whether this consult wants a fork (unstable vs arrest) instead; the fork labels would have to equal the option labels at hemo-initial."
+  },
+  {
+    "kind": "other",
+    "tileId": "intubate",
+    "nodeIds": [
+      "hemo-airway-decision",
+      "hemo-ett-selection",
+      "hemo-arrest"
+    ],
+    "text": "Reviewer change: the consult makes intubation a decision (Airway Decision node, with a 'No - adequate airway protection' branch), so the tile now reads 'Intubate if indicated' and quotes the five indications. The large-ETT instruction line is quoted from the arrest node because the ETT node holds it only in a table; it sits under the header 'Immediate actions:' (context flag). The double-lumen caution is on the face and in the warning (the heading 'Why NOT double-lumen ETT:' is not quoted). Physician to confirm this reads right at a glance."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "hemo-arrest",
+      "hemo-stable-workup",
+      "hemo-airway-decision",
+      "hemo-medical-start",
+      "hemo-lavage",
+      "hemo-warfarin-reversal",
+      "hemo-doac-reversal",
+      "hemo-heparin-reversal",
+      "hemo-surgery",
+      "hemo-surgery-consider",
+      "hemo-icu-admit",
+      "hemo-transfer",
+      "hemo-extras",
+      "hemo-initial"
+    ],
+    "text": "Time-critical content NOT on the strip: (1) the arrest/peri-arrest path (large ETT, advance into contralateral mainstem if side known, aggressive suction, ACLS, emergent rigid bronchoscopy, VA-ECMO, thoracotomy), of which only the large-ETT line is quoted; (2) initial assessment actions (oxygen target, two large-bore IVs, type and crossmatch, STAT labs, CXR); (3) the 'No - adequate airway protection' branch (no intubation) is not shown, only the indications for intubation; (4) the agent-specific anticoagulant reversal doses (warfarin: 4F-PCC with vitamin K; dabigatran: idarucizumab; Xa inhibitors: 4F-PCC; heparin: protamine) which are named in the consult but only the generic coagulopathy check is on the strip; (5) cold saline lavage and topical vasoconstrictors (with the consult's epinephrine arrhythmia caution) and the other 'Cs'; (6) the TXA maintenance dose and the bronchoscopic TXA route; (7) the surgery pathway after failed embolization and early CT surgery consult; (8) ICU admission and early transfer if no embolization or surgical capability; (9) additional therapies. Critical action left off: 'Avoid cough suppressants (retained blood \u2192 airway obstruction)' (node hemo-extras): see the node-silent finding."
+  },
+  {
+    "kind": "node-silent",
+    "nodeIds": [
+      "hemo-extras"
+    ],
+    "text": "The critical-actions list says to avoid cough suppressants, pointing at node hemo-extras, but that node's text does not say this anywhere (it lists vasopressin analogues and bronchoscopic hemostatic agents). Nothing could be quoted, so it is not on the strip. The consult and its critical list disagree; not fixed here."
+  },
+  {
+    "kind": "gap",
+    "tileId": "txa",
+    "drugId": "tranexamic-acid",
+    "nodeIds": [
+      "hemo-txa",
+      "hemo-medical-start"
+    ],
+    "text": "TXA is a steps tile because the drug store has no nebulized or hemoptysis entry for tranexamic acid (its entries are epistaxis, topical access bleeding, ICH, uterine bleeding, angioedema, hemophilia, tPA reversal, antiplatelet reversal, trauma, postpartum hemorrhage, amniotic fluid embolism). The tile figure carries the consult's own nebulized dose; the loading and maintenance regimen is in the consult node only. The expansion quotes only headings and the IV line; the table rows (loading, maintenance) were left off the tile (not attempted as quotes). Physician to check whether the table doses should be on the tile and whether a nebulized entry is wanted in the store."
+  },
+  {
+    "kind": "gap",
+    "tileId": "reverse",
+    "nodeIds": [
+      "hemo-coag-reversal",
+      "hemo-warfarin-reversal",
+      "hemo-doac-reversal",
+      "hemo-heparin-reversal"
+    ],
+    "text": "The reversal tile is only a prompt to check for anticoagulant or antiplatelet use, because the consult's reversal choice branches by agent and every dose line names a drug. The tile says 'agent-specific reversal'; the specific agents and doses are not on it. The drug store holds a massive hemoptysis / DOAC reversal dose under the 4F-PCC entry that was not used. Physician to decide whether reversal should be a fork-free tile with named agents."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "hemo-positioning",
+      "hemo-ett-selection",
+      "hemo-lung-isolation",
+      "hemo-txa",
+      "hemo-coag-reversal",
+      "hemo-bronchoscopy",
+      "hemo-bae"
+    ],
+    "text": "Tile order follows the consult's node flow (positioning, ETT, isolation, TXA, coagulopathy, bronchoscopy, embolization), which differs from the critical-actions list (the list puts reversal after TXA and embolization before bronchoscopy). The consult's own text places bronchoscopy before embolization; the order flag on the TXA tile is expected. The 'Intubate' tile also quotes a line from the arrest node, because the ETT size appears there as a plain instruction."
+  },
+  {
+    "kind": "other",
+    "tileId": "bae",
+    "nodeIds": [
+      "hemo-bae",
+      "hemo-icu-admit"
+    ],
+    "text": "The critical action says 'IR consult for emergent bronchial artery embolization'. The embolization node itself does not mention calling IR; the consult-to-IR line is only in the ICU admission node. The tile says embolization is first-line definitive therapy and does not say to call IR."
+  },
+  {
+    "kind": "other",
+    "tileId": "reverse",
+    "nodeIds": [
+      "hemo-coag-reversal"
+    ],
+    "text": "The reverse tile condition says 'Anticoagulated or antiplatelet' because the consult asks about both, but the consult offers reversal only for warfarin, DOACs and heparin/LMWH. It gives no antiplatelet reversal. Nothing on the tile tells the clinician which agent to give."
+  },
+  {
+    "kind": "other",
+    "tileId": "bronch",
+    "nodeIds": [
+      "hemo-bronchoscopy"
+    ],
+    "text": "The bronch tile face leads with 'Rigid bronchoscopy' but the consult says flexible first for localization, and that rigid needs the OR and general anesthesia. The OR and anesthesia requirement is not on the tile. Physician to judge whether the face could be read as 'go to rigid first'."
+  }
+]

@@ -1,0 +1,153 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "vt-pulse",
+      "pvt-check",
+      "vt-mono-stable",
+      "vt-poly-check"
+    ],
+    "text": "Most important: this consult is a branching decision guide (pulse check, then pulseless, unstable, stable monomorphic, polymorphic QTc paths), not one memorised sequence. It forks at the pulse check into two strips. Each strip is a best-effort pick of 7 tiles, so a lot is left off (see the omission finding). Also check the pulse-present strip: the consult asks 'stable or unstable' first and only then 'monomorphic or polymorphic', but the strip has no stable-versus-unstable gate tile; it is carried on the cardioversion tile's condition. The fork node vt-pulse itself is the critical action 'Pulse check first'; it is the fork, not a tile, so it is listed here."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "vt-mono-stable",
+      "vt-poly-check",
+      "pvt-check"
+    ],
+    "text": "Order judgments for the physician. (1) Pulse-present strip: the Torsades magnesium tile now comes before the normal-QTc ischemia tile, because vt-poly-check lists prolonged QTc first and marks it critical. (2) Stable monomorphic VT: amiodarone is listed before procainamide, but the consult says procainamide may be preferred (2025 AHA) except with prolonged QTc or CHF; which belongs first is a clinical choice. (3) Pulseless strip: the ROSC tile is last, matching the option order at pvt-check, so rapid-check shows an order flag on it. (4) The pulseless variant has no tile for the 2-minute rhythm check itself; it appears only as a quoted line on the shock tile."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "vt-start",
+      "pvt-rosc",
+      "vt-unstable-check",
+      "vt-post-cardiovert",
+      "vt-mono-response",
+      "vt-mono-refractory",
+      "vt-poly-check",
+      "vt-poly-normal-qt",
+      "vt-recurrent",
+      "vt-disposition",
+      "pvt-check",
+      "pvt-cycle",
+      "pvt-torsades-check",
+      "vt-mono-stable",
+      "vt-cardiovert"
+    ],
+    "text": "Time-critical content NOT on the strips. Pulseless strip: CPR quality targets (rate, depth, recoil, hands-off under 10 sec), the rhythm check every 2 minutes, the H's and T's search, the antiarrhythmic ROSC infusion and maximum doses, and the pulseless-VT-to-polymorphic branch beyond the magnesium tile. Pulse strip: lidocaine for stable monomorphic VT (no drug store entry for this use); the 'Deteriorating' path back to cardioversion and the response-to-antiarrhythmic question; refractory stable monomorphic VT (alternative antiarrhythmic, consider cardioversion, EP consult, continuous monitoring); beta-blockers and amiodarone for normal-QTc polymorphic VT; isoproterenol if pacing is unavailable for Torsades; the post-cardioversion checklist; recurrent VT, ICD evaluation and disposition. The consult's QTc cut-off for polymorphic VT is on the vt-poly-check question and is not on a tile. Critical actions: Pulse check (vt-pulse) is the fork; the post-conversion action (vt-converted) is a tile. All other critical actions are on tiles. Also not on the strip: the consult's note that procainamide may be preferred over amiodarone for stable monomorphic VT (2025 AHA), and that amiodarone is preferred when QTc is prolonged or in CHF/impaired LV function; the strip lists amiodarone first. The pulse-present strip has no separate stable-versus-unstable gate tile: the unstable criteria are quoted inside the cardioversion tile and the stable tiles follow it."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "pvt-shock",
+      "pvt-cycle",
+      "vt-cardiovert",
+      "vt-mono-stable",
+      "vt-poly-check",
+      "vt-converted"
+    ],
+    "text": "Tile order follows the consult's flow, not the order of the critical-actions list. On the pulse-present strip the consult lists the shock first and sedation after it in the same node; the strip keeps that order, so the sedation tile comes after the cardioversion tile. Physician to decide whether sedation should come first. The Torsades check (vt-poly-check) is listed before the stable amiodarone action in the critical-actions list but the consult reaches it later."
+  },
+  {
+    "kind": "gap",
+    "tileId": "epinephrine",
+    "drugId": "epinephrine",
+    "nodeIds": [
+      "pvt-cycle"
+    ],
+    "text": "Epinephrine is a steps tile: the drug store has no adult cardiac arrest entry for epinephrine (only a VAD cardiac arrest entry, which is not this use). The tile quotes the consult line only; no store dosing is shown."
+  },
+  {
+    "kind": "gap",
+    "tileId": "refractory",
+    "drugId": "esmolol",
+    "nodeIds": [
+      "pvt-refractory"
+    ],
+    "text": "The refractory tile quotes the consult's line 'Esmolol 500 mcg/kg IV bolus' as a steps line; it is on the tile only because the consult lists it under 'Consider:'. It is not a drug tile here. Physician to decide whether esmolol belongs on the strip and whether it needs a store entry for this use."
+  },
+  {
+    "kind": "gap",
+    "tileId": "procainamide",
+    "drugId": "procainamide",
+    "nodeIds": [
+      "vt-mono-stable"
+    ],
+    "text": "Procainamide is a steps tile: the drug store's only procainamide entry is labelled 'WPW + A-Fib / Wide-complex tachycardia', not stable monomorphic VT, so it was not used as a drug tile. The consult's dose text is quoted. Physician to decide whether the store entry is meant to cover stable VT."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "lidocaine",
+    "drugId": "lidocaine",
+    "nodeIds": [
+      "pvt-cycle"
+    ],
+    "text": "Consult and store differ in how lidocaine is placed. The consult offers lidocaine as an equal alternative to amiodarone after the 3rd shock. The store regimen says 'Give after 3rd shock if amiodarone unavailable'. The consult also gives 'max 3 mg/kg' in a line quoted here; the store gives the same total."
+  },
+  {
+    "kind": "missing-weightcalc",
+    "tileId": "lidocaine",
+    "drugId": "lidocaine",
+    "nodeIds": [
+      "pvt-cycle"
+    ],
+    "text": "Lidocaine for VF/pVT is dosed per kg (1-1.5 mg/kg, then 0.5-0.75 mg/kg) but the store dose entry has no weight calculator."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "sedation",
+    "drugId": "midazolam",
+    "nodeIds": [
+      "vt-cardiovert"
+    ],
+    "text": "Midazolam dose differs: the consult says 2-5 mg IV. The store's cardioversion entry says 1-2 mg IV over 2 min, may repeat 1 mg q2 min to adequate sedation, 'typical total 2-5 mg', and lower doses in unstable or post-arrest patients. The face shows the consult's figure. Physician to decide which is the intended starting dose. The consult also offers ketamine 1-2 mg/kg IV as an alternative; the store has no ketamine entry for cardioversion sedation, and the strip shows it only as a quoted line."
+  },
+  {
+    "kind": "missing-weightcalc",
+    "tileId": "sedation",
+    "drugId": "midazolam",
+    "nodeIds": [
+      "vt-cardiovert"
+    ],
+    "text": "The consult quotes ketamine per kg (1-2 mg/kg IV) as the alternative sedative; there is no weight calculator for it on this strip."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "torsades-mg",
+    "drugId": "magnesium-sulfate",
+    "nodeIds": [
+      "pvt-torsades-check",
+      "vt-poly-long-qt"
+    ],
+    "text": "Magnesium: the consult gives 2 g IV push in arrest and 2 g IV over 5-15 min in a perfusing rhythm, repeat 2 g at 5-15 min, then an infusion with no rate. The store Torsades entry gives 2 g and an infusion of 1-4 g/hr, plus a second 'EMCrit front-load' alternative (4 g over 20 min) that is not the guideline number. The store regimen on the tile shows both. Physician to check the face '2 g IV' against the store's alternative."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "amiodarone-stable",
+    "drugId": "amiodarone",
+    "nodeIds": [
+      "vt-mono-stable"
+    ],
+    "text": "Amiodarone for stable VT: the store says 'Avoid if baseline QTc prolonged' and 'Alternative to procainamide'. The consult says procainamide may be preferred (2025 AHA) but amiodarone is preferred when QTc is prolonged or in CHF; the consult's amiodarone avoidance applies to Torsades, not baseline QTc. The warning on the tile is the consult's own 'do not combine' line."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "cardiovert",
+    "nodeIds": [
+      "vt-cardiovert"
+    ],
+    "text": "The consult gives 100J, 200J, 360J biphasic for synchronized cardioversion; the consult does not say what to do if 360J fails, and does not give a sedation-timing rule beyond 'if hemodynamics tolerate brief sedation'. The strip quotes the consult unchanged. Physician to review."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "shock",
+    "nodeIds": [
+      "pvt-shock",
+      "pvt-cycle"
+    ],
+    "text": "The consult says 'Same protocol as VF' for pulseless VT and sends refractory cases to the Refractory VF/VT protocol; it does not repeat the energy for subsequent shocks."
+  }
+]

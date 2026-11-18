@@ -51,3 +51,6 @@ docs/visual-review/
 
 # Agent worktrees (separate branches checked out by build agents)
 .claude/worktrees/
+
+# RAPID proof page (generated, local only; must never sit in docs/)
+rapid-proof/

@@ -38,6 +38,7 @@ const treeCache = new Map<string, TreeConfig>();
 const STALE_MS = 60 * 60 * 1000;
 
 const LOCAL_TREE_OVERRIDES = new Set([
+  'surgical-complications',
   'acute-agitation',
   'acute-psychosis',
   'capacity-assessment',
@@ -757,6 +758,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'svt': async () => {
       const m = await import('../data/trees/svt.js');
       return { nodes: m.SVT_NODES, entryNodeId: 'svt-start', categoryId: 'cardiology', moduleLabels: m.SVT_MODULE_LABELS, citations: m.SVT_CITATIONS, criticalActions: m.SVT_CRITICAL_ACTIONS };
+    },
+    'surgical-complications': async () => {
+      const m = await import('../data/trees/surgical-complications.js');
+      return { nodes: m.SURGICAL_COMPLICATIONS_NODES, entryNodeId: 'sc-start', categoryId: 'trauma-surg', moduleLabels: m.SURGICAL_COMPLICATIONS_MODULE_LABELS, citations: m.SURGICAL_COMPLICATIONS_CITATIONS, criticalActions: m.SURGICAL_COMPLICATIONS_CRITICAL_ACTIONS };
     },
     'gallbladder': async () => {
       const m = await import('../data/trees/gallbladder.js');

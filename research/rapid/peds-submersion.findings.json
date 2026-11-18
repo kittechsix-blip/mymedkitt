@@ -1,0 +1,106 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "submersion-scene-info",
+      "submersion-arrest",
+      "submersion-ams",
+      "submersion-resp-symptoms",
+      "submersion-observation-ed"
+    ],
+    "text": "Most important: this consult is only partly a memorised resuscitation sequence. Only the cardiac-arrest and cold-arrest nodes are a sequence; the rest (altered mental status, respiratory symptoms, asymptomatic, observation and discharge) is a triage-and-disposition workup that does not reduce to 7 actions. The strip is a single variant that runs from arrest through post-ROSC to observation, so the last three tiles (post-ROSC, intubate, observe) are a thin sample of workup branches, not a resuscitation path. The consult forks at the scene-status node into four different workups rather than resuscitation paths, so no fork was drawn. Physician to decide whether this consult suits a RAPID strip."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "post-rosc",
+    "drugId": "lorazepam",
+    "nodeIds": [
+      "submersion-seizures"
+    ],
+    "text": "Consult and drug store differ on the lorazepam repeat interval: the seizure node says may repeat x1 in 5 minutes; the store's status epilepticus entry says may repeat once in 5-10 min. Dose 0.1 mg/kg (max 4 mg) and levetiracetam 60 mg/kg (max 4500 mg) agree. Not on the strip; not reconciled."
+  },
+  {
+    "kind": "other",
+    "tileId": "intubate",
+    "nodeIds": [
+      "submersion-ams"
+    ],
+    "text": "Reviewer edit: the intubate face now says 'Consider intubation' because the node says 'Consider intubation if', not a command. GCS 8 or less is only one of three listed triggers; the list and the node's 'rule out' items (hypoglycemia, pre-drowning seizure, head trauma, toxic ingestion) are quoted. The scene-status question also routes to respiratory-only and asymptomatic paths that are not on the strip."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "submersion-seizures",
+      "submersion-ams-management",
+      "submersion-resp-symptoms",
+      "submersion-resp-treatment",
+      "submersion-scene-info",
+      "submersion-observation-admit",
+      "submersion-disposition-critical",
+      "submersion-arrest-continue",
+      "submersion-mild-hypothermia",
+      "submersion-rosc-or-term",
+      "submersion-termination",
+      "submersion-icu-monitoring",
+      "submersion-asymptomatic",
+      "submersion-discharge-criteria"
+    ],
+    "text": "Time-critical content NOT on the strip, and critical actions left off: (1) chest X-ray for all symptomatic patients (node says only 'Consider CXR (often normal initially)', see the separate finding); (2) admit patients with hypoxia, altered mental status or respiratory distress, and the admission criteria; (3) consider child abuse under 1 year or with inconsistent history; (4) family support and anticipatory guidance, and ICU admission criteria; (5) post-submersion seizure treatment (lorazepam first-line, levetiracetam second-line) and the respiratory support steps by SpO2 band; (6) the mild and moderate hypothermia branches (standard PALS, spaced dosing) and the core-temperature check; (7) termination criteria and poor prognostic factors; (8) oxygen, CPAP or high-flow steps for respiratory symptoms; (9) targeted temperature management after ROSC; (10) the 'what NOT to use routinely' list (diuretics, steroids, empiric antibiotics). Observation on the strip is the consult's low-risk ED observation node; the critical-action list words it as 'all symptomatic patients' for 4-8 hours, which the node does not say."
+  },
+  {
+    "kind": "other",
+    "tileId": "observe",
+    "nodeIds": [
+      "submersion-observation-ed",
+      "submersion-asymptomatic"
+    ],
+    "text": "The critical-action line says observe all symptomatic patients for a minimum of 4-8 hours. The node says observe 4-8 hours for LOW-RISK patients (GCS 15, SpO2 95% or more, no or resolving respiratory symptoms), and the admission node sends patients with persistent respiratory symptoms or any oxygen need to admission. The tile quotes the node; the condition on the face says low-risk."
+  },
+  {
+    "kind": "node-silent",
+    "nodeIds": [
+      "submersion-resp-symptoms"
+    ],
+    "text": "The critical-action line says obtain a chest X-ray for ALL symptomatic patients, but the node only says 'Consider CXR (often normal initially)'. Not on the strip; the consult disagrees with itself on whether it is required."
+  },
+  {
+    "kind": "other",
+    "tileId": "rewarm",
+    "nodeIds": [
+      "submersion-severe-hypothermia",
+      "submersion-termination",
+      "submersion-arrest-continue"
+    ],
+    "text": "Threshold wording differs inside the consult: the cold-arrest node says limit shocks and hold meds below 30\u00b0C, the severe-hypothermia node is headed 'Severe hypothermia (<28\u00b0C)' but uses temp >30\u00b0C for the limits, and the temperature-status question groups moderate and severe together as <32\u00b0C. The strip quotes each node as written and does not reconcile them. The warm-before-declaring-death critical action is on the rewarm tile; its figure is the consult's own phrase, and its warning quotes the termination node's core temperature line, whose 'Do NOT terminate if:' heading sits above it and is not in the quote."
+  },
+  {
+    "kind": "other",
+    "tileId": "post-rosc",
+    "nodeIds": [
+      "submersion-post-arrest",
+      "submersion-rosc-or-term"
+    ],
+    "text": "Tile order follows the consult's node flow: submersion history, arrest, cold arrest, rewarming, post-ROSC, intubation for altered mental status, then observation. The critical-actions list order differs (history, CPR, warm, chest X-ray, observe, admit, abuse, family). The post-ROSC tile quotes post-arrest node lines (SpO2 target, no hyperventilation, no hypotension); no vasopressor or temperature target is shown."
+  },
+  {
+    "kind": "gap",
+    "tileId": "post-rosc",
+    "nodeIds": [
+      "submersion-seizures",
+      "submersion-ams-management",
+      "submersion-post-arrest"
+    ],
+    "drugId": "lorazepam",
+    "text": "Seizure treatment is time-critical and is NOT a tile. The drug store has matching entries (lorazepam 'Status Epilepticus \u2014 IV (first-line)', levetiracetam 'Status Epilepticus \u2014 2nd line (ESETT)'), so under the drug-tile rule it could replace the observation tile; I left that choice to the physician. The strip carries no dose. Fosphenytoin 20 mg PE/kg in the seizure node has not been checked against the store."
+  },
+  {
+    "kind": "gap",
+    "tileId": "rewarm",
+    "nodeIds": [
+      "submersion-termination",
+      "submersion-arrest",
+      "submersion-arrest-continue"
+    ],
+    "text": "Reviewer edit: the rewarm tile now quotes the termination node's 'Do NOT terminate if:' heading above the core-temperature line, and the arrest node's 'Not dead until warm and dead'. The termination node's other do-not-terminate items (ECMO available and transfer possible; any signs of life) are not on the strip, and the arrest node's 'Consider ECMO for refractory arrest with hypothermia' is not quoted."
+  }
+]

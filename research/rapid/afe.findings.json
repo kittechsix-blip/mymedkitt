@@ -1,0 +1,86 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "afe-acls",
+      "afe-pmcd-decision",
+      "afe-airway",
+      "afe-pharm-branch",
+      "afe-ecmo"
+    ],
+    "text": "Look first at the order and the arrest condition. The consult forks at 'Cardiac arrest?' (afe-acls) into arrest (LUD, hysterotomy) and shock with a pulse (straight to airway, then pressors), but the strip is one linear sequence because the consult does not split into separate resuscitation paths. LUD and hysterotomy apply only in arrest; the norepinephrine and transfusion tiles apply to both. The consult's own flow puts airway (immediate intubation) and access BEFORE the hysterotomy decision; the strip has no airway tile, so on this strip hysterotomy appears to come before the airway. Please decide whether airway should displace a tile, and whether the 'A-O-K NOT recommended' caution (a critical action) or VA-ECMO (a critical action) should replace one. The strip follows the consult's flow, not the critical-actions list order (which places A-O-K and MTP before the pressor content)."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "afe-access",
+      "afe-acls",
+      "afe-airway",
+      "afe-ddx",
+      "afe-ecmo",
+      "afe-hemo",
+      "afe-pharm-branch",
+      "afe-pmcd-decision",
+      "afe-postrosc",
+      "afe-refractory",
+      "afe-start",
+      "afe-txa"
+    ],
+    "text": "Time-critical content NOT on the strip (7-tile cap): (1) airway and oxygenation (afe-airway: immediate intubation, 100% FiO2, smaller ETT, rapid-sequence choices, capnography); (2) arterial/central/IO access and the DIC labs (afe-access); (3) VA-ECMO early (afe-ecmo), a critical action left off; only the 'page ECMO team during the resuscitation' line is quoted in the call-team tile; (4) the A-O-K caution (afe-pharm-branch), a critical action left off: the consult says A-O-K is NOT recommended as of 2025, mainstay is supportive care, and the 50-50-500 alternative is equally low evidence; (5) vasopressin as its own drug tile (the store has an AFE vasopressin entry; it appears only as a quoted line in the norepinephrine tile), epinephrine 'if arrest or mixed shock', inotropes (milrinone no bolus, dobutamine), inhaled pulmonary vasodilators, and the crystalloid 500 mL limit and STOP-fluids rule; (6) cryoprecipitate (store has an AFE entry), platelet targets, TEG/ROTEM triggers, surgical hemostasis (uterotonics, Bakri, hysterectomy); (7) refractory-arrest optimisation, reversible-causes list and termination criteria (afe-refractory); (8) post-ROSC care and handoff (afe-postrosc); (9) differential diagnosis (afe-ddx); (10) epinephrine 1 mg q3-5 min for arrest (afe-acls), kept off the CPR tile because a steps tile may not carry a dose; (11) the 4-minute rule wording (start at minute 4, deliver by minute 5, 'a prompt to act, not a rigid deadline') is only in the tile face; it could not be quoted clause-complete without other content; (12) the 'Do NOT wait for' list in afe-pmcd (anesthesia, OR setup, sterile prep, fetal viability); (13) the three-way branch at afe-pmcd-decision (under 20 weeks / no fundus: not indicated, standard ACLS)."
+  },
+  {
+    "kind": "missing-weightcalc",
+    "tileId": "norepi",
+    "drugId": "norepinephrine",
+    "nodeIds": [
+      "afe-hemo"
+    ],
+    "text": "Norepinephrine is dosed per kg per minute. The store's AFE entry has one weight calculator that gives the 0.1 mcg/kg/min point only (unit mcg/min); there is no calculator across the 0.05-0.5 range the consult gives. Physician to decide whether that is adequate."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "txa",
+    "drugId": "tranexamic-acid",
+    "nodeIds": [
+      "afe-txa",
+      "afe-mtp"
+    ],
+    "text": "Please compare the drug store and the consult for TXA. Consult and store agree on the dose and repeat. The consult gives TXA after the MTP question only if there is active bleeding (afe-mtp Yes branch), while the critical-actions list carries the TXA action unconditionally with '(<3 h from onset)'; the tile face states active bleeding and <3 h. Also the store's AFE entry says the 3-hour window runs from onset of hemorrhage/AFE, the consult says WOMAN trial effect is within 3 h of hemorrhage onset. Not resolved."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "hysterotomy",
+    "nodeIds": [
+      "afe-pmcd",
+      "afe-pmcd-decision"
+    ],
+    "text": "The hysterotomy tile's danger box is 'Where: at bedside. Do NOT transport to OR.' (afe-pmcd-decision); the 'Pack uterus - do not attempt definitive closure during arrest' line is quoted among the steps. The consult's 'Do NOT wait for' list (anesthesia, formal OR setup, sterile prep beyond Betadine, fetal viability assessment) is not on the tile. The face figure 'Start at minute 4' is the consult's 4-minute prompt; the consult itself says 4 minutes is a prompt to act, not a rigid deadline, which the face cannot carry. Physician to choose which do-NOT belongs in the danger box."
+  },
+  {
+    "kind": "other",
+    "tileId": "cpr",
+    "drugId": "epinephrine",
+    "nodeIds": [
+      "afe-acls"
+    ],
+    "text": "Epinephrine 1 mg q3-5 min for arrest is in the consult (afe-acls) but is not on the strip as a drug tile; the store's epinephrine entries are for other indications (anaphylaxis, etc.), none read as cardiac arrest in this consult. Physician to decide."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "norepi",
+    "drugId": "norepinephrine",
+    "nodeIds": [
+      "afe-hemo"
+    ],
+    "text": "The store's norepinephrine entry lists 'Hypovolemia (correct volume deficit first)' as a contraindication, which shows on the tile. The consult starts pressors early in AFE shock and also says blood products rather than crystalloid for volume, with hemorrhage/DIC common. The consult does not address this; physician to judge how the tile reads. Not resolved here."
+  },
+  {
+    "kind": "other",
+    "tileId": "norepi",
+    "drugId": "vasopressin",
+    "nodeIds": [
+      "afe-hemo"
+    ],
+    "text": "The consult lists vasopressin 0.04 U/min as the second pressor and the store has a matching AFE vasopressin entry, but it is only a quoted line inside the norepinephrine tile, not its own drug tile (7-tile cap). The consult also lists epinephrine for arrest or mixed shock; the store has no AFE epinephrine entry."
+  }
+]

@@ -1,0 +1,129 @@
+import type { RapidStrip } from './types.js';
+
+// RAPID strip (format v3), Brain Herniation. Faces authored; every expansion line is a verbatim node excerpt. Not approved.
+// One variant: the consult does not fork into different resuscitation paths. Tile order follows the consult's node FLOW.
+// Findings: research/rapid/brain-herniation.findings.json
+
+export const RAPID_BRAIN_HERNIATION: RapidStrip = {
+  treeId: 'brain-herniation',
+  variants: [
+    {
+      id: 'herniation',
+      label: 'Herniation',
+      tiles: [
+        {
+          id: 'airway',
+          layout: 'steps',
+          action: 'Intubate',
+          figure: 'GCS ≤8',
+          condition: 'Avoid hypotension during RSI',
+          nodeIds: ['hern-emergency', 'hern-start'],
+          warning: { nodeId: 'hern-start', text: '⚠️ Do NOT wait for CT if clinical signs present — start treatment immediately!' },
+          lines: [
+            { nodeId: 'hern-emergency', text: 'Intubate if GCS ≤8' },
+            { nodeId: 'hern-emergency', text: 'Avoid hypoxia (SaO2 >95%)' },
+            { nodeId: 'hern-emergency', text: 'Avoid hypotension during RSI' },
+          ],
+        },
+        {
+          id: 'mannitol',
+          layout: 'drug',
+          action: 'Mannitol 20%',
+          figure: '1 g/kg',
+          condition: 'One of two; avoid if hypovolemic',
+          nodeIds: ['hern-osmolar', 'hern-mannitol'],
+          warning: { nodeId: 'hern-mannitol', text: 'Avoid in hypovolemia — can worsen hypotension' },
+          drug: {
+            id: 'mannitol',
+            indication: 'Brain herniation',
+            weightCalcs: [{ dosePerKg: 1, unit: 'g', label: 'Standard herniation dose (1 g/kg)' }],
+          },
+          lines: [
+            { nodeId: 'hern-osmolar', text: 'Choose ONE — Both Are Effective:' },
+            { nodeId: 'hern-mannitol', text: 'Monitoring:' },
+            { nodeId: 'hern-mannitol', text: 'Serum osmolarity (hold if >320 mOsm/L)' },
+            { nodeId: 'hern-mannitol', text: 'Blood pressure (may drop)' },
+          ],
+        },
+        {
+          id: 'hts',
+          layout: 'drug',
+          action: 'Hypertonic saline 3%',
+          figure: '2-5 mL/kg bolus',
+          condition: 'One of two; may suit if hypotensive',
+          nodeIds: ['hern-osmolar', 'hern-hts'],
+          drug: {
+            id: 'hypertonic-saline',
+            indication: 'Intracranial hypertension / impending herniation',
+            weightCalcs: [{ dosePerKg: 3, unit: 'mL', label: '3% NaCl bolus (3 mL/kg midpoint)' }],
+          },
+          lines: [
+            { nodeId: 'hern-osmolar', text: 'Choose ONE — Both Are Effective:' },
+            { nodeId: 'hern-osmolar', text: 'May be preferred if hypotensive' },
+            { nodeId: 'hern-hts', text: 'Monitoring:' },
+            { nodeId: 'hern-hts', text: 'Central line for concentrations >3% (peripheral OK for 3%)' },
+          ],
+        },
+        {
+          id: 'positioning',
+          layout: 'steps',
+          action: 'Elevate head',
+          figure: 'HOB 30 degrees',
+          nodeIds: ['hern-positioning'],
+          lines: [
+            { nodeId: 'hern-positioning', text: 'Head of bed 30 degrees — improves venous drainage' },
+            { nodeId: 'hern-positioning', text: 'Head midline — avoid neck rotation (compresses jugular)' },
+            { nodeId: 'hern-positioning', text: 'Loosen cervical collar if present (impedes venous outflow)' },
+          ],
+        },
+        {
+          id: 'hyperventilate',
+          layout: 'steps',
+          action: 'Hyperventilate',
+          figure: 'PaCO2 32-35, max 2 h',
+          condition: 'Temporizing bridge only',
+          nodeIds: ['hern-hypervent', 'hern-emergency'],
+          warning: { nodeId: 'hern-hypervent', text: 'TEMPORIZING MEASURE ONLY' },
+          lines: [
+            { nodeId: 'hern-hypervent', text: 'Target:' },
+            { nodeId: 'hern-hypervent', text: 'PaCO2 32-35 mmHg (mild hypocapnia)' },
+            { nodeId: 'hern-hypervent', text: 'Do NOT go below 25 mmHg' },
+            { nodeId: 'hern-emergency', text: 'Maximum 2 hours — causes ischemia if prolonged' },
+          ],
+        },
+        {
+          id: 'neurosurgery',
+          layout: 'steps',
+          action: 'Call neurosurgery',
+          figure: 'STAT',
+          condition: 'While doing the other steps',
+          nodeIds: ['hern-surgery', 'hern-emergency'],
+          lines: [
+            { nodeId: 'hern-surgery', text: 'CALL NEUROSURGERY STAT For:' },
+            { nodeId: 'hern-surgery', text: 'Imaging Indications:' },
+            { nodeId: 'hern-surgery', text: 'Midline shift >5 mm' },
+            { nodeId: 'hern-surgery', text: 'Clinical Indications:' },
+            { nodeId: 'hern-surgery', text: 'Anisocoria + altered consciousness' },
+            { nodeId: 'hern-surgery', text: 'Cushing triad' },
+            { nodeId: 'hern-emergency', text: 'Prep for emergent CT and possible OR' },
+          ],
+        },
+        {
+          id: 'bp',
+          layout: 'steps',
+          action: 'Avoid hypotension',
+          figure: 'SBP >100-110 mmHg',
+          condition: 'Don\'t overcorrect HTN: may be Cushing',
+          nodeIds: ['hern-bp-targets', 'hern-emergency'],
+          warning: { nodeId: 'hern-bp-targets', text: 'Don\'t overcorrect — HTN may be Cushing response' },
+          lines: [
+            { nodeId: 'hern-emergency', text: 'Target SBP >100-110 mmHg' },
+            { nodeId: 'hern-emergency', text: 'Avoid hypotension aggressively' },
+            { nodeId: 'hern-bp-targets', text: 'Caution:' },
+            { nodeId: 'hern-bp-targets', text: 'Don\'t overcorrect — HTN may be Cushing response' },
+          ],
+        },
+      ],
+    },
+  ],
+};

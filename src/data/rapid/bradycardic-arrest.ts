@@ -1,0 +1,206 @@
+import type { RapidStrip } from './types.js';
+
+// RAPID strip (format v3), Bradycardic Arrest. Faces authored; every expansion line is a verbatim node excerpt. Not approved.
+// Fork at brady-confirm (Asystole vs Extreme bradycardia with QRS). Tile order follows each branch's node FLOW.
+// Findings: research/rapid/bradycardic-arrest.findings.json
+
+const HYPERK_LINE =
+  'Hyperkalemia (wide QRS, peaked T): Calcium Chloride 1 g IV (preferred in arrest, even peripherally) or Calcium Gluconate 3 g IV + bicarb + insulin/dextrose';
+const HYPOTHERMIA_LINE = 'Hypothermia: active rewarming, defer pacing until >30°C (myocardium irritable below 30°C)';
+
+export const RAPID_BRADYCARDIC_ARREST: RapidStrip = {
+  treeId: 'bradycardic-arrest',
+  forkNodeId: 'brady-confirm',
+  variants: [
+    {
+      id: 'asystole',
+      label: 'Asystole',
+      tiles: [
+        {
+          id: 'confirm-asystole',
+          layout: 'steps',
+          action: 'Confirm asystole',
+          figure: 'Confirm in 2 leads',
+          condition: 'Lead disconnect or low gain mimics it',
+          nodeIds: ['brady-start'],
+          lines: [
+            { nodeId: 'brady-start', text: 'Key steps:' },
+            { nodeId: 'brady-start', text: 'Confirm rhythm in 2 leads — avoid misdiagnosing lead disconnect artifact as asystole' },
+            { nodeId: 'brady-start', text: 'Check gain settings — low gain can mimic flat line' },
+          ],
+        },
+        {
+          id: 'cpr',
+          layout: 'steps',
+          action: 'Start CPR',
+          figure: 'Do not defibrillate',
+          condition: 'Asystole is non-shockable',
+          nodeIds: ['brady-asystole-mgmt'],
+          warning: { nodeId: 'brady-asystole-mgmt', text: 'Asystole is a non-shockable rhythm — do NOT defibrillate.' },
+          lines: [
+            { nodeId: 'brady-asystole-mgmt', text: 'CPR immediately — high-quality compressions' },
+            { nodeId: 'brady-asystole-mgmt', text: 'TCP rarely effective in true asystole — pacing spikes without capture' },
+          ],
+        },
+        {
+          id: 'epinephrine-arrest',
+          layout: 'steps',
+          action: 'Epinephrine',
+          figure: '1mg IV/IO',
+          condition: 'ASAP, repeat q3-5 min',
+          nodeIds: ['brady-asystole-mgmt'],
+          lines: [{ nodeId: 'brady-asystole-mgmt', text: 'Epinephrine 1mg IV/IO ASAP, repeat q3-5 min' }],
+        },
+        {
+          id: 'reversible-causes',
+          layout: 'steps',
+          action: 'Search reversible causes',
+          figure: 'H\'s and T\'s',
+          condition: 'Search aggressively',
+          nodeIds: ['brady-asystole-mgmt', 'brady-causes'],
+          lines: [
+            { nodeId: 'brady-asystole-mgmt', text: 'Search aggressively for reversible causes (H\'s and T\'s)' },
+            { nodeId: 'brady-causes', text: 'Treatable causes of bradycardic arrest:' },
+            { nodeId: 'brady-causes', text: 'Hypoxia: airway + oxygenation first' },
+            { nodeId: 'brady-causes', text: 'Myocardial infarction: inferior STEMI → right-sided ECG' },
+          ],
+        },
+        {
+          id: 'calcium-chloride',
+          layout: 'drug',
+          action: 'Calcium chloride',
+          figure: '1 gram',
+          condition: 'Hyperkalemia: wide QRS, peaked T',
+          nodeIds: ['brady-causes'],
+          drug: { id: 'calcium-chloride', indication: 'Hyperkalemia (central access)' },
+          lines: [{ nodeId: 'brady-causes', text: HYPERK_LINE }],
+        },
+        {
+          id: 'rewarm',
+          layout: 'steps',
+          action: 'Rewarm first',
+          figure: 'Rewarm to >30°C',
+          condition: 'Hypothermia',
+          nodeIds: ['brady-causes', 'brady-tor'],
+          lines: [
+            { nodeId: 'brady-causes', text: HYPOTHERMIA_LINE },
+            { nodeId: 'brady-tor', text: 'EXCEPTION — Hypothermia:' },
+            { nodeId: 'brady-tor', text: 'Rewarm to >30°C before declaring futility' },
+            { nodeId: 'brady-tor', text: 'Active rewarming: warm IV fluids, forced air, lavage, ECMO rewarming' },
+          ],
+        },
+        {
+          id: 'tor',
+          layout: 'steps',
+          action: 'Consider TOR',
+          figure: 'ETCO2 <10 mmHg, 20 min',
+          condition: 'Not if hypothermic: rewarm first',
+          nodeIds: ['brady-tor'],
+          warning: { nodeId: 'brady-tor', text: 'Rewarm to >30°C before declaring futility' },
+          lines: [
+            { nodeId: 'brady-tor', text: 'Consider TOR when:' },
+            { nodeId: 'brady-tor', text: 'ETCO2 <10 mmHg after 20 min of high-quality CPR' },
+            { nodeId: 'brady-tor', text: 'No reversible cause identified' },
+            { nodeId: 'brady-tor', text: 'No cardiac activity on POCUS (cardiac standstill)' },
+            { nodeId: 'brady-tor', text: 'No response to pacing, medications, or cause-directed therapy' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'extreme-brady',
+      label: 'Extreme bradycardia with QRS',
+      tiles: [
+        {
+          id: 'tcp',
+          layout: 'steps',
+          action: 'Transcutaneous pacing',
+          figure: '60-80 bpm, mA to capture',
+          condition: 'Hypothermic: rewarm to >30°C first',
+          nodeIds: ['brady-tcp', 'brady-causes'],
+          warning: { nodeId: 'brady-tcp', text: 'Transcutaneous pacing immediately — don\'t wait for medications.' },
+          lines: [
+            { nodeId: 'brady-tcp', text: 'Setup:' },
+            { nodeId: 'brady-tcp', text: 'Rate: 60-80 bpm' },
+            { nodeId: 'brady-tcp', text: 'Start at 0 mA → increase until electrical capture (usually 50-100 mA)' },
+            { nodeId: 'brady-tcp', text: 'AP pad position preferred (anterior: left parasternal, posterior: left infrascapular)' },
+            { nodeId: 'brady-tcp', text: 'If conscious patient → sedation required (TCP is extremely painful)' },
+            { nodeId: 'brady-causes', text: HYPOTHERMIA_LINE },
+          ],
+        },
+        {
+          id: 'capture',
+          layout: 'steps',
+          action: 'Confirm capture',
+          figure: 'Pulse or POCUS contractility',
+          condition: 'Electrical capture alone is not enough',
+          nodeIds: ['brady-capture', 'brady-no-capture'],
+          warning: { nodeId: 'brady-capture', text: 'Electrical capture alone insufficient — confirm pulse or POCUS contractility' },
+          lines: [
+            { nodeId: 'brady-capture', text: 'Electrical capture: pacer spike + wide QRS on monitor' },
+            { nodeId: 'brady-capture', text: 'Mechanical capture: palpable pulse AND/OR contractility on POCUS' },
+            { nodeId: 'brady-no-capture', text: 'No mechanical capture despite electrical:' },
+            { nodeId: 'brady-no-capture', text: 'Increase mA (up to max output)' },
+            { nodeId: 'brady-no-capture', text: 'Reposition pads — try AP position if using anterolateral' },
+          ],
+        },
+        {
+          id: 'atropine',
+          layout: 'drug',
+          action: 'Atropine',
+          figure: '1 mg IV',
+          condition: 'Do NOT delay pacing',
+          nodeIds: ['brady-atropine'],
+          drug: { id: 'atropine', indication: 'Symptomatic bradycardia (ACLS)' },
+          warning: { nodeId: 'brady-atropine', text: 'Do NOT delay pacing for atropine — atropine is an adjunct, not a substitute for pacing' },
+          lines: [
+            { nodeId: 'brady-atropine', text: 'Atropine 1mg IV q3-5 min, max 3 doses (3mg total)' },
+            { nodeId: 'brady-atropine', text: 'Limited efficacy in:' },
+            { nodeId: 'brady-atropine', text: 'Infranodal block (Mobitz II, 3° AVB) — block is below the vagal innervation' },
+            { nodeId: 'brady-atropine', text: 'Wide-complex escape rhythms' },
+          ],
+        },
+        {
+          id: 'epinephrine-infusion',
+          layout: 'drug',
+          action: 'Epinephrine infusion',
+          figure: '2-10 mcg/min',
+          condition: 'Titrate to HR >60',
+          nodeIds: ['brady-epi-infusion'],
+          drug: { id: 'epinephrine', indication: 'Symptomatic bradycardia (ACLS infusion)' },
+          lines: [
+            { nodeId: 'brady-epi-infusion', text: 'First-line:' },
+            { nodeId: 'brady-epi-infusion', text: 'Epinephrine infusion 2-10 mcg/min IV — titrate to HR >60 and adequate perfusion' },
+            { nodeId: 'brady-epi-infusion', text: 'Alternative (if epi unavailable):' },
+            { nodeId: 'brady-epi-infusion', text: 'Dopamine 5-20 mcg/kg/min IV infusion' },
+          ],
+        },
+        {
+          id: 'calcium-chloride-brady',
+          layout: 'drug',
+          action: 'Calcium chloride',
+          figure: '1 gram',
+          condition: 'Hyperkalemia: wide QRS, peaked T',
+          nodeIds: ['brady-causes'],
+          drug: { id: 'calcium-chloride', indication: 'Hyperkalemia (central access)' },
+          lines: [{ nodeId: 'brady-causes', text: HYPERK_LINE }],
+        },
+        {
+          id: 'tvp',
+          layout: 'steps',
+          action: 'Transvenous pacing',
+          figure: 'RIJ or femoral vein',
+          condition: 'Float without fluoroscopy if unstable',
+          nodeIds: ['brady-tvp'],
+          lines: [
+            { nodeId: 'brady-tvp', text: 'Right internal jugular (RIJ) — preferred, direct line to RV' },
+            { nodeId: 'brady-tvp', text: 'Femoral vein — alternative, easier access during CPR' },
+            { nodeId: 'brady-tvp', text: 'Emergency TVP:' },
+            { nodeId: 'brady-tvp', text: 'Float without fluoroscopy if patient unstable' },
+            { nodeId: 'brady-tvp', text: 'Use balloon-tipped catheter for flow-directed placement' },
+          ],
+        },
+      ],
+    },
+  ],
+};

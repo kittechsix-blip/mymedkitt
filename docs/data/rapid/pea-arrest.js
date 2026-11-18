@@ -1,0 +1,113 @@
+// RAPID strip (format v3), PEA Arrest. Faces authored; every expansion line is a verbatim node excerpt. Not approved.
+// Single variant (the consult forks at pea-activity into PREM/PRES; see findings). Findings: research/rapid/pea-arrest.findings.json
+export const RAPID_PEA_ARREST = {
+    treeId: 'pea-arrest',
+    variants: [
+        {
+            id: 'pea',
+            label: 'PEA arrest',
+            tiles: [
+                {
+                    id: 'pocus',
+                    layout: 'steps',
+                    action: 'POCUS pulse check',
+                    figure: '<10 sec',
+                    condition: 'Cardiac activity present?',
+                    nodeIds: ['pea-pocus'],
+                    lines: [
+                        { nodeId: 'pea-pocus', text: 'Perform RUSH exam during pulse check (<10 sec):' },
+                        { nodeId: 'pea-pocus', text: 'Pump (cardiac):' },
+                        { nodeId: 'pea-pocus', text: 'Cardiac activity present?' },
+                        { nodeId: 'pea-pocus', text: 'POCUS findings direct specific treatment — do not delay CPR for prolonged imaging.' },
+                    ],
+                },
+                {
+                    id: 'epinephrine',
+                    layout: 'steps',
+                    action: 'Epinephrine',
+                    figure: '1 mg IV/IO q3-5 min',
+                    condition: 'True PEA, as early as feasible',
+                    nodeIds: ['pea-epi'],
+                    warning: { nodeId: 'pea-epi', text: 'In pseudo-PEA (PREM) — do NOT give 1mg epi. Use titratable vasopressors instead (norepi infusion, push-dose epi 5-20 mcg, or vasopressin)' },
+                    lines: [
+                        { nodeId: 'pea-epi', text: 'Give as soon as feasible — PEA is non-shockable, so epi early (AHA 2025 Part 9, COR 2a)' },
+                        { nodeId: 'pea-epi', text: 'Repeat every 3-5 minutes (operationally, every second CPR cycle after the first dose)' },
+                        { nodeId: 'pea-epi', text: 'Do NOT use high-dose epi or substitute vasopressin for epi (AHA 2025, COR 3: No Benefit)' },
+                    ],
+                },
+                {
+                    id: 'wide-bicarb',
+                    layout: 'steps',
+                    action: 'Sodium bicarbonate',
+                    figure: '1-2 mEq/kg IV push',
+                    condition: 'Wide complex PEA',
+                    nodeIds: ['pea-wide'],
+                    lines: [
+                        { nodeId: 'pea-wide', text: 'Empiric treatment — give immediately:' },
+                        { nodeId: 'pea-wide', text: 'NaHCO3 1-2 mEq/kg IV push' },
+                    ],
+                },
+                {
+                    id: 'narrow-fluids',
+                    layout: 'steps',
+                    action: 'IV fluids',
+                    figure: 'Wide-open',
+                    condition: 'Narrow complex PEA or collapsed IVC',
+                    nodeIds: ['pea-narrow', 'pea-hypovolemia'],
+                    lines: [
+                        { nodeId: 'pea-narrow', text: 'First-line treatment: wide-open IV fluids — narrow-complex PEA is frequently fluid-responsive.' },
+                        { nodeId: 'pea-narrow', text: 'Note: Calcium and bicarb are unlikely to help in narrow-complex PEA — save for wide QRS.' },
+                        { nodeId: 'pea-hypovolemia', text: 'Hypovolemia: collapsed IVC → rapid volume resuscitation.' },
+                        { nodeId: 'pea-hypovolemia', text: 'Immediate actions:' },
+                        { nodeId: 'pea-hypovolemia', text: 'Rapid 1-2L crystalloid IV bolus' },
+                    ],
+                },
+                {
+                    id: 'tamponade',
+                    layout: 'steps',
+                    action: 'Pericardiocentesis',
+                    figure: 'Subxiphoid',
+                    condition: 'Effusion + RV diastolic collapse',
+                    nodeIds: ['pea-tamponade'],
+                    warning: { nodeId: 'pea-tamponade', text: 'Do NOT delay for formal echo or OR — this is a bedside procedure in arrest.' },
+                    lines: [
+                        { nodeId: 'pea-tamponade', text: 'Tamponade: pericardial effusion + RV diastolic collapse → emergent pericardiocentesis.' },
+                        { nodeId: 'pea-tamponade', text: 'Procedure:' },
+                        { nodeId: 'pea-tamponade', text: 'Subxiphoid approach preferred in arrest' },
+                        { nodeId: 'pea-tamponade', text: 'Ultrasound-guided if possible' },
+                    ],
+                },
+                {
+                    id: 'tension',
+                    layout: 'steps',
+                    action: 'Needle decompression',
+                    figure: '2nd ICS midclavicular',
+                    condition: 'Absent lung sliding',
+                    nodeIds: ['pea-tension'],
+                    warning: { nodeId: 'pea-tension', text: 'DO NOT wait for CXR — this is a clinical/POCUS diagnosis in arrest.' },
+                    lines: [
+                        { nodeId: 'pea-tension', text: 'Tension PTX: absent lung sliding on POCUS → immediate decompression.' },
+                        { nodeId: 'pea-tension', text: 'Needle decompression:' },
+                        { nodeId: 'pea-tension', text: '2nd ICS midclavicular line (traditional)' },
+                        { nodeId: 'pea-tension', text: '4th/5th ICS anterior axillary line (newer guidance — higher success)' },
+                    ],
+                },
+                {
+                    id: 'alteplase',
+                    layout: 'drug',
+                    action: 'Alteplase',
+                    figure: '50 mg IV push',
+                    condition: 'RV dilation + McConnell sign',
+                    nodeIds: ['pea-massive-pe'],
+                    warning: { nodeId: 'pea-massive-pe', text: 'Continue CPR for 60-90 minutes after lytic administration — do not stop early' },
+                    drug: { id: 'alteplase', indication: 'PE arrest/peri-arrest' },
+                    lines: [
+                        { nodeId: 'pea-massive-pe', text: 'Massive PE: RV dilation + McConnell sign → thrombolytics in arrest.' },
+                        { nodeId: 'pea-massive-pe', text: 'Key points:' },
+                        { nodeId: 'pea-massive-pe', text: 'Thrombolytics in arrest are NOT contraindicated by CPR' },
+                    ],
+                },
+            ],
+        },
+    ],
+};

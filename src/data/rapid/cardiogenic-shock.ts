@@ -1,0 +1,119 @@
+import type { RapidStrip } from './types.js';
+
+// RAPID strip (format v3), Cardiogenic Shock. Faces authored; every expansion line is a verbatim node excerpt. Not approved.
+// One variant: the consult's SCAI fork (cs-recognize) is a severity staging, not two different resuscitation paths.
+// Tile order follows the consult's node FLOW. Findings: research/rapid/cardiogenic-shock.findings.json
+
+export const RAPID_CARDIOGENIC_SHOCK: RapidStrip = {
+  treeId: 'cardiogenic-shock',
+  variants: [
+    {
+      id: 'cardiogenic-shock',
+      label: 'Cardiogenic shock',
+      tiles: [
+        {
+          id: 'push-dose',
+          layout: 'steps',
+          action: 'Push-dose pressor',
+          figure: 'Epi 10-20 mcg IV',
+          condition: 'SCAI D-E crashing, setting up drips',
+          nodeIds: ['cs-crash'],
+          warning: { nodeId: 'cs-crash', text: 'Avoid intubation if possible — sedation + PPV will crash them further' },
+          lines: [
+            { nodeId: 'cs-crash', text: 'Push-dose pressors while setting up infusions:' },
+            { nodeId: 'cs-crash', text: 'Epinephrine 10-20 mcg IV push (1 mL of 10 mcg/mL)' },
+            { nodeId: 'cs-crash', text: 'Phenylephrine 100-200 mcg if pure vasodilation' },
+            { nodeId: 'cs-crash', text: 'Call for help: Cardiology, CT surgery, ECMO team' },
+          ],
+        },
+        {
+          id: 'cath-lab',
+          layout: 'steps',
+          action: 'Activate cath lab',
+          figure: 'STEMI + shock',
+          condition: 'AMI-related shock',
+          nodeIds: ['cs-ami', 'cs-cath'],
+          warning: { nodeId: 'cs-ami', text: 'Thrombolytics (inferior to PCI, contraindicated if MCS planned)' },
+          lines: [
+            { nodeId: 'cs-ami', text: 'STEMI + Shock = Emergent cath lab' },
+            { nodeId: 'cs-ami', text: 'Activate cath lab immediately' },
+            { nodeId: 'cs-ami', text: 'PCI is definitive therapy — every minute of delay = worse outcomes' },
+            { nodeId: 'cs-ami', text: 'Avoid if possible:' },
+            { nodeId: 'cs-ami', text: 'Thrombolytics (inferior to PCI, contraindicated if MCS planned)' },
+            { nodeId: 'cs-ami', text: 'Delaying cath for additional workup' },
+            { nodeId: 'cs-cath', text: 'AMI + Cardiogenic Shock = Emergent PCI' },
+          ],
+        },
+        {
+          id: 'echo',
+          layout: 'steps',
+          action: 'Bedside echo',
+          figure: 'LV, RV, IVC, B-lines',
+          nodeIds: ['cs-hemodynamics'],
+          lines: [
+            { nodeId: 'cs-hemodynamics', text: 'Use POCUS to determine:' },
+            { nodeId: 'cs-hemodynamics', text: 'LV function (EPSS, visual EF)' },
+            { nodeId: 'cs-hemodynamics', text: 'RV size and function' },
+            { nodeId: 'cs-hemodynamics', text: 'IVC (preload status)' },
+            { nodeId: 'cs-hemodynamics', text: 'Pericardial effusion' },
+            { nodeId: 'cs-hemodynamics', text: 'B-lines (pulmonary edema)' },
+          ],
+        },
+        {
+          id: 'art-line',
+          layout: 'steps',
+          action: 'Arterial line',
+          figure: 'cuff BP unreliable',
+          nodeIds: ['cs-initial-rx'],
+          lines: [
+            { nodeId: 'cs-initial-rx', text: 'Arterial line — cuff pressures are unreliable in shock' },
+            { nodeId: 'cs-initial-rx', text: 'Central line — for pressors/inotropes' },
+            { nodeId: 'cs-initial-rx', text: 'ECG + POCUS — immediately' },
+          ],
+        },
+        {
+          id: 'norepinephrine',
+          layout: 'drug',
+          action: 'Norepinephrine',
+          figure: '0.05-1 mcg/kg/min',
+          condition: 'first-line; titrate to MAP >65',
+          nodeIds: ['cs-pressors'],
+          warning: { nodeId: 'cs-pressors', text: 'Avoid pure vasoconstrictors (phenylephrine, vasopressin) as monotherapy — increase afterload without helping contractility.' },
+          drug: { id: 'norepinephrine', indication: 'Cardiogenic shock (first-line vasopressor)' },
+          lines: [
+            { nodeId: 'cs-pressors', text: 'First-Line: Norepinephrine' },
+            { nodeId: 'cs-pressors', text: 'Vasopressor + mild inotrope' },
+            { nodeId: 'cs-pressors', text: 'Start 5-10 mcg/min, titrate to MAP >65' },
+          ],
+        },
+        {
+          id: 'dobutamine',
+          layout: 'steps',
+          action: 'Add dobutamine',
+          figure: 'Add if CI low',
+          condition: 'CI remains low; may drop BP',
+          nodeIds: ['cs-pressors'],
+          lines: [
+            { nodeId: 'cs-pressors', text: 'Add Inotrope if CI remains low:' },
+            { nodeId: 'cs-pressors', text: 'Dobutamine: 2.5-20 mcg/kg/min (may drop BP — watch for hypotension)' },
+          ],
+        },
+        {
+          id: 'mcs',
+          layout: 'steps',
+          action: 'Consider MCS',
+          figure: 'Escalating pressors',
+          condition: 'refractory to drugs',
+          nodeIds: ['cs-pressor-choice', 'cs-mcs-decision'],
+          lines: [
+            { nodeId: 'cs-pressor-choice', text: 'Warning Signs of Failure:' },
+            { nodeId: 'cs-pressor-choice', text: 'Escalating pressor requirements' },
+            { nodeId: 'cs-pressor-choice', text: 'Worsening lactate despite pressors' },
+            { nodeId: 'cs-pressor-choice', text: 'Multi-organ dysfunction' },
+            { nodeId: 'cs-mcs-decision', text: "don't wait for multi-organ failure to consider MCS." },
+          ],
+        },
+      ],
+    },
+  ],
+};

@@ -1,0 +1,112 @@
+[
+  {
+    "kind": "other",
+    "tileId": "cardiovert",
+    "nodeIds": [
+      "svt-start",
+      "svt-unstable",
+      "svt-wpw-af"
+    ],
+    "text": "Most important: the consult itself gives two different shock energies. The unstable-SVT node says start 50-100J, while the pre-excited AF node says 100-200J synchronized. The strip quotes both (on the cardiovert tile and the WPW tile) and does not reconcile them. Also, this is a stable/unstable/WPW triage with several time-critical paths; it is kept as one strip (the consult forks at svt-start into stable, unstable and suspected WPW) in the order a clinician meets the nodes, with the unstable tile first because it is the most time-critical. The fork labels at svt-start (Stable \u2014 Proceed with Vagal Maneuvers / Unstable \u2014 Immediate Cardioversion / Suspected WPW) must equal the option labels but the plate key is limited to 1-2 words, so a faithful fork cannot be written under the label rule; a physician should decide whether to split into stable, unstable and WPW cards. On the one-variant strip, tile conditions carry the stable/unstable/WPW distinction."
+  },
+  {
+    "kind": "gap",
+    "tileId": "diltiazem",
+    "drugId": "diltiazem",
+    "nodeIds": [
+      "svt-diltiazem",
+      "svt-rate-control"
+    ],
+    "text": "The drug store has diltiazem only for 'A-Fib rate control (acute)', not for SVT, so diltiazem is a steps tile and its figure carries a dose. The store entry also lists as contraindications EF 40% or less, decompensated heart failure, second/third-degree AV block without pacemaker, and concurrent IV beta-blocker use, which the consult node does not list; the consult lists sick sinus syndrome and hypotension, which the store also lists."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "diltiazem",
+    "drugId": "diltiazem",
+    "nodeIds": [
+      "svt-diltiazem",
+      "svt-rate-control"
+    ],
+    "text": "Diltiazem first bolus: the consult says 15-20mg (0.25 mg/kg) IV over 2 minutes and repeat 20-25mg (0.35 mg/kg); the store says 0.25 mg/kg 'typically 20-25 mg' and a second bolus of 0.35 mg/kg. The mg ranges differ. The per-kg doses on the diltiazem tile are quoted text only: it is a steps tile, so no weight box is shown even though the store has weight calculators for diltiazem (AF rate control entry)."
+  },
+  {
+    "kind": "conflict",
+    "nodeIds": [
+      "svt-amiodarone",
+      "svt-wpw-af",
+      "svt-rate-control"
+    ],
+    "text": "The drug store lists IV amiodarone among AV nodal blockers that are contraindicated in WPW + AF; the consult's WPW + pre-excited AF avoid list does not name amiodarone, and the amiodarone node (offered as the refractory rate-control agent, not on the strip) carries no WPW caution. Reported only; nothing on the strip addresses it."
+  },
+  {
+    "kind": "gap",
+    "tileId": "wpw-af-avoid",
+    "drugId": "adenosine",
+    "nodeIds": [
+      "svt-wpw-af"
+    ],
+    "text": "The avoid line quotes adenosine by name on a steps tile; it is a do-NOT instruction, not a dose. No dose is shown on this tile."
+  },
+  {
+    "kind": "gap",
+    "tileId": "wpw-af-avoid",
+    "drugId": "diltiazem",
+    "nodeIds": [
+      "svt-wpw-af"
+    ],
+    "text": "The avoid line quotes diltiazem by name on a steps tile; it is a do-NOT instruction, not a dose. No dose is shown on this tile."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "svt-start",
+      "svt-vagal-choice",
+      "svt-csm",
+      "svt-adenosine-response",
+      "svt-flutter",
+      "svt-metoprolol",
+      "svt-amiodarone",
+      "svt-cardiovert-result",
+      "svt-wpw-assess",
+      "svt-wpw-orthodromic",
+      "svt-converted",
+      "svt-discharge",
+      "svt-admit",
+      "svt-adenosine",
+      "svt-unstable",
+      "svt-diltiazem",
+      "svt-valsalva",
+      "svt-wpw-af"
+    ],
+    "text": "Time-critical content NOT on the strip: sedation before cardioversion (propofol, etomidate, midazolam with fentanyl) and pediatric doses; carotid sinus massage and its contraindications; adenosine technique details and the 3 mg / higher-dose modifiers beyond the one quoted line; reading the adenosine response (abrupt termination vs flutter vs no response); atrial flutter pathway (cardioversion energy, ibutilide, anticoagulation); metoprolol and amiodarone as rate control; diltiazem maintenance infusion, monitoring and the repeat-bolus detail beyond what is quoted; post-cardioversion assessment and the WPW-suspected loop; WPW assessment (orthodromic vs antidromic, where blockers may be used cautiously); ibutilide for WPW AF; disposition, discharge and admission. The consult's critical actions are covered as follows: unstable cardioversion, modified Valsalva, adenosine, WPW AF avoid-list and diltiazem are tiles. Also left off: the consult's full avoid list for WPW AF names verapamil and digoxin as well; the heading line that carries the word AVOID starts with an emoji and cannot be quoted clause-complete, so the strip quotes the consult's own shorter line (adenosine, diltiazem, beta-blockers) instead, which omits verapamil and digoxin. Procainamide for WPW AF is on its own tile; ibutilide is not. Escalation to 360J and the consult's 'consider adenosine between shocks' are partly on the strip (escalation only)."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "svt-valsalva",
+      "svt-adenosine",
+      "svt-diltiazem",
+      "svt-wpw-af",
+      "svt-unstable"
+    ],
+    "text": "Tile order follows the consult's flow for the stable path (vagal, adenosine, rate control) with the unstable cardioversion tile first because it is time-critical (the consult reaches it from the first node by the Unstable option). It differs from the critical-actions list order, which runs unstable, Valsalva, adenosine, WPW AF, diltiazem."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "adenosine",
+    "drugId": "adenosine",
+    "nodeIds": [
+      "svt-adenosine"
+    ],
+    "text": "Adenosine: the store says 12 mg repeat 'if no conversion in 1-2 min' and to repeat once if needed; the consult also lists a maximum of 12mg x 2 and says some sources allow 18mg, while the store only says up to 18 mg may be needed with theophylline/caffeine. The consult's central-line, transplant and carbamazepine/dipyridamole 3 mg reduction matches the store. The pediatric adenosine dose in the consult (0.1 mg/kg then 0.2 mg/kg) is not on the strip; the store's pediatric entries have weight calculators but the adult SVT entry has none, so no weight box is shown."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "procainamide",
+    "drugId": "procainamide",
+    "nodeIds": [
+      "svt-wpw-af"
+    ],
+    "text": "Procainamide: the consult gives 20-50 mg/min IV, max 17 mg/kg, which agrees with the store's loading line. The store also lists maintenance infusion and stopping criteria (hypotension, QRS widening over 50%) that the consult does not mention; they appear in the drug section of the tile only. The per-kg maximum has no weight calculator in the store."
+  }
+]

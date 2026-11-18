@@ -1,0 +1,55 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "asystole-cpr",
+      "asystole-reassess",
+      "asystole-start"
+    ],
+    "text": "Most important: this consult is a short non-shockable arrest sequence and fits a strip, but epinephrine is on it as a steps tile because the drug store has no adult cardiac-arrest entry for epinephrine (see the gap finding). The strip is drafted for TRUE asystole only. The consult's rhythm node has six branches (true asystole, VF/pVT, PEA, P waves without QRS, still uncertain, ROSC); only the shock branch is carried as a tile. Tile order puts epinephrine second because it is time-critical, although its dose node comes after the signal-check node in the consult's flow (order flags). Several lines that carry a dose or rate sit in source lines that hold negations, so they could not be quoted in full within the 160-character limit; see the gap finding. Reviewer note: the rhythm node's other branches (PEA, P waves without QRS, still uncertain, ROSC) are not on this strip, so a clinician reading it for a rhythm that is not true asystole gets no help."
+  },
+  {
+    "kind": "gap",
+    "tileId": "epinephrine",
+    "drugId": "epinephrine",
+    "nodeIds": [
+      "asystole-cpr",
+      "asystole-reassess"
+    ],
+    "text": "Epinephrine has a drug store entry only for VAD cardiac arrest (1 mg IV/IO every 3-5 minutes), not for adult non-shockable arrest, so it is a steps tile. The face dose '1 mg IV/IO' comes from the consult's own node text. The consult's dose line could not be quoted whole because its source line carries two negations and runs past the 160-character excerpt limit; the strip quotes the route and do-not-wait lines and the every 3-5 minutes repeat line, and the 1 mg dose appears on the face only. Physician to decide whether a store entry for adult arrest should be added. Reviewer note: the drug store's epinephrine entry also carries a contraindication 'Do NOT give cardiac arrest doses (1 mg) to patients with a pulse'; it is a drug-wide statement that does not appear on a steps tile, and the consult itself says to check a pulse only with an organized rhythm or signs of ROSC."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "asystole-rhythm",
+      "asystole-confirm",
+      "asystole-uncertain",
+      "asystole-pea",
+      "asystole-standstill",
+      "asystole-cpr",
+      "asystole-causes",
+      "asystole-rosc",
+      "asystole-termination",
+      "asystole-shockable"
+    ],
+    "text": "Time-critical content NOT on the strip: the critical action 'Confirmed VF is shockable; true asystole is not' (asystole-rhythm) is not quoted because its line is a structured field; the shock tile carries the shockable branch instead. Also left off: the compression rate, depth and recoil and 2-minute compressor rotation (that source line carries negations later in the line and could not be quoted within the length limit); waveform capnography after advanced airway; the 'still uncertain, fine VF vs asystole' advice to shock (ERC vs AHA differ); PEA branch; P waves without QRS (ventricular standstill and pacing consideration); post-ROSC care; termination of resuscitation; the remaining reversible causes (hydrogen ion, hypo/hyperkalemia, hypothermia, tamponade, toxins, thrombosis); the shock energy protocol. The shock tile quotes only the do-not-delay line plus the recommendation, not the energy or delivery instructions, because those share a source line with a negation and exceed the length limit. Also left off (reviewer): the line 'Do not delay CPR, ventilation or early epinephrine to troubleshoot the monitor' is now the warning on the first tile. On the reversible-causes tile the 'Hydrogen ion / metabolic disturbance' line (treat the underlying cause; avoid routine bicarbonate) was left off to stay within 8 lines; the consult's note that POCUS must not extend CPR pauses and that absent cardiac motion or an ETCO2 value alone must not stop resuscitation is also not on the strip. Physician to judge whether the hydrogen-ion line should replace another cause line."
+  },
+  {
+    "kind": "other",
+    "tileId": "cpr-quality",
+    "nodeIds": [
+      "asystole-cpr"
+    ],
+    "text": "Tile order: the consult meets the signal check before the CPR and epinephrine node, but the strip puts CPR start and epinephrine first (time-critical). The critical-actions list order differs from the consult flow. The 'Ventilate' tile's action word is authored by me; the consult calls this the CPR line."
+  },
+  {
+    "kind": "other",
+    "tileId": "shock-vf",
+    "nodeIds": [
+      "asystole-shockable",
+      "asystole-uncertain",
+      "asystole-rhythm"
+    ],
+    "text": "The shock tile sits in a true-asystole strip because the consult's rhythm node sends VF/pVT to defibrillation. The consult's uncertain-rhythm node cites ERC 2025 advising a shock when unsure between fine VF and asystole while AHA 2025 gives no such rule, and says not to apply that exception to confirmed asystole. That is the consult's own source disagreement; nothing about it is on the strip. Physician to decide whether it needs a tile."
+  }
+]

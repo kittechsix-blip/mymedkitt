@@ -1,0 +1,125 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "acr-agent-critical",
+      "acr-bleeding-q"
+    ],
+    "text": "Most important: this consult is a fork by anticoagulant, not one memorised sequence. The strip forks at 'Identify the Anticoagulant' into five variants (warfarin, dabigatran, factor Xa inhibitor, heparin, tPA), but the physician must already know the agent. The consult's very first action for a bleeding patient of unknown agent (activate MTP 1:1:1 and give empiric 4-factor PCC 25-50 units/kg) sits on the fork node itself and is not on any variant, because it belongs to all of them and would repeat in each. Please decide whether it should lead the strip. Many other things a clinician needs (antiplatelet reversal, charcoal, dialysis, andexanet, monitoring) are also off the strip; see the gap finding."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "acr-agent-critical",
+      "acr-antiplatelet",
+      "acr-warfarin-critical",
+      "acr-dabigatran-critical",
+      "acr-xa-critical",
+      "acr-heparin-critical",
+      "acr-ufh-reversal",
+      "acr-lmwh-reversal",
+      "acr-tpa-critical",
+      "acr-agent-minor",
+      "acr-supra-agent",
+      "acr-pre-proc",
+      "acr-start",
+      "acr-bleeding-q"
+    ],
+    "text": "Time-critical content NOT on the strip: (1) the critical action 'massive hemorrhage: activate MTP, give 4-factor PCC empirically while awaiting specific agent' on the fork node; (2) the antiplatelet branch (DDAVP, higher fibrinogen target, avoid platelet transfusion, TXA); the critical-actions list has no antiplatelet entry, so no variant was built; (3) FFP as the alternative if PCC is unavailable (warfarin); (4) fixed-dose PCC for non-CNS bleeding (1,500 units, or 2,000 if >95 kg or INR >7.5, repeat INR at 30 min); (5) activated charcoal if ingested <2 h and hemodialysis for dabigatran; (6) andexanet alfa (consult says no longer marketed in the US); activated charcoal and vitamin K for Xa bleeds; (7) other UFH protamine time bands, infusion-rate calculation and dalteparin/tinzaparin/fondaparinux guidance; (8) FFP and platelets in tPA bleeding and the follow-up labs; (9) all monitoring and rebound advice; (10) the minor-bleeding, supratherapeutic and pre-procedure branches; (11) the first node's advice on when reversal is needed. Also: the strip lists PCC before vitamin K for warfarin, though the consult lists vitamin K first, because the consult says PCC is given immediately; the critical-actions list order was not followed for the same reason (it puts warfarin first, then Xa, dabigatran, heparin, enoxaparin, MTP, TXA; the strip follows the consult's own fork order). Reviewer additions: (12) UFH protamine infusion case (1 mg per 100 units infused in the last 2 hours) and the 30-60 min, 1-2 h and 2-6 h bolus bands; the UFH tile's face is the <30 min bolus dose only; (13) the consult's warning that PCC will NOT change the anti-Xa level; (14) the consult's note that protamine may cause anaphylaxis or pulmonary hypertension (only 'paradoxical coagulopathy' and the slow-infusion line are quoted); (15) 'max 50 mg' protamine cap line and the re-dose line for LMWH; (16) 'For ICH: consider idarucizumab if dose within past 2-4 days'; (17) warfarin: follow INR q3-6h."
+  },
+  {
+    "kind": "other",
+    "tileId": "ufh-protamine",
+    "nodeIds": [
+      "acr-ufh-reversal"
+    ],
+    "text": "UFH protamine tile: dose depends on time since a bolus or on infusion rate over the last 2 hours. The face shows the <30 min bolus case and the tile quotes the header 'If given as bolus:'; an infusion patient needs the consult node. Physician: decide if the strip should carry a time-band or infusion line instead."
+  },
+  {
+    "kind": "other",
+    "tileId": "lmwh-protamine",
+    "nodeIds": [
+      "acr-lmwh-reversal"
+    ],
+    "text": "LMWH tile warning is the consult's fondaparinux line (protamine NOT effective, consider PCC), added in review. UFH and LMWH tiles are alternatives by agent type (face conditions say so) but sit side by side; the consult forks them at its own 'Heparin Type?' node, which the strip does not model."
+  },
+  {
+    "kind": "other",
+    "tileId": "warfarin-pcc-weight",
+    "nodeIds": [
+      "acr-warfarin-critical"
+    ],
+    "text": "Warfarin tile order: PCC tiles come before vitamin K, opposite to the consult's numbering (vitamin K [1], PCC [2]); the weight-tier lines sit under the header 'Institutional weight-based protocol (INR-tiered):', which could not be quoted within the 4-line cap. Physician to judge both."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "tpa-txa",
+    "drugId": "tranexamic-acid",
+    "nodeIds": [
+      "acr-tpa-critical"
+    ],
+    "text": "TXA for tPA bleeding: the consult says 1 g over 10 min then 1 g over the next hour; the drug store entry says 1 g over 10 min then 1 g over the next 8 hours (125 mg/hr). The strip shows both unchanged. Physician must reconcile."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "warfarin-pcc-weight",
+    "drugId": "pcc-4factor",
+    "nodeIds": [
+      "acr-warfarin-critical"
+    ],
+    "text": "Weight-based PCC: the consult lists four INR tiers (1.3-2: 15 units/kg, max 1,500; 2-4: 25; 4-6: 35; >6: 50) with INR bands 2-4 and 4-6. The drug store has three tiers (INR 2-3.9, 4-6, >6, in IU/kg), no 1.3-2 tier, and a different INR 4 boundary. The consult's own treatment block also omits the 1.3-2 tier. Units are 'units' in the consult and 'IU' in the store."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "xa-pcc",
+    "drugId": "pcc-4factor",
+    "nodeIds": [
+      "acr-xa-critical"
+    ],
+    "text": "Factor Xa bleeding: the consult gives 25-50 units/kg (higher end for life-threatening or intracranial, 50 units/kg); the drug store entry for DOAC reversal gives only 50 IU/kg for ICH. The strip's figure shows the store's 50 IU/kg and does not show the lower end. The consult's non-CNS range is not on the strip."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "ufh-protamine",
+    "drugId": "protamine",
+    "nodeIds": [
+      "acr-ufh-reversal"
+    ],
+    "text": "UFH protamine: the consult says give slowly over 15 minutes, based on heparin given in the last 2 hours (infusion) with time-banded bolus doses; the store says infuse over 10 min (max 5 mg/min in cautions) and counts heparin from the prior 2-3 hours. Both shown unchanged."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "lmwh-protamine",
+    "drugId": "protamine",
+    "nodeIds": [
+      "acr-lmwh-reversal"
+    ],
+    "text": "LMWH protamine: consult says protamine neutralizes ~50% of enoxaparin anti-Xa and caps the dose at 50 mg; the store says ~60% and gives no cap. The consult also says re-dose at 0.5 mg per 1 mg (max 25 mg), not on the strip."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "warfarin-vitk",
+    "drugId": "vitamin-k",
+    "nodeIds": [
+      "acr-warfarin-critical"
+    ],
+    "text": "Vitamin K: the consult says 10 mg IV over 30 minutes; the store says slow push over 15-30 min. The strip's tile shows the store's regimen and the consult's lines only; no consult line states the infusion time (the 'over 30 minutes' line is not quoted)."
+  },
+  {
+    "kind": "gap",
+    "tileId": "dabigatran-pcc",
+    "drugId": "pcc-4factor",
+    "nodeIds": [
+      "acr-dabigatran-critical"
+    ],
+    "text": "PCC as the fallback for dabigatran has no drug store entry for dabigatran reversal, so it is a steps tile. The consult's body gives no dose for it (its treatment block gives 50 units/kg, max 5,000 units, which is not quoted here)."
+  },
+  {
+    "kind": "other",
+    "tileId": "warfarin-pcc-fixed",
+    "nodeIds": [
+      "acr-warfarin-critical"
+    ],
+    "text": "Two PCC tiles for warfarin read as alternatives by condition: fixed dose 1000 IU 'not for intracranial bleeding' versus INR-tiered weight-based dosing for ICH. The consult's other fixed-dose rule (1,500 units for non-CNS) is not on the strip. The consult says PCC 'with Vitamin K' always; that is on the vitamin K tile condition."
+  }
+]

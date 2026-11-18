@@ -1,0 +1,98 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "trach-start",
+      "trach-assessment"
+    ],
+    "text": "Most important: this consult is a triage into different emergencies (obstruction, dislodgement, bleeding) plus a laryngectomy branch, not one memorised sequence. The strip is seven separate scenario tiles, not seven steps to do in order; only the first tile (oxygen) applies to every patient. The physician must judge whether the card suits this consult at all. The consult's own assessment node does fork into obstruction, dislodgement and bleeding, and its option labels are two words each, so a three-variant fork (time-critical branch first) is possible; it was drafted as one variant for the physician to decide. Note also that there is NO tile for a mature (>7 days) dislodged trach: the consult says bedside replacement is generally safe there, but a clinician reading only the 'Fresh trach out' tile sees no mature path."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "trach-confirm-placement",
+      "trach-disposition-ent",
+      "trach-mature-replace",
+      "trach-obstruction-refractory",
+      "trach-obstruction-decision",
+      "laryngectomy-emergency",
+      "trach-bleeding-minor",
+      "trach-oxygenation-strategies",
+      "trach-assessment"
+    ],
+    "text": "Left off the strip: (1) Mature trach (>7 days) dislodgement and bedside replacement (consult: generally safe at the bedside), and the assessment signs that sort obstruction, dislodgement and bleeding. (2) Refractory obstruction rescue after the tube is out and still cannot ventilate: for a mature stoma tracheal dilators, smaller tube or ETT through stoma, fiberoptic, then oral intubation; for a fresh stoma no blind reinsertion, oxygenate via face and call the surgeon; for cannot intubate/cannot oxygenate, LMA over stoma and emergency front-of-neck access. This is time-critical and has no tile. (3) Call ENT/surgery (critical action) has no tile of its own; it is quoted only as 'Call for help (anesthesia, ENT, surgery)' on the fresh-trach tile, 'Call for HELP (vascular surgery, ENT, OR team)' is on the TIF tile and 'Call ENT/surgeon immediately.' on the laryngectomy tile; the ENT consultation node is not quoted. (4) Confirm placement with capnography after replacement (critical action): only the oral-intubation capnography line is on the strip; the placement-confirmation node (capnography gold standard, do not rely solely on misting, phonation or oxygen saturation, do not inflate cuff if uncertain, low threshold for oral intubation) is not. (5) Deflate cuff if unable to ventilate (critical action) is on the obstruction tile only as the unconditional 'Step 4: Deflate cuff (if present)'. (6) Laryngectomy: the 'Size 6.0 cuffed ETT fits most adult stomas' line and removing devices/dressings from the stoma. (7) Minor bleeding management (suction, direct pressure, topical measures, coags). (8) Dual-oxygenation detail (non-rebreather or BVM to face, pediatric mask to stoma). (9) Massive hemorrhage: reverse anticoagulation, aggressive suctioning, emergency OR for median sternotomy and innominate artery ligation, cardiothoracic surgery STAT; 'Step 1' heading not quoted. (10) The obstruction reassessment node and post-obstruction care."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "obstruction",
+    "nodeIds": [
+      "trach-obstruction-start"
+    ],
+    "text": "The critical-actions list says 'Remove inner cannula FIRST for obstruction', but the obstruction node orders 'Step 1: Remove any external devices' (speaking valve, cap, HME filter, collar) before 'Step 2: Remove inner cannula'. The tile follows the node. The face figure 'Remove inner cannula' is the consult's headline but not literally step 1. Nothing was changed; the physician should decide which is meant."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "massive-bleed",
+    "nodeIds": [
+      "trach-bleeding-tif-concern",
+      "trach-bleeding-massive"
+    ],
+    "text": "The TIF concern node says 'DO NOT remove tracheostomy tube', while the massive hemorrhage node says 'If uncuffed tube: replace with cuffed ETT'. Both lines are on the strip (TIF tile warning; massive tile). The consult does not say how these fit together. Nothing was changed."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "tif-bleed",
+    "nodeIds": [
+      "trach-bleeding-start",
+      "trach-bleeding-tif-concern",
+      "trach-assessment"
+    ],
+    "text": "Timing windows disagree inside the consult. The bleeding-start node says treat ANY late bleeding (>72 hours, especially 7-14 days) as potential TIF; the TIF node says ANY bleeding 7+ days post-trach is a sentinel bleed and lists 7-21 days as peak; the option label says 'Moderate bleeding, 7-21 days post-trach'; the assessment node says recent trach <3 weeks. The tile figure '7+ days post-trach' follows the TIF node, so a bleed between 72 hours and 7 days is not covered by the face. Nothing was changed."
+  },
+  {
+    "kind": "gap",
+    "tileId": "massive-bleed",
+    "nodeIds": [
+      "trach-bleeding-massive"
+    ],
+    "text": "The figure '50 mL air into cuff (adult)' is an air volume for a cuff, not a medicine, so there is no drug-store entry and the tile is a steps tile. Quoted as the consult states it."
+  },
+  {
+    "kind": "other",
+    "tileId": "oral-intubation",
+    "nodeIds": [
+      "trach-oral-intubation"
+    ],
+    "text": "The consult lists four 'When to intubate orally' bullets (fresh dislodgement, failed stoma replacement, cannot ventilate through stoma, upper airway confirmed patent) without saying whether they are alternatives or all required. The face condition shows only 'Upper airway confirmed patent' because that is the one with a safety meaning (no oral route after laryngectomy); all four are quoted under their heading. The physician should confirm how they combine."
+  },
+  {
+    "kind": "other",
+    "tileId": "oxygen",
+    "nodeIds": [
+      "trach-start",
+      "laryngectomy-emergency",
+      "trach-obstruction-start",
+      "trach-fresh-emergency",
+      "trach-oral-intubation",
+      "trach-bleeding-tif-concern",
+      "trach-bleeding-massive"
+    ],
+    "text": "Tile order follows the consult's node flow: first actions, laryngectomy branch, then obstruction, fresh dislodgement, oral intubation, TIF concern, massive hemorrhage. The critical-actions list puts remove inner cannula and deflate cuff before the fresh-trach items and TIF last; the order here is by flow, not by list. Which problem the patient has is decided by the assessment node, so no tile is more 'first' than another once the problem type is known."
+  },
+  {
+    "kind": "other",
+    "tileId": "massive-bleed",
+    "nodeIds": [
+      "trach-bleeding-massive"
+    ],
+    "text": "The massive hemorrhage tile quotes '50 mL air' and the Utley maneuver as the consult states them. There is no drug-store entry involved. The consult lists 'Step 2' as a heading line, quoted as written; the Step 1 heading is not quoted. Resuscitation items (massive transfusion protocol, aggressive suctioning, reverse anticoagulation) are only partly on the tile."
+  },
+  {
+    "kind": "other",
+    "tileId": "oral-intubation",
+    "nodeIds": [
+      "trach-oral-intubation"
+    ],
+    "text": "The oral intubation node is not reachable from the consult's start node by any link, so the checker flags it as out of order and outside the branch. The content is the consult's own and is what the critical actions point to; the physician should decide whether the node needs a link in the consult. Nothing was changed."
+  }
+]

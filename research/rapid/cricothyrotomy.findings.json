@@ -1,0 +1,67 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "cric-start",
+      "cric-anatomy",
+      "cric-technique-vertical",
+      "cric-technique-horizontal",
+      "cric-technique-bougie",
+      "cric-technique-ett",
+      "cric-confirm"
+    ],
+    "text": "Most important: this consult is a procedure walkthrough, not a memorised resuscitation sequence. The strip is a best-effort seven-step recall of the scalpel-finger-bougie steps (declare CICO, find membrane, skin incision, membrane stab, bougie, tube, confirm). The consult has a decision at cric-start (CICO vs predicted difficult airway vs review) but all options lead into the same walkthrough, so there is no fork. Physician to decide whether a procedure card suits the RAPID format at all, and whether the pediatric needle-cric redirect on tile 1 should stay."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "find-ctm",
+    "nodeIds": [
+      "cric-anatomy"
+    ],
+    "text": "Tile 2 says 'Notch DOWN' (consult headline: EMCrit method 'validated as superior in an RCT'). The same node's own source notes say the laryngeal handshake study (Drew and McCaul) was non-randomised, and that a separate randomised trial (Chang et al.) found the upward (sternal-notch-up) variant more accurate than the downward one. The consult itself tells the reader to read both before relying on either direction. Physician to decide whether 'Notch DOWN' should be the face figure. Also in the same node: the 9 x 30 mm membrane size is quoted as an average while the cadaveric range is smaller in width."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "cric-equipment",
+      "cric-position",
+      "cric-post-procedure",
+      "cric-complications",
+      "cric-troubleshooting",
+      "cric-alternative",
+      "cric-success",
+      "cric-contraindications",
+      "cric-anatomy",
+      "cric-technique-blunt",
+      "cric-technique-ett"
+    ],
+    "text": "Time-critical content NOT on the strip: equipment (the 3 essential items: #10 scalpel, bougie, 6.0 cuffed ETT, 5.5 backup; critical action on cric-equipment, left off to stay at 7 tiles; the 6.0 tube appears on the tube tile only); patient positioning and C-spine handling; ENT/surgery consult and tracheostomy conversion within 24-72 hours (critical action on cric-post-procedure); right mainstem intubation risk and tube depth warning (critical action on cric-technique-ett; only 'do not advance far' is on the face and 'advance until cuff is just past skin incision' is quoted, the 46% figure is not); needle cricothyrotomy with jet ventilation details; laryngeal fracture contraindication; relative contraindications; troubleshooting (cannot locate CTM, bougie or ETT will not pass, no ETCO2); post-procedure care, ventilation settings, CXR, bleeding control after airway; complications. The CICO critical action on cric-start is on tile 1. Also not on the strip: bougie hold-up sign (resistance at about 15-20 cm confirms tracheal placement; free advance beyond 25 cm suggests esophagus), the 'remove your finger once bougie is in, do not let it advance or pull out' step, keeping the horizontal incision in the lower half of the membrane, the alternative of inserting the bougie alongside the finger being only partly shown, the 'cannot find CTM' fallback (ultrasound; extend the vertical incision), the right mainstem rate (46%), color-change detector being less reliable in cardiac arrest, securing the tube and chest X-ray, and the difficult-airway-predicted and review-only options at cric-start."
+  },
+  {
+    "kind": "other",
+    "tileId": "vertical-incision",
+    "nodeIds": [
+      "cric-technique-vertical",
+      "cric-technique-horizontal"
+    ],
+    "text": "Order: critical-actions list order differs from the consult's flow (equipment listed before the incision, and bleeding listed after the ETT). The strip follows node flow: CICO, locate membrane, vertical incision (with the ignore-bleeding warning kept on that tile), horizontal stab, bougie, tube, confirm. Also note: the consult's cric-technique-horizontal node describes an alternative bougie-alongside-finger option that is not on the strip."
+  },
+  {
+    "kind": "other",
+    "tileId": "declare-cico",
+    "nodeIds": [
+      "cric-start",
+      "cric-contraindications"
+    ],
+    "text": "Tile 1 cites cric-contraindications, which in the consult is reached from the 'Predicted Difficult Airway' option, not from the CICO option (which goes to cric-anatomy). I added the age under 10-12 line because the consult attaches it as the one absolute contraindication. The same node also says that in a true CICO there are no absolute contraindications except pediatric age. Physician to confirm this belongs on tile 1."
+  },
+  {
+    "kind": "other",
+    "tileId": "ett-over-bougie",
+    "nodeIds": [
+      "cric-technique-ett",
+      "cric-equipment"
+    ],
+    "text": "Tube size: the consult names a 6.0 cuffed ETT with 5.5 as backup in cric-equipment, and says to try a smaller tube in troubleshooting if it will not pass. Only the 6.0 is on the strip. Cuff inflation volume (5-10 mL air) is quoted from the node."
+  }
+]

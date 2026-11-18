@@ -1,0 +1,115 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "ccb-calcium",
+      "ccb-vasopressors",
+      "ccb-hiet-dosing",
+      "ccb-shock-phenotype"
+    ],
+    "text": "Most important: three of the six tiles (calcium, vasopressors, and the phenotype tile that names norepinephrine) are steps tiles with doses quoted from the consult, because the drug store has no calcium or norepinephrine entry for CCB overdose. Only insulin is a drug tile. The consult is also a branching, phenotype-driven protocol with many parallel therapies (calcium, glucagon, HIET, pressors, lipid, rescue), not one memorised sequence, so six tiles are a selection. The tile order follows the consult's flow (phenotype, calcium, decontamination, insulin, pressors, ECMO), not the critical-actions list order, which puts insulin first. Physician to judge the selection and order."
+  },
+  {
+    "kind": "other",
+    "tileId": "hiet",
+    "nodeIds": [
+      "ccb-hiet-dosing"
+    ],
+    "text": "Reviewer note: the insulin face now says dextrose goes WITH the bolus when glucose is below 200 mg/dL, as the consult says (the draft said 'first'). The face figure is the bolus only; the infusion (start 1 unit/kg/hr, up to 10 units/kg/hr) is only in the expansion. Physician to decide whether the infusion belongs on the face."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "wbi",
+    "nodeIds": [
+      "ccb-gi-decon"
+    ],
+    "text": "Inside the consult: whole bowel irrigation is 'Contraindicated if ... hemodynamic instability precluding positioning' but the same node says 'Continue even if patient deteriorates'. Both cannot guide a crashing patient. Not resolved. Also whole bowel irrigation sits before insulin in the consult flow, so on this strip it comes before HIET and pressors; physician to decide whether a decontamination tile belongs ahead of them in a crashing patient."
+  },
+  {
+    "kind": "other",
+    "tileId": "vasopressors",
+    "nodeIds": [
+      "ccb-vasopressors"
+    ],
+    "text": "Reviewer note: the norepinephrine figure now reads as a titration ceiling (0.5-3 mcg/kg/min), because the consult starts at 0.1 mcg/kg/min; the start dose is in the expansion. Epinephrine (consider if combined cardiogenic/vasodilatory features) and 'inotropes' for cardiogenic shock are not on the strip; the consult names no inotrope dose for the cardiogenic branch beyond HIET."
+  },
+  {
+    "kind": "gap",
+    "tileId": "calcium",
+    "drugId": "calcium-chloride",
+    "nodeIds": [
+      "ccb-calcium"
+    ],
+    "text": "Drug store has no calcium chloride entry for CCB overdose (entries cover hyperkalemia, hypocalcemia, HF acid burn and hypermagnesemia only), so the calcium tile is a steps tile quoting the consult's own dose."
+  },
+  {
+    "kind": "gap",
+    "tileId": "calcium",
+    "drugId": "calcium-gluconate",
+    "nodeIds": [
+      "ccb-calcium"
+    ],
+    "text": "Calcium gluconate is quoted on the calcium tile as the consult's peripheral-access alternative. The drug store has no CCB-overdose entry for it either."
+  },
+  {
+    "kind": "gap",
+    "tileId": "calcium",
+    "drugId": "calcium-gluconate-gel",
+    "nodeIds": [
+      "ccb-calcium"
+    ],
+    "text": "The gate matched the gluconate lines to the topical gel entry as well. That is a false match; the consult means IV calcium gluconate. Listed only so the gate can pass."
+  },
+  {
+    "kind": "gap",
+    "tileId": "vasopressors",
+    "drugId": "norepinephrine",
+    "nodeIds": [
+      "ccb-vasopressors"
+    ],
+    "text": "Drug store norepinephrine entries are for septic or vasodilatory shock (0.01-3 mcg/kg/min), TCA, cardiogenic shock, VAD, post-arrest and amniotic fluid embolism; none is for CCB overdose. The cardiogenic entry advises avoiding escalation above 0.5 mcg/kg/min without inotrope or mechanical support, which differs in spirit from the consult's 0.5-3 mcg/kg/min. Not resolved; steps tile quotes the consult."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "wbi",
+    "nodeIds": [
+      "ccb-gi-decon",
+      "ccb-extended-release"
+    ],
+    "text": "The critical-actions list and the summary say whole bowel irrigation at 2 L/hr; the node body says GoLYTELY 1.5-2 L/hr. The strip quotes the node body. Not resolved."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "hiet",
+    "drugId": "regular-insulin",
+    "nodeIds": [
+      "ccb-hiet-dosing"
+    ],
+    "text": "Consult: start infusion at 1 unit/kg/hr and titrate up to 10 units/kg/hr, with D50W 25g if glucose <200 mg/dL. Drug store HIET entry additionally says increase by 1 unit/kg/hr every 20-30 minutes with poison center guidance, glucose q15-20 min and potassium at least hourly; the consult says glucose q15-30 min and potassium targets 4.0-4.5. Wording differs, not resolved. The tile figure is the bolus only; the drug store regimen holds three dose tokens, hence a multi-dose flag."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "ccb-extended-release",
+      "ccb-initial-stab",
+      "ccb-glucagon",
+      "ccb-hiet-onset",
+      "ccb-vasopressor-high-dose",
+      "ccb-lipid",
+      "ccb-rescue",
+      "ccb-methylene-blue",
+      "ccb-pacing",
+      "ccb-disposition",
+      "ccb-icu",
+      "ccb-icu-stable"
+    ],
+    "text": "Time-critical content NOT on the strip: (1) critical action ccb-extended-release, delayed toxicity up to 12-24h and 24-48h ICU monitoring even if initially stable; (2) [now on the strip as the atropine-pacing tile; atropine dose 0.5-1 mg IV deliberately not quoted]; (3) glucagon 3-5 mg IV bolus as a bridge; (4) glucose, potassium monitoring and dextrose infusion during HIET, and not stopping HIET early (hemodynamic response takes 15-60 min); (5) vasopressin 0.04 units/min and epinephrine as adjuncts (vasopressin lines are only inside the vasopressor tile); (6) lipid emulsion 1.5 mL/kg for severe refractory toxicity; (7) methylene blue for refractory vasoplegia; (8) transvenous pacing; (9) activated charcoal; (10) disposition, ICU admission and Poison Control 1-800-222-1222. Left off because of the 7-tile cap and the rule against composing text."
+  },
+  {
+    "kind": "node-silent",
+    "nodeIds": [
+      "ccb-calcium"
+    ],
+    "text": "The calcium node does not say which dose to start with in the unstable patient beyond 1-2g; the critical action says 'or continuous infusion' while the node gives 0.5 mEq/kg/hr. That continuous infusion line is not on the tile."
+  }
+]

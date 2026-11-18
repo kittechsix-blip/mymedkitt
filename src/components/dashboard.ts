@@ -14,6 +14,8 @@ import { showShareModal } from './share-modal.js';
 import { sinkTrack } from '../services/kittmd-analytics.js';
 import { rankBucket, resultBucket } from '../services/telemetry.js';
 import { getPins } from '../services/pins.js';
+import { createRapidSearchKey } from './rapid-card.js';
+import { getRapidStrip, primeRapid, rapidShown } from '../services/rapid-service.js';
 import { getMostUsed, type UsedConsult } from '../services/consult-usage.js';
 
 /** Tool categories route to special pages instead of category view */
@@ -261,6 +263,23 @@ export function renderDashboard(container: HTMLElement): void {
 
       li.appendChild(badge);
       li.appendChild(labelWrap);
+
+      // RAPID key: only after the SAME full check as the card passes (approved + holds on live data, or local preview)
+      const rapidMatch = r.type === 'consult' ? /^\/tree\/([^/]+)$/.exec(r.route) : null;
+      if (rapidMatch && getRapidStrip(rapidMatch[1])) {
+        const rid = rapidMatch[1];
+        const addKey = (): void => {
+          if (li.querySelector('.rapid-search-key')) return;
+          li.appendChild(createRapidSearchKey(rid, () => {
+            searchInput.value = '';
+            resultsList.hidden = true;
+            resultsList.replaceChildren();
+            router.navigate('/tree/' + rid + '/rapid');
+          }, r.label));
+        };
+        if (rapidShown(rid)) addKey();
+        else void primeRapid(rid).then((ok) => { if (ok && li.isConnected) addKey(); });
+      }
 
       // Pediatric numbers card: colored by the Broselow-equivalent zone (dark or light text per zone)
       if (r.zone) {

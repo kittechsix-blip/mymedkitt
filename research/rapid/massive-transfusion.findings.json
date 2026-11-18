@@ -1,0 +1,161 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "mtp-start",
+      "mtp-products",
+      "mtp-txa",
+      "mtp-calcium",
+      "mtp-when-stop",
+      "mtp-complications"
+    ],
+    "text": "Most important: this consult is mostly a managed-process bundle (activate, limit crystalloid, balanced products, calcium, TXA, keep warm, stop) rather than a memorised sequence, and it is a close fit to 7 tiles only because most of the consult is left off (see the gap finding below). The consult's own targets also disagree with each other (see the conflict findings on the temperature and stop-MTP tiles). Physician to decide whether this belongs as a RAPID card at all, and which 7 actions matter most."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "mtp-start",
+      "mtp-indications",
+      "mtp-gi-bleed",
+      "mtp-pph",
+      "mtp-vascular",
+      "mtp-surgical",
+      "mtp-abo-q",
+      "mtp-abo-chart",
+      "mtp-emergency-release",
+      "mtp-rh",
+      "mtp-rhogam",
+      "mtp-teg-q",
+      "mtp-teg-normal",
+      "mtp-teg-interpret",
+      "mtp-teg-guided",
+      "mtp-termination-q",
+      "mtp-transition",
+      "mtp-postlabs",
+      "mtp-damage-control",
+      "mtp-special-pops",
+      "mtp-peds",
+      "mtp-anticoag",
+      "mtp-jw",
+      "mtp-permissive-hypotension",
+      "mtp-cooler-contents"
+    ],
+    "text": "Time-critical consult content NOT on the strip: Factor VIIa guidance (the consult says it is not routinely recommended; this is the critical action left off the strip, its node is cited only for the cooler lines); cryoprecipitate and the fibrinogen and platelet targets; emergency release blood (O-negative vs O-positive, AB plasma, whole blood) and the Rh rules; TEG/ROTEM interpretation; the etiology-specific branches (GI bleed, postpartum hemorrhage with its uterotonics, ruptured AAA with its own blood pressure target); the higher blood pressure targets for TBI and spinal cord injury; pediatric weight-based products and TXA; anticoagulant reversal; Jehovah's Witness; hyperkalemia, TACO and TRALI; post-MTP care. The consult's critical action 'Activate MTP within 5 minutes' has its '5 minutes' only in the critical-action list, not in a node line, so the tile does not carry it. Also not on the strip: the consult's low-titer O whole blood option, the cryoprecipitate 10 unit dose with fibrinogen under 150 mg/dL, Rh-positive allowed for males and women over 50, the stop-MTP items for base deficit and TEG/ROTEM normalising, and the communication steps to the blood bank when stopping."
+  },
+  {
+    "kind": "other",
+    "tileId": "activate-mtp",
+    "nodeIds": [
+      "mtp-trauma-assess",
+      "mtp-indications"
+    ],
+    "text": "The consult forks by etiology (trauma, GI bleed, postpartum hemorrhage, ruptured AAA, surgical) but all branches rejoin at the same initial resuscitation, so this is one variant. The Activate tile quotes the trauma criteria only; the non-trauma activation criteria are not on the strip."
+  },
+  {
+    "kind": "other",
+    "tileId": "activate-mtp",
+    "nodeIds": [
+      "mtp-products",
+      "mtp-txa",
+      "mtp-calcium",
+      "mtp-complications",
+      "mtp-when-stop",
+      "mtp-permissive-hypotension",
+      "mtp-cooler-contents"
+    ],
+    "text": "Tile order follows the consult's node flow (activation, initial resuscitation with crystalloid limit, products, calcium, TXA, complications, stop). The critical-action list puts products first, then TXA, calcium, temperature, stop, crystalloid, factor VIIa. TXA is mentioned in the initial resuscitation node (before products) but its full dosing node comes after calcium, so it sits after calcium here although it is time-critical. Warm products (complications node) sits before Stop criteria (when-to-terminate node) although the termination menu lists 'When to terminate MTP' before 'MTP complications' and the checker flags that order; warming is ongoing care so it is kept earlier. Physician to confirm."
+  },
+  {
+    "kind": "gap",
+    "tileId": "blood-products",
+    "drugId": "ffp",
+    "nodeIds": [
+      "mtp-products",
+      "mtp-cooler-contents"
+    ],
+    "text": "The ratio tile is a drug tile on pRBCs (store entry 'Massive transfusion protocol', which carries the 6 unit cooler, 1:1:1 with FFP and platelets, the O-negative rule for females under 50 or unknown Rh, and switch to type-specific). The store also has MTP entries for platelets, cryoprecipitate and whole blood, but only one drug can own a tile, so those are shown only through the quoted ratio line. The FFP store entries cover angioedema, TEG-guided trauma and warfarin reversal, none for the fixed MTP cooler. Physician to decide whether pRBCs is the right owner of this tile. A previous draft of this strip wrongly said the store had no matching MTP entry."
+  },
+  {
+    "kind": "gap",
+    "tileId": "calcium",
+    "drugId": "calcium-chloride",
+    "nodeIds": [
+      "mtp-calcium",
+      "mtp-initial-resus"
+    ],
+    "text": "The drug store calcium chloride entry covers hyperkalemia, severe hypocalcemia (500 mg to 1 g), HF burns and magnesium toxicity, not prophylaxis during massive transfusion, so this is a steps tile with the dose quoted from the consult. The store also says central line only and contraindicates peripheral administration; the consult's calcium node says nothing about the line, and its initial resuscitation node starts with peripheral or IO access. The physician should look at that mismatch."
+  },
+  {
+    "kind": "gap",
+    "tileId": "calcium",
+    "drugId": "calcium-gluconate",
+    "nodeIds": [
+      "mtp-calcium"
+    ],
+    "text": "The consult offers calcium gluconate 3 g IV per 4 units as the alternative to calcium chloride (the usual choice when there is no central access). It is not on the strip because it would read as a second consecutive step; the physician may want it as an alternative line. The drug store has calcium gluconate entries for hyperkalemia and hypocalcemia only, not for this use."
+  },
+  {
+    "kind": "gap",
+    "tileId": "calcium",
+    "drugId": "calcium-gluconate-gel",
+    "nodeIds": [
+      "mtp-calcium"
+    ],
+    "text": "Detected by the checker as a name match only (calcium gluconate gel is a topical burn product); nothing about it is on the tile."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "calcium",
+    "drugId": "calcium-chloride",
+    "nodeIds": [
+      "mtp-calcium",
+      "mtp-complications"
+    ],
+    "text": "Calcium target: the consult's calcium node says iCa >1.0 mmol/L (ideally >1.1) and the critical-action list says ionized Ca >1.1. The tile quotes the calcium node's 1.0."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "txa",
+    "drugId": "tranexamic-acid",
+    "nodeIds": [
+      "mtp-txa",
+      "mtp-initial-resus"
+    ],
+    "text": "The consult's TXA node lists an alternative 2 g IV/IO single bolus; the drug store trauma entry has only 1 g over 10 minutes then 1 g over 8 hours. The tile shows the store text under Dosing and quotes the consult's alternative as a labelled alternative. The consult lists known hypersensitivity, active thromboembolic disease (relative) and DIC with predominant thrombosis (relative) as contraindications; the store lists active thromboembolic disease, subarachnoid hemorrhage, impaired color vision and post-tPA angioedema. They are not the same lists. The drug tile shows the store's list."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "warm-products",
+    "nodeIds": [
+      "mtp-complications",
+      "mtp-transition"
+    ],
+    "text": "Temperature target disagrees inside the consult: the critical-action list says target temp >35\u00b0C, the transition node says core temp >36\u00b0C, and the complications node says core temp <36\u00b0C impairs clotting. The critical action also says pH >7.2, which does not appear in any node. The tile quotes the complications node only and gives no pH target."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "stop-mtp",
+    "nodeIds": [
+      "mtp-when-stop",
+      "mtp-transition"
+    ],
+    "text": "Stop criteria disagree: the critical-action list says stop when hemorrhage controlled, INR <1.5, platelets >100k, fibrinogen >150; the when-to-terminate node lists bleeding control, MAP >65 and HR <100, falling lactate, improving base deficit and no ongoing hemorrhage, with no INR, platelet or fibrinogen thresholds, and the post-MTP node uses platelets >50,000. The tile quotes the terminate node. 'Stop MTP' is also a hazardous action word: its warning quotes the consult's do-not-stop-prematurely heading."
+  },
+  {
+    "kind": "other",
+    "tileId": "limit-crystalloid",
+    "nodeIds": [
+      "mtp-initial-resus",
+      "mtp-permissive-hypotension"
+    ],
+    "text": "The crystalloid tile also carries the line access, type and crossmatch, and permissive hypotension lines from the initial resuscitation node, quoted under the consult's heading 'Immediate actions (first 5 minutes):' which is not itself quoted. The permissive-hypotension node (cited for the critical action) is outside the primary flow order; the checker flags that. The consult's ruptured AAA target (SBP 70-90) and the higher TBI target are not on the strip."
+  },
+  {
+    "kind": "other",
+    "tileId": "stop-mtp",
+    "nodeIds": [
+      "mtp-when-stop"
+    ],
+    "text": "Face reworded from 'Stop MTP' to 'Stop MTP criteria' so a glance cannot read it as an order to stop. The do-not-stop-prematurely heading is the warning, and the two items under it (may appear stable but still compensating; watch for rebleeding in first 6-12 hours) are now quoted as lines."
+  }
+]

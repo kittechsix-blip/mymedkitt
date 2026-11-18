@@ -1,0 +1,100 @@
+[
+  {
+    "kind": "gap",
+    "tileId": "esmolol",
+    "drugId": "esmolol",
+    "nodeIds": [
+      "dissect-beta-blocker"
+    ],
+    "text": "Most important: none of the drugs on this strip (esmolol, diltiazem, nicardipine, opioids) has a drug-store dose entry for aortic dissection (esmolol is A-Fib / thyroid storm, diltiazem is A-Fib, nicardipine is stroke / ICH / SAH BP). So all four are steps tiles quoting the consult, and the doses on the faces are the consult's own, with no weight calculator. Physician to check the doses against the store and decide whether dissection entries are needed. The esmolol face carries a per-kg dose, hence this gap."
+  },
+  {
+    "kind": "gap",
+    "tileId": "diltiazem-alt",
+    "drugId": "diltiazem",
+    "nodeIds": [
+      "dissect-beta-blocker"
+    ],
+    "text": "No drug-store dose entry for diltiazem in aortic dissection (store entry is A-Fib rate control only). The 0.25 mg/kg figure and its infusion rate are the consult's own, quoted as lines, with no weight calculator. Physician to check."
+  },
+  {
+    "kind": "gap",
+    "tileId": "nicardipine",
+    "drugId": "nicardipine",
+    "nodeIds": [
+      "dissect-vasodilator"
+    ],
+    "text": "No drug-store dose entry for nicardipine in aortic dissection (store has stroke, ICH and SAH targets only; its SAH entry targets SBP <160, whereas this consult targets SBP 100-120). Consult doses are quoted as lines, with no weight calculator. Physician to check."
+  },
+  {
+    "kind": "gap",
+    "tileId": "pain",
+    "drugId": "morphine",
+    "nodeIds": [
+      "dissect-management"
+    ],
+    "text": "The consult says 'IV opioids (morphine, fentanyl)' with no dose; the strip shows no dose and the drug-store entries for these opioids are not for dissection."
+  },
+  {
+    "kind": "gap",
+    "tileId": "pain",
+    "drugId": "fentanyl",
+    "nodeIds": [
+      "dissect-management"
+    ],
+    "text": "Same as morphine: the consult gives no opioid dose; none is shown."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "dissect-management",
+      "dissect-beta-blocker"
+    ],
+    "text": "Order: the consult's critical-actions list leads with beta-blocker, then SBP target, CTA, surgery consult, pain control. The strip follows the consult's node flow instead (CTA, pain, beta-blocker, alternative, vasodilator, hypotension, Type A). The consult's text lists pain control before heart rate control. Also: the consult forks by Stanford type only after imaging, so the strip is one variant; Type B uncomplicated and complicated have no tile. Also: in the consult's high-suspicion route, Immediate Workup comes before Imaging Modalities in traversal, which is why rapid-check raises order flags; the imaging tile is placed first because CTA is time-critical."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "diltiazem-alt",
+    "nodeIds": [
+      "dissect-beta-blocker"
+    ],
+    "drugId": "diltiazem",
+    "text": "The consult tells a clinician to give diltiazem in a dissection where beta-blockers cannot be used; the drug-store diltiazem entry lists concurrent IV beta-blocker use, decompensated heart failure and EF 40% or less as contraindications, and the consult itself names decompensated HF as a reason to switch TO diltiazem. Not resolved."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "esmolol",
+    "nodeIds": [
+      "dissect-beta-blocker"
+    ],
+    "drugId": "esmolol",
+    "text": "Consult lists decompensated HF as a relative contraindication to beta-blockers; the drug store lists decompensated heart failure and cardiogenic shock as contraindications to esmolol. The esmolol tile quotes four of the consult's contraindication lines (severe bradycardia, high-grade AV block, acute decompensated HF (relative), severe AR); the cocaine/sympathomimetic intoxication contraindication line (relative, unopposed alpha, use CCB) did not fit under the 8-line cap and is on the diltiazem tile only through its 'Use ONLY when' line. Physician to decide whether the cocaine line belongs on the esmolol tile."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "dissect-add-rs",
+      "dissect-ddimer",
+      "dissect-pathway",
+      "dissect-ruled-out",
+      "dissect-beta-blocker",
+      "dissect-vasodilator",
+      "dissect-type-b-uncomplicated",
+      "dissect-type-b-complicated",
+      "dissect-malperfusion",
+      "dissect-type-b-comp-dispo",
+      "dissect-type-a-disposition",
+      "dissect-atypical",
+      "dissect-management"
+    ],
+    "text": "Time-critical content NOT on the strip: labetalol and metoprolol as beta-blocker alternatives; nitroprusside and clevidipine; the SBP 100-120 target as its own tile (it appears only in the nicardipine condition); the ADD-RS >=2 go straight to CTA rule (ADD-RS and D-dimer nodes); Type B uncomplicated and complicated management (ICU, TEVAR, malperfusion, spinal cord MAP target, mesenteric ischemia); transfer advice for Type A; pulling out the key labs (type and screen, crossmatch 6 units); the avoid anticoagulation line and ACS-mimic warning (never give thrombolytics) from the presentation nodes. Judgment: the strip keeps the Type A / hemodynamic path. Also left off: 'Avoid anticoagulation (unless clear indication)' and NPO (dissect-management), and the ACS-mimic warning in dissect-atypical ('Fatal to give thrombolytics or aggressive anticoagulation'); with 7 tiles already used there is no room, so a physician may want this warning on the strip. Also the strip assumes the high-suspicion branch; moderate and low suspicion go to ADD-RS and D-dimer first, which are not on it."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "dissect-start",
+      "dissect-management"
+    ],
+    "text": "Fit: this consult is mostly a diagnostic and risk-stratification workup with an anti-impulse protocol; the strip captures the resuscitation actions but is not a memorised sequence."
+  }
+]

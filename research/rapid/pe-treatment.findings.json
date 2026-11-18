@@ -1,0 +1,88 @@
+[
+  {
+    "kind": "conflict",
+    "tileId": "ufh",
+    "nodeIds": [
+      "pe-crashing-reperfusion"
+    ],
+    "drugId": "ufh",
+    "text": "Look at the heparin and alteplase sequence first. The consult's body says start anticoagulation immediately with UFH (no bolus if thrombolysis imminent, low-dose infusion), but the consult's own treatment notes say give alteplase BEFORE heparin and avoid a concurrent heparin bolus. The drug store's UFH entry for high-risk PE shows a full weight-based bolus and infusion with no mention of withholding the bolus before lysis, and the store's alteplase entry says to stop the UFH drip before the infusion. The strip shows the store regimen under Dosing and the consult's own lines, so the physician sees all three side by side. Nothing was resolved."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "pe-crashing",
+      "pe-start",
+      "pe-crashing-reperfusion",
+      "pe-advanced-interventions",
+      "pe-ecmo",
+      "pe-surgery",
+      "pe-mechanical-thrombectomy",
+      "pe-cdt"
+    ],
+    "text": "Time-critical consult content NOT on the strip. (1) Bradycardia HR <40 as the most ominous sign, and lactate >2 mM (critical action on pe-crashing): it is a recognition cue, not an action, so left off. (2) Tenecteplase weight-based single bolus alternative. (3) The branch when thrombolysis is contraindicated or shock is refractory: advanced interventions (mechanical thrombectomy, catheter-directed lysis, VA-ECMO, surgical embolectomy). The critical action 'Mechanical thrombectomy and CDT both reasonable for stable intermediate-risk' (pe-advanced-interventions) is not on the strip because it applies to stable patients, not the crashing path. (4) Post-lysis monitoring and the 'restart UFH if PTT is in range' instruction from the drug store. (5) The thrombolysis-contraindication options themselves (the consult only says 'recent surgery, active bleeding, prior ICH, etc.'). (6) Fibrinogen monitoring for reduced-dose lytic. Only the crashing (Category D-E) path is on the strip; the Category C and A-B paths and the anticoagulation selection modules are not."
+  },
+  {
+    "kind": "gap",
+    "tileId": "vasopressors",
+    "nodeIds": [
+      "pe-crashing-resus"
+    ],
+    "drugId": "norepinephrine",
+    "text": "The drug store has no norepinephrine entry for PE or RV failure shock (entries cover TCA overdose, septic, cardiogenic, VAD, post-arrest and amniotic fluid embolism). The tile is a steps tile quoting the consult; no dose is shown for norepinephrine because the consult gives none."
+  },
+  {
+    "kind": "gap",
+    "tileId": "vasopressors",
+    "nodeIds": [
+      "pe-crashing-resus"
+    ],
+    "drugId": "phenylephrine",
+    "text": "The drug store's phenylephrine push-dose entry is for sepsis, not PE, and its text says it is NOT recommended as the primary septic vasopressor. The consult's push-dose phenylephrine 100-200 mcg is quoted as a steps line only."
+  },
+  {
+    "kind": "other",
+    "tileId": "alteplase",
+    "nodeIds": [
+      "pe-crashing-reperfusion"
+    ],
+    "drugId": "alteplase",
+    "text": "Standard and reduced-dose alteplase are both quoted from the consult (100 mg over 2 h vs 50 mg over 2 h); the drug store shows only the 100 mg regimen. The consult does not say when to choose reduced-dose over standard. The 'No absolute contraindications' condition is the consult's option description; the store lists absolute and relative contraindications that appear below the regimen. The warning line is taken from the alternative-drug note, and it conflicts in tone with 'start anticoagulation immediately' in the body (see first finding)."
+  },
+  {
+    "kind": "other",
+    "tileId": "alteplase-arrest",
+    "nodeIds": [
+      "pe-crashing-reperfusion"
+    ],
+    "drugId": "alteplase",
+    "text": "The store's PE arrest entry also says consider a repeat 50 mg if no ROSC and to continue prolonged CPR and activate the PERT/ECMO pathway; the consult says only 50 mg IV bolus plus sustained CPR. The arrest tile sits after the standard-dose tile because that is the order of the consult's bullets, although arrest is the more time-critical use. The physician may want it first."
+  },
+  {
+    "kind": "other",
+    "tileId": "no-intubation",
+    "nodeIds": [
+      "pe-crashing-resus",
+      "pe-crashing"
+    ],
+    "text": "Tile order follows the consult's node flow (no intubation, no fluids, pressors, PERT, then the next node's UFH and lysis). The critical-actions list puts UFH and lysis after PERT the same way, but lists the HR <40 cue last; it is not a tile (see the gap finding). The consult does not say what to do for a patient already intubated, or how to support oxygenation beyond high-flow O2."
+  },
+  {
+    "kind": "missing-weightcalc",
+    "tileId": "alteplase",
+    "nodeIds": [
+      "pe-crashing-reperfusion"
+    ],
+    "drugId": "alteplase",
+    "text": "The consult gives alteplase as 0.6 mg/kg up to 50 mg over the first 15 min. The drug store's high-risk PE dose entry has one weight calculator (0.6 mg/kg, max 50 mg, first 15 min), which is carried on the strip as a snapshot; the reduced-dose regimen has none. UFH 80 units/kg bolus and 18 units/kg/hr in the store entry for high-risk PE have no weight calculator."
+  },
+  {
+    "kind": "other",
+    "tileId": "ufh",
+    "nodeIds": [
+      "pe-crashing-reperfusion"
+    ],
+    "drugId": "ufh",
+    "text": "Tile order puts UFH before alteplase because the consult lists anticoagulation first, but the consult's own note on the UFH alternative says give alteplase BEFORE heparin. The same warning now appears on both tiles; the physician should decide whether the order of the two tiles misleads. The consult also lists tenecteplase weight-based bolus dosing and the Thrombolysis Contraindicated / Refractory Shock options only in the node, not on the strip."
+  }
+]

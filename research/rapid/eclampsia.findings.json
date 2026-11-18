@@ -1,0 +1,92 @@
+[
+  {
+    "kind": "conflict",
+    "tileId": "mag-toxicity",
+    "drugId": "calcium-gluconate",
+    "nodeIds": [
+      "eclampsia-mag-toxicity"
+    ],
+    "text": "Most important: the consult gives calcium gluconate as 1 g (10 mL of 10%) IV over 3-5 minutes, repeat in 5 minutes; the drug store's magnesium-toxicity entry says 1-2 grams IV over 5-10 minutes. The tile face and Dosing text come from the store; the consult's own dose is quoted under 'In this consult'. Not resolved. Also, the strip's other drug figures are the store's; please check the labetalol and hydralazine multi-dose flags."
+  },
+  {
+    "kind": "other",
+    "tileId": "labetalol",
+    "drugId": "labetalol",
+    "nodeIds": [
+      "eclampsia-bp-labetalol",
+      "eclampsia-bp-assessment"
+    ],
+    "text": "Labetalol face shows only the first rung (20 mg IV) of an escalating protocol (the store regimen and the consult list 40, 80, 80 mg at 10 minute intervals). The consult lists four contraindications (asthma/severe reactive airway disease, heart block, decompensated heart failure, bradycardia <60); the tile cap of 4 lines would not hold the heading plus all four, so only the consult's one-line 'Alternative if labetalol contraindicated: Start with hydralazine' is quoted and the store text carries the avoid list. Physician to decide whether the contraindications deserve a tile face condition instead."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "lorazepam",
+    "drugId": "lorazepam",
+    "nodeIds": [
+      "eclampsia-refractory"
+    ],
+    "text": "The consult gives lorazepam 2-4 mg IV (extrapolated from the status epilepticus guideline, not eclampsia-specific, per the consult's own basis note); the store's status epilepticus entry is 0.1 mg/kg IV (max 4 mg), may repeat once. The store has no eclampsia-specific lorazepam entry. The face shows the store's per-kg dose; the consult's flat dose is quoted in the tile."
+  },
+  {
+    "kind": "gap",
+    "tileId": "magnesium",
+    "drugId": "magnesium-sulfate",
+    "nodeIds": [
+      "eclampsia-mag-loading",
+      "eclampsia-mag-maintenance"
+    ],
+    "text": "Magnesium store entry 'Eclampsia / Pregnancy SE' repeats the 4-6 g load and 1-2 g/hr; it does not contain the consult's 4 g IV push over 5 minutes if seizing, or the extra 2 g bolus if already on magnesium. Those are quoted from the consult only. Renal adjustment (CrCl <30, anuria) is not on the strip."
+  },
+  {
+    "kind": "missing-weightcalc",
+    "tileId": "lorazepam",
+    "drugId": "lorazepam",
+    "nodeIds": [
+      "eclampsia-refractory"
+    ],
+    "text": "Lorazepam is per-kg in the store and the tile carries the store's weight box. Calcium gluconate, labetalol, hydralazine and magnesium have fixed (not per-kg) doses here, so no weight calculator is expected."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "eclampsia-branch",
+      "eclampsia-bp-assessment",
+      "eclampsia-bp-labetalol",
+      "eclampsia-mag-toxicity",
+      "eclampsia-refractory"
+    ],
+    "text": "Tile order follows the consult's node flow (seizure care, magnesium, maintenance and toxicity, refractory seizures, BP, delivery), not the critical-actions list order (magnesium, labetalol, benzodiazepine, OB, toxicity). One variant only: eclampsia-branch triages the patient (active seizure, post-ictal, prophylaxis) rather than forking into different resuscitation paths. The strip covers the active seizure path. The calcium gluconate tile sits before lorazepam because the consult places toxicity there; it is a rescue for toxicity, not a routine step."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "eclampsia-anesthesia",
+      "eclampsia-bp-assessment",
+      "eclampsia-bp-hydralazine",
+      "eclampsia-bp-labetalol",
+      "eclampsia-bp-nifedipine",
+      "eclampsia-bp-refractory",
+      "eclampsia-disposition",
+      "eclampsia-fetal",
+      "eclampsia-hellp",
+      "eclampsia-icu",
+      "eclampsia-ld",
+      "eclampsia-mag-toxicity",
+      "eclampsia-postictal",
+      "eclampsia-postpartum",
+      "eclampsia-prophylaxis",
+      "eclampsia-refractory",
+      "eclampsia-seizure-active",
+      "eclampsia-stabilization"
+    ],
+    "text": "Time-critical content NOT on the strip: the critical action 'Labs: CBC, CMP, LFTs, uric acid, 24h protein or spot protein/Cr ratio' (post-ictal node, which also holds airway/SpO2/fetal assessment and imaging criteria); post-ictal pathway and prophylaxis path for severe preeclampsia without seizure; the escalating labetalol steps (40, 80, 80 mg every 10 min) beyond the store's regimen text; oral nifedipine (and 'do NOT use sublingual nifedipine'); refractory hypertension infusions (nicardipine, esmolol, nitroprusside); levetiracetam, propofol or thiopental and phenytoin alternatives; additional 2 g magnesium and maximum total loading 8 g in refractory seizures; imaging to rule out ICH/CVT/PRES; HELLP; fetal assessment and when not to wait for fetal recovery; antenatal steroids; anesthesia and succinylcholine/magnesium interaction; postpartum magnesium continuation; ICU vs L&D disposition. Left off because of the 7-tile cap. Also left off: fetal monitoring and 'be prepared for intubation / bag-valve mask' from the seizure node; the labetalol contraindication list beyond what the store text shows (asthma/severe reactive airway disease, heart block, decompensated heart failure, bradycardia <60); the 'sustained for 15 minutes' qualifier on the severe BP definition and the BP target 140-150/90-100; hydralazine escalation steps and maximum; magnesium renal adjustment; benzodiazepine alternative diazepam 5-10 mg IV (an alternative to lorazepam, not a further step)."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "magnesium",
+    "nodeIds": [
+      "eclampsia-mag-loading"
+    ],
+    "text": "The consult has no 'when to stop' condition for the magnesium bolus other than reflex/respiratory checks in the maintenance and toxicity nodes. The toxicity tile warning is only the quoted 'Do not wait for a serum level.' because the full sentence is over the 160-character excerpt limit; the condition is carried on the tile face instead."
+  }
+]

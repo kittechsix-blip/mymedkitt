@@ -1,0 +1,96 @@
+[
+  {
+    "kind": "other",
+    "tileId": "iv-io-epi",
+    "nodeIds": [
+      "nrp-epinephrine",
+      "nrp-cpr"
+    ],
+    "drugId": "epinephrine",
+    "text": "Most important: this is a neonatal resuscitation consult, but the epinephrine tile only works because the drug store has a dedicated neonatal IV/IO entry. Please check the face dose (0.01-0.03 mg/kg) against the weight boxes. The Dosing text also holds the volume (0.1-0.3 mL/kg) and a 3 mL flush, so the gate flags the face as multi-dose. The consult node and the drug store agree on the dose, route and 3-5 minute repeat; no conflict found."
+  },
+  {
+    "kind": "other",
+    "tileId": "advanced-airway",
+    "nodeIds": [
+      "nrp-advanced-airway",
+      "nrp-corrective"
+    ],
+    "text": "Reviewer added a 7th tile (Intubate or LMA). The consult requires airway secured before compressions and puts the advanced airway between MR SOPA and compressions; a physician should confirm it earns a tile. The line about LMA use (age/weight limits) sits under the LMA heading, which is not quoted, so it reads as a bare criterion. Left off: ETT sizing/depth and the other 'when to intubate' reasons."
+  },
+  {
+    "kind": "other",
+    "tileId": "ppv",
+    "nodeIds": [
+      "nrp-ppv",
+      "nrp-meconium"
+    ],
+    "text": "Reviewer: PPV tile now quotes the rate and starting FiO2 so the face (rate 30-60/min) agrees with its lines. The meconium do-NOT line sits under 'Non-vigorous baby + meconium:', which is not quoted; the physician should check it does not read as applying to every baby."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "nrp-start",
+      "nrp-initial-eval"
+    ],
+    "text": "Fit: this is a real memorised sequence (warm/dry/stimulate, PPV, corrective steps, compressions, epinephrine, UVC), but the consult has more time-critical content than 7 tiles hold. It also forks at the initial evaluation (vigorous = routine care, not vigorous = initial steps); I kept a single variant starting at the not-vigorous path because the vigorous branch is not a resuscitation path."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "nrp-spo2-targets",
+      "nrp-cord-mgmt",
+      "nrp-postresus",
+      "nrp-routine",
+      "nrp-breathing-support",
+      "nrp-hr60-check",
+      "nrp-advanced-airway",
+      "nrp-ett-sizing",
+      "nrp-persistent",
+      "nrp-volume",
+      "nrp-discontinuation",
+      "nrp-preparation",
+      "nrp-preterm",
+      "nrp-golden30-eval",
+      "nrp-ppv-eval",
+      "nrp-cpr-eval"
+    ],
+    "text": "Left OFF the strip (7-tile cap): preductal SpO2 on the right hand/wrist and the minute-by-minute targets (critical action, nrp-spo2-targets); delayed cord clamping at least 60 seconds for vigorous term/late preterm (critical action, nrp-cord-mgmt); normothermia 36.5-37.5 C and post-resuscitation care (critical action, nrp-postresus); team and equipment preparation; preterm plastic wrap and starting FiO2 by gestational age; CPAP and supplemental O2 for labored breathing; the start-PPV trigger (apnea/gasping or HR <100), which sits in an option label and cannot be quoted; ETT sizing and depth, and the when-to-intubate list beyond the lines shown; the MR SOPA pressure ceiling (up to 30-40 cmH2O, MR SOPA tile is at the 8-line cap);  the ET-route epinephrine dose (drug store has a separate ET entry); persistent bradycardia causes, volume (saline or O-negative blood), D10W and the 20-minute discontinuation discussion. Left-off items are the physician's call to review."
+  },
+  {
+    "kind": "other",
+    "tileId": "ppv",
+    "nodeIds": [
+      "nrp-ppv",
+      "nrp-meconium",
+      "nrp-golden30-eval"
+    ],
+    "text": "The PPV tile does not show when to start (apnea/gasping or HR <100) because that wording is in option labels and the critical-action text, which cannot be quoted. The face condition names the meconium rule instead (do not delay PPV for suctioning); that rule applies to a non-vigorous baby with meconium, a header that is not quoted on the tile."
+  },
+  {
+    "kind": "other",
+    "tileId": "chest-compressions",
+    "nodeIds": [
+      "nrp-cpr",
+      "nrp-hr60-check"
+    ],
+    "text": "Reviewer: the compressions face now carries the trigger (HR <60 on effective PPV) and the airway-first rule is in the warning; the trigger line is quoted from the question node nrp-hr60-check, so that node is cited. The 90 compressions + 30 breaths wording is not quoted (the 3:1 ratio line is)."
+  },
+  {
+    "kind": "other",
+    "tileId": "initial-steps",
+    "nodeIds": [
+      "nrp-initial-steps",
+      "nrp-meconium"
+    ],
+    "text": "Tile order follows node flow (initial steps, meconium, PPV, corrective steps, compressions, epinephrine, UVC). The critical-actions list orders SpO2 and cord management differently; cord management comes early in the consult flow but was left off for space."
+  },
+  {
+    "kind": "other",
+    "tileId": "uvc",
+    "nodeIds": [
+      "nrp-uvc"
+    ],
+    "text": "UVC is a steps tile; the drug store has no device or procedure entry. In the consult flow the UVC node comes after epinephrine, although the compressions node says to establish vascular access during CPR; the tile follows the node order, not the urgency."
+  }
+]

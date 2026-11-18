@@ -1,0 +1,97 @@
+[
+  {
+    "kind": "conflict",
+    "tileId": "permissive-hypotension",
+    "nodeIds": [
+      "aortic-aaa-ruptured",
+      "aortic-hypotensive"
+    ],
+    "text": "Most important: the consult gives two different blood pressure targets. The critical-actions list says permissive hypotension with a target SBP of 90-100 mmHg (and points at the hypotensive-dissection node), but the ruptured AAA node says target SBP 70-90 mmHg while maintaining consciousness, and the hypotensive dissection node says to maintain MAP about 65 mmHg with a vasopressor. The strip quotes each node for its own variant (70-90 on the ruptured AAA variant, MAP about 65 on the dissection variant). The 90-100 list wording is on no node and is not on the strip. Physician to decide which is right; nothing was changed. Related: heart-rate targets also differ between nodes (60-70 bpm in anti-impulse therapy, 60-80 bpm in hypotensive dissection with norepinephrine); both are quoted for their own tile."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "aortic-start",
+      "aortic-dissection-eval",
+      "aortic-aaa-eval"
+    ],
+    "text": "Fit: this consult is not one memorised resuscitation sequence. It is two different emergencies (ruptured AAA and acute aortic dissection) plus symptomatic and incidental aneurysm branches, and it spans diagnosis, drug titration and disposition. The strip forks at the presentation node into the two crash paths only (ruptured AAA first as the most immediate crash, then dissection); the symptomatic unruptured and incidental aneurysm options are not on the strip. Several dissection nodes (anti-impulse, vasodilator, hypotensive) are not linked from the dissection option in the consult's own flow, so the checker flags them as outside the branch; they are cited because they are the dissection management nodes."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "aortic-symptomatic",
+      "aortic-incidental",
+      "aortic-type-b",
+      "aortic-type-b-medical",
+      "aortic-type-b-intervention",
+      "aortic-pau",
+      "aortic-malperfusion",
+      "aortic-add-rs",
+      "aortic-ddimer",
+      "aortic-aaa-surgical",
+      "aortic-hemo-dissection",
+      "aortic-vasodilator",
+      "aortic-type-a",
+      "aortic-aaa-ruptured",
+      "aortic-hypotensive",
+      "aortic-dispo-surgery"
+    ],
+    "text": "Time-critical content NOT on the strip. Critical action left off: avoid NG tube placement (risk of esophageal perforation in thoracic aneurysm), whose node is aortic-symptomatic; that node's own text does not contain the NG tube line, so it could not be quoted. Also left off: bedside ultrasound to measure AAA diameter with the 5.5 cm or expanding threshold (the aortic-aaa-imaging node does not state it; the bedside US tile quotes only what that node says); the ADD-RS and D-dimer risk stratification; Type B dissection (uncomplicated and complicated, TEVAR); penetrating ulcer; malperfusion; the other beta-blocker doses and labetalol; clevidipine, nitroprusside and the diltiazem alternative when a beta-blocker cannot be used; pain control with opioids and NPO for surgery in Type A; keeping the ruptured AAA patient warm; the 30-minute window and EVAR versus open repair choice; the symptomatic unruptured AAA branch (admit, CTA, repair thresholds); disposition nodes. The dissection variant has 6 tiles and the AAA variant 6 tiles; nothing was dropped to fit the 7-tile cap, content was left out for relevance. Also left off: the 'Hemodynamically STABLE' AAA path (CT angiography, crescent sign); the D-dimer warning 'Do NOT delay imaging in high-risk patients for D-dimer result'; coronary malperfusion presenting as STEMI (check for dissection before cath lab, emergent surgery not PCI); anti-impulse therapy, pain control with opioids and NPO as the other ED steps while awaiting Type A surgery; the clevidipine line that it is preferred if available (the strip shows nicardipine, which the consult calls an excellent first choice); intubation timing is on the strip only as the AAA caution."
+  },
+  {
+    "kind": "other",
+    "tileId": "cta",
+    "nodeIds": [
+      "aortic-imaging",
+      "aortic-aaa-imaging",
+      "aortic-aaa-eval",
+      "aortic-aaa-ruptured",
+      "aortic-hemo-dissection"
+    ],
+    "text": "Tile order follows the consult's node flow (AAA: vascular call, bedside US, permissive hypotension and blood, intubation caution, balloon control; dissection: CTA, beta-blocker, vasodilator, hypotension, Type A surgery, blood). The critical-actions list puts permissive hypotension first and the CTA after the ultrasound, and mixes the two emergencies. The CTA tile says 'if hemodynamically stable' only in the critical-action list; the node itself says CTA is the test of choice and lists TEE for unstable patients going to OR, which is what the tile quotes."
+  },
+  {
+    "kind": "gap",
+    "tileId": "beta-blocker-first",
+    "nodeIds": [
+      "aortic-hemo-dissection"
+    ],
+    "drugId": "esmolol",
+    "text": "The drug store has no esmolol entry for aortic dissection (only A-Fib rate control and thyroid storm), so the beta-blocker tile is a steps tile and shows only the consult's line that esmolol is preferred in unstable patients. No dose is on the strip. Labetalol and metoprolol appear in the consult's table but the store has no entry for this use either."
+  },
+  {
+    "kind": "gap",
+    "tileId": "add-vasodilator",
+    "nodeIds": [
+      "aortic-vasodilator"
+    ],
+    "drugId": "nicardipine",
+    "text": "The drug store has nicardipine entries for stroke and blood pressure control, none for aortic dissection, so the vasodilator tile is a steps tile and quotes the consult's own nicardipine start and maximum rates. The consult names clevidipine as 'Preferred if available' (not on the strip). Physician to check whether the nicardipine tile should instead be a store-backed drug tile."
+  },
+  {
+    "kind": "gap",
+    "tileId": "treat-hypotension",
+    "nodeIds": [
+      "aortic-hypotensive"
+    ],
+    "drugId": "norepinephrine",
+    "text": "The drug store has no norepinephrine entry for aortic dissection hypotension, so the tile is a steps tile quoting the consult's line (maintain MAP about 65 mmHg, HR 60-80 bpm). The consult's own norepinephrine dose range is not on the strip. The consult's avoid-phenylephrine line and the small-volume pericardiocentesis line are quoted on the tile; phenylephrine has a store entry for other indications, none for this use."
+  },
+  {
+    "kind": "gap",
+    "tileId": "blood-access",
+    "nodeIds": [
+      "aortic-type-a"
+    ],
+    "text": "The blood order (6-10 units pRBCs) is a quoted node line, not a drug tile, because blood products are not drug-store entries. The same 6-10 units figure is also quoted on the ruptured AAA transfusion tile."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "blood-mtp",
+    "nodeIds": [
+      "aortic-aaa-ruptured"
+    ],
+    "text": "The consult gives the transfusion ratio but not when to activate the protocol; the critical-actions list says 'activate MTP if ruptured', and the node line is quoted as written. Also, the aortic-imaging node says type and screen with a minimum of 6-10 units, while the ruptured AAA node says order 6-10 units pRBCs and the critical-action list says type and cross; these are not identical wording."
+  }
+]

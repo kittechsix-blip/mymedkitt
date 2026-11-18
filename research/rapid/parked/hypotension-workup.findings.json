@@ -1,0 +1,122 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "hypotension-start",
+      "hypotension-pocus-findings",
+      "shock-septic",
+      "hypotension-vasopressors"
+    ],
+    "text": "Most important: this consult is NOT a memorised resuscitation sequence. It is an undifferentiated-shock workup: after a shared start (access, RUSH) it splits by POCUS pattern into four different shock types (distributive, cardiogenic, hypovolemic, obstructive), each with its own treatment, then converges on vasopressors. The strip is therefore a menu of the time-critical actions of different branches (sepsis, anaphylaxis, adrenal crisis, tension pneumothorax) with a condition on each face, not one order to follow. Several shock types (cardiogenic, hemorrhagic, tamponade, massive PE, neurogenic) have no tile. I did not fork: the consult's only fork (POCUS findings) has four pattern labels leading to four workups, which cannot each be reduced to a strip of at most 7 faithful actions here. Physician to decide whether this consult should have a RAPID card at all."
+  },
+  {
+    "kind": "other",
+    "tileId": "rush",
+    "nodeIds": [
+      "hypotension-pocus"
+    ],
+    "text": "The RUSH tile quotes the Heart findings for effusion and D-sign, FAST, Aorta and Pneumothorax lines, but not the EF line or either IVC line (collapsing IVC points to hypovolemic; dilated IVC with minimal collapse points to cardiogenic or obstructive). The consult names IVC as part of the exam, and the critical action lists it. Left off for the 8-line limit and because each IVC line sits under a header; physician to decide whether IVC should replace another line."
+  },
+  {
+    "kind": "other",
+    "tileId": "norepinephrine",
+    "drugId": "norepinephrine",
+    "nodeIds": [
+      "hypotension-vasopressors",
+      "shock-hemorrhagic",
+      "shock-neurogenic",
+      "shock-cardiogenic",
+      "shock-pe",
+      "shock-septic"
+    ],
+    "text": "Read the strip with the shock type in mind. The norepinephrine tile says MAP >=65 for every patient, and the consult lists norepinephrine as first-line for ALL shock types. But the same consult gives a different target or caution in other branches: neurogenic shock MAP 85-90, hemorrhagic shock permissive hypotension (SBP 80-90, with a TBI exception), chronic hypertension 75-85 on the vasopressor node, and the store lists hypovolemia (correct volume first) as a contraindication. Likewise the sepsis tile 30 mL/kg crystalloid has no counterpart for the branches that say to avoid aggressive fluids (cardiogenic, massive PE, neurogenic cautious fluids). The strip has no tile for those branches, so a glance could apply the sepsis fluid and MAP 65 numbers to the wrong shock type. Left as is; physician to decide whether to add a condition or drop the tile. Possible internal inconsistency in the consult (first-line for ALL shock types versus permissive hypotension in hemorrhage); not resolved here."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "hypotension-fluid-responsiveness",
+      "hypotension-source-control",
+      "shock-cardiogenic",
+      "shock-hypovolemic",
+      "shock-hemorrhagic",
+      "shock-nonhemorrhagic",
+      "shock-neurogenic",
+      "shock-tamponade",
+      "shock-pe",
+      "shock-distributive",
+      "hypotension-pocus-findings",
+      "hypotension-disposition",
+      "shock-septic",
+      "hypotension-vasopressors",
+      "shock-obstructive",
+      "shock-anaphylaxis",
+      "shock-adrenal"
+    ],
+    "text": "Time-critical content NOT on the strip (7-tile cap): critical actions left off are passive leg raise / VTI fluid responsiveness (hypotension-fluid-responsiveness) and source control within 6-12 hours for septic shock (hypotension-source-control). Also off: hemorrhagic shock (massive transfusion protocol, TXA, permissive hypotension), cardiogenic shock treatment, tamponade, massive PE (avoid intubation and aggressive fluids, thrombolysis, PERT), neurogenic shock, non-hemorrhagic hypovolemia, the POCUS-pattern-to-shock-type matching, antibiotic choice by source, vasopressin / epinephrine / phenylephrine as second-line pressors and the norepinephrine ceiling, disposition (ICU, OR, cath lab), labs and the shock index. Also off, as cautions rather than steps: avoid aggressive fluids in cardiogenic shock, avoid intubation and aggressive fluid loading in massive PE, avoid intubation if possible in tamponade, and cautious fluids in neurogenic shock; these bear directly on the sepsis 30 mL/kg tile."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "epinephrine-im",
+    "nodeIds": [
+      "shock-anaphylaxis"
+    ],
+    "drugId": "epinephrine",
+    "text": "Face shows 0.5 mg only (the store dose and the upper end); the consult says 0.3-0.5 mg. The consult doses IM epinephrine for anaphylaxis as 0.3-0.5 mg and repeat every 5-15 minutes; the drug store says 0.5 mg and repeat every 5 minutes up to 3 doses. The tile figure and Dosing text come from the drug store; the node's own dose is quoted under 'In this consult'. Not resolved. The drug store's single weight calculator is the pediatric IM one; the consult gives no per-kg dose."
+  },
+  {
+    "kind": "other",
+    "tileId": "hydrocortisone",
+    "nodeIds": [
+      "shock-adrenal"
+    ],
+    "drugId": "hydrocortisone",
+    "text": "No numeric conflict found for the adrenal crisis dose (100 mg IV then 200 mg/24h in both). The drug store also says 100 mg IV or IM; the consult says IV only. The consult attaches the condition 'refractory to fluids and vasopressors' with steroid history; the tile condition is a shortened plain-words version, flagged for the physician."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "norepinephrine",
+    "nodeIds": [
+      "hypotension-vasopressors"
+    ],
+    "drugId": "norepinephrine",
+    "text": "The consult starts norepinephrine at 0.01-0.05 mcg/kg/min with a max of about 0.5-1 mcg/kg/min; the drug store's septic/vasodilatory entry says 0.01-3 mcg/kg/min. The consult says peripheral start is fine and not to delay for a central line; the store says central line preferred, peripheral acceptable for initial resuscitation up to 12 hours. The store also lists hypovolemia (correct volume first) as a contraindication, which the consult does not carry. The store's septic indication was used; it has no weight calculator, and the consult's mcg/kg/min dose has none either. Not resolved."
+  },
+  {
+    "kind": "missing-weightcalc",
+    "tileId": "norepinephrine",
+    "nodeIds": [
+      "hypotension-vasopressors"
+    ],
+    "drugId": "norepinephrine",
+    "text": "Per-kg infusion dose (mcg/kg/min) with no weight calculator on the store's septic/vasodilatory entry."
+  },
+  {
+    "kind": "other",
+    "tileId": "epinephrine-im",
+    "nodeIds": [
+      "shock-anaphylaxis"
+    ],
+    "drugId": "epinephrine",
+    "text": "Anaphylaxis epinephrine IV (refractory), infusion, diphenhydramine, methylprednisolone, albuterol, glucagon and the 1-2 L crystalloid are in the consult but not on the tile (4-line limit and strip scope). The consult itself treats IM epinephrine as the treatment."
+  },
+  {
+    "kind": "other",
+    "tileId": "needle-decompress",
+    "nodeIds": [
+      "shock-tension-ptx"
+    ],
+    "text": "The tension pneumothorax tile face abbreviates the site (5th ICS, ant. axillary) for the 24-character limit; the expansion quotes the full site. The consult also gives the 2nd intercostal space, midclavicular line as an alternative and the intubated-patient advice (disconnect vent, bag with low pressures); neither is on the tile."
+  },
+  {
+    "kind": "other",
+    "tileId": "norepinephrine",
+    "nodeIds": [
+      "hypotension-vasopressors",
+      "shock-septic",
+      "shock-anaphylaxis",
+      "shock-adrenal",
+      "shock-tension-ptx"
+    ],
+    "text": "Tile order follows the consult's flow (start, RUSH, then branches in file order, vasopressors last as the shared endpoint). The critical-actions list orders them differently (norepinephrine fourth, fluid responsiveness fifth). The order flag on the norepinephrine tile is expected, because several branches converge on the vasopressor node. In the consult, anaphylaxis, tension pneumothorax and adrenal crisis end at disposition without passing the vasopressor node."
+  }
+]

@@ -1,0 +1,102 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "hs-cooling-start",
+      "hs-cooling-method",
+      "hs-immersion",
+      "hs-evaporative",
+      "hs-cooling-endpoint"
+    ],
+    "text": "Most important: this consult is mostly one time-critical action (cool now, to a core temperature endpoint) with a set of supportive branches, so it fits a strip only loosely. Four of the seven tiles are cooling. The consult's method choice (immersion, evaporative, ice packs) is a choice of alternatives, not different resuscitation paths, so there is one variant, and the immersion and evaporative tiles are alternatives to each other (the evaporative tile says 'if immersion unavailable'). Please check this reads as 'pick one', not two consecutive steps."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "hs-ice-packs",
+      "hs-rhabdo",
+      "hs-rhabdo-rx",
+      "hs-rhabdo-severe",
+      "hs-coags",
+      "hs-complications",
+      "hs-recognize",
+      "hs-disposition",
+      "hs-admit-icu",
+      "hs-seizure-rx",
+      "hs-resuscitation"
+    ],
+    "text": "Time-critical content NOT on the strip (7-tile cap): the ice-pack method (cold IV saline plus ice packs to groin, axillae, neck) and the instruction to avoid antipyretics (acetaminophen/NSAIDs are useless here); rectal temperature as the only reliable thermometry (hs-recognize); rhabdomyolysis assessment and aggressive fluids by CK threshold, severe rhabdomyolysis, nephrology, dialysis and compartment syndrome; DIC labs and transfusion rules; vasopressor advice after fluids; midazolam as the consult's first-line seizure drug is shown only as a quoted line under the lorazepam tile; refractory seizure options (propofol, phenobarbital); RSI induction drugs; the post-cooling complications work-up; disposition (ALL heat stroke patients are admitted, ICU criteria). Critical actions left off the strip: cold IV saline + ice packs, avoid antipyretics, monitor for rhabdomyolysis, check DIC labs."
+  },
+  {
+    "kind": "conflict",
+    "nodeIds": [
+      "hs-resuscitation",
+      "hs-evaporative",
+      "hs-ice-packs"
+    ],
+    "text": "Inside the consult: the fluids node summary says to avoid overcooled fluids through IV (peripheral vasoconstriction), while the evaporative node, ice-pack node and critical-actions list give cold IV saline (4°C, 500-1000 mL) as a cooling adjunct. Not resolved and not on the strip; physician to decide."
+  },
+  {
+    "kind": "other",
+    "tileId": "rocuronium",
+    "nodeIds": [
+      "hs-airway",
+      "hs-intubation"
+    ],
+    "text": "The intubation lines under 'Indications for intubation:' show only the first item (GCS <=8 or unable to protect airway) because the drug tile allows 4 lines. The consult also lists refractory seizures, severe agitation requiring deep sedation and respiratory failure. The airway node says avoid succinylcholine 'if rhabdomyolysis suspected'; the intubation node says it unconditionally. Post-intubation advice (target normocapnia, sedation) is not on the strip."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "lorazepam",
+    "nodeIds": [
+      "hs-seizure-rx"
+    ],
+    "drugId": "lorazepam",
+    "text": "The consult names midazolam 0.2 mg/kg IV or IM (max 10 mg) as first-line and lorazepam as the alternative; the critical-actions list names lorazepam only. The drug store has no midazolam entry that covers IV use for seizures (only 'Status Epilepticus — IM (no IV access)'), so the drug tile is lorazepam and the consult's midazolam line is quoted under 'In this consult'. Physician to decide which drug should be the tile. The store says lorazepam may be repeated once with a total max of 8 mg; the consult does not mention repeating lorazepam (it says 'may repeat in 5 minutes' only in its structured treatment block). The face now says 'Alternative; midazolam is first-line' so the lorazepam headline is not read as the consult's default. The store's midazolam IM status epilepticus entry (0.2 mg/kg IM, max 10 mg) matches only the IM half of the consult's 'IV or IM' midazolam line."
+  },
+  {
+    "kind": "gap",
+    "tileId": "lorazepam",
+    "nodeIds": [
+      "hs-seizure-rx"
+    ],
+    "drugId": "midazolam",
+    "text": "Midazolam IV for seizures has no matching drug-store indication (store has IM only for status epilepticus), so midazolam is not a drug tile."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "stop-cooling",
+    "nodeIds": [
+      "hs-cooling-endpoint",
+      "hs-immersion"
+    ],
+    "text": "The critical-actions list says to stop immersion at 38.5-39°C, and the node summary says stop at 38.5-39°C; the node body says stop at 39°C. The tile quotes the node body (39°C). Not resolved."
+  },
+  {
+    "kind": "other",
+    "tileId": "stop-cooling",
+    "nodeIds": [
+      "hs-cooling-endpoint",
+      "hs-cooling-start"
+    ],
+    "text": "Tile order follows the consult's flow: cool now, immersion, evaporative, stop at endpoint, fluids, airway/intubation, seizures. The critical-actions list order differs (endpoint first, then evaporative, immersion, ice packs, seizures). Fluids is not on the critical-actions list but the consult puts it before airway; it was added as a tile. The consult's cooling target is 'within 30 minutes' on the first tile; this consult's flow reaches seizure treatment after airway, so the intubation tile precedes the seizure tile."
+  },
+  {
+    "kind": "gap",
+    "tileId": "fluids",
+    "nodeIds": [
+      "hs-resuscitation"
+    ],
+    "text": "The fluids tile is a steps tile and its figure carries a dose (adult 1-2 L bolus). The pediatric dose (20 mL/kg) is quoted as a line but has no weight calculator here. The goal (MAP >65, UOP >0.5 mL/kg/hr) and the vasopressor advice after 2-3 L of fluids are not on the tile."
+  },
+  {
+    "kind": "other",
+    "tileId": "rocuronium",
+    "nodeIds": [
+      "hs-intubation",
+      "hs-airway"
+    ],
+    "drugId": "rocuronium",
+    "text": "The consult gives rocuronium 1.2 mg/kg IV and says to avoid succinylcholine; the drug store agrees on 1.2 mg/kg and also lists a 0.6 mg/kg standard intubating dose (both weight calculators are on the tile). RSI induction drugs (ketamine or propofol 1-2 mg/kg IV) are in the consult but are not on the strip. The drug store regimen shows 'Higher dose (>=1.4 mg/kg)' wording the consult does not have."
+  }
+]

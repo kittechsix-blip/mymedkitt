@@ -1,0 +1,71 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "thorac-start",
+      "thorac-indications-check",
+      "thorac-incision",
+      "thorac-pericardium",
+      "thorac-cardiac-wound",
+      "thorac-aorta"
+    ],
+    "text": "Most important: this consult is a procedure walkthrough (indication, position, incision, pericardium, cardiac wound, hilum, aorta, massage, response), not a memorised drug-and-shock resuscitation sequence. The strip is the best faithful 7-tile procedure reminder, but the consult has about nine procedural steps, so something had to be left off. Physician to judge whether this consult belongs on a RAPID card at all."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "thorac-cardiac-control",
+      "thorac-cardiac-wound",
+      "thorac-aorta",
+      "thorac-hilum"
+    ],
+    "tileId": "aorta",
+    "text": "Cardiac wound and aortic occlusion are branches at the cardiac-control question (wound present goes to wound control then massage; no wound/empty heart goes to aortic clamp then massage; hilar bleeding goes to hilum control), but the strip shows them as consecutive tiles. The aorta tile's quoted indications say when to use it, but a glance could read it as a step that always follows the wound. Physician to judge whether the face should say this."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "thorac-start",
+      "thorac-setup",
+      "thorac-hilum",
+      "thorac-roscorstop",
+      "thorac-post-rosc",
+      "thorac-stop",
+      "thorac-not-indicated",
+      "thorac-cardiac-control",
+      "thorac-indications-check",
+      "thorac-incision",
+      "thorac-pericardium",
+      "thorac-cardiac-wound",
+      "thorac-aorta",
+      "thorac-massage",
+      "thorac-cardiac-control"
+    ],
+    "text": "Time-critical content NOT on the strip: team roles and equipment (setup node); pausing ventilation during chest entry, pericardiotomy, heart inspection and hilar control; pulmonary hilum control for massive lung bleeding or air embolism (a branch at the cardiac control question, left off to stay within 7 tiles); the response-after-thoracotomy decision, post-ROSC handoff to OR, and the stop/termination decision; not-indicated pattern (blunt arrest without signs of life, prolonged downtime). The aorta tile quotes only the first two aortic indications and the compression line; the clamp technique, esophagus/NG tube caution and announcing occlusion time are not shown. The incision tile omits evacuating hemothorax and rib spreader steps; the pause-ventilation line is quoted there from the start node, but the airway lead role and resuming small tidal volumes once massage starts are not shown. The aorta tile also omits the third indication (prioritize coronary/cerebral perfusion). Massage tile omits internal defibrillation and the epinephrine route note. Critical actions all have their node on a tile."
+  },
+  {
+    "kind": "other",
+    "tileId": "arms-out",
+    "nodeIds": [
+      "thorac-position",
+      "thorac-incision"
+    ],
+    "text": "The critical-actions list puts 'arms out (crucifix)' together with the incision at node thorac-incision, but the incision node itself does not mention arms; the arms-out line lives in the Position / Prep node. So arms-out is its own tile cited to thorac-position, and the incision tile quotes only incision lines. Tile order follows the consult's flow (indication, position, incision, pericardium, cardiac wound, aorta, massage), not the critical-actions list order."
+  },
+  {
+    "kind": "other",
+    "tileId": "cardiac-wound",
+    "nodeIds": [
+      "thorac-cardiac-wound"
+    ],
+    "text": "The cardiac wound tile quotes the wound node. The consult's control question words the order as digital pressure first, then sutures or staples; the face says digital pressure, sutures. The no-routine-Foley condition: the node says Foley plugging is discouraged, the control question says not recommended. Physician to confirm the face reads right."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "indication",
+    "nodeIds": [
+      "thorac-indications-check"
+    ],
+    "text": "The 15-minute window line is quoted from the indication node, but that node says the window mainly applies to tamponade; that sentence is not quoted, so the tile alone could read as a universal 15-minute rule."
+  }
+]

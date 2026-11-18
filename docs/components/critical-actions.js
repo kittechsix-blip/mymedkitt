@@ -21,7 +21,7 @@ export function createCriticalActionsButton(opts) {
     return btn;
 }
 /** Render the Critical Actions modal. */
-function openCriticalActionsModal(opts) {
+export function openCriticalActionsModal(opts) {
     closeCriticalActionsModal();
     const overlay = document.createElement('div');
     overlay.className = 'critical-actions-overlay';

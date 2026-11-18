@@ -1,0 +1,65 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "rh-extract-fetus",
+      "rh-uterine-incision",
+      "rh-continue-cpr"
+    ],
+    "tileId": "vertical-incisions",
+    "text": "Look first at the end of the strip. The goal of this consult is delivering the fetus, but the strip stops at the incisions (tile 6) and jumps to 'Continue CPR', which in the consult is a post-delivery step. Delivering the fetus (Step 3) is not on the strip because of the 7-tile cap; the physician should decide whether it should replace or be merged with another tile. Also, this consult is partly a procedure walkthrough (incision, delivery, cord, placenta, atony drugs) rather than a pure memorised sequence; the strip covers recognition, positioning of the uterus, clock, decision, bedside/scalpel, incisions and CPR only."
+  },
+  {
+    "kind": "conflict",
+    "nodeIds": [
+      "rh-start-timer",
+      "rh-decision-point"
+    ],
+    "tileId": "start-clock",
+    "text": "Inside the consult the timing reads two ways: the Decision node says begin incision at about 4 minutes with the fetus delivered by 5 minutes, while the timekeeper script says 'At 5 minutes: if no ROSC, incision now' (and the critical-actions list says incision by 5 minutes). Both are quoted on the strip (Start clock and 4-min decision tiles). Not changed; please decide which the card should lead with."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "rh-proceed",
+      "rh-equipment"
+    ],
+    "tileId": "bedside-scalpel",
+    "text": "Look first at the 'Cut at bedside' tile. The consult's clear DO / DO NOT list in the Proceed node (do not move to the OR, do not wait for obstetrics, do not prep, do not give anesthesia, do not stop CPR; perform at the bedside, continue CPR and LUD, neonatal team ready) cannot be quoted because each of those lines starts with an emoji marker and the gate rejects them as not clause-complete. The tile quotes the node's one-line summary instead, which keeps its negations but is less complete, and the face condition is written from it. Please check that the tile still tells the whole 'what not to do' message you want. Also: this is a time-critical procedure sequence, but it is partly a procedure walkthrough (incision, delivery, cord, placenta); the strip covers the decision and the first cuts, not the full procedure."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "rh-uterine-atony",
+      "rh-iv-airway",
+      "rh-pre-arrest-optimization",
+      "rh-arrest-confirmed",
+      "rh-acls-pregnancy",
+      "rh-beauchops",
+      "rh-positioning",
+      "rh-extract-fetus",
+      "rh-cord-clamp",
+      "rh-placenta",
+      "rh-neonate",
+      "rh-rosc-continue",
+      "rh-standard-acls"
+    ],
+    "text": "Time-critical consult content NOT on the strip: (1) critical action 'Oxytocin + TXA + bimanual massage after delivery' (Uterine Atony node) is left off because the strip is capped at 7 tiles and this comes after delivery; oxytocin and tranexamic acid are not drug tiles here and no dose is shown. (2) Arrest-response parallel actions (call overhead, scalpel to bedside within 60 seconds, team roles), IV/IO above the diaphragm, airway, and BEAU-CHOPS reversible causes. (3) Positioning and the under-60-seconds decision-to-incision target. (4) Delivering the fetus, clamping and cutting the cord, placental delivery. (5) Neonatal assessment and ROSC care. Critical actions kept: recognize fundus, LUD, start clock, 4-minute decision, bedside/no move, scalpel only, vertical incisions, continue CPR. The consult's own flow places the clock tile after LUD, which is how the tiles are ordered; the critical-actions list order is the same except it puts the 4-minute decision before the bedside and scalpel tiles, as the strip also does. Also left off: the anterior-placenta instruction (go through the placenta, do not stop) and enlarging the uterine incision with scissors or fingers (uterine incision node); the one-handed LUD alternative; the 'team decides on time of death' line (Continue CPR node); the below-umbilicus standard-ACLS branch; neonatal team at the warmer."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "rh-fundal-check"
+    ],
+    "tileId": "check-fundus",
+    "text": "The fundal check is a question node with a branch (below umbilicus goes to standard ACLS), but it is not a resuscitation fork, so the strip has one variant. The 'below umbilicus, standard ACLS' branch is quoted nowhere on the strip; the tile quotes the threshold lines and the 'unable to assess, assume 20 weeks or more' option text. The full line 'If unsure, assume ≥20 weeks and proceed' could not be quoted because its source line continues with a long clause containing 'not'."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "rh-decision-point"
+    ],
+    "tileId": "decide-4-min",
+    "text": "The strongest statement that late is still worth doing ('Past 4 min — start now regardless of elapsed time') sits in a long line with negations that does not fit the 160-character excerpt limit, so the tile quotes the option text 'Start now — later is still better than never' instead. The face condition 'Past 4 min: start now' paraphrases that line; expect phrase and negation flags."
+  }
+]

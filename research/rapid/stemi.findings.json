@@ -1,0 +1,70 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "stemi-start",
+      "stemi-confirmed",
+      "stemi-initial-tx",
+      "stemi-p2y12",
+      "stemi-lytics"
+    ],
+    "text": "Most important: STEMI is mostly a diagnose-then-sequence consult (ECG, activate cath lab, aspirin, P2Y12, choose PCI vs lytics, complications), not one memorised resuscitation. The strip is a seven-tile reminder of the early steps, and it does not hold the branch decisions (LBBB/Sgarbossa, aVR/left main, PCI vs transfer vs lytics, shock). Physician to decide whether a RAPID card suits this consult. The P2Y12 tile deliberately names no agent and gives no dose, because choosing prasugrel vs ticagrelor vs clopidogrel (with the prasugrel stroke/TIA contraindication) is a decision inside the node, not a single action."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "stemi-lbbb",
+      "stemi-avr",
+      "stemi-serial",
+      "stemi-arrhythmia",
+      "stemi-shock",
+      "stemi-transfer",
+      "stemi-post-lytics",
+      "stemi-anticoag",
+      "stemi-pci",
+      "stemi-p2y12",
+      "stemi-initial-tx",
+      "stemi-lytics",
+      "stemi-reperfusion-q"
+    ],
+    "text": "Time-critical content NOT on the strip. Critical actions left off: apply Sgarbossa criteria in LBBB or paced rhythm (stemi-lbbb; any ONE positive = STEMI; LBBB with ongoing ischemic symptoms is managed as STEMI); AIVR after reperfusion is benign and must NOT be treated with antidysrhythmics (stemi-arrhythmia). Other content left off: the P2Y12 agent choice, doses and prasugrel contraindication (stemi-p2y12); the avoid-nitroglycerin conditions (SBP <90, RV infarct, PDE-5 inhibitor use) and oxygen only if SpO2 <90% (stemi-initial-tx); anticoagulation for PCI and after lytics (stemi-anticoag, stemi-post-lytics); aVR elevation / left main concern (stemi-avr); serial ECGs (stemi-serial); the PCI vs transfer vs lytic decision targets other than the two quoted (stemi-reperfusion-q, stemi-transfer); fibrinolytic contraindications check and half-dose tenecteplase over 75 (stemi-lytics); cardiogenic shock management and vasopressors (stemi-shock); RV fluid and dobutamine/milrinone (stemi-rv); VT/VF and AV block management (stemi-arrhythmia). The morphine warning is shown only as the warning on the aspirin tile. Also left off: after fibrinolysis, transfer for angiography within 3-24 hours and NOT within the first 2-3 hours (stemi-post-lytics, stemi-lytics); the options 'Cardiogenic shock or severe HF: transfer immediately regardless of time' (stemi-reperfusion-q) and 'Absolute contraindication: must transfer for PCI regardless of time' (stemi-lytics); and nitroglycerin itself (0.4 mg SL, first-line pain/symptom agent) has no tile, only its RV-infarct 'avoid nitrates' caution on the right-sided-leads tile. Tile order note: the consult reaches the posterior-leads node from the ECG pattern question, before confirmed STEMI, so posterior leads arguably belong before 'Activate cath lab'; rapid-check orders by node-array position and flags the right-leads tile as out of order. Left for the physician."
+  },
+  {
+    "kind": "other",
+    "tileId": "aspirin",
+    "nodeIds": [
+      "stemi-initial-tx",
+      "stemi-p2y12"
+    ],
+    "drugId": "aspirin",
+    "text": "The critical-action list bundles aspirin with P2Y12 loading and puts morphine as a separate action. The strip splits aspirin and P2Y12 into two tiles, and carries the morphine caution as the warning on the aspirin tile. Tile order follows the consult flow (ECG, posterior leads, cath lab, right-sided leads, aspirin, P2Y12, lytics), not the critical-actions list order; in the consult the posterior-leads node is reached from the ECG pattern question and the right-sided leads advice appears in the confirmed-STEMI node. Physician to check this order."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "lytics",
+    "nodeIds": [
+      "stemi-lytics",
+      "stemi-reperfusion-q"
+    ],
+    "drugId": "tenecteplase",
+    "text": "Tenecteplase is a drug tile from the drug store's STEMI / Fibrinolysis entry. The tile now quotes the consult's 'Check Fibrinolytic Contraindications' line, but the consult's actual list sits on a separate info page and the options 'Absolute contraindication: must transfer for PCI regardless of time' and 'Relative contraindication' are not on the tile; physician to decide whether the tile needs them. 'Fibrin-specific agents preferred' was dropped to stay within 4 lines. The half-dose-over-75 advice appears in the store regimen only (not quoted from the node). The store's general contraindications are stroke-oriented (a stroke thrombolysis list), not the STEMI list. The condition 'PCI NOT available within 120 min' is quoted from an option label of the reperfusion question. Not resolved."
+  },
+  {
+    "kind": "other",
+    "tileId": "aspirin",
+    "nodeIds": [
+      "stemi-initial-tx",
+      "stemi-dispo"
+    ],
+    "drugId": "aspirin",
+    "text": "Aspirin tile: the drug store entry 'ACS / STEMI (loading)' and the consult both say 162-325 mg chewed. No disagreement found on the loading dose. The store regimen also contains 81 mg daily, so the tile figure is flagged as a multi-dose figure. No weight calculator is needed (fixed dose)."
+  },
+  {
+    "kind": "gap",
+    "tileId": "p2y12",
+    "nodeIds": [
+      "stemi-p2y12"
+    ],
+    "text": "The drug store's ticagrelor ACS entry is labelled 'ACS / NSTEMI (preferred P2Y12)', not STEMI, and the consult itself calls prasugrel and ticagrelor equivalent for PCI and clopidogrel for fibrinolysis. For these reasons no P2Y12 drug tile was made. Nothing was added to the strip."
+  }
+]

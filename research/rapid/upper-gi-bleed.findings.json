@@ -1,0 +1,103 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "ugib-hemodynamics",
+      "ugib-cirrhosis-check",
+      "ugib-variceal-pathway"
+    ],
+    "text": "Most important: this consult is a branching workup (stability, then cirrhosis or not, then variceal, balloon and disposition), not one memorised sequence. The strip is one variant in the consult's own order, so the variceal tiles (octreotide, ceftriaxone, fluid limit, balloon tamponade) show for every patient even though the consult only reaches them after the cirrhosis question. The consult does not fork into separate resuscitation paths, so no fork was built. Physician to decide whether the variceal tiles belong on one strip or a fork on ugib-cirrhosis-check."
+  },
+  {
+    "kind": "other",
+    "tileId": "balloon",
+    "nodeIds": [
+      "ugib-esophageal-balloon",
+      "ugib-blakemore-indications"
+    ],
+    "text": "Balloon tile: the consult says the esophageal balloon is inflated only if gastric tamponade fails, and the 45 mmHg ceiling applies to the esophageal balloon; the face now says 'Esophageal max 45 mmHg' and 'Uncontrolled bleed' (the indication line is quoted). The consult also calls balloon tamponade a last resort; that wording is not on the tile. Physician to confirm the face is not read as 'place a balloon' for every bleed."
+  },
+  {
+    "kind": "other",
+    "tileId": "access-airway",
+    "nodeIds": [
+      "ugib-unstable-resus",
+      "ugib-hemodynamics"
+    ],
+    "text": "Access and transfusion tiles come from the unstable pathway only (ugib-hemodynamics, Unstable branch); the stable branch goes to risk stratification instead. The access tile face now says 'Unstable'. The consult's intubation list also includes massive hematemesis and inability to protect airway; those are in the quoted line, not on the face."
+  },
+  {
+    "kind": "other",
+    "tileId": "ceftriaxone",
+    "nodeIds": [
+      "ugib-variceal-abx"
+    ],
+    "text": "Ceftriaxone tile quotes 'up to 7 days' but not the consult's note that it may be stopped once hemostasis is achieved and vasoactives are stopped (AASLD 2024), nor the 2025 evolving-evidence note on shorter or no courses."
+  },
+  {
+    "kind": "gap",
+    "tileId": "octreotide",
+    "drugId": "octreotide",
+    "nodeIds": [
+      "ugib-octreotide"
+    ],
+    "text": "The drug store has octreotide only for VAD GI bleeding (AVMs), cluster headache, opioid withdrawal and sulfonylurea hypoglycemia, none of which is variceal bleeding. So octreotide is a steps tile quoting the consult's own dose lines, not a drug tile. The store regimen for the VAD entry happens to give the same bolus and infusion numbers, but that is a different indication and was not used."
+  },
+  {
+    "kind": "gap",
+    "tileId": "ceftriaxone",
+    "drugId": "ceftriaxone",
+    "nodeIds": [
+      "ugib-variceal-abx"
+    ],
+    "text": "The drug store has no ceftriaxone entry for antibiotic prophylaxis in cirrhosis with GI bleeding, so this is a steps tile quoting the consult's dose line. The consult links a drug page for ceftriaxone for this use (#/drug/ceftriaxone/ugib) that does not match any store indication."
+  },
+  {
+    "kind": "gap",
+    "tileId": "balloon",
+    "nodeIds": [
+      "ugib-blakemore-technique",
+      "ugib-blakemore-complications"
+    ],
+    "text": "Balloon tamponade is a procedure with many steps; the tile carries only the indication, intubate first, CXR before inflation and the 45 mmHg ceiling. Left off the tile: balloon volumes, traction, the 30-40 mmHg target, deflation every 6-8 hours, 24-hour maximum, and the emergency instruction to cut all lumens if the tube migrates and obstructs the airway."
+  },
+  {
+    "kind": "gap",
+    "tileId": "no-txa",
+    "nodeIds": [
+      "ugib-start"
+    ],
+    "text": "The consult's own line giving the reason for no TXA names the trial, so it cannot be quoted as a source line. The tile quotes the node's one-line summary instead, which also carries the definition of the bleed."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "ugib-start",
+      "ugib-unstable-resus",
+      "ugib-transfusion",
+      "ugib-octreotide",
+      "ugib-variceal-abx",
+      "ugib-variceal-resus",
+      "ugib-blakemore-technique"
+    ],
+    "text": "Tile order follows the consult's node flow (TXA note, resuscitation, transfusion, octreotide, antibiotics, fluid limit, balloon tamponade) and not the critical-actions list order, which starts with transfusion and puts TXA second, and places the fluid limit last."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "ugib-low-risk",
+      "ugib-pre-egd",
+      "ugib-ppi",
+      "ugib-egd-timing",
+      "ugib-transfusion",
+      "ugib-variceal-abx",
+      "ugib-esophageal-balloon",
+      "ugib-blakemore-complications",
+      "ugib-tips",
+      "ugib-icu-admit",
+      "ugib-hemodynamics",
+      "ugib-risk-stratify"
+    ],
+    "text": "Time-critical content NOT on the strip (7-tile cap): erythromycin 250 mg IV 20-90 minutes before EGD (critical action, node ugib-pre-egd; the drug store's only erythromycin entry is gastroparesis, so it would be a steps tile); GBS 0-1 low-risk outpatient route (critical action, node ugib-low-risk, a disposition rule not a resuscitation step); pre-endoscopy and post-endoscopy PPI dosing; endoscopy timing (urgent under 12 hours, emergent under 6 hours) and going to IR for aortoenteric fistula or exsanguinating duodenal ulcer; coagulation targets and reversal for warfarin and DOACs; terlipressin; norfloxacin as the antibiotic alternative; preemptive and rescue TIPS; ICU admission criteria; the stability question and risk scores. Choosing what stays off is for the physician to review."
+  }
+]

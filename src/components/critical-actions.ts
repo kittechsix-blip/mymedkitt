@@ -41,7 +41,7 @@ type OverlayWithHandlers = HTMLElement & {
 };
 
 /** Render the Critical Actions modal. */
-function openCriticalActionsModal(opts: CriticalActionsOpts): void {
+export function openCriticalActionsModal(opts: CriticalActionsOpts): void {
   closeCriticalActionsModal();
 
   const overlay = document.createElement('div');

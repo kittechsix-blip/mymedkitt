@@ -1,0 +1,222 @@
+[
+ {
+  "kind": "other",
+  "tileId": "lipid",
+  "nodeIds": [
+   "bb-atropine",
+   "bb-pacing",
+   "bb-arrest",
+   "bb-lipid"
+  ],
+  "text": "Look first at the cardiac arrest path. The consult sends a pulseless patient to a separate modified-ACLS node (bb-arrest) from the atropine and pacing questions, but this strip is the non-arrest escalation ladder and has no arrest tile. Arrest is only touched by one quoted line on the lipid tile ('Cardiac arrest' under 'When to use:'). Decide whether the consult's atropine-question option 'Cardiac arrest or pulseless' should become a second fork variant (time-critical branch first) or whether arrest stays off the strip. I did not fork it."
+ },
+ {
+  "kind": "other",
+  "tileId": "hiet",
+  "nodeIds": [
+   "bb-hiet-dosing",
+   "bb-hiet-monitoring"
+  ],
+  "text": "On the insulin tile the quoted heading 'MUST co-administer:' is followed by only the dextrose line, because a drug tile holds 4 lines. The consult's second must-co-administer item, potassium (target 3.5-4.5, aggressive repletion), and glucose checks every 15-30 minutes are not on the tile. A reader could think dextrose is the only co-therapy."
+ },
+ {
+  "kind": "other",
+  "tileId": "pressors",
+  "nodeIds": [
+   "bb-pressors"
+  ],
+  "text": "The norepinephrine figure 'start 0.1; may need 0.5-3' is authored from two consult lines (start at 0.1 mcg/kg/min; may need 0.5-3 mcg/kg/min). The consult's epinephrine option for a cardiogenic component is quoted without its dose. Please confirm the face reads right."
+ },
+ {
+  "kind": "other",
+  "tileId": "lipid",
+  "nodeIds": [
+   "bb-lipid",
+   "bb-lipid-dosing"
+  ],
+  "text": "The lipid tile now quotes 'Cardiac arrest' and 'Refractory shock despite...' under 'When to use:' (the consult's third bullet, life-threatening toxicity from a lipophilic agent, is not quoted). To stay within 4 lines the bolus line was dropped from 'In this consult'; the drug store regimen and weight box still show the bolus. The atropine tile face now says 'try first, usually ineffective' to match the consult's 'usually ineffective but try first'."
+ },
+ {
+  "kind": "gap",
+  "nodeIds": [
+   "bb-pacing",
+   "bb-arrest",
+   "bb-ecmo",
+   "bb-methylene",
+   "bb-stabilize",
+   "bb-pressors-adjunct",
+   "bb-hiet-monitoring",
+   "bb-sotalol",
+   "bb-dialysis"
+  ],
+  "text": "Time-critical content NOT on the strip (7-tile cap). Most important: the cardiac arrest branch (modified ACLS, bb-arrest: give epinephrine, glucagon, calcium chloride and lipid emulsion together during CPR, prolonged CPR, consider ECMO) is not on the strip because the consult reaches it only as an option on the atropine and pacing questions, and it is not in the critical-actions list. Also left off: sotalol (magnesium for QT prolongation/Torsades with overdrive pacing, avoid amiodarone) and hemodialysis for atenolol/nadolol, both critical actions; the dextrose co-administration beyond one quoted line, glucose monitoring every 15-30 minutes, and potassium repletion during insulin therapy (critical actions in bb-hiet-monitoring); vasopressin and the do-not-use vasopressors (dobutamine, dopamine, phenylephrine); external pacing; VA-ECMO; methylene blue; initial stabilization (ABCs, glucose, ECG, activated charcoal and whole bowel irrigation); the mild-toxicity and extended-release observation advice. Choosing what stays off is a physician judgment. Also off: the consult's 'When to use' third bullet for lipid, lorazepam/avoid-phenytoin seizure lines, potassium repletion as part of 'MUST co-administer', and the calcium infusion after response."
+ },
+ {
+  "kind": "gap",
+  "tileId": "calcium",
+  "drugId": "calcium-gluconate",
+  "nodeIds": [
+   "bb-calcium"
+  ],
+  "text": "The drug store has no calcium entry for beta-blocker or calcium channel blocker toxicity (only hyperkalemia, hypocalcemia and similar), so calcium is a steps tile with the consult's own doses quoted, not a drug tile."
+ },
+ {
+  "kind": "gap",
+  "tileId": "calcium",
+  "drugId": "calcium-chloride",
+  "nodeIds": [
+   "bb-calcium"
+  ],
+  "text": "Same as above for calcium chloride: no store entry for this use. The consult says central line preferred and caustic; the store says calcium chloride is central line only. The calcium infusion after response is in the node but not on the strip."
+ },
+ {
+  "kind": "gap",
+  "tileId": "calcium",
+  "drugId": "calcium-gluconate-gel",
+  "nodeIds": [
+   "bb-calcium"
+  ],
+  "text": "The strip checker matched the calcium gluconate gel entry by name only; the gel is not relevant to this consult."
+ },
+ {
+  "kind": "gap",
+  "tileId": "pressors",
+  "drugId": "norepinephrine",
+  "nodeIds": [
+   "bb-pressors"
+  ],
+  "text": "The drug store norepinephrine entry has no beta-blocker toxicity indication (TCA, sepsis, cardiogenic shock and others), so norepinephrine is a steps tile with the consult's high-dose figures quoted. The epinephrine option is quoted only as a heading; its dose is not on the strip."
+ },
+ {
+  "kind": "gap",
+  "tileId": "bicarb",
+  "drugId": "sodium-bicarbonate",
+  "nodeIds": [
+   "bb-propranolol"
+  ],
+  "text": "The drug store sodium bicarbonate entry is for TCA overdose, not propranolol, so this is a steps tile quoting the consult's own dose. The consult says to use the same protocol as TCA toxicity. The consult's 'avoid phenytoin' seizure line was left off this tile because the checker mistakes 'sodium channel blocker' for sodium drugs; lorazepam for seizures is also not shown."
+ },
+ {
+  "kind": "conflict",
+  "tileId": "glucagon",
+  "drugId": "glucagon",
+  "nodeIds": [
+   "bb-glucagon"
+  ],
+  "text": "The consult gives glucagon as 3-5 mg IV over 1-2 minutes, repeat up to 10 mg total, then infusion 2-10 mg/hr; the drug store says 3-10 mg IV over 1 minute then 3-5 mg/hr infusion. The tile figure and Dosing text come from the drug store, the consult's dose is under 'In this consult'. Not resolved. The store entry has no weight calculator and none is needed (flat dose)."
+ },
+ {
+  "kind": "conflict",
+  "tileId": "hiet",
+  "drugId": "regular-insulin",
+  "nodeIds": [
+   "bb-hiet-dosing"
+  ],
+  "text": "The consult's insulin node links to the drug id insulin-regular, which has no high-dose entry for this use; the entry used on the strip is regular-insulin. The consult titrates the infusion up to 10 units/kg/hr; the store says increase by 1 unit/kg/hr every 20-30 minutes, commonly up to 10 units/kg/hr with toxicology guidance. The consult requires potassium repletion and glucose targets; those are only partly quoted (dextrose line only)."
+ },
+ {
+  "kind": "missing-weightcalc",
+  "tileId": "hiet",
+  "drugId": "regular-insulin",
+  "nodeIds": [
+   "bb-hiet-dosing"
+  ],
+  "text": "No issue found: the three insulin per-kg figures are all in the store's weight calculators, snapshotted in order. Listed for the physician to confirm the unit labels."
+ },
+ {
+  "kind": "conflict",
+  "tileId": "lipid",
+  "drugId": "intralipid-20",
+  "nodeIds": [
+   "bb-lipid-dosing"
+  ],
+  "text": "The consult says infusion 0.25-0.5 mL/kg/min for 30-60 minutes and maximum 10-12 mL/kg over the first hour; the store (same dosing as LAST) says infusion 0.25 mL/kg/min for 10 minutes after stability and a maximum of 12 mL/kg in the first 30 minutes. The consult also links to the drug id lipid-emulsion, whose entries cover only TCA and LAST; the strip uses intralipid-20, which has a cardiotoxic overdose entry. Not resolved."
+ },
+ {
+  "kind": "conflict",
+  "tileId": "atropine",
+  "drugId": "atropine",
+  "nodeIds": [
+   "bb-atropine",
+   "bb-stabilize"
+  ],
+  "text": "The store entry for beta-blocker toxicity gives 0.5-1 mg IV without a repeat limit; the consult adds repeat every 3-5 minutes to a maximum of 3 mg. Both are quoted on the tile."
+ },
+ {
+  "kind": "other",
+  "tileId": "atropine",
+  "nodeIds": [
+   "bb-atropine",
+   "bb-glucagon",
+   "bb-calcium",
+   "bb-hiet-dosing",
+   "bb-pressors",
+   "bb-lipid-dosing",
+   "bb-propranolol"
+  ],
+  "text": "Tile order follows the consult's flow: atropine, glucagon, calcium, insulin, vasopressors, lipid, then agent-specific bicarbonate (propranolol), which is the consult's rescue module. The critical-actions list puts atropine nowhere and bicarbonate near the end, so the order differs only by adding atropine first. The consult does not fork into different resuscitation paths, so there is one variant. Calcium is advised simultaneously with glucagon in the consult but appears as the next tile. The consult's severity question (mild, moderate, severe) is not a fork."
+ },
+ {
+  "kind": "node-silent",
+  "tileId": "hiet",
+  "nodeIds": [
+   "bb-hiet-dosing",
+   "bb-pacing"
+  ],
+  "text": "The condition on the insulin tile ('hypotensive despite glucagon/calcium') is the consult's pacing-question option label, which cannot be quoted as a line; it is authored wording for the physician to confirm."
+ },
+ {
+  "kind": "gap",
+  "tileId": "bicarb",
+  "drugId": "hypertonic-saline",
+  "nodeIds": [
+   "bb-propranolol"
+  ],
+  "text": "The strip checker matched the store entry hypertonic-saline to the word 'Sodium' in the quoted line 'Sodium Bicarbonate 1-2 mEq/kg IV push'; this is a name-matching artefact, not a drug the consult uses here. Reported only so the strip checker can pass without altering the quoted line."
+ },
+ {
+  "kind": "gap",
+  "tileId": "bicarb",
+  "drugId": "sodium-zirconium-cyclosilicate",
+  "nodeIds": [
+   "bb-propranolol"
+  ],
+  "text": "The strip checker matched the store entry sodium-zirconium-cyclosilicate to the word 'Sodium' in the quoted line 'Sodium Bicarbonate 1-2 mEq/kg IV push'; this is a name-matching artefact, not a drug the consult uses here. Reported only so the strip checker can pass without altering the quoted line."
+ },
+ {
+  "kind": "gap",
+  "tileId": "bicarb",
+  "drugId": "nacl-tablets",
+  "nodeIds": [
+   "bb-propranolol"
+  ],
+  "text": "The strip checker matched the store entry nacl-tablets to the word 'Sodium' in the quoted line 'Sodium Bicarbonate 1-2 mEq/kg IV push'; this is a name-matching artefact, not a drug the consult uses here. Reported only so the strip checker can pass without altering the quoted line."
+ },
+ {
+  "kind": "gap",
+  "tileId": "bicarb",
+  "drugId": "sodium-phosphate",
+  "nodeIds": [
+   "bb-propranolol"
+  ],
+  "text": "The strip checker matched the store entry sodium-phosphate to the word 'Sodium' in the quoted line 'Sodium Bicarbonate 1-2 mEq/kg IV push'; this is a name-matching artefact, not a drug the consult uses here. Reported only so the strip checker can pass without altering the quoted line."
+ },
+ {
+  "kind": "gap",
+  "tileId": "bicarb",
+  "drugId": "nitroprusside",
+  "nodeIds": [
+   "bb-propranolol"
+  ],
+  "text": "The strip checker matched the store entry nitroprusside to the word 'Sodium' in the quoted line 'Sodium Bicarbonate 1-2 mEq/kg IV push'; this is a name-matching artefact, not a drug the consult uses here. Reported only so the strip checker can pass without altering the quoted line."
+ },
+ {
+  "kind": "gap",
+  "tileId": "bicarb",
+  "drugId": "sodium-polystyrene-sulfonate",
+  "nodeIds": [
+   "bb-propranolol"
+  ],
+  "text": "The strip checker matched the store entry sodium-polystyrene-sulfonate to the word 'Sodium' in the quoted line 'Sodium Bicarbonate 1-2 mEq/kg IV push'; this is a name-matching artefact, not a drug the consult uses here. Reported only so the strip checker can pass without altering the quoted line."
+ }
+]

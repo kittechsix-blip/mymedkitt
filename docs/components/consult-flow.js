@@ -8,6 +8,8 @@ import { handleInlineLinkClick } from './text-renderer.js';
 import { renderContextualToolbar, removeContextualToolbar } from './contextual-toolbar.js';
 import { getSpecialtyGradient } from './button-3d.js';
 import { createCriticalActionsButton } from './critical-actions.js';
+import { createRapidKey, openRapidCard } from './rapid-card.js';
+import { rapidLive } from '../services/rapid-service.js';
 import { router } from '../services/router.js';
 import { getAllCategories } from '../services/category-service.js';
 import { addRecentConsult } from './dashboard.js';
@@ -158,6 +160,9 @@ export async function renderConsultFlow(container, treeId, options) {
         renderFlow(delegatedContainer);
     });
     renderFlow(container);
+    // #/tree/<id>/rapid: the consult loads exactly as /tree/<id> does, then the card opens on top.
+    if (options?.openRapid && rapidLive(treeId, config))
+        openRapid(container);
     // Scroll deep-linked card into view below the sticky header
     if (jumpValid) {
         requestAnimationFrame(() => {
@@ -364,8 +369,11 @@ function renderConsultSearch(container) {
         }
     });
     wrapper.appendChild(toggleBtn);
-    // Critical Actions button — red 3D glass, next to search
-    if (currentConfig?.criticalActions && currentConfig.criticalActions.length > 0 && controller) {
+    // RAPID key takes the Critical button's slot for approved strips; every other consult keeps Critical.
+    if (currentTreeId && currentConfig && controller && rapidLive(currentTreeId, currentConfig)) {
+        wrapper.appendChild(createRapidKey(rapidOpts(container)));
+    }
+    else if (currentConfig?.criticalActions && currentConfig.criticalActions.length > 0 && controller) {
         const consultTitle = getConsultTitle(currentTreeId ?? '') ?? '';
         const criticalBtn = createCriticalActionsButton({
             actions: currentConfig.criticalActions,
@@ -387,6 +395,30 @@ function renderConsultSearch(container) {
     wrapper.appendChild(input);
     wrapper.appendChild(results);
     container.appendChild(wrapper);
+}
+function rapidOpts(container) {
+    return {
+        treeId: currentTreeId ?? '',
+        consultTitle: getConsultTitle(currentTreeId ?? '') ?? '',
+        config: currentConfig,
+        disclaimer: CONSULT_DISCLAIMER,
+        onJumpToNode: (nodeId) => {
+            if (!controller)
+                return;
+            controller.jumpToNode(nodeId);
+            renderFlow(container);
+            requestAnimationFrame(() => {
+                const active = container.querySelector('.decision-card--active');
+                if (active)
+                    scrollCardBelowHeader(active);
+            });
+        },
+    };
+}
+function openRapid(container) {
+    if (!currentTreeId || !currentConfig)
+        return;
+    openRapidCard(rapidOpts(container));
 }
 /** Search all nodes in the current tree for a query */
 function searchNodes(query) {
