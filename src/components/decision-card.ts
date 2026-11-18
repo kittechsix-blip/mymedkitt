@@ -3,6 +3,7 @@
 // Active cards show full content + 3D buttons. Answered cards show compact summary.
 
 import { renderBodyText } from './text-renderer.js';
+import { isDoseCalcOptedOut } from '../data/dose-calc-optout.js';
 import { renderInlineCitations } from './reference-table.js';
 import { create3DButton } from './button-3d.js';
 import { findDrugIdByName } from '../data/drug-store.js';
@@ -135,7 +136,7 @@ function renderAnsweredCard(card: HTMLElement, node: DecisionNode, opts: CardOpt
   if (node.body) {
     const body = document.createElement('div');
     body.className = 'decision-card__body';
-    renderBodyText(body, node.body);
+    renderBodyText(body, node.body, { noDoseCalc: isDoseCalcOptedOut(node.id) });
     expandedContent.appendChild(body);
   }
 
@@ -282,7 +283,7 @@ function renderActiveInput(card: HTMLElement, node: DecisionNode, opts: CardOpti
   if (node.body) {
     const body = document.createElement('div');
     body.className = 'decision-card__body';
-    renderBodyText(body, node.body);
+    renderBodyText(body, node.body, { noDoseCalc: isDoseCalcOptedOut(node.id) });
     card.appendChild(body);
   }
 
@@ -416,7 +417,7 @@ function renderActiveResult(card: HTMLElement, node: DecisionNode, opts: CardOpt
   if (node.body) {
     const body = document.createElement('div');
     body.className = 'decision-card__body';
-    renderBodyText(body, node.body);
+    renderBodyText(body, node.body, { noDoseCalc: isDoseCalcOptedOut(node.id) });
     card.appendChild(body);
   }
 
@@ -424,7 +425,7 @@ function renderActiveResult(card: HTMLElement, node: DecisionNode, opts: CardOpt
   if (node.recommendation) {
     const rec = document.createElement('div');
     rec.className = 'result-recommendation';
-    renderBodyText(rec, node.recommendation);
+    renderBodyText(rec, node.recommendation, { noDoseCalc: isDoseCalcOptedOut(node.id) });
     card.appendChild(rec);
   }
 
@@ -510,7 +511,7 @@ function renderBodyWithAccordion(container: HTMLElement, node: DecisionNode): vo
 
       const content = document.createElement('div');
       content.className = 'card-accordion__content';
-      renderBodyText(content, node.body);
+      renderBodyText(content, node.body, { noDoseCalc: isDoseCalcOptedOut(node.id) });
 
       // Pearls callout inside accordion
       if (node.pearls) {
@@ -528,7 +529,7 @@ function renderBodyWithAccordion(container: HTMLElement, node: DecisionNode): vo
     if (node.body) {
       const body = document.createElement('div');
       body.className = 'decision-card__body';
-      renderBodyText(body, node.body);
+      renderBodyText(body, node.body, { noDoseCalc: isDoseCalcOptedOut(node.id) });
       container.appendChild(body);
     }
   }

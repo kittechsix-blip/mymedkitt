@@ -171,6 +171,15 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'reperfusion', label: 'Reperfusion', icon: '⚠️', action: 'jump', target: 'il-reperfusion' },
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'il-stop' },
   ],
+  'onc-drug-side-effects': [
+    { id: 'chemo', label: 'Chemo Ref', icon: '💊', action: 'overlay', target: 'chemo-regimens' },
+    { id: 'ici-algo', label: 'ICI Tox', icon: '🛡️', action: 'overlay', target: 'ici-toxicity-algorithm' },
+    { id: 'crs-icans-protocol', label: 'CRS/ICANS', icon: '🧬', action: 'overlay', target: 'crs-icans-protocol' },
+    { id: 'mascc', label: 'MASCC', icon: '🌡️', action: 'calculator', target: 'mascc-score' },
+    // Both Stop pages are listed explicitly. The ids contain '-stop' so getToolbarConfig does not also auto-add a third, unlabeled 'Stop'.
+    { id: 'onc-stop-immuno', label: 'Stop: immuno', icon: '🛑', action: 'overlay', target: 'onc-drug-side-effects-stop' },
+    { id: 'onc-stop-chemo', label: 'Stop: chemo', icon: '🛑', action: 'overlay', target: 'onc-drug-side-effects-stop-cytotoxic' },
+  ],
   'oncological-emergencies': [
     { id: 'summary', label: 'Onc Steps', icon: '📋', action: 'overlay', target: 'onc-emergency-summary' },
     { id: 'chemo', label: 'Chemo Ref', icon: '💊', action: 'overlay', target: 'chemo-regimens' },

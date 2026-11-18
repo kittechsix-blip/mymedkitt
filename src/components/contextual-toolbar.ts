@@ -48,6 +48,7 @@ export function renderContextualToolbar(
   const toolbar = document.createElement('div');
   toolbar.className = 'contextual-toolbar';
   toolbar.setAttribute('translate', 'no'); // Prevent browser auto-translation
+  toolbar.setAttribute('data-consult', consultId); // lets a consult with many buttons opt into a compact layout in CSS
 
   const config = getToolbarConfig(consultId);
 

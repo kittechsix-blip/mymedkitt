@@ -1415,6 +1415,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/diabetic-foot-wounds.js');
             return { nodes: m.DIABETIC_FOOT_WOUNDS_NODES, entryNodeId: 'dfw-start', categoryId: 'trauma-surg', moduleLabels: m.DIABETIC_FOOT_WOUNDS_MODULE_LABELS, citations: m.DIABETIC_FOOT_WOUNDS_CITATIONS, criticalActions: m.DIABETIC_FOOT_WOUNDS_CRITICAL_ACTIONS };
         },
+        'onc-drug-side-effects': async () => {
+            const m = await import('../data/trees/onc-drug-side-effects.js');
+            return { nodes: m.ONC_DRUG_SIDE_EFFECTS_NODES, entryNodeId: 'odse-start', categoryId: 'heme-onc', moduleLabels: m.ONC_DRUG_SIDE_EFFECTS_MODULE_LABELS, citations: m.ONC_DRUG_SIDE_EFFECTS_CITATIONS, criticalActions: m.ONC_DRUG_SIDE_EFFECTS_CRITICAL_ACTIONS };
+        },
         'oncological-emergencies': async () => {
             const m = await import('../data/trees/oncological-emergencies.js');
             return { nodes: m.ONCOLOGICAL_EMERGENCIES_NODES, entryNodeId: 'onc-start', categoryId: 'heme-onc', moduleLabels: m.ONCOLOGICAL_EMERGENCIES_MODULE_LABELS, citations: m.ONCOLOGICAL_EMERGENCIES_CITATIONS, criticalActions: m.ONCOLOGICAL_EMERGENCIES_CRITICAL_ACTIONS };

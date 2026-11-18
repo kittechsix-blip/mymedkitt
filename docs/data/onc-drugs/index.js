@@ -1,0 +1,296 @@
+// myMedKitt — Oncology Drugs Side-effects: aggregate data + pure helpers (no DOM, no I/O).
+import { ONC_SOURCES } from './sources.js';
+import { ONC_CANCERS } from './cancers.js';
+import { ONC_COMPLAINTS } from './complaints.js';
+import { ONC_TOXICITIES } from './toxicities.js';
+import { ONC_CLASSES } from './classes.js';
+import { ONC_REGIMENS } from './regimens.js';
+import { ONC_GROUPS } from './drugs/index.js';
+export * from './types.js';
+export * from './cancer-types.js';
+export { ONC_SOURCES, ONC_CANCERS, ONC_COMPLAINTS, ONC_TOXICITIES, ONC_CLASSES, ONC_REGIMENS, ONC_GROUPS };
+export const ONC_TREE_ID = 'onc-drug-side-effects';
+/**
+ * Merge the shared files with every group file. First declaration wins; every clash is reported with both file names.
+ * An identical cancer id + name declared in two files is merged silently; the same id with a different name is a clash.
+ * Pure, so the gate can run it on synthetic groups.
+ */
+export function mergeOncData(shared, groups) {
+    const errors = [];
+    const sources = {};
+    const sourceFile = new Map();
+    const cancers = [];
+    const cancerFile = new Map();
+    const classes = [];
+    const classFile = new Map();
+    const regimens = [];
+    const regimenFile = new Map();
+    const drugs = [];
+    const drugFile = new Map();
+    const addSources = (file, src) => {
+        for (const [k, v] of Object.entries(src ?? {})) {
+            if (sourceFile.has(k)) {
+                errors.push(`DUPLICATE-SOURCE: source key "${k}" is declared in both ${sourceFile.get(k)} and ${file}`);
+                continue;
+            }
+            sourceFile.set(k, file);
+            sources[k] = v;
+        }
+    };
+    const addCancers = (file, list) => {
+        for (const c of list ?? []) {
+            const prev = cancerFile.get(c.id);
+            if (prev) {
+                if (prev.name !== c.name)
+                    errors.push(`DUPLICATE-CANCER: cancer id "${c.id}" is "${prev.name}" in ${prev.file} but "${c.name}" in ${file}`);
+                // identical id + name: merged silently, and the aliases from every file are kept
+                const kept = cancers.find((x) => x.id === c.id);
+                if (kept.type && c.type && kept.type !== c.type)
+                    errors.push(`DUPLICATE-CANCER: cancer id "${c.id}" has type "${kept.type}" in ${prev.file} but "${c.type}" in ${file}`);
+                if (!kept.type && c.type)
+                    kept.type = c.type;
+                const extra = (c.aliases ?? []).filter((a) => !(kept.aliases ?? []).includes(a));
+                if (extra.length)
+                    kept.aliases = [...(kept.aliases ?? []), ...extra];
+                continue;
+            }
+            cancerFile.set(c.id, { file, name: c.name });
+            cancers.push({ ...c, ...(c.aliases ? { aliases: [...c.aliases] } : {}) }); // copy: the source file's own object is never mutated
+        }
+    };
+    const addUnique = (kind, file, list, out, seen) => {
+        for (const x of list ?? []) {
+            if (seen.has(x.id)) {
+                errors.push(`DUPLICATE-${kind.toUpperCase()}: ${kind} id "${x.id}" is declared in both ${seen.get(x.id)} and ${file}`);
+                continue;
+            }
+            seen.set(x.id, file);
+            out.push(x);
+        }
+    };
+    addSources('sources.ts', shared.sources);
+    addCancers('cancers.ts', shared.cancers);
+    addUnique('class', 'classes.ts', shared.classes, classes, classFile);
+    addUnique('regimen', 'regimens.ts', shared.regimens, regimens, regimenFile);
+    addUnique('drug', 'drugs/index.ts', shared.drugs, drugs, drugFile);
+    for (const [file, g] of Object.entries(groups)) {
+        const f = `drugs/${file}`;
+        addSources(f, g.SOURCES);
+        addCancers(f, g.CANCERS);
+        addUnique('class', f, g.CLASSES, classes, classFile);
+        addUnique('regimen', f, g.REGIMENS, regimens, regimenFile);
+        addUnique('drug', f, g.DRUGS, drugs, drugFile);
+    }
+    return { merged: { sources, cancers, classes, regimens, drugs }, errors };
+}
+const MERGE = mergeOncData({ sources: ONC_SOURCES, cancers: ONC_CANCERS, classes: ONC_CLASSES, regimens: ONC_REGIMENS }, ONC_GROUPS);
+/** Clashes between files; the gate requires this to be empty. */
+export const ONC_MERGE_ERRORS = MERGE.errors;
+export const ONC_DRUGS = MERGE.merged.drugs;
+export const ONC_DATA = {
+    sources: MERGE.merged.sources,
+    cancers: MERGE.merged.cancers,
+    complaints: ONC_COMPLAINTS,
+    toxicities: ONC_TOXICITIES,
+    classes: MERGE.merged.classes,
+    regimens: MERGE.merged.regimens,
+    drugs: MERGE.merged.drugs,
+};
+export const VIRTUAL_PREFIX = 'odse-';
+const KINDS = ['drug', 'reg', 'class', 'cancer', 'ctype', 'cx'];
+export function virtualNodeId(kind, slug) {
+    return `${VIRTUAL_PREFIX}${kind}-${slug}`;
+}
+/** Cheap check used by the router before loading the component. */
+export function isVirtualNodeId(nodeId) {
+    return KINDS.some((k) => nodeId.startsWith(`${VIRTUAL_PREFIX}${k}-`));
+}
+export function parseVirtualNodeId(nodeId) {
+    for (const k of KINDS) {
+        const p = `${VIRTUAL_PREFIX}${k}-`;
+        if (nodeId.startsWith(p) && nodeId.length > p.length)
+            return { kind: k, slug: nodeId.slice(p.length) };
+    }
+    return null;
+}
+export const cardNodeId = (drug) => virtualNodeId('drug', drug.id);
+/**
+ * Class effects (for every class the drug belongs to) with the drug's overrides merged by tox id.
+ * Order: an explicit `rank` (drug override, else class) is a promotion and sorts first, lowest rank first;
+ * everything else follows lethality ascending (1 = most lethal), then declaration order (class order, then the
+ * order effects are listed in the class), which is stable. A drop removes the effect.
+ */
+export function resolveEffects(drug, data = ONC_DATA) {
+    const toxById = new Map(data.toxicities.map((t) => [t.id, t]));
+    const merged = new Map();
+    for (const cid of drug.classIds) {
+        const cls = data.classes.find((c) => c.id === cid);
+        if (!cls)
+            continue;
+        for (const e of cls.effects) {
+            const tox = toxById.get(e.tox);
+            if (!tox || merged.has(e.tox))
+                continue;
+            merged.set(e.tox, { base: e, tox });
+        }
+    }
+    const out = [];
+    const overrides = new Map((drug.effects ?? []).map((o) => [o.tox, o]));
+    for (const [id, { base, tox }] of merged) {
+        const o = overrides.get(id);
+        if (o?.drop)
+            continue;
+        out.push({
+            tox,
+            timing: o?.timing ?? base.timing,
+            cite: o?.cite ?? base.cite ?? [],
+            basis: o?.basis ?? base.basis,
+            boxed: o?.boxed ?? base.boxed,
+            rank: o?.rank ?? base.rank,
+            note: base.note,
+            quirk: o?.quirk,
+            ask: o?.ask ?? tox.ask,
+        });
+    }
+    // drug-only effects (override on a tox no class lists)
+    for (const o of drug.effects ?? []) {
+        if (o.drop || merged.has(o.tox) || (!o.timing && !o.cite?.length))
+            continue;
+        const tox = toxById.get(o.tox);
+        if (!tox)
+            continue;
+        out.push({ tox, timing: o.timing, cite: o.cite ?? [], basis: o.basis, boxed: o.boxed, rank: o.rank, quirk: o.quirk, ask: o.ask ?? tox.ask });
+    }
+    const order = new Map(out.map((e, i) => [e, i]));
+    return out.sort((a, b) => {
+        const ra = a.rank ?? Infinity;
+        const rb = b.rank ?? Infinity;
+        if (ra !== rb)
+            return ra < rb ? -1 : 1;
+        return a.tox.lethality - b.tox.lethality || order.get(a) - order.get(b);
+    });
+}
+// ---- display helpers ----
+/**
+ * Short badge for a timing string, derived mechanically: the text before the first top-level comma (not inside parentheses,
+ * not the thousands comma in a number such as 1,000 mg/m2), only when it contains a digit and is at most 48 characters.
+ * Anything else is returned whole. The full string always appears, with its citations, in the expanded row.
+ */
+export function shortTiming(v) {
+    let depth = 0;
+    for (let i = 0; i < v.length; i++) {
+        const ch = v[i];
+        if (ch === '(')
+            depth++;
+        else if (ch === ')')
+            depth = Math.max(0, depth - 1);
+        else if (ch === ',' && depth === 0 && !(/\d/.test(v[i - 1] ?? '') && /\d/.test(v[i + 1] ?? ''))) {
+            const head = v.slice(0, i).trim();
+            return /\d/.test(head) && head.length <= 48 ? head : v;
+        }
+    }
+    return v;
+}
+/** Boxed-warning items of a drug, always as a list. */
+export function boxedItems(drug) {
+    const b = drug.boxedWarning;
+    return !b ? [] : Array.isArray(b) ? b : [b];
+}
+// ---- names and pinning ----
+/** Lowercase, letters and digits only: "R-CHOP", "r chop" and "Rchop" are one name. */
+export function normName(s) {
+    return s.toLowerCase().replace(/[^a-z0-9]+/g, '');
+}
+export const MIN_PIN_LENGTH = 4;
+/**
+ * Formulation-suffix rule (mechanical, not hand-entered): FDA lists some brands with a trailing formulation or kit token
+ * ("Adriamycin PFS", "Jevtana Kit", "Etopophos Preservative Free", "Cytosar-U", "Mexate-AQ Preserved"). The name with those
+ * trailing tokens removed is also a searchable and pinnable name for the same card. Tokens: PFS, PF, KIT, AQ, PRESERVED,
+ * PRESERVATIVE FREE (space separated) and a hyphen plus U or AQ, repeated, at the END of the name only, case-insensitive.
+ * Returns null when nothing is stripped or nothing would remain.
+ */
+export function derivedBrandName(name) {
+    const out = name.replace(/(?:\s+(?:PFS|PF|KIT|AQ|PRESERVED|PRESERVATIVE\s+FREE)|-(?:AQ|U))+$/i, '').trim();
+    return out && out.toLowerCase() !== name.trim().toLowerCase() ? out : null;
+}
+/** Every name that should resolve to the card: generic, current and former brands, aliases, and suffix-stripped brand names. */
+export function searchNames(drug) {
+    const base = [drug.generic, ...drug.brands, ...(drug.formerBrands ?? []), ...(drug.searchOnlyBrands ?? []), ...(drug.aliases ?? []), ...(drug.editorAliases ?? [])];
+    const seen = new Set(base.map(normName));
+    const derived = [];
+    for (const b of [...drug.brands, ...(drug.formerBrands ?? []), ...(drug.searchOnlyBrands ?? [])]) {
+        const d = derivedBrandName(b);
+        if (d && !seen.has(normName(d))) {
+            seen.add(normName(d));
+            derived.push(d);
+        }
+    }
+    return [...base, ...derived];
+}
+export function regimenNames(r) {
+    return [r.acronym, ...(r.aliases ?? [])];
+}
+/** Shortest normalized name that can pin: 4, or 3 for an editor alias that contains a digit (5FU, 6MP, 6TG). */
+export const MIN_PIN_LENGTH_DIGIT_ALIAS = 3;
+/**
+ * Names that are pinned to rank 1: pin !== false, normalized length >= 4 (3 for an editor alias with a digit).
+ * `pinAlso` (drug only) pins the listed names even when the drug itself is pin:false; each must still be a searchable name and clear the length rule.
+ */
+export function pinNames(item) {
+    const isDrug = 'generic' in item;
+    const also = isDrug ? new Set((item.pinAlso ?? []).map(normName)) : new Set();
+    if (item.pin === false && !also.size)
+        return [];
+    const skip = new Set(((isDrug ? item.unpinnedNames : undefined) ?? []).map(normName));
+    const digitAliases = new Set(isDrug ? (item.editorAliases ?? []).filter((a) => /\d/.test(a)).map(normName) : []);
+    const names = isDrug ? searchNames(item) : regimenNames(item);
+    return names.filter((n) => {
+        const k = normName(n);
+        if (skip.has(k))
+            return false;
+        if (item.pin === false && !also.has(k))
+            return false;
+        return k.length >= MIN_PIN_LENGTH || (digitAliases.has(k) && k.length >= MIN_PIN_LENGTH_DIGIT_ALIAS);
+    });
+}
+/** Current brands for display: a brand that is another brand plus a formulation suffix ("Jevtana Kit" beside "Jevtana") is not listed twice. */
+export function displayBrands(drug) {
+    return drug.brands.filter((b) => { const dn = derivedBrandName(b); return !(dn && drug.brands.some((o) => normName(o) === normName(dn))); });
+}
+/** Display title of a drug card search result, e.g. "Generic (Brand, Brand)". */
+export function cardTitle(drug) {
+    // at most three brands in a title: the rest stay searchable but would make a list row unreadable
+    const b = displayBrands(drug);
+    return b.length ? `${drug.generic} (${b.slice(0, 3).join(', ')}${b.length > 3 ? ', ...' : ''})` : drug.generic;
+}
+const squash = (s) => s.replace(/\s+/g, ' ').trim();
+/**
+ * One identity-only document per card: title, class, brands and cancers ONLY. Never side-effect text, so symptom
+ * queries ("fever after chemo") are not disturbed. `onc` feeds src/services/onc-search-pin.ts.
+ */
+export function oncSearchDocs(data = ONC_DATA) {
+    const cancerName = new Map(data.cancers.map((c) => [c.id, c.name]));
+    const className = new Map(data.classes.map((c) => [c.id, c.name]));
+    const nodes = [];
+    const onc = [];
+    const seen = new Set();
+    const add = (kind, slug, title, sub, parts, pin, all) => {
+        const id = virtualNodeId(kind, slug);
+        if (seen.has(id))
+            throw new Error(`duplicate onc card id ${id}`);
+        seen.add(id);
+        nodes.push({ id, treeId: ONC_TREE_ID, title: squash(title), summary: '', body: squash(parts.filter(Boolean).join('. ')).slice(0, 600), recommendation: '', ml: squash(sub) });
+        onc.push({ route: `/tree/${ONC_TREE_ID}/node/${id}`, title: squash(title), sub: squash(sub), pin, all });
+    };
+    for (const d of data.drugs) {
+        const cls = d.classIds.map((c) => className.get(c)).filter(Boolean).join(', ');
+        const cancers = d.cancers.map((c) => cancerName.get(c)).filter(Boolean).join(', ');
+        add('drug', d.id, cardTitle(d), cls, [[...d.brands, ...(d.formerBrands ?? []), ...(d.searchOnlyBrands ?? [])].join(', '), cls, cancers], pinNames(d), searchNames(d));
+    }
+    for (const r of data.regimens) {
+        const cancers = r.cancers.map((c) => cancerName.get(c)).filter(Boolean).join(', ');
+        const comps = r.drugs.map((id) => data.drugs.find((d) => d.id === id)?.generic ?? r.uncarded?.find((u) => u.id === id)?.name).filter(Boolean).join(', ');
+        add('reg', r.id, `${r.acronym} (${r.expansion})`, 'Regimen', [comps, cancers], pinNames(r), regimenNames(r));
+    }
+    return { nodes, onc };
+}

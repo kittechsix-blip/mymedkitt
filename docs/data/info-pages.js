@@ -30249,6 +30249,117 @@ const PHLEGMASIA_PHOTOS = {
         }
     ]
 };
+// =====================================================================
+// Oncology Drugs Side-effects - Do NOT (checkpoint-inhibitor serious adverse effects)
+// Every item is from the research file (ASCO / ESMO text / SITC / labels) and links to the page that explains it.
+// =====================================================================
+const ONC_DSE_STOP_PAGE = {
+    id: 'onc-drug-side-effects-stop',
+    title: 'Oncology Drugs Side-effects — Do NOT',
+    subtitle: 'Checkpoint-inhibitor pitfalls',
+    sections: [
+        {
+            heading: '🛑 Do NOT withhold steroids in checkpoint-inhibitor SJS/TEN',
+            body: 'ASCO says the usual prohibition of corticosteroids in SJS does not apply to checkpoint-inhibitor skin reactions, because the mechanism is T-cell immune-directed (stated in ASCO\'s grade 3 row). Stop the inhibitor, involve dermatology early and consider a burn unit. [1] [Severe skin reactions](#/node/odse-tox-severe-skin).',
+        },
+        {
+            heading: '🛑 Do NOT give drugs that can worsen myasthenia without reviewing them',
+            body: 'ASCO lists beta-blockers, IV magnesium, fluoroquinolones, aminoglycosides and macrolide antibiotics as drugs to review and stop. ESMO and SITC give no such list. [1] [Myasthenia gravis](#/node/odse-neuro-mg).',
+        },
+        {
+            heading: '🛑 Do NOT start the usual 1 mg/kg steroid dose in suspected myasthenia without neurology input',
+            body: 'ASCO gives prednisone 0.5 mg/kg daily in myasthenia instead of the usual 1 mg/kg, because high-dose steroid can transiently worsen myasthenia (ASCO Table 7 footnote); SITC gives prednisone 1-1.5 mg/kg daily for grade 2 and a neurology consult at any grade. The guidelines differ, so decide with neurology. [1][3] [Myasthenia gravis](#/node/odse-neuro-mg).',
+        },
+        {
+            heading: '🛑 Do NOT start plasmapheresis straight after IVIG',
+            body: 'ASCO notes that plasmapheresis immediately after IVIG will remove the immunoglobulin. [1] [Myasthenia gravis](#/node/odse-neuro-mg), [Guillain-Barre](#/node/odse-neuro-gbs).',
+        },
+        {
+            heading: '🛑 Do NOT stop at one diagnosis: test for myositis, myocarditis and myasthenia together',
+            body: 'Weakness, myalgia or a raised troponin means testing for myositis, myocarditis and myasthenia together: SITC says suspicion of one or more should prompt evaluation for all three, and ASCO calls myositis with myocarditis or myasthenia an "ominous prognosis". [1][3] [Myositis and overlap](#/node/odse-tox-myositis-overlap).',
+        },
+        {
+            heading: '🛑 Do NOT apply the idiopathic-GBS \'no steroids\' rule to checkpoint-inhibitor Guillain-Barre',
+            body: 'ASCO says steroids are usually not recommended for idiopathic GBS but a trial is reasonable in the ICI-related form; the ESMO text recommends steroids first-line in ICI-related GBS; SITC gives IVIG or plasma exchange with corticosteroids. IVIG or plasmapheresis remains core treatment per ASCO and SITC. [1][2][3] [Guillain-Barre](#/node/odse-neuro-gbs).',
+        },
+        {
+            heading: '🛑 Do NOT stop antimicrobial cover for suspected encephalitis or meningitis before infection is excluded',
+            body: 'ASCO: IV acyclovir until PCR results are obtained and negative in encephalitis, and empiric IV acyclovir plus antibacterial therapy until CSF results in aseptic meningitis, in its management list that covers all grades (only admission or hospitalization is tied to grade 3-4). SITC: empirical antiviral treatment until viral encephalitis is ruled out and antibiotics until bacterial meningitis is ruled out. [1][3] Clinical note (myMedKitt editor, not from the irAE guidelines): in suspected encephalitis, empiric antibacterial meningitis cover is given alongside IV acyclovir until CSF results are back; regimen in the [bacterial meningitis consult](#/tree/meningitis). [Encephalitis](#/node/odse-neuro-enceph), [Aseptic meningitis](#/node/odse-neuro-mening).',
+        },
+        {
+            heading: '🛑 Do NOT wait on respiratory or bulbar weakness',
+            body: 'ASCO grades any dysphagia, facial weakness, respiratory-muscle weakness or rapidly progressive weakness as grade 3-4; separately, ASCO says grade 2 myasthenia patients can deteriorate quickly and to strongly consider inpatient care. Check NIF and VC. [1] [Neurologic recognition](#/node/odse-tox-neuro).',
+        },
+        {
+            heading: '🛑 Do NOT restart the infusion after a grade 3 reaction without checking the guideline and the drug label',
+            body: 'ASCO holds and may resume at 50% rate once back to grade 1 or less; SITC restarts only for grade 2 or lower; the Keytruda label says to stop and permanently discontinue for grade 3 or 4. [1][3][4] [Infusion reactions](#/node/odse-tox-infusion-reaction).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Schneider BJ, et al. Management of immune-related adverse events in patients treated with immune checkpoint inhibitor therapy: ASCO guideline update. J Clin Oncol. 2021;39(36):4073-4126. doi:10.1200/JCO.21.01440' },
+        { num: 2, text: 'Haanen J, et al. Management of toxicities from immunotherapy: ESMO Clinical Practice Guideline. Ann Oncol. 2022;33(12):1217-1238. doi:10.1016/j.annonc.2022.10.001' },
+        { num: 3, text: 'Brahmer JR, et al. Society for Immunotherapy of Cancer (SITC) clinical practice guideline on immune checkpoint inhibitor-related adverse events. J Immunother Cancer. 2021;9:e002435. doi:10.1136/jitc-2021-002435' },
+        { num: 4, text: 'KEYTRUDA (pembrolizumab), intravenous. FDA prescribing information, DailyMed set ID 9333c79b-d487-4538-a9f0-71b91a02b287, SPL effective 2026-10-16.' },
+    ],
+};
+// =====================================================================
+// Oncology Drugs Side-effects - Do NOT (cytotoxic chemotherapy)
+// Second Stop page for the cytotoxic-chemotherapy management pages. Each item is from the page authors' fragments and links to the page that explains it.
+// =====================================================================
+const ONC_DSE_STOP_CYTOTOXIC_PAGE = {
+    id: 'onc-drug-side-effects-stop-cytotoxic',
+    title: 'Oncology Drugs Side-effects — Do NOT (chemotherapy)',
+    subtitle: 'Cytotoxic chemotherapy pitfalls',
+    sections: [
+        {
+            heading: '🛑 Do NOT give leucovorin into the spinal fluid',
+            body: 'The label warns it may be harmful or fatal if given intrathecally. [11] [Methotrexate: delayed clearance and kidney injury after high-dose therapy](#/node/odse-tox-methotrexate).',
+        },
+        {
+            heading: '🛑 Do NOT give leucovorin within 2 h of glucarpidase',
+            body: 'Keep leucovorin rescue going; time each dose at least 2 h before or after glucarpidase, because glucarpidase cleaves leucovorin as well. [13][14] [Glucarpidase for delayed methotrexate clearance](#/node/odse-mtx-glucarpidase).',
+        },
+        {
+            heading: '🛑 Do NOT use uridine triacetate for non-emergent fluoropyrimidine toxicity',
+            body: 'It may diminish drug efficacy. For overdose or early severe toxicity give it as soon as possible, no later than 96 h after the end of administration. [9] [Fluoropyrimidine early severe toxicity, DPD deficiency and overdose](#/node/odse-tox-fluoropyrimidine).',
+        },
+        {
+            heading: '🛑 Do NOT combine DMSO with dexrazoxane for anthracycline extravasation',
+            body: 'ONS/ASCO says never combine; eviQ says it may decrease efficacy. [23][25] [Anthracycline and DNA-binding vesicant extravasation](#/node/odse-extrav-anthracycline).',
+        },
+        {
+            heading: '🛑 Do NOT run loperamide past 48 consecutive hours at the irinotecan-label doses',
+            body: 'Camptosar label: not recommended beyond 48 consecutive hours at these doses because of the risk of paralytic ileus. [38] [Chemotherapy diarrhea: loperamide and octreotide by source](#/node/odse-diarrhea-regimens).',
+        },
+        {
+            heading: '🛑 Do NOT give oxaliplatin again after a hypersensitivity reaction',
+            body: 'Oxaliplatin label (boxed): immediately and permanently discontinue for hypersensitivity reactions. [41] For milder reactions eviQ (any drug, grade 1-2 without anaphylaxis) says to consider rechallenge at a reduced rate with extra premedication if appropriate, and CEPO allows premedication to continue oxaliplatin after a grade 1-2 reaction. [39][40] [Chemotherapy hypersensitivity and infusion reactions](#/node/odse-tox-chemo-hypersensitivity).',
+        },
+        {
+            heading: '🛑 Do NOT rely on lumbar CSF removal and flushing alone after an intrathecal vinca dose',
+            body: 'Vincristine label: removal and flushing has not prevented ascending paralysis and death; vinblastine label requires immediate neurosurgical intervention. [52][53] [Vinca alkaloid given intrathecally (wrong route)](#/node/odse-vinca-intrathecal).',
+        },
+        {
+            heading: '🛑 Do NOT continue nelarabine after a grade 2 or worse neurologic reaction',
+            body: 'Nelarabine label (boxed): discontinue for CTCAE grade 2 or greater neurologic reactions. [54] [Cytarabine, nelarabine, fludarabine and other CNS toxicity](#/node/odse-tox-chemo-cns).',
+        },
+    ],
+    citations: [
+        { num: 9, text: 'VISTOGARD (uridine triacetate) granules, BTG International. FDA prescribing information, DailyMed set ID 269f7363-63ed-444e-85f1-f0009e44818b, version dated Apr 14, 2026. https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=269f7363-63ed-444e-85f1-f0009e44818b' },
+        { num: 11, text: 'Leucovorin Calcium for Injection (Sagent generic, old-format label). FDA prescribing information, DailyMed set ID 9d0e5356-ff39-4a8e-944c-e808a21ef4b2, dated Jul 23, 2026. https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=9d0e5356-ff39-4a8e-944c-e808a21ef4b2' },
+        { num: 13, text: 'Ramsey LB, Balis FM, O\'Brien MM, et al. Consensus Guideline for Use of Glucarpidase in Patients with High-Dose Methotrexate Induced Acute Kidney Injury and Delayed Methotrexate Clearance. The Oncologist 2018;23(1):52-61. doi:10.1634/theoncologist.2017-0243. PMC5759822.' },
+        { num: 14, text: 'VORAXAZE (glucarpidase), BTG International. FDA prescribing information, DailyMed set ID acaef5a6-b740-40e3-8ffe-74a75c74745c, dated Dec 02, 2024. https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=acaef5a6-b740-40e3-8ffe-74a75c74745c' },
+        { num: 23, text: 'ONS/ASCO. Algorithm on the Management of Antineoplastic Extravasation of Vesicant or Irritant with Vesicant Properties in Adults (Supplement B to the ONS/ASCO Guideline on the Management of Antineoplastic Extravasation; guideline itself: JCO Oncol Pract 2026, PMID 40966485 / Clin J Oncol Nurs 2025, PMID 40986763). One-page algorithm, March 2026. https://www.ons.org/sites/default/files/2026-03/ons-asco-extravasation-guideline-algorithm-3-2026.pdf' },
+        { num: 25, text: 'eviQ (Cancer Institute NSW). Clinical procedure - extravasation management of intravenous anti-cancer therapies and contrast media. eviQ ID 4156 v.2 (Endorsed), first approved 12 Jul 2022, last reviewed 3 May 2023, review due 31 Dec 2027. https://www.eviq.org.au/clinical-resources/extravasation/4156-extravasation-management-clinical-procedure' },
+        { num: 38, text: 'CAMPTOSAR (irinotecan). FDA prescribing information, DailyMed set ID e518dfc6-7e93-4fee-a66c-51e1ab71c056, dated May 13, 2026. https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=e518dfc6-7e93-4fee-a66c-51e1ab71c056' },
+        { num: 39, text: 'eviQ (Cancer Institute NSW). Hypersensitivity reaction. eviQ ID 1831 v.5 (Under review), first approved 20 Sep 2010, last reviewed 1 May 2019, review due 30 Jun 2021 (past due). https://www.eviq.org.au/clinical-resources/side-effect-and-toxicity-management/immunological/1831-hypersensitivity-reaction' },
+        { num: 40, text: 'Boulanger J, Boursiquot JN, et al. Management of hypersensitivity to platinum- and taxane-based chemotherapy: CEPO review and clinical recommendations. Curr Oncol 2014;21(4):e630-e641. doi:10.3747/co.21.1966. PMC4117628.' },
+        { num: 41, text: 'Oxaliplatin, Hospira, Inc.. FDA prescribing information, DailyMed set ID e51a62ba-d163-4c57-835c-8c86cf097e40, SPL effective 2026-08-07 (version 18). https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=e51a62ba-d163-4c57-835c-8c86cf097e40' },
+        { num: 52, text: 'Vincristine sulfate injection, Hospira (old-format label). FDA prescribing information, DailyMed set ID b22e4c8e-dbe1-4d4b-a026-e1812974071c, dated Feb 19, 2026. https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=b22e4c8e-dbe1-4d4b-a026-e1812974071c' },
+        { num: 53, text: 'Vinblastine sulfate, Fresenius Kabi USA, LLC. FDA prescribing information, DailyMed set ID f073b58e-56d6-4c8d-a2ce-b37719402d77, SPL effective 2025-04-15 (version 5). https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=f073b58e-56d6-4c8d-a2ce-b37719402d77' },
+        { num: 54, text: 'ARRANON (nelarabine). FDA prescribing information, DailyMed set ID 0f9051de-5c4d-4c0f-8c19-e15214498cca, dated Mar 23, 2026. https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=0f9051de-5c4d-4c0f-8c19-e15214498cca' },
+    ],
+};
 export const INFO_PAGES = {
     ...HG_INFO_PAGES,
     'phlegmasia-photos': PHLEGMASIA_PHOTOS,
@@ -31393,6 +31504,9 @@ export const INFO_PAGES = {
     // Acute Jaundice Hub (EM + GI dual-list, type: 'hub')
     'aj-steps': AJ_STEPS_PAGE,
     'aj-stop': AJ_STOP_PAGE,
+    // Oncology Drugs Side-effects
+    'onc-drug-side-effects-stop': ONC_DSE_STOP_PAGE,
+    'onc-drug-side-effects-stop-cytotoxic': ONC_DSE_STOP_CYTOTOXIC_PAGE,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

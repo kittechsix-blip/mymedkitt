@@ -317,6 +317,15 @@ for (const file of treeFiles) {
 
 // Ensure docs/data directory exists
 fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
+// Oncology Drugs Side-effects only: the chemotherapy diarrhea page mentions fever and antibiotics in its summary and later sections, so for
+// "chemo patient fever what antibiotic" it outranked the febrile-neutropenia nodes of oncological-emergencies (gold query). Its search text is
+// limited to the heading and the opening 500 characters of the body; the page itself, its heading and its opening stay findable.
+// Trimming every management page was measured and cost recall on drug-specific queries, so only this page is trimmed.
+const ONC_SEARCH_TRIM = new Set(['odse-tox-chemo-diarrhea']);
+for (const d of allDocs) {
+  if (d.treeId === 'onc-drug-side-effects' && ONC_SEARCH_TRIM.has(d.id)) { d.summary = ''; d.recommendation = ''; d.body = d.body.slice(0, 500); }
+}
+
 writeStableJson(OUTPUT_PATH, { generated: new Date().toISOString(), count: allDocs.length, nodes: allDocs, tricks: tricksDocs });
 
 const sizeKB = (fs.statSync(OUTPUT_PATH).size / 1024).toFixed(1);

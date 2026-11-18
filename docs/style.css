@@ -6641,3 +6641,199 @@ a,
 .calculator-container--obsidian .calculator-copy-btn { color: #ffe4d7; background: #5b231a; border-color: #a64c38; }
 .calculator-container--obsidian .carry-caption { color: #e9cbbb; }
 .calculator-container--obsidian .carry-caption__clear { color: #ffb49b; }
+
+/* ===================================================================
+   Oncology Drugs Side-effects (components/onc-drug-consult.ts)
+   =================================================================== */
+
+.onc-body { padding: 12px 16px 120px; max-width: 820px; margin: 0 auto; }
+.onc-critical { display: flex; justify-content: flex-end; margin-bottom: 8px; }
+.onc-filter {
+  width: 100%; min-height: 48px; padding: 0 16px; margin-bottom: 12px;
+  border: 1px solid var(--color-border); border-radius: var(--radius-pill);
+  font: inherit; font-size: 16px; background: var(--color-surface-card); color: var(--color-text-primary);
+}
+.onc-filter:focus { outline: none; border-color: var(--color-decision-active); box-shadow: 0 0 0 2px rgba(34, 139, 34, 0.15); }
+.onc-tabs { display: flex; gap: 6px; margin-bottom: 12px; }
+.onc-tab {
+  flex: 1; min-height: 44px; border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  background: var(--color-surface-card); color: var(--color-text-primary); font: inherit; font-weight: 600; cursor: pointer;
+}
+.onc-tab--on { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-primary-foreground); }
+.onc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.onc-tile {
+  min-height: 64px; padding: 10px 12px; text-align: left; font: inherit; font-weight: 600;
+  background: var(--color-surface-card); color: var(--color-text-primary);
+  border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-card); cursor: pointer;
+}
+.onc-row {
+  display: flex; align-items: center; gap: 8px; width: 100%; min-height: 56px; padding: 8px 14px; margin-bottom: 8px;
+  text-align: left; font: inherit; background: var(--color-surface-card); color: var(--color-text-primary);
+  border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-card); cursor: pointer;
+}
+.onc-row__label { flex: 1; font-weight: 600; }
+.onc-row__sub { font-size: 13px; color: var(--color-text-secondary); }
+.onc-row__chev { font-size: 22px; color: var(--color-text-secondary); }
+.onc-section { font-size: 16px; font-weight: 700; margin: 18px 0 8px; }
+.onc-empty, .onc-cx-note { font-size: 14px; color: var(--color-text-secondary); margin: 8px 0; }
+.onc-identity { padding: 12px 0; }
+.onc-identity__name { font-size: 24px; font-weight: 700; line-height: 1.2; }
+.onc-identity__brands, .onc-identity__class, .onc-identity__cancers { font-size: 14px; color: var(--color-text-secondary); margin-top: 4px; }
+.onc-identity__mech { font-size: 15px; margin-top: 6px; }
+.onc-link { color: var(--color-primary); text-decoration: underline; }
+.onc-boxed { background: var(--color-danger-bg); border: 1px solid var(--color-danger); border-radius: var(--radius-md); padding: 10px 14px; margin: 8px 0; }
+.onc-boxed__title { font-size: 14px; font-weight: 700; color: var(--color-danger); }
+.onc-boxed__text { font-size: 15px; margin-top: 4px; }
+.onc-effect { background: var(--color-surface-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: 12px 14px; margin-bottom: 10px; }
+.onc-effect__head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; justify-content: space-between; }
+.onc-effect__label { font-size: 17px; font-weight: 700; }
+.onc-effect__line, .onc-effect__quirk, .onc-effect__note { font-size: 14px; margin-top: 6px; line-height: 1.4; }
+.onc-badge { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: var(--radius-pill); background: var(--color-surface-hover); color: var(--color-text-primary); }
+.onc-btn {
+  min-height: 48px; padding: 0 16px; font: inherit; font-weight: 600; cursor: pointer;
+  color: var(--color-primary-foreground); background: var(--color-primary); border: 0; border-radius: var(--radius-md);
+}
+.onc-btn--full { display: block; width: 100%; margin-top: 10px; }
+.onc-more { display: block; min-height: 44px; padding: 0 4px; background: none; border: 0; font: inherit; font-size: 14px; color: var(--color-primary); text-decoration: underline; cursor: pointer; }
+.onc-ask { margin-bottom: 10px; }
+.onc-ask__for { font-size: 14px; font-weight: 700; }
+.onc-ask__list { margin: 4px 0 0 18px; font-size: 14px; line-height: 1.5; }
+.onc-cites { display: inline-flex; gap: 2px; margin-left: 4px; vertical-align: baseline; }
+.onc-cites button.onc-cite { /* beats the global button:not() 44px floor; ::after restores a 44px tap area */
+  position: relative; min-width: 20px; min-height: 20px; height: 20px; padding: 0 4px; line-height: 1; font: inherit; font-size: 11px; font-weight: 700;
+  color: var(--color-primary); background: transparent; border: 1px solid var(--color-primary); border-radius: var(--radius-pill); cursor: pointer;
+}
+.onc-cites button.onc-cite::after { content: ''; position: absolute; inset: -12px; } /* 44x44 tap target (min) without a 44px chip */
+.onc-cite-flash { background: var(--color-surface-hover); }
+.onc-notfound { padding: 32px 16px; text-align: center; }
+.onc-notfound__title { font-size: 20px; margin-bottom: 8px; }
+.onc-notfound__text { color: var(--color-text-secondary); margin-bottom: 16px; }
+
+/* ---- oncology card v2: scan first, open in place ---- */
+.onc-identity { padding: 4px 0 6px; }
+.onc-identity__names { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; line-height: 1.15; }
+.onc-identity__names .onc-identity__name { font-size: 24px; font-weight: 700; }
+.onc-identity__brand { font-size: 24px; font-weight: 700; color: var(--color-primary); }
+.onc-identity__chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+a.onc-chip {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 600;
+  color: var(--color-primary); background: var(--color-surface-card); border: 1px solid var(--color-primary);
+  border-radius: var(--radius-pill); text-decoration: none;
+}
+button.onc-mech {
+  display: block; width: 100%; min-height: 44px; padding: 4px 0; text-align: left; font: inherit; font-size: 14px; line-height: 1.35;
+  color: var(--color-text-primary); background: none; border: 0; cursor: pointer;
+}
+.onc-mech__text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.onc-mech[aria-expanded="true"] .onc-mech__text { display: block; }
+.onc-mech__more { color: var(--color-primary); font-weight: 600; font-size: 13px; }
+.onc-mech__cites { display: none; }
+.onc-mech[aria-expanded="true"] ~ .onc-mech__cites { display: inline-flex; }
+.onc-cancers { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px; font-size: 14px; min-height: 44px; }
+.onc-cancers:not(.onc-cancers--open) .onc-cancers__list { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.onc-cancers__list a.onc-link { display: inline-block; padding: 12px 0; }
+button.onc-cancers__more { min-height: 44px; padding: 0 6px; font: inherit; font-size: 14px; font-weight: 600; color: var(--color-primary); background: none; border: 0; cursor: pointer; }
+.onc-effect { padding: 0; overflow: hidden; }
+.onc-effect--top { border-color: var(--color-danger); background: var(--color-danger-bg); }
+button.onc-effect__toggle {
+  display: flex; align-items: center; gap: 10px; width: 100%; min-height: 56px; padding: 8px 14px; text-align: left;
+  font: inherit; color: var(--color-text-primary); background: none; border: 0; cursor: pointer;
+}
+.onc-effect__main { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.onc-effect__label { font-size: 16px; font-weight: 700; line-height: 1.25; }
+.onc-flag { font-size: 12px; font-weight: 700; color: var(--color-danger); }
+.onc-effect__toggle .onc-badge { max-width: 42%; text-align: left; line-height: 1.25; }
+.onc-effect__chev { font-size: 22px; color: var(--color-text-secondary); transition: transform 0.15s; }
+.onc-effect__toggle[aria-expanded="true"] .onc-effect__chev { transform: rotate(90deg); }
+.onc-effect__panel { padding: 0 14px 12px; border-top: 1px solid var(--color-border); }
+.onc-effect__panel[hidden] { display: none; }
+.onc-effect__timing { font-size: 14px; font-weight: 600; margin-top: 8px; }
+.onc-ask__for { font-size: 13px; font-weight: 700; margin-top: 10px; color: var(--color-text-secondary); }
+.onc-cxrow { background: var(--color-surface-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-card); margin-bottom: 10px; overflow: hidden; }
+.onc-cxrow--top { border-color: var(--color-danger); background: var(--color-danger-bg); }
+button.onc-cxrow__main { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 56px; padding: 8px 14px; text-align: left; font: inherit; background: none; border: 0; cursor: pointer; color: var(--color-text-primary); }
+.onc-cxrow__label { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.onc-cxrow__name { font-size: 16px; font-weight: 700; line-height: 1.25; }
+.onc-cxrow__meta { padding: 0 14px 10px; }
+.onc-cxrow__line { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin-top: 4px; }
+.onc-cxrow__classes { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.onc-cxrow__classes a.onc-chip { min-height: 44px; font-size: 12px; padding: 0 10px; }
+.onc-cxrow__timing { font-size: 13px; color: var(--color-text-secondary); }
+.onc-row--stacked .onc-row__col { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.onc-effect__toggle .onc-effect__label { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.onc-effect__full { font-size: 14px; font-weight: 700; margin-top: 8px; }
+.onc-effect__toggle .onc-badge { border-radius: var(--radius-sm); padding: 4px 8px; font-size: 12px; }
+button.onc-mech { position: relative; }
+.onc-mech__more { position: absolute; right: 0; bottom: 4px; padding-left: 28px; background: linear-gradient(to right, transparent, var(--color-bg) 40%); }
+.onc-mech[aria-expanded="true"] .onc-mech__more { position: static; display: block; padding: 0; background: none; }
+.onc-cancers:not(.onc-cancers--open) { flex-wrap: nowrap; }
+.onc-cancers:not(.onc-cancers--open) .onc-cancers__list { flex: 0 1 auto; min-width: 0; }
+.onc-cancers:not(.onc-cancers--open) button.onc-cancers__more { flex: none; }
+.onc-identity__chips { align-items: center; }
+.onc-tag { display: inline-block; padding: 3px 10px; font-size: 12px; font-weight: 600; color: var(--color-primary); border: 1px solid var(--color-primary); border-radius: var(--radius-pill); background: var(--color-surface-card); }
+
+/* ---- oncology v6: boxed warning list, plain regimen rows, letter headings ---- */
+.onc-boxed { padding: 8px 12px; margin: 6px 0 10px; }
+.onc-boxed__title { font-size: 14px; font-weight: 700; color: var(--color-danger); }
+.onc-boxed__list { margin: 4px 0 0 18px; }
+.onc-boxed__text { font-size: 14px; line-height: 1.35; margin: 2px 0; }
+button.onc-boxed__more { min-height: 44px; padding: 0 4px; font: inherit; font-size: 14px; font-weight: 600; color: var(--color-danger); background: none; border: 0; text-decoration: underline; cursor: pointer; }
+.onc-row--plain { cursor: default; }
+.onc-letter { font-size: 14px; font-weight: 700; color: var(--color-text-secondary); margin: 14px 0 6px; }
+.onc-effect__sources { font-size: 13px; color: var(--color-text-secondary); margin-top: 8px; }
+.onc-row--plain { background: transparent; box-shadow: none; border-style: dashed; }
+
+/* ---- "Also on the label": plain list, no danger colours ---- */
+.onc-label__list { margin: 0 0 0 18px; }
+.onc-label__item { font-size: 14px; line-height: 1.4; margin: 4px 0; }
+.onc-label__item[hidden] { display: none; }
+button.onc-label__more { min-height: 44px; padding: 0 4px; font: inherit; font-size: 14px; font-weight: 600; color: var(--color-primary); background: none; border: 0; text-decoration: underline; cursor: pointer; }
+
+/* boxed warning, collapsed: label + heads, at most three lines */
+.onc-boxed__heads { font-size: 14px; line-height: 1.35; margin: 2px 0 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+.onc-boxed__list[hidden], .onc-boxed__heads[hidden] { display: none; }
+.onc-boxed { padding-bottom: 0; }
+
+/* brand lines */
+.onc-former { font-size: 12px; line-height: 1.3; color: var(--color-text-secondary); margin: 2px 0 0; }
+button.onc-brand-more { min-height: 44px; min-width: 44px; padding: 0 6px; font: inherit; font-size: 12px; font-weight: 600; color: var(--color-primary); background: none; border: 0; cursor: pointer; margin: -14px 0; }
+.onc-identity__brand button.onc-brand-more { font-size: 14px; }
+.onc-former { display: flex; align-items: center; gap: 2px; }
+.onc-former__text { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.onc-former--open { align-items: flex-start; }
+.onc-former--open .onc-former__text { white-space: normal; }
+button.onc-brand-more { margin: -14px 0 -14px 2px; white-space: nowrap; }
+.onc-boxed__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 8px; }
+.onc-boxed button.onc-boxed__more { margin: 0 -4px 0 auto; }
+.onc-section { margin-top: 12px; margin-bottom: 6px; }
+.onc-effect { margin-bottom: 8px; }
+.onc-boxed { padding-bottom: 8px; }
+.onc-boxed__row { flex-wrap: nowrap; }
+.onc-boxed .onc-boxed__title { font-size: 13px; white-space: nowrap; }
+.onc-boxed button.onc-boxed__more { position: relative; min-height: 0; height: 24px; padding: 0 2px; font-size: 13px; white-space: nowrap; margin: 0; }
+.onc-boxed button.onc-boxed__more::after { content: ''; position: absolute; inset: -10px -6px; } /* 44px tap area on a 24px line */
+
+/* Oncology Drugs Side-effects: seven toolbar buttons (two Stop pages) share the width instead of scrolling off screen */
+.contextual-toolbar[data-consult="onc-drug-side-effects"] { gap: 0; padding-left: 4px; padding-right: 4px; }
+.contextual-toolbar[data-consult="onc-drug-side-effects"] .contextual-toolbar__item { flex: 1 1 0; min-width: 0; padding: 6px 1px; text-align: center; }
+.contextual-toolbar[data-consult="onc-drug-side-effects"] .contextual-toolbar__item span:last-child { white-space: normal; line-height: 1.1; font-size: 10px; }
+.contextual-toolbar[data-consult="onc-drug-side-effects"] .contextual-toolbar__icon { font-size: 20px; }
+
+/* long timing badges: own line, wrap cleanly */
+.onc-badge { overflow-wrap: anywhere; min-width: 0; }
+button.onc-effect__toggle { flex-wrap: wrap; }
+.onc-effect__toggle .onc-effect__chev { order: 2; margin-left: auto; }
+.onc-effect__toggle .onc-badge--long { order: 3; flex: 1 0 100%; max-width: none; margin-bottom: 2px; }
+.onc-label__item .onc-head { font-weight: 700; }
+
+/* "Reported after approval" group */
+button.onc-group-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 56px; margin: 6px 0 8px; padding: 8px 14px; font: inherit; font-size: 15px; font-weight: 700; color: var(--color-text-primary); background: var(--color-surface-hover); border: 1px dashed var(--color-border); border-radius: var(--radius-md); cursor: pointer; text-align: left; }
+.onc-group-toggle[aria-expanded="true"] .onc-effect__chev { transform: rotate(90deg); }
+.onc-group[hidden] { display: none; }
+.onc-label-age { font-size: 12px; color: var(--color-text-secondary); margin: 2px 0 0; }
+.onc-no-effects { font-size: 14px; color: var(--color-text-secondary); margin: 12px 0 8px; }
+
+/* effect row flags: Life-threatening (tier 1 or boxed) and the Boxed warning marker */
+.onc-flags { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px; }
+.onc-boxed-mark { font-size: 12px; font-weight: 600; color: var(--color-danger); border: 1px solid var(--color-danger); border-radius: var(--radius-sm); padding: 0 6px; line-height: 1.4; }
+.onc-identity__names .onc-identity__editor { font-size: 14px; font-weight: 600; color: var(--color-text-secondary); }

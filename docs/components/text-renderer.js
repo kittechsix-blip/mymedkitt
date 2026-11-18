@@ -26,17 +26,26 @@ export function appendBoldAware(parent, text) {
 }
 /** Render body text with line breaks preserved. Supports [text](#/info/id), [text](#/drug/id),
  *  [text](#/calculator/id), [text](#/tree/id), [text](https://url) links, and [N] citation refs. */
-export function renderBodyText(container, text) {
-    const lines = text.split('\n');
-    for (const line of lines) {
-        const trimmed = line.trim();
-        if (!trimmed)
-            continue;
-        const p = document.createElement('p');
-        renderLineWithLinksAndCitations(p, trimmed);
-        container.appendChild(p);
+export function renderBodyText(container, text, opts = {}) {
+    // noDoseCalc (src/data/dose-calc-optout.ts): leave "<n> mg/kg" as plain text instead of the weight-calculator button
+    const prev = suppressDoseCalc;
+    suppressDoseCalc = !!opts.noDoseCalc;
+    try {
+        const lines = text.split('\n');
+        for (const line of lines) {
+            const trimmed = line.trim();
+            if (!trimmed)
+                continue;
+            const p = document.createElement('p');
+            renderLineWithLinksAndCitations(p, trimmed);
+            container.appendChild(p);
+        }
+    }
+    finally {
+        suppressDoseCalc = prev;
     }
 }
+let suppressDoseCalc = false;
 /** Parse a single line for markdown links [text](url), citation refs [N], and weight-dose patterns (e.g. 0.5 mg/kg/hr). */
 function renderLineWithLinksAndCitations(container, line) {
     // Four-way combined pattern (in priority order — leftmost-longest wins per JS regex semantics):
@@ -107,6 +116,18 @@ function renderLineWithLinksAndCitations(container, line) {
             const doseText = match[0].replace(/\*\*/g, '');
             const boldOpen = match[6];
             const boldClose = match[10];
+            if (suppressDoseCalc) {
+                // opted-out node: same visible text, no calculator
+                if (boldOpen && boldClose) {
+                    const strong = document.createElement('strong');
+                    strong.textContent = doseText;
+                    container.appendChild(strong);
+                }
+                else
+                    container.appendChild(document.createTextNode(doseText));
+                lastIndex = match.index + match[0].length;
+                continue;
+            }
             // Parse dose value and unit from the match for pre-filling the calculator
             const dosePerKg = parseFloat(match[7]);
             const unit = match[8] === 'U' ? 'units' : match[8]; // normalize U → units

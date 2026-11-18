@@ -143,6 +143,8 @@ function handleCategory(params) {
     const main = clearMain();
     renderSpecialtyView(main, id);
 }
+const ONC_TREE_ID = 'onc-drug-side-effects';
+const ONC_VIRTUAL_ID = /^odse-(drug|reg|class|cancer|ctype|cx)-/; // frozen deep-link scheme, see data/onc-drugs/index.ts
 function handleTree(params) {
     hideGlobalTabBar();
     const id = params['id'] ?? 'unknown';
@@ -151,6 +153,10 @@ function handleTree(params) {
     removeContextualToolbar();
     if (renderProcedureApp(main, id))
         return;
+    if (id === ONC_TREE_ID) {
+        void import('./components/onc-drug-consult.js').then((m) => m.renderOncConsult(main));
+        return;
+    }
     void renderConsultFlow(main, id);
 }
 function handleTreeNode(params) {
@@ -159,6 +165,13 @@ function handleTreeNode(params) {
     const nodeId = params['nodeId'] ?? 'unknown';
     setCurrentTreeId(treeId);
     const main = clearMain();
+    // Virtual drug / regimen / class / cancer / complaint ids are not tree nodes: the oncology component renders them.
+    // Real odse-tox-* nodes fall through to the normal consult flow.
+    if (treeId === ONC_TREE_ID && ONC_VIRTUAL_ID.test(nodeId)) {
+        removeContextualToolbar();
+        void import('./components/onc-drug-consult.js').then((m) => m.renderOncConsult(main, nodeId));
+        return;
+    }
     void renderConsultFlow(main, treeId, { jumpToNodeId: nodeId });
 }
 /**

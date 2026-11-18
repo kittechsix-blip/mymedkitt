@@ -1746,6 +1746,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'dvt-start',
             },
             {
+                id: 'onc-drug-side-effects',
+                title: 'Oncology Drugs Side-effects',
+                subtitle: 'Search a drug \u2192 serious adverse effects ranked by severity \u2192 workup & treatment',
+                categoryId: 'heme-onc',
+                version: '1.0',
+                nodeCount: 1,
+                entryNodeId: 'odse-start',
+            },
+            {
                 id: 'oncological-emergencies',
                 title: 'Oncological Emergencies',
                 subtitle: 'Triage → Febrile Neutropenia → TLS → Hypercalcemia → Cord Compression → SVC → Leukostasis → Chemo Reference',

@@ -35,6 +35,7 @@ export function renderContextualToolbar(consultId, controller, _entryNodeId, mod
     const toolbar = document.createElement('div');
     toolbar.className = 'contextual-toolbar';
     toolbar.setAttribute('translate', 'no'); // Prevent browser auto-translation
+    toolbar.setAttribute('data-consult', consultId); // lets a consult with many buttons opt into a compact layout in CSS
     const config = getToolbarConfig(consultId);
     // Split items into inline vs overflow per `toolbarOverflow` opt-in. Existing
     // toolbars (40+, including vertigo=6, oncological-emergencies=14, ocular-trauma=10)

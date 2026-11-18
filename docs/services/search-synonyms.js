@@ -7,6 +7,7 @@ export const CLINICAL_SYNONYMS = {
     'decompression-sickness': ['decompression illness', 'DCS', 'DCI', 'scuba diving', 'diving injury', 'diver', 'bends', 'caisson disease', 'rapid ascent', 'fast ascent', 'spinal decompression sickness', 'arterial gas embolism', 'recompression', 'hyperbaric oxygen', 'weakness urinary retention after scuba'],
     'thyroid': ['myxedema coma', 'myxoedema coma', 'decompensated hypothyroidism'],
     'paracentesis': ['sbp', 'spontaneous bacterial peritonitis', 'infected ascites', 'cirrhosis fever', 'sbp albumin'],
+    'onc-drug-side-effects': ['chemo side effects', 'chemo side-effects', 'chemotherapy side effects', 'oncology drugs', 'oncology drug side effects', 'cancer drug', 'cancer drugs', 'cancer drug side effects', 'immunotherapy side effects', 'drug toxicity cancer'],
     'oncological-emergencies': ['neutropenia', 'neutropenic', 'chemo', 'chemotherapy', 'anc', 'absolute neutrophil count'],
     'alcohol-withdrawal': ['delirium tremens', 'dts', 'alcohol detox', 'etoh withdrawal', 'ciwa', 'alcohol withdrawal seizure'],
     'afib-rvr': ['afib', 'a-fib', 'atrial fibrillation', 'rvr', 'rapid ventricular', 'rate control', 'cardioversion'],

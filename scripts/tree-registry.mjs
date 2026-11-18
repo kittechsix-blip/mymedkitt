@@ -286,6 +286,7 @@ export const TREE_REGISTRY = {
   'sti-comprehensive': { prefix: 'STI_COMPREHENSIVE', entryNodeId: 'sti-start',          categoryId: 'infectious-disease' },
   'approach-to-arthritis': { prefix: 'APPROACH_TO_ARTHRITIS', entryNodeId: 'arth-start', categoryId: 'orthopedics' },
   'diabetic-foot-wounds': { prefix: 'DIABETIC_FOOT_WOUNDS', entryNodeId: 'dfw-start',  categoryId: 'orthopedics' },
+  'onc-drug-side-effects': { prefix: 'ONC_DRUG_SIDE_EFFECTS', entryNodeId: 'odse-start', categoryId: 'heme-onc' },
   'oncological-emergencies': { prefix: 'ONCOLOGICAL_EMERGENCIES', entryNodeId: 'onc-start', categoryId: 'heme-onc' },
   'pediatric-arthritis': { prefix: 'PEDIATRIC_ARTHRITIS', entryNodeId: 'peds-arth-start', categoryId: 'pediatrics' },
   'gout':             { prefix: 'GOUT',                entryNodeId: 'gout-start',         categoryId: 'orthopedics' },

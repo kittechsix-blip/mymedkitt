@@ -9,6 +9,7 @@ import { getAllCalculators } from '../components/calculator.js';
 import { sanitizeSearchInput } from './sanitize.js';
 import { pediSearchAnswer } from '../components/pedi-resus-engine.js';
 import { CLINICAL_SYNONYMS, DRUG_SYNONYMS } from './search-synonyms.js';
+import { oncPin, oncPrefix, setOncEntries, type OncIndexEntry } from './onc-search-pin.js';
 import { buildQuestionDocs, createQuestionIndex, drugInput, previewFor, routeFor, type BuildInput, type QDoc, type QResult, type QuestionIndex } from './question-search.js';
 // Types imported from data services directly
 
@@ -124,6 +125,8 @@ interface AnswerIndexFile {
   info: { p: string; a: string; h: string; pt: string; t: string }[];
   pages: { p: string; t: string; s: string; x: string }[];
   extraNodes: NodeIndexEntry[];
+  /** oncology drug cards: exact-name pin and prefix names (scripts/build-search-answer-index.mjs) */
+  onc?: OncIndexEntry[];
   /** reviewed synonym pairs (scripts/synonyms.review.tsv rows marked y) */
   synonyms?: { a: string; b: string; oneWay?: true }[];
 }
@@ -209,8 +212,11 @@ async function loadAnswerIndex(): Promise<void> {
     const res = await fetch('data/search-answer-index.json');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     answerIndex = (await res.json()) as AnswerIndexFile;
+    setOncEntries(answerIndex.onc);
     questionIndexStale = true;
     scheduleQuestionIndex();
+    // card names join the typo-tolerant index
+    if (answerIndex.onc?.length && indexedDocs.length > 0) buildSearchIndex();
   } catch (e) {
     console.warn('[SearchService] Could not load search-answer-index.json:', e);
   } finally {
@@ -323,6 +329,20 @@ export function buildSearchIndex(): void {
     indexedDocs.push(...trickDocs);
   }
 
+  // Oncology drug cards (identity only): typo-tolerant names land on the card.
+  for (const e of answerIndex?.onc ?? []) {
+    const nodeId = e.route.slice(e.route.lastIndexOf('/') + 1);
+    indexedDocs.push({
+      id: `onc-${nodeId}`,
+      type: 'node',
+      title: e.title,
+      subtitle: e.sub,
+      keywords: e.all,
+      treeId: ONC_TREE,
+      nodeId,
+    });
+  }
+
   // Create Fuse index. Threshold bumped 0.35 -> 0.4 so common transposition
   // typos (e.g. "hydroflouric" vs "hydrofluoric") still hit. Higher than 0.4
   // starts producing noisy false positives in QA.
@@ -365,13 +385,23 @@ export function search(query: string): SearchResult[] {
   // Pediatric numbers ("age 2 yo ET tube", "20 kg defib"): a zone-colored answer card pinned first.
   // Pure and synchronous; returns null for every other query, so their ranking is untouched.
   const ped = query ? pediSearchAnswer(query) : null;
-  if (!ped) return core;
+  if (!ped) return pinOnc(query, core);
   const card: SearchResult = {
     type: ped.route.startsWith('/tree/') ? 'consult' : 'calculator',
     label: ped.title, sublabel: ped.subtitle, route: ped.route, preview: ped.preview,
     zone: { bgHex: ped.bgHex, textHex: ped.textHex }, score: 0,
   };
   return [card, ...core.filter(r => r.route.split('?')[0] !== ped.route.split('?')[0])];
+}
+
+const ONC_TREE = 'onc-drug-side-effects';
+
+/** An exact drug / brand / regimen name opens its card first (src/services/onc-search-pin.ts). */
+function pinOnc(query: string, core: SearchResult[]): SearchResult[] {
+  const hit = query ? oncPin(query) : null;
+  if (!hit) return core;
+  const card: SearchResult = { type: 'node', label: hit.title, sublabel: hit.sub, route: hit.route, score: 0 };
+  return [card, ...core.filter(r => r.route !== hit.route)];
 }
 
 function searchCore(query: string): SearchResult[] {
@@ -613,6 +643,11 @@ function alphabeticalPrefixSearch(query: string): SearchResult[] {
         drugId: drug.id,
       });
     }
+  }
+
+  // Oncology drug cards - prefix match on generic, brand and alias names (4+ characters)
+  for (const e of oncPrefix(query)) {
+    results.push({ type: 'node', label: e.title, sublabel: e.sub, route: e.route });
   }
 
   // Calculators - prefix match on title

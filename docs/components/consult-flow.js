@@ -24,6 +24,23 @@ let delegatedContainer = null;
 let jumpNodeListenerRegistered = false;
 let searchOpen = false;
 let resetUndoToast = null;
+/** Where the header back button returns on a deep-linked page, set only by components/onc-drug-consult.ts. */
+let returnRoute = null;
+export const RETURN_ROUTE_KEY = 'medkitt-return-route';
+/** Pages left by in-page jumps, kept only while a return route is set (arrived from an oncology card), so Back retraces them one at a time. */
+let jumpBack = [];
+function trackedJump(nodeId) {
+    if (!controller)
+        return;
+    if (returnRoute) {
+        const cur = controller.getCurrentNode()?.id;
+        if (cur && cur !== nodeId)
+            jumpBack.push(cur);
+    }
+    controller.jumpToNode(nodeId);
+}
+/** The consult's disclaimer line (shared with components/onc-drug-consult.ts). */
+export const CONSULT_DISCLAIMER = 'This tool is for educational and clinical decision support purposes only. It does not replace clinical judgment. All treatment decisions should be verified against current guidelines and institutional protocols.';
 const CONSULT_TITLE_OVERRIDES = {
     'acute-agitation': 'Acute Agitation',
     'acute-psychosis': 'Acute Psychosis / First Break',
@@ -56,6 +73,11 @@ function scrollCardBelowHeader(card) {
 /** Initialize and render the consult flow for a given tree */
 export async function renderConsultFlow(container, treeId, options) {
     const requestedRoute = window.location.hash;
+    // One-shot: consumed here so a stale value can never redirect a later visit or another consult.
+    returnRoute = null;
+    jumpBack = [];
+    const pendingReturn = sessionStorage.getItem(RETURN_ROUTE_KEY);
+    sessionStorage.removeItem(RETURN_ROUTE_KEY);
     const config = await getTreeConfig(treeId);
     // A slow reference fetch must not overwrite the procedure screen after Back.
     if (window.location.hash !== requestedRoute)
@@ -90,7 +112,7 @@ export async function renderConsultFlow(container, treeId, options) {
         jumpNodeListenerRegistered = true;
         window.addEventListener('medkitt-jump-node', ((e) => {
             if (controller && delegatedContainer) {
-                controller.jumpToNode(e.detail);
+                trackedJump(e.detail);
                 renderFlow(delegatedContainer);
                 // Scroll to the active card after jump
                 requestAnimationFrame(() => {
@@ -125,6 +147,7 @@ export async function renderConsultFlow(container, treeId, options) {
     const jumpValid = !!jumpId && config.nodes.some(n => n.id === jumpId);
     if (jumpValid && jumpId) {
         controller.jumpToNode(jumpId);
+        returnRoute = pendingReturn;
     }
     // Back gesture = Back button: one history entry per card (see services/consult-history.ts)
     beginConsultHistory(treeId, (steps) => {
@@ -166,7 +189,7 @@ function renderFlow(container) {
     if (cardStack.length === 0) {
         const disclaimer = document.createElement('div');
         disclaimer.className = 'wizard-disclaimer';
-        disclaimer.textContent = 'This tool is for educational and clinical decision support purposes only. It does not replace clinical judgment. All treatment decisions should be verified against current guidelines and institutional protocols.';
+        disclaimer.textContent = CONSULT_DISCLAIMER;
         stackContainer.appendChild(disclaimer);
     }
     // Render answered cards as pills
@@ -350,7 +373,7 @@ function renderConsultSearch(container) {
             onJumpToNode: (nodeId) => {
                 if (!controller)
                     return;
-                controller.jumpToNode(nodeId);
+                trackedJump(nodeId);
                 renderFlow(container);
                 requestAnimationFrame(() => {
                     const active = container.querySelector('.decision-card--active');
@@ -442,7 +465,7 @@ function renderResults(matches, resultsEl, container) {
         item.addEventListener('click', () => {
             if (!controller)
                 return;
-            controller.jumpToNode(node.id);
+            trackedJump(node.id);
             searchOpen = false;
             renderFlow(container);
             // Scroll active card into view
@@ -479,6 +502,20 @@ function renderFlowHeader(container, categoryId) {
         else if (controller?.canGoBack()) {
             controller.goBack();
             renderFlow(container);
+        }
+        else if (returnRoute && jumpBack.length) {
+            // a page reached by an in-page link: Back goes to the page it was opened from, then on to the card
+            controller?.jumpToNode(jumpBack.pop());
+            if (delegatedContainer)
+                renderFlow(delegatedContainer);
+        }
+        else if (returnRoute) {
+            const back = returnRoute;
+            returnRoute = null;
+            if (controller)
+                controller.fullReset();
+            removeContextualToolbar();
+            router.navigate(back);
         }
         else {
             if (controller)
@@ -662,7 +699,7 @@ function getConsultTitle(treeId) {
 function onInlineLinkClick(e) {
     handleInlineLinkClick(e, (nodeId) => {
         if (controller && delegatedContainer) {
-            controller.jumpToNode(nodeId);
+            trackedJump(nodeId);
             renderFlow(delegatedContainer);
         }
     });
