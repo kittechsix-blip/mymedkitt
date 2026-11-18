@@ -1,0 +1,133 @@
+import type { RapidStrip } from './types.js';
+
+// RAPID strip (format v3), Anaphylaxis. Faces authored; every expansion line is a verbatim node excerpt. Not approved.
+// Single variant; first 7 of the consult's 10 critical actions, in node FLOW order. Findings: research/rapid/anaphylaxis.findings.json
+
+export const RAPID_ANAPHYLAXIS: RapidStrip = {
+  treeId: 'anaphylaxis',
+  variants: [
+    {
+      id: 'anaphylaxis',
+      label: 'Anaphylaxis',
+      tiles: [
+        {
+          id: 'im-epi',
+          layout: 'drug',
+          action: 'IM epinephrine',
+          figure: '0.5 mg',
+          condition: 'Do NOT delay for IV access',
+          nodeIds: ['anaph-source-control'],
+          drug: {
+            id: 'epinephrine',
+            indication: 'Anaphylaxis — IM (first-line)',
+            weightCalcs: [{ dosePerKg: 0.01, unit: 'mg', maxDose: 0.5, label: 'Pediatric IM', concentration: { amount: 1, perMl: 1, displayName: '1:1,000 (1 mg/mL)' } }],
+          },
+          lines: [
+            { nodeId: 'anaph-source-control', text: 'IM Epinephrine — FIRST LINE:' },
+            { nodeId: 'anaph-source-control', text: 'Epinephrine 0.5 mg IM (0.5 mL of 1 mg/mL) into anterolateral thigh' },
+            { nodeId: 'anaph-source-control', text: 'Pediatric: 0.01 mg/kg IM (max 0.5 mg)' },
+            { nodeId: 'anaph-source-control', text: 'Repeat every 5 minutes, up to 3 doses' },
+          ],
+        },
+        {
+          id: 'repeat-im-epi',
+          layout: 'steps',
+          action: 'Repeat IM epinephrine',
+          figure: 'up to 3 doses',
+          condition: 'Assess 5 minutes after each dose',
+          nodeIds: ['anaph-epi-response', 'anaph-source-control'],
+          lines: [
+            { nodeId: 'anaph-source-control', text: 'IM Epinephrine — FIRST LINE:' },
+            { nodeId: 'anaph-source-control', text: 'Repeat every 5 minutes, up to 3 doses' },
+            { nodeId: 'anaph-epi-response', text: 'Assess 5 minutes after each dose' },
+            { nodeId: 'anaph-epi-response', text: 'Good response: Improved blood pressure, reduced wheeze/stridor, improved skin perfusion' },
+            { nodeId: 'anaph-epi-response', text: 'Poor response: Persistent hypotension, worsening respiratory distress, no clinical improvement' },
+            { nodeId: 'anaph-epi-response', text: 'Up to 3 IM doses before escalating to IV epinephrine' },
+          ],
+        },
+        {
+          id: 'iv-epi-infusion',
+          layout: 'drug',
+          action: 'IV epinephrine infusion',
+          figure: '5-15 mcg/min',
+          condition: 'inadequate after 2-3 doses',
+          nodeIds: ['anaph-epi-infusion', 'anaph-iv-access'],
+          warning: { nodeId: 'anaph-iv-access', text: 'Do NOT give cardiac arrest dose (1 mg IV push) to a patient with a pulse' },
+          drug: { id: 'epinephrine', indication: 'Anaphylaxis — IV infusion' },
+          lines: [
+            { nodeId: 'anaph-epi-infusion', text: 'Protocol:' },
+            { nodeId: 'anaph-epi-infusion', text: 'Loading: 20 mcg/min x 2 minutes (~40 mcg total)' },
+            { nodeId: 'anaph-epi-infusion', text: 'Maintenance: 10 mcg/min (= 60 mL/hr)' },
+            { nodeId: 'anaph-epi-infusion', text: 'AGGRESSIVELY WEAN after resolution' },
+          ],
+        },
+        {
+          id: 'iv-fluids',
+          layout: 'steps',
+          action: 'IV fluid bolus',
+          figure: '500-1000 mL',
+          condition: 'Distributive shock',
+          nodeIds: ['anaph-fluids'],
+          lines: [
+            { nodeId: 'anaph-fluids', text: '500-1000 mL bolus (adult) / 20-30 mL/kg (pediatric)' },
+            { nodeId: 'anaph-fluids', text: 'LR preferred for large-volume resuscitation. Pediatric: repeat to 60 mL/kg+' },
+            { nodeId: 'anaph-fluids', text: 'Up to 35% intravascular volume extravasates — aggressive NS/LR boluses, POCUS-guided; may need liters in first hour' },
+            { nodeId: 'anaph-fluids', text: 'POCUS-guided: IVC collapse = more fluid; adequate filling + persistent hypotension = uptitrate epinephrine' },
+          ],
+        },
+        {
+          id: 'nebulized-epi',
+          layout: 'steps',
+          action: 'Nebulized epinephrine',
+          figure: '0.5 mL of 2.25%',
+          condition: 'Stridor / upper airway edema',
+          nodeIds: ['anaph-airway-critical'],
+          warning: { nodeId: 'anaph-airway-critical', text: 'Do NOT delay intubation if patient is deteriorating' },
+          lines: [
+            { nodeId: 'anaph-airway-critical', text: 'Temporizing: Nebulized epinephrine — racemic epinephrine 0.5 mL of 2.25% in 4.5 mL NS OR L-epinephrine 5 mL of 1:1000 (1 mg/mL)' },
+          ],
+        },
+        {
+          id: 'secure-airway',
+          layout: 'steps',
+          action: 'Secure airway',
+          figure: 'Video laryngoscopy',
+          condition: 'Stridor / upper airway edema',
+          nodeIds: ['anaph-airway-critical', 'anaph-airway'],
+          warning: { nodeId: 'anaph-airway-critical', text: 'Do NOT delay intubation if patient is deteriorating' },
+          lines: [
+            { nodeId: 'anaph-airway', text: 'Signs of upper airway involvement:' },
+            { nodeId: 'anaph-airway', text: 'Stridor, hoarseness, voice change' },
+            { nodeId: 'anaph-airway-critical', text: 'Prepare for difficult airway — call anesthesia/ENT early' },
+            { nodeId: 'anaph-airway-critical', text: 'Equipment:' },
+            { nodeId: 'anaph-airway-critical', text: 'Video laryngoscopy (first attempt)' },
+            { nodeId: 'anaph-airway-critical', text: 'Smaller ETT than usual (edema narrows the airway)' },
+            { nodeId: 'anaph-airway-critical', text: 'Surgical airway kit at bedside' },
+          ],
+        },
+        {
+          id: 'methylene-blue',
+          layout: 'drug',
+          action: 'Methylene blue',
+          figure: '1-2 mg/kg',
+          condition: 'Beta-Blocked Patient',
+          nodeIds: ['anaph-beta-blocked'],
+          drug: {
+            id: 'methylene-blue',
+            indication: 'Refractory anaphylaxis',
+            weightCalcs: [
+              { dosePerKg: 1, unit: 'mg', label: 'Standard dose (1 mg/kg)' },
+              { dosePerKg: 2, unit: 'mg', label: 'High dose (2 mg/kg)' },
+            ],
+          },
+          lines: [
+            { nodeId: 'anaph-beta-blocked', text: 'Blunted epinephrine response due to beta-adrenergic blockade' },
+            { nodeId: 'anaph-beta-blocked', text: 'Management:' },
+            { nodeId: 'anaph-beta-blocked', text: 'Higher epinephrine doses (may need more frequent/larger IM doses)' },
+            { nodeId: 'anaph-beta-blocked', text: 'Methylene Blue 1-2 mg/kg IV over 5-10 min (guanylate cyclase inhibitor — blocks NO-mediated vasodilation)' },
+          ],
+        },
+      ],
+    },
+  ],
+};

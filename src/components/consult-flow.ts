@@ -10,6 +10,8 @@ import { handleInlineLinkClick } from './text-renderer.js';
 import { renderContextualToolbar, removeContextualToolbar } from './contextual-toolbar.js';
 import { getSpecialtyGradient } from './button-3d.js';
 import { createCriticalActionsButton } from './critical-actions.js';
+import { createRapidKey, openRapidCard } from './rapid-card.js';
+import { rapidLive } from '../services/rapid-service.js';
 import { router } from '../services/router.js';
 import { getAllCategories } from '../services/category-service.js';
 import { addRecentConsult } from './dashboard.js';
@@ -35,6 +37,8 @@ let delegatedContainer: HTMLElement | null = null;
 let jumpNodeListenerRegistered = false;
 let searchOpen = false;
 let resetUndoToast: ToastHandle | null = null;
+
+const CONSULT_DISCLAIMER = 'This tool is for educational and clinical decision support purposes only. It does not replace clinical judgment. All treatment decisions should be verified against current guidelines and institutional protocols.';
 
 const CONSULT_TITLE_OVERRIDES: Record<string, string> = {
   'acute-agitation': 'Acute Agitation',
@@ -71,7 +75,7 @@ function scrollCardBelowHeader(card: Element): void {
 export async function renderConsultFlow(
   container: HTMLElement,
   treeId: string,
-  options?: { jumpToNodeId?: string }
+  options?: { jumpToNodeId?: string; openRapid?: boolean }
 ): Promise<void> {
   const requestedRoute = window.location.hash;
   const config = await getTreeConfig(treeId);
@@ -159,6 +163,9 @@ export async function renderConsultFlow(
 
   renderFlow(container);
 
+  // #/tree/<id>/rapid: the consult loads exactly as /tree/<id> does, then the card opens on top.
+  if (options?.openRapid && rapidLive(treeId, config)) openRapid(container);
+
   // Scroll deep-linked card into view below the sticky header
   if (jumpValid) {
     requestAnimationFrame(() => {
@@ -195,7 +202,7 @@ function renderFlow(container: HTMLElement): void {
   if (cardStack.length === 0) {
     const disclaimer = document.createElement('div');
     disclaimer.className = 'wizard-disclaimer';
-    disclaimer.textContent = 'This tool is for educational and clinical decision support purposes only. It does not replace clinical judgment. All treatment decisions should be verified against current guidelines and institutional protocols.';
+    disclaimer.textContent = CONSULT_DISCLAIMER;
     stackContainer.appendChild(disclaimer);
   }
 
@@ -372,8 +379,10 @@ function renderConsultSearch(container: HTMLElement): void {
 
   wrapper.appendChild(toggleBtn);
 
-  // Critical Actions button — red 3D glass, next to search
-  if (currentConfig?.criticalActions && currentConfig.criticalActions.length > 0 && controller) {
+  // RAPID key takes the Critical button's slot for approved strips; every other consult keeps Critical.
+  if (currentTreeId && currentConfig && controller && rapidLive(currentTreeId, currentConfig)) {
+    wrapper.appendChild(createRapidKey(rapidOpts(container)));
+  } else if (currentConfig?.criticalActions && currentConfig.criticalActions.length > 0 && controller) {
     const consultTitle = getConsultTitle(currentTreeId ?? '') ?? '';
     const criticalBtn = createCriticalActionsButton({
       actions: currentConfig.criticalActions,
@@ -394,6 +403,29 @@ function renderConsultSearch(container: HTMLElement): void {
   wrapper.appendChild(input);
   wrapper.appendChild(results);
   container.appendChild(wrapper);
+}
+
+function rapidOpts(container: HTMLElement): import('./rapid-card.js').RapidCardOpts {
+  return {
+    treeId: currentTreeId ?? '',
+    consultTitle: getConsultTitle(currentTreeId ?? '') ?? '',
+    config: currentConfig as TreeConfig,
+    disclaimer: CONSULT_DISCLAIMER,
+    onJumpToNode: (nodeId) => {
+      if (!controller) return;
+      controller.jumpToNode(nodeId);
+      renderFlow(container);
+      requestAnimationFrame(() => {
+        const active = container.querySelector('.decision-card--active');
+        if (active) scrollCardBelowHeader(active);
+      });
+    },
+  };
+}
+
+function openRapid(container: HTMLElement): void {
+  if (!currentTreeId || !currentConfig) return;
+  openRapidCard(rapidOpts(container));
 }
 
 /** Search all nodes in the current tree for a query */

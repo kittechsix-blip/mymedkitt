@@ -1,0 +1,102 @@
+[
+  {
+    "kind": "other",
+    "tileId": "lidocaine",
+    "nodeIds": [
+      "rvf-amio-lido",
+      "rvf-antiarrhythmic-dose",
+      "rvf-ecpr-assess",
+      "rvf-ecpr-activate"
+    ],
+    "drugId": "lidocaine",
+    "text": "Most important: amiodarone and lidocaine both have drug store entries for VF/pVT arrest, so they are two drug tiles. That made 8 tiles; the tile last in the consult's flow, ECPR activation, was dropped to stay within 7. The consult's critical-action list names ECPR (collapse to ECMO flow, criteria and time targets). Physician to decide whether ECPR should replace another tile. Both faces say 'X or Y' and quote the consult's choose-one line (both acceptable per AHA)."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "rvf-ecpr-assess",
+      "rvf-ecpr-activate",
+      "rvf-hyperK",
+      "rvf-toxin",
+      "rvf-pe",
+      "rvf-other-agents",
+      "rvf-emerging",
+      "rvf-post-rosc",
+      "rvf-optimize"
+    ],
+    "text": "Time-critical consult content NOT on the strip: ECPR criteria and time targets; hyperkalemia, toxin and PE treatment doses; magnesium and bicarbonate guidance; stellate ganglion block and overdrive pacing; termination considerations; post-ROSC care; CPR quality targets; coronary thrombosis, in the reversible causes list; the antiarrhythmic post-ROSC infusion and maximum doses."
+  },
+  {
+    "kind": "gap",
+    "tileId": "dsd",
+    "nodeIds": [
+      "rvf-dsd-setup"
+    ],
+    "text": "The consult states no joule value for double sequential defibrillation, only 'use maximum energy on both devices'. The tile quotes that and gives no number."
+  },
+  {
+    "kind": "missing-weightcalc",
+    "tileId": "lidocaine",
+    "nodeIds": [
+      "rvf-antiarrhythmic-dose"
+    ],
+    "drugId": "lidocaine",
+    "text": "The drug store entry 'Cardiac arrest — VF/pVT (ACLS)' for lidocaine has no weight calculator, although it doses per kg, so the tile has no weight box."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "lidocaine",
+    "nodeIds": [
+      "rvf-amio-lido"
+    ],
+    "drugId": "lidocaine",
+    "text": "The drug store regimen for lidocaine says to give it after the 3rd shock if amiodarone is unavailable; the consult says either antiarrhythmic is acceptable per AHA. The tile shows the drug store text under Dosing and quotes the consult's wording on the face."
+  },
+  {
+    "kind": "gap",
+    "tileId": "epinephrine",
+    "nodeIds": [
+      "rvf-epi-timing"
+    ],
+    "drugId": "epinephrine",
+    "text": "The drug store has no ACLS cardiac-arrest epinephrine entry (the only arrest entry is for VAD patients), so this is a steps tile built from the node and has no weight box or drug store text."
+  },
+  {
+    "kind": "gap",
+    "tileId": "esmolol",
+    "nodeIds": [
+      "rvf-esmolol-dose",
+      "rvf-esmolol-consider"
+    ],
+    "drugId": "esmolol",
+    "text": "The drug store esmolol entry covers A-Fib rate control and thyroid storm only, with no VF/VT indication, so this is a steps tile built from the node."
+  },
+  {
+    "kind": "other",
+    "tileId": "epinephrine",
+    "nodeIds": [
+      "rvf-epi-timing",
+      "rvf-hs-ts",
+      "rvf-vector-change"
+    ],
+    "text": "Tile order follows the consult's node flow (epinephrine, reversible causes, pads, double sequential defibrillation, amiodarone, lidocaine, esmolol). The critical-action list puts pads first and epinephrine last."
+  },
+  {
+    "kind": "gap",
+    "tileId": "reversible-causes",
+    "nodeIds": [
+      "rvf-hs-ts"
+    ],
+    "text": "The reversible-causes tile quotes 7 of the 11 H's and T's (with their 'The H's:' and 'The T's:' headings, within the 8-line limit), chosen so the face's hyperK, toxins and PE are all quoted: hypoxia, hypovolemia, hypo/hyperkalemia, tension pneumothorax, toxins, pulmonary thrombosis. Left out: hydrogen ion (acidosis), hypothermia, hypoglycemia, tamponade, coronary thrombosis (MI)."
+  },
+  {
+    "kind": "other",
+    "tileId": "esmolol",
+    "nodeIds": [
+      "rvf-esmolol-dose",
+      "rvf-esmolol-consider"
+    ],
+    "drugId": "esmolol",
+    "text": "The esmolol trigger is quoted as 'Consider after 3 shocks + epi + amio' from the drug dose notes; the consult's own fuller trigger line (3 shocks, 3 mg epinephrine, 300 mg amiodarone) names another drug with a dose, so it is not on this tile."
+  }
+]

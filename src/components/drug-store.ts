@@ -508,7 +508,7 @@ function estimateWeight(ageValue: number, bracket: 'infant' | 'child' | 'adolesc
 
 /** Calculate per-dose amount for a single WeightCalc entry given a weight in kg.
  *  For dailyDivided drugs, divides daily total before applying maxDose cap. */
-function calcDose(wc: WeightCalc, weightKg: number): { dose: number; capped: boolean; rawDose: number } {
+export function calcDose(wc: WeightCalc, weightKg: number): { dose: number; capped: boolean; rawDose: number } {
   let rawTotal = weightKg * wc.dosePerKg;
   let dose = wc.dailyDivided ? rawTotal / wc.dailyDivided : rawTotal;
   const rawDose = dose;
@@ -521,7 +521,7 @@ function calcDose(wc: WeightCalc, weightKg: number): { dose: number; capped: boo
 }
 
 /** Format a number to a clean decimal string (remove trailing zeros) */
-function fmtNum(n: number): string {
+export function fmtNum(n: number): string {
   return n % 1 === 0 ? String(n) : n.toFixed(2).replace(/0+$/, '').replace(/\.$/, '');
 }
 

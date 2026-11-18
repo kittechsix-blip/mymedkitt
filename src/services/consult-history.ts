@@ -20,6 +20,7 @@ const OVERLAY_SELECTOR = [
   '.infographic-overlay',
   '.toolbar-tools-overlay',
   '.decision-map-overlay',
+  '.rapid-overlay',
 ].join(',');
 
 let consultHash = '';
@@ -129,6 +130,11 @@ function onOverlayMutation(): void {
     const st = window.history.state as { mkOverlay?: boolean } | null;
     if (st && st.mkOverlay) goBy(-1);
   }
+}
+
+/** A route-opened overlay (#/tree/<id>/rapid) still needs its own history entry: call before attaching it. */
+export function claimOverlayEntry(): void {
+  lastHashChange = 0;
 }
 
 /** Call once at startup. */

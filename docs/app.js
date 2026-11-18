@@ -22,6 +22,7 @@ import { resolveNodeTreeId, setCurrentTreeId } from './services/node-resolver.js
 import { initAppUpdates, scheduleCacheWarm } from './services/app-update.js';
 import { initOfflineBadge } from './components/offline-badge.js';
 import { initOverlayHistory } from './services/consult-history.js';
+import { initRapidPreview } from './services/rapid-service.js';
 // -------------------------------------------------------------------
 // Service Worker Registration
 // -------------------------------------------------------------------
@@ -153,6 +154,19 @@ function handleTree(params) {
         return;
     void renderConsultFlow(main, id);
 }
+/** #/tree/<id>/rapid: load the consult as /tree/<id> does (restoring any saved session), card on top. */
+function handleTreeRapid(params) {
+    const id = params['id'] ?? 'unknown';
+    // Swap the hash for the plain consult hash without a hashchange, so Back from the card lands on the consult.
+    window.history.replaceState(null, '', window.location.pathname + window.location.search + '#/tree/' + id);
+    hideGlobalTabBar();
+    setCurrentTreeId(id);
+    const main = clearMain();
+    removeContextualToolbar();
+    if (renderProcedureApp(main, id))
+        return;
+    void renderConsultFlow(main, id, { openRapid: true });
+}
 function handleTreeNode(params) {
     hideGlobalTabBar();
     const treeId = params['id'] ?? 'unknown';
@@ -264,6 +278,7 @@ async function init() {
     registerServiceWorker();
     initOfflineBadge();
     initOverlayHistory();
+    initRapidPreview();
     // Show splash screen while data loads
     const splashPromise = showSplashScreen();
     // Initialize data services
@@ -291,6 +306,7 @@ async function init() {
     router.on('/category/:id', handleCategory);
     router.on('/tree/:id', handleTree);
     router.on('/tree/:id/node/:nodeId', handleTreeNode);
+    router.on('/tree/:id/rapid', handleTreeRapid);
     // Bare node deep-link used by ~3,200 in-body markdown links across consults,
     // stop pages and info pages. Resolves the owning consult, then redirects to the
     // canonical /tree/:id/node/:nodeId above. See handleBareNode.
