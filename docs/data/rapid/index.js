@@ -10,17 +10,13 @@ import { RAPID_ASYSTOLE } from './asystole.js';
 import { RAPID_BETA_BLOCKER_OD } from './beta-blocker-od.js';
 import { RAPID_BRADYCARDIC_ARREST } from './bradycardic-arrest.js';
 import { RAPID_BRAIN_HERNIATION } from './brain-herniation.js';
-import { RAPID_BURR_HOLE } from './burr-hole.js';
-import { RAPID_CARDIAC_ARREST } from './cardiac-arrest.js';
 import { RAPID_CARDIOGENIC_SHOCK } from './cardiogenic-shock.js';
 import { RAPID_CCB_OD } from './ccb-od.js';
 import { RAPID_CORD_EMERGENCIES } from './cord-emergencies.js';
 import { RAPID_CRICOTHYROTOMY } from './cricothyrotomy.js';
-import { RAPID_DIFFICULT_AIRWAY_BOUGIE } from './difficult-airway-bougie.js';
 import { RAPID_ECLAMPSIA } from './eclampsia.js';
 import { RAPID_HEAT_STROKE } from './heat-stroke.js';
 import { RAPID_HYPOGLYCEMIA } from './hypoglycemia.js';
-import { RAPID_HYPOTENSION_WORKUP } from './hypotension-workup.js';
 import { RAPID_HYPOTHERMIA } from './hypothermia.js';
 import { RAPID_INTRALIPID } from './intralipid.js';
 import { RAPID_MASSIVE_HEMOPTYSIS } from './massive-hemoptysis.js';
@@ -30,7 +26,6 @@ import { RAPID_PE_TREATMENT } from './pe-treatment.js';
 import { RAPID_PEA_ARREST } from './pea-arrest.js';
 import { RAPID_PEDS_SUBMERSION } from './peds-submersion.js';
 import { RAPID_POST_ROSC } from './post-rosc.js';
-import { RAPID_POTASSIUM } from './potassium.js';
 import { RAPID_PPH } from './pph.js';
 import { RAPID_REFRACTORY_VFVT } from './refractory-vfvt.js';
 import { RAPID_RESUSCITATIVE_HYSTEROTOMY } from './resuscitative-hysterotomy.js';
@@ -40,9 +35,7 @@ import { RAPID_STATUS_EPILEPTICUS } from './status-epilepticus.js';
 import { RAPID_STEMI } from './stemi.js';
 import { RAPID_SVT } from './svt.js';
 import { RAPID_TCA_TOXIDROME } from './tca-toxidrome.js';
-import { RAPID_THORACOTOMY_PROCEDURE } from './thoracotomy-procedure.js';
 import { RAPID_TORSADES_DE_POINTES } from './torsades-de-pointes.js';
-import { RAPID_TRACH_EMERGENCY } from './trach-emergency.js';
 import { RAPID_TRACHEO_INNOMINATE_FISTULA } from './tracheo-innominate-fistula.js';
 import { RAPID_TRAUMATIC_ARREST } from './traumatic-arrest.js';
 import { RAPID_UPPER_GI_BLEED } from './upper-gi-bleed.js';
@@ -60,17 +53,13 @@ export const RAPID_STRIPS = {
     [RAPID_BETA_BLOCKER_OD.treeId]: RAPID_BETA_BLOCKER_OD,
     [RAPID_BRADYCARDIC_ARREST.treeId]: RAPID_BRADYCARDIC_ARREST,
     [RAPID_BRAIN_HERNIATION.treeId]: RAPID_BRAIN_HERNIATION,
-    [RAPID_BURR_HOLE.treeId]: RAPID_BURR_HOLE,
-    [RAPID_CARDIAC_ARREST.treeId]: RAPID_CARDIAC_ARREST,
     [RAPID_CARDIOGENIC_SHOCK.treeId]: RAPID_CARDIOGENIC_SHOCK,
     [RAPID_CCB_OD.treeId]: RAPID_CCB_OD,
     [RAPID_CORD_EMERGENCIES.treeId]: RAPID_CORD_EMERGENCIES,
     [RAPID_CRICOTHYROTOMY.treeId]: RAPID_CRICOTHYROTOMY,
-    [RAPID_DIFFICULT_AIRWAY_BOUGIE.treeId]: RAPID_DIFFICULT_AIRWAY_BOUGIE,
     [RAPID_ECLAMPSIA.treeId]: RAPID_ECLAMPSIA,
     [RAPID_HEAT_STROKE.treeId]: RAPID_HEAT_STROKE,
     [RAPID_HYPOGLYCEMIA.treeId]: RAPID_HYPOGLYCEMIA,
-    [RAPID_HYPOTENSION_WORKUP.treeId]: RAPID_HYPOTENSION_WORKUP,
     [RAPID_HYPOTHERMIA.treeId]: RAPID_HYPOTHERMIA,
     [RAPID_INTRALIPID.treeId]: RAPID_INTRALIPID,
     [RAPID_MASSIVE_HEMOPTYSIS.treeId]: RAPID_MASSIVE_HEMOPTYSIS,
@@ -80,7 +69,6 @@ export const RAPID_STRIPS = {
     [RAPID_PEA_ARREST.treeId]: RAPID_PEA_ARREST,
     [RAPID_PEDS_SUBMERSION.treeId]: RAPID_PEDS_SUBMERSION,
     [RAPID_POST_ROSC.treeId]: RAPID_POST_ROSC,
-    [RAPID_POTASSIUM.treeId]: RAPID_POTASSIUM,
     [RAPID_PPH.treeId]: RAPID_PPH,
     [RAPID_REFRACTORY_VFVT.treeId]: RAPID_REFRACTORY_VFVT,
     [RAPID_RESUSCITATIVE_HYSTEROTOMY.treeId]: RAPID_RESUSCITATIVE_HYSTEROTOMY,
@@ -90,9 +78,7 @@ export const RAPID_STRIPS = {
     [RAPID_STEMI.treeId]: RAPID_STEMI,
     [RAPID_SVT.treeId]: RAPID_SVT,
     [RAPID_TCA_TOXIDROME.treeId]: RAPID_TCA_TOXIDROME,
-    [RAPID_THORACOTOMY_PROCEDURE.treeId]: RAPID_THORACOTOMY_PROCEDURE,
     [RAPID_TORSADES_DE_POINTES.treeId]: RAPID_TORSADES_DE_POINTES,
-    [RAPID_TRACH_EMERGENCY.treeId]: RAPID_TRACH_EMERGENCY,
     [RAPID_TRACHEO_INNOMINATE_FISTULA.treeId]: RAPID_TRACHEO_INNOMINATE_FISTULA,
     [RAPID_TRAUMATIC_ARREST.treeId]: RAPID_TRAUMATIC_ARREST,
     [RAPID_UPPER_GI_BLEED.treeId]: RAPID_UPPER_GI_BLEED,

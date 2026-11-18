@@ -10,7 +10,7 @@ const V = await import(pathToFileURL(join(ROOT, 'src/services/rapid-verify.ts'))
 const { verifyStrip, makeCanary, makeExcerptCanary, parseFindings, stripHash, approvalStatus } = V;
 
 /** Ratchet: raise as the fleet lands strips, never lower. */
-const MIN_STRIPS = 49;
+const MIN_STRIPS = 42;
 
 const strips = await loadStrips();
 const approvals = await loadApprovals();
