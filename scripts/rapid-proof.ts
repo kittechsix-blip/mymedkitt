@@ -1,6 +1,6 @@
 // Writes rapid-proof/index.html: every tile beside its sources, matched numbers marked.
 // Local only (gitignored, outside docs/). Usage: node scripts/rapid-proof.ts
-import { mkdirSync, writeFileSync, existsSync, readFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, loadStrips, loadApprovals, makeCtx } from './lib/rapid-load.ts';
@@ -43,6 +43,12 @@ function markPart(line: string, part: string): string {
   return esc(line.slice(0, i)) + `<mark class="q">${esc(part)}</mark>` + esc(line.slice(i + part.length));
 }
 
+/** Review groups for the index (edit freely). Order of groups = order on the page; anything not listed is "Remaining". */
+const REVIEW_GROUPS: { name: string; ids: string[] }[] = [
+  { name: 'Review first', ids: ['sepsis', 'hypoglycemia', 'pea-arrest', 'pph', 'shoulder-dystocia', 'massive-hemoptysis', 'stemi', 'tca-toxidrome'] },
+  { name: 'Pilot', ids: ['afib-rvr', 'refractory-vfvt', 'anaphylaxis'] },
+];
+
 const STATEMENT = 'Checked by machine: every expansion line is word-for-word text from a node the tile cites; every number on a tile face exists in its source; drug identity and weight math match the drug store. NOT checked by machine, and yours to judge: which tiles were chosen and what was left out, their order, the wording of any face, whether a quoted line still means the same thing outside its section, and whether the drug-store indication is the right one. Drug-wide contraindications and cautions, and lines of a cited node that are not quoted, are shown live from the drug store and consult and are not pinned by approval.';
 
 const strips = await loadStrips();
@@ -50,7 +56,13 @@ const approvals = await loadApprovals();
 let totalTokens = 0;
 let totalExcerpts = 0;
 let totalFail = 0;
-const sections: string[] = [];
+interface StripRec { id: string; title: string; status: string; variants: number; tiles: number; hard: number; flags: number; findings: number; body: string }
+const recs: StripRec[] = [];
+const { DEFAULT_CATEGORIES } = await import(pathToFileURL(join(ROOT, 'src/data/categories.ts')).href);
+const titleOf = (id: string): string => {
+  for (const c of DEFAULT_CATEGORIES as any[]) for (const t of c.decisionTrees ?? []) if (t.id === id) return t.title;
+  return id;
+};
 
 for (const [id, strip] of Object.entries(strips) as [string, any][]) {
   const { ctx, tree } = await makeCtx(id);
@@ -86,7 +98,7 @@ for (const [id, strip] of Object.entries(strips) as [string, any][]) {
   };
 
   // 1. status
-  let html = `<section><h2>${esc(id)} <span class="st">${esc(status)}</span></h2>
+  let html = `<section><h2>${esc(titleOf(id))} <code>${esc(id)}</code> <span class="st">${esc(status)}</span></h2>
 <p class="${r.ok ? '' : 'bad'}"><b>Would show in production if approved: ${r.ok ? 'yes' : 'no (' + r.failures.length + ' hard failure' + (r.failures.length === 1 ? '' : 's') + ')'}</b><br>Flags to acknowledge: ${r.flags.length}${a && a.ackedFlags ? ' &middot; currently acknowledged: ' + a.ackedFlags.length : ''}</p>
 <p class="meta">stripHash ${h}<br><a href="/app.html?rapid-preview=1#/tree/${encodeURIComponent(id)}/rapid">Preview on this device</a></p>`;
   for (const f of r.failures) html += `<p class="bad">${esc(f.message)}${f.nearest && f.nearest.length ? '<br><small>nearest: ' + esc(f.nearest.join(' | ')) + '</small>' : ''}</p>`;
@@ -140,11 +152,10 @@ for (const [id, strip] of Object.entries(strips) as [string, any][]) {
   const ids = flagIds(r);
   const binding = approvalBinding(strip, ctx.getDrug, r);
   html += `<h3>Approve (owner)</h3><p>Read each flag above before using this command.</p><p class="meta">--hash binds the approval to this strip, these regimens and this flag set (${esc(binding)}); anything that changes before you run it is refused.</p><pre class="cmd">${esc(`node scripts/rapid-approve.ts ${id} --hash ${binding}${ids.map((x: string) => ' \\\n  --ack ' + shq(x)).join('')}`)}</pre>`;
-  sections.push(html + '</section>');
+  recs.push({ id, title: titleOf(id), status: st.status === 'draft' ? 'draft' : st.status === 'live' ? 'approved+live' : 'approved-but-dropped', variants: strip.variants.length, tiles: strip.variants.reduce((n: number, v: any) => n + v.tiles.length, 0), hard: r.failures.length, flags: r.flags.length, findings: findings.length, body: html + '</section>' });
 }
 
-const page = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RAPID proof (local only)</title><style>
+const CSS = `
 body{font:16px/1.45 system-ui,sans-serif;background:#FAF4EB;color:#141414;margin:0;padding:16px;max-width:1300px;margin-inline:auto}
 section{background:#fff;border:1px solid #E7D6C4;border-radius:6px;padding:16px;margin:16px 0}
 .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:16px;border-top:1px solid #E5E5E5;padding:12px 0}
@@ -153,8 +164,29 @@ section,code,pre,.cmd,.src,.whole,.full,blockquote,.flag,.wcrow,h2,h3,h4,p{overf
 summary{cursor:pointer;padding:6px 0}.pb{height:6px}.ack{background:#fff;border:1px dashed #d9b34a}.wcrow{margin:6px 0;font-size:14px}
 pre{white-space:pre-wrap;font:13px/1.4 ui-monospace,monospace;background:#FAF4EB;padding:8px;border-radius:4px}.whole{background:#FAF4EB;border-radius:4px;padding:6px 8px;font:13px/1.4 ui-monospace,monospace}.ln{padding:1px 0}.ln.quoted{background:#fff6e0}.ln.skipped{color:#8a8a8a}mark.q{background:#f3d98a}.hdr{font-size:13px;color:#5E6A74;margin-top:4px}.full{font-size:14px;background:#FAF4EB;padding:6px 8px;border-radius:4px;margin:2px 0}.why{font-size:13px;color:#8B1A1A}.tag{display:inline-block;font-size:12px;color:#5E6A74;border:1px solid #E7D6C4;border-radius:3px;padding:0 6px;background:#fff}.crit li.off{color:#8B1A1A}.crit li.on{color:#1B6E1B}
 div.flag{background:#fff6e0;border:1px solid #d9b34a;border-radius:4px;padding:6px;margin:6px 0;font-size:13px}.row.flagged{background:#fffaf0}.cmd{white-space:pre-wrap}mark.ok{background:#cfe9cf}mark.bad{background:#f6c7c7}.bad{color:#8B1A1A}.st{font-size:14px;color:#8A3324}.meta{font:12px ui-monospace,monospace;color:#5E6A74}
-small{color:#5E6A74}.stmt{background:#fff;border:1px solid #E7D6C4;border-left:4px solid #8A3324;border-radius:4px;padding:10px 12px;font-weight:600}blockquote{margin:4px 0;padding:6px 10px;background:#FAF4EB;border-left:3px solid #8A3324;font-size:14px}.badex blockquote{border-left-color:#B22222;background:#FDF2F2}h5{margin:10px 0 4px}</style></head><body><h1>RAPID proof page</h1><p class="stmt">${esc(STATEMENT)}</p><p class="meta">Local only. Verifier v${RAPID_VERIFIER_VERSION} &middot; generated ${new Date().toISOString()} &middot; ${Object.keys(strips).length} strips &middot; ${totalTokens} face tokens &middot; ${totalExcerpts} excerpts checked &middot; ${totalFail} failures</p>${sections.join('')}</body></html>`;
+small{color:#5E6A74}.stmt{background:#fff;border:1px solid #E7D6C4;border-left:4px solid #8A3324;border-radius:4px;padding:10px 12px;font-weight:600}blockquote{margin:4px 0;padding:6px 10px;background:#FAF4EB;border-left:3px solid #8A3324;font-size:14px}.badex blockquote{border-left-color:#B22222;background:#FDF2F2}h5{margin:10px 0 4px}`;
+const shell = (title: string, body: string): string => `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${esc(title)}</title><style>${CSS}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;padding:6px 8px;border-top:1px solid #E5E5E5;vertical-align:top}th{font-size:12px;color:#5E6A74}
+.tablewrap{overflow-x:auto;max-width:100%}.nav{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;margin:8px 0}</style></head><body>${body}</body></html>`;
+
+// ---- order: review group, then flag count ascending
+const groupOf = (id: string): number => { const i = REVIEW_GROUPS.findIndex((g) => g.ids.includes(id)); return i < 0 ? REVIEW_GROUPS.length : i; };
+recs.sort((a, b) => groupOf(a.id) - groupOf(b.id) || a.flags - b.flags || a.id.localeCompare(b.id));
 
 mkdirSync(join(ROOT, 'rapid-proof'), { recursive: true });
-writeFileSync(join(ROOT, 'rapid-proof/index.html'), page);
-console.log('wrote rapid-proof/index.html');
+recs.forEach((rec, i) => {
+  const prev = recs[i - 1];
+  const next = recs[i + 1];
+  const nav = `<div class="nav"><a href="index.html">&larr; All strips</a>${prev ? `<a href="${esc(prev.id)}.html">&laquo; ${esc(prev.id)}</a>` : '<span></span>'}${next ? `<a href="${esc(next.id)}.html">${esc(next.id)} &raquo;</a>` : '<span></span>'}</div>`;
+  writeFileSync(join(ROOT, `rapid-proof/${rec.id}.html`), shell(`RAPID proof: ${rec.id}`, `${nav}<p class="stmt">${esc(STATEMENT)}</p>${rec.body}${nav}`));
+});
+
+const parkedDir = join(ROOT, 'research/rapid/parked');
+const parked = existsSync(parkedDir) ? readdirSync(parkedDir).filter((f) => f.endsWith('.ts.draft')).map((f) => f.slice(0, -'.ts.draft'.length)).sort() : [];
+const rows = (g: number): string => recs.filter((x) => groupOf(x.id) === g).map((x) => `<tr><td>${esc(x.title)}</td><td><code>${esc(x.id)}</code></td><td>${esc(x.status)}</td><td>${x.variants}</td><td>${x.tiles}</td><td class="${x.hard ? 'bad' : ''}">${x.hard}</td><td>${x.flags}</td><td>${x.findings}</td><td><a href="/app.html?rapid-preview=1#/tree/${encodeURIComponent(x.id)}/rapid">Preview card</a></td><td><a href="${esc(x.id)}.html">Proof</a></td></tr>`).join('');
+const groups = [...REVIEW_GROUPS.map((g) => g.name), 'Remaining'];
+const tables = groups.map((name, g) => { const n = recs.filter((x) => groupOf(x.id) === g).length; return n ? `<h2>${esc(name)} (${n})</h2><div class="tablewrap"><table><tr><th>Consult</th><th>treeId</th><th>Status</th><th>Variants</th><th>Tiles</th><th>Hard failures</th><th>Flags</th><th>Findings</th><th>Card</th><th>Proof</th></tr>${rows(g)}</table></div>` : ''; }).join('');
+const index = shell('RAPID proof (local only)', `<h1>RAPID proof</h1><p class="stmt">${esc(STATEMENT)}</p><p class="meta">Local only. Verifier v${RAPID_VERIFIER_VERSION} &middot; generated ${new Date().toISOString()} &middot; ${recs.length} strips &middot; ${totalTokens} face tokens &middot; ${totalExcerpts} excerpts checked &middot; ${totalFail} failures</p>${tables}<h2>Parked: not registered (${parked.length})</h2><p>${parked.length ? parked.map((x) => `<code>${esc(x)}</code>`).join(' ') : 'None.'}</p>`);
+writeFileSync(join(ROOT, 'rapid-proof/index.html'), index);
+console.log(`wrote rapid-proof/index.html and ${recs.length} strip pages`);

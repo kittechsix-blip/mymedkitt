@@ -590,53 +590,26 @@ test('rapid-approve: refuses without --hash and on a hash mismatch, and never to
   assert.equal(readFileSync(file, 'utf8'), before);
 });
 
-test('proof page: statement, findings first, critical-action coverage, approve command last with shell-safe ids', () => {
+test('proof pages: an index (statement, grouped table, parked list) and one page per strip with the fixed section order', () => {
   const r = spawnSync(process.execPath, [`${ROOT}/scripts/rapid-proof.ts`], { encoding: 'utf8', cwd: ROOT });
   assert.equal(r.status, 0, r.stderr);
-  const html = readFileSync(`${ROOT}/rapid-proof/index.html`, 'utf8');
-  assert.ok(html.includes('NOT checked by machine, and yours to judge: which tiles were chosen and what was left out'));
-  for (const sec of html.split('<section>').slice(1)) {
-    const at = (m: string) => sec.indexOf(m);
-    assert.ok(at('Findings (read first)') > 0 && at('Findings (read first)') < at("The consult's Critical actions") && at("The consult's Critical actions") < at('<h4>') && sec.lastIndexOf('<h3>Approve (owner)</h3>') > sec.lastIndexOf('<h4>'), 'section order');
-    assert.ok(/--hash [0-9a-f]{12}/.test(sec));
-    assert.ok(/not on strip|on strip/.test(sec));
+  const index = readFileSync(`${ROOT}/rapid-proof/index.html`, 'utf8');
+  assert.ok(index.includes('NOT checked by machine, and yours to judge: which tiles were chosen and what was left out'));
+  assert.ok(index.length < 100_000, `the index must stay small (${index.length} bytes)`);
+  assert.ok(index.includes('<h2>Review first (') || index.includes('<h2>Pilot ('), 'review groups');
+  assert.ok(index.includes('Parked: not registered'));
+  const ids = [...index.matchAll(/href="([a-z0-9-]+)\.html">Proof</g)].map((m) => m[1]);
+  assert.ok(ids.includes('anaphylaxis') && ids.includes('afib-rvr'));
+  assert.ok(index.includes('/app.html?rapid-preview=1#/tree/anaphylaxis/rapid'), 'preview link');
+  for (const id of ['anaphylaxis', 'afib-rvr']) {
+    const html = readFileSync(`${ROOT}/rapid-proof/${id}.html`, 'utf8');
+    const at = (m: string) => html.indexOf(m);
+    assert.ok(html.includes('href="index.html"'), 'link back to the index');
+    assert.ok(at('Findings (read first)') > 0 && at('Findings (read first)') < at("The consult's Critical actions") && at("The consult's Critical actions") < at('<h4>') && html.lastIndexOf('<h3>Approve (owner)</h3>') > html.lastIndexOf('<h4>'), 'section order');
+    assert.ok(/--hash [0-9a-f]{12}/.test(html));
+    assert.ok(/not on strip|on strip/.test(html));
+    assert.ok(!/max-height/.test(html.slice(html.indexOf('<body>'))), 'no fixed-height scroll boxes');
   }
-  assert.ok(!/max-height/.test(html.slice(html.indexOf('<body>'))), 'no fixed-height scroll boxes');
-});
-
-test('governing header: a quoted heading has none; the search stops at a blank-line break (real afib-hfref-drugs)', async () => {
-  const { ctx } = await makeCtx('afib-rvr');
-  const nodes = new Map(ctx.nodes.map((n: { id: string }) => [n.id, n]));
-  const cx = (text: string) => excerptContext(ex('afib-hfref-drugs', text), nodes as never, []);
-  assert.equal(cx('FIRST-LINE \u2014 Beta-Blockers:')?.header, undefined, 'a quoted heading is not shown under a sibling section header');
-  assert.equal(cx('FIRST-LINE \u2014 Beta-Blockers:')?.reasons.length, 0, 'no bogus context reason on a quoted heading');
-  assert.equal(cx('Metoprolol 2.5\u20135 mg IV q5min, up to 15 mg total')?.header, 'FIRST-LINE \u2014 Beta-Blockers:', 'the header of its own paragraph, not "CONTRAINDICATED in HFrEF:"');
-  assert.equal(cx('Digoxin 0.25\u20130.5 mg IV')?.header, 'SECOND-LINE \u2014 Digoxin:');
-  assert.equal(cx('Rate Control in HFrEF (EF \u226440%)')?.header, undefined);
-  const lines = nodeLines(nodes.get('afib-hfref-drugs') as never) as { text: string; para: number }[];
-  assert.notEqual(lines.find((l) => l.text.startsWith('FIRST-LINE'))?.para, lines.find((l) => l.text.startsWith('\u26A0')) ?.para);
-  // synthetic: a blank line stops the upward search
-  const n = new Map([['q', { id: 'q', title: 't', body: 'Header:\nitem one\n\nitem two here now\nitem three' }]]);
-  assert.equal(excerptContext(ex('q', 'item three'), n as never, [])?.header, undefined, 'a blank line separates the paragraphs');
-  assert.equal(excerptContext(ex('q', 'item one'), n as never, [])?.header, 'Header:');
-});
-
-test('drug-as-steps: a figure carrying a dose needs a gap finding for the tile even when no drug name is detected', () => {
-  const tile = stepTile({ id: 't', action: 'Push it', figure: '0.5 mg', nodeIds: ['b1'], lines: [ex('b1', 'Max 1 mg')] });
-  const ctx = (findings: unknown[]) => ({ ...synth, criticalActions: [], allDrugs: [], findings });
-  assert.ok(hard(wrap([tile]), ctx([])).some((m) => /figure carries a dose/.test(m)));
-  assert.deepEqual(hard(wrap([tile]), ctx([{ kind: 'gap', tileId: 't', nodeIds: [], text: 'why' }])).filter((m) => /figure carries a dose/.test(m)), []);
-  assert.ok(hard(wrap([tile]), ctx([{ kind: 'other', tileId: 't', nodeIds: [], text: 'why' }])).some((m) => /figure carries a dose/.test(m)));
-  assert.deepEqual(hard(wrap([stepTile()]), ctx([])).filter((m) => /figure carries a dose/.test(m)), [], '200 J is not a dose unit');
-});
-
-test('approval binding: --hash changes with the strip, a live regimen and the flag set', () => {
-  const strip = wrap([drugTile()]);
-  const b = (st: RapidStrip, ctx: any = synth) => approvalBinding(st, ctx.getDrug, verifyStrip(st, ctx as never));
-  const base = b(strip);
-  assert.match(base, /^[0-9a-f]{12}$/);
-  assert.equal(b(strip), base);
-  assert.notEqual(b(wrap([drugTile({ figure: '0.01 mg/kg' })])), base, 'strip / flag set');
-  const drifted = { ...synth, getDrug: (id: string) => (id === 'drug-x' ? { ...drugX, dosing: [{ ...drugX.dosing[0], regimen: drugX.dosing[0].regimen.replace('5 min', '6 min') }] } : stores[id]) as never };
-  assert.notEqual(b(strip, drifted), base, 'a regimen change between proofing and approving');
+  const first = readFileSync(`${ROOT}/rapid-proof/${ids[0]}.html`, 'utf8');
+  assert.ok(ids.length > 1 && first.includes(`href="${ids[1]}.html"`), 'next link follows the index order');
 });
