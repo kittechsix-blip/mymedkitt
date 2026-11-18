@@ -1,7 +1,7 @@
 // MedKitt - Eclampsia
 // ED management of seizures in pregnancy with preeclampsia
 // 5 modules: Recognition -> Seizure Control -> BP Management -> Maternal/Fetal Stabilization -> Delivery
-// Based on ACOG 2020, SMFM 2022, and EM literature
+// Based on ACOG Practice Bulletin 222 (2020), ACOG Committee Opinion 767, and cited literature
 
 import type { DecisionNode } from '../../models/types.js';
 
