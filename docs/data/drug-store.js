@@ -261,7 +261,7 @@ const AMOXICILLIN_CLAVULANATE = {
     genericName: 'Amoxicillin / Clavulanic acid',
     drugClass: 'Aminopenicillin + beta-lactamase inhibitor',
     route: 'PO',
-    indications: ['Pediatric UTI (alternative outpatient)', 'Otitis media', 'Sinusitis', 'Bite wounds', 'Adult UTI / cystitis'],
+    indications: ['Pediatric UTI (alternative outpatient)', 'Otitis media', 'Sinusitis', 'Bite wounds', 'Adult UTI / cystitis', 'Peritonsillar abscess (adult)', 'Suppurative sialadenitis (adult)'],
     dosing: [
         {
             indication: 'Pediatric UTI',
@@ -271,6 +271,14 @@ const AMOXICILLIN_CLAVULANATE = {
         {
             indication: 'Adult UTI / cystitis',
             regimen: '500/125 mg PO BID × 5-7 days. Alternative for uncomplicated cystitis when first-line agents (nitrofurantoin, fosfomycin, TMP-SMX) contraindicated or resistance suspected. Pregnancy-safe. IDSA 2011.',
+        },
+        {
+            indication: 'Peritonsillar abscess (adult)',
+            regimen: '875/125 mg PO twice daily for 10–14 days. Use when able to swallow. The 875 mg tablet is unsuitable for GFR below 30 mL/min. University of Iowa PTA protocol.',
+        },
+        {
+            indication: 'Suppurative sialadenitis (adult)',
+            regimen: '875/125 mg PO twice daily for outpatient bacterial infection. Tailor duration to clinical response. The 875 mg tablet is unsuitable for GFR below 30 mL/min. Moore et al., Can Fam Physician 2023.',
         },
         {
             indication: 'Hidradenitis suppurativa — perianal / perineal / gluteal secondary infection (adult)',
@@ -288,6 +296,9 @@ const AMOXICILLIN_CLAVULANATE = {
     monitoring: 'Clinical response. LFTs if prolonged course or hepatic symptoms. Repeat urine culture if no improvement at 48-72 hours.',
     notes: 'Alternative empiric outpatient antibiotic for pediatric febrile UTI when cephalexin not tolerated. Per DCMC EBOC guidelines.',
     citations: [
+        'University of Iowa. Peritonsillar Abscess Management. https://iowaprotocols.medicine.uiowa.edu/protocols/peritonsillar-abscess-pta-management',
+        'Moore J et al. Approach to sialadenitis. Can Fam Physician. 2023;69:531–536. https://pmc.ncbi.nlm.nih.gov/articles/PMC10426371/',
+        'FDA. Augmentin prescribing information, section 2.6 (renal dosing). https://www.accessdata.fda.gov/drugsatfda_docs/label/2026/050720s039lbl.pdf',
         'Dell Children\'s EBOC. First Febrile Urinary Tract Infection Clinical Pathway. May 2017.',
         'Roberts KB. Urinary tract infection: clinical practice guideline for febrile infants and children 2 to 24 months. Pediatrics. 2011;128(3):595-610.',
     ],

@@ -698,7 +698,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'post-tonsillectomy-bleed': async () => {
             const m = await import('../data/trees/post-tonsillectomy-bleed.js');
-            return { nodes: m.PTH_NODES, entryNodeId: 'pth-start', categoryId: 'pediatrics', moduleLabels: m.PTH_MODULE_LABELS, citations: m.PTH_CITATIONS, criticalActions: m.PTH_CRITICAL_ACTIONS };
+            return { nodes: m.PTH_NODES, entryNodeId: 'pth-start', categoryId: 'ent', moduleLabels: m.PTH_MODULE_LABELS, citations: m.PTH_CITATIONS, criticalActions: m.PTH_CRITICAL_ACTIONS };
         },
         'critical-care-drips': async () => {
             const m = await import('../data/trees/critical-care-drips.js');
@@ -970,7 +970,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'epistaxis': async () => {
             const m = await import('../data/trees/epistaxis.js');
-            return { nodes: m.EPISTAXIS_NODES, entryNodeId: 'epi-start', categoryId: 'emergency-medicine', moduleLabels: m.EPISTAXIS_MODULE_LABELS, citations: m.EPISTAXIS_CITATIONS, criticalActions: m.EPISTAXIS_CRITICAL_ACTIONS };
+            return { nodes: m.EPISTAXIS_NODES, entryNodeId: 'epi-start', categoryId: 'ent', moduleLabels: m.EPISTAXIS_MODULE_LABELS, citations: m.EPISTAXIS_CITATIONS, criticalActions: m.EPISTAXIS_CRITICAL_ACTIONS };
         },
         'psychiatry-assessment': async () => {
             const m = await import('../data/trees/psychiatry-assessment.js');
@@ -1074,7 +1074,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'trach-emergency': async () => {
             const m = await import('../data/trees/trach-emergency.js');
-            return { nodes: m.TRACH_EMERGENCY_NODES, entryNodeId: 'trach-start', categoryId: 'emergency-medicine', moduleLabels: m.TRACH_EMERGENCY_MODULE_LABELS, citations: m.TRACH_EMERGENCY_CITATIONS, criticalActions: m.TRACH_EMERGENCY_CRITICAL_ACTIONS };
+            return { nodes: m.TRACH_EMERGENCY_NODES, entryNodeId: 'trach-start', categoryId: 'ent', moduleLabels: m.TRACH_EMERGENCY_MODULE_LABELS, citations: m.TRACH_EMERGENCY_CITATIONS, criticalActions: m.TRACH_EMERGENCY_CRITICAL_ACTIONS };
         },
         'methemoglobinemia': async () => {
             const m = await import('../data/trees/methemoglobinemia.js');
@@ -1086,7 +1086,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'deep-neck-infection': async () => {
             const m = await import('../data/trees/deep-neck-infection.js');
-            return { nodes: m.DEEP_NECK_INFECTION_NODES, entryNodeId: 'dni-start', categoryId: 'infectious-disease', moduleLabels: m.DEEP_NECK_INFECTION_MODULE_LABELS, citations: m.DEEP_NECK_INFECTION_CITATIONS, criticalActions: m.DEEP_NECK_INFECTION_CRITICAL_ACTIONS };
+            return { nodes: m.DEEP_NECK_INFECTION_NODES, entryNodeId: 'dni-start', categoryId: 'ent', moduleLabels: m.DEEP_NECK_INFECTION_MODULE_LABELS, citations: m.DEEP_NECK_INFECTION_CITATIONS, criticalActions: m.DEEP_NECK_INFECTION_CRITICAL_ACTIONS };
         },
         'vp-shunt': async () => {
             const m = await import('../data/trees/vp-shunt.js');
@@ -1238,7 +1238,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'laryngeal-trauma': async () => {
             const m = await import('../data/trees/laryngeal-trauma.js');
-            return { nodes: m.LARYNGEAL_TRAUMA_NODES, entryNodeId: 'larynx-start', categoryId: 'trauma-surg', moduleLabels: m.LARYNGEAL_TRAUMA_MODULE_LABELS, citations: m.LARYNGEAL_TRAUMA_CITATIONS, criticalActions: m.LARYNGEAL_TRAUMA_CRITICAL_ACTIONS };
+            return { nodes: m.LARYNGEAL_TRAUMA_NODES, entryNodeId: 'larynx-start', categoryId: 'ent', moduleLabels: m.LARYNGEAL_TRAUMA_MODULE_LABELS, citations: m.LARYNGEAL_TRAUMA_CITATIONS, criticalActions: m.LARYNGEAL_TRAUMA_CRITICAL_ACTIONS };
         },
         'refractory-vfvt': async () => {
             const m = await import('../data/trees/refractory-vfvt.js');
@@ -1314,7 +1314,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'pta-drainage': async () => {
             const m = await import('../data/trees/pta-drainage.js');
-            return { nodes: m.PTA_DRAINAGE_NODES, entryNodeId: 'pta-start', categoryId: 'procedures', moduleLabels: m.PTA_DRAINAGE_MODULE_LABELS, citations: m.PTA_DRAINAGE_CITATIONS, criticalActions: m.PTA_DRAINAGE_CRITICAL_ACTIONS };
+            return { nodes: m.PTA_DRAINAGE_NODES, entryNodeId: 'pta-start', categoryId: 'ent', moduleLabels: m.PTA_DRAINAGE_MODULE_LABELS, citations: m.PTA_DRAINAGE_CITATIONS, criticalActions: m.PTA_DRAINAGE_CRITICAL_ACTIONS };
         },
         'heat-stroke': async () => {
             const m = await import('../data/trees/heat-stroke.js');
@@ -1350,7 +1350,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'ear-fb': async () => {
             const m = await import('../data/trees/ear-fb.js');
-            return { nodes: m.EAR_FB_NODES, entryNodeId: 'earfb-start', categoryId: 'procedures', moduleLabels: m.EAR_FB_MODULE_LABELS, citations: m.EAR_FB_CITATIONS, criticalActions: m.EAR_FB_CRITICAL_ACTIONS };
+            return { nodes: m.EAR_FB_NODES, entryNodeId: 'earfb-start', categoryId: 'ent', moduleLabels: m.EAR_FB_MODULE_LABELS, citations: m.EAR_FB_CITATIONS, criticalActions: m.EAR_FB_CRITICAL_ACTIONS };
         },
         'suicide-risk-assessment': async () => {
             const m = await import('../data/trees/suicide-risk-assessment.js');
@@ -1498,7 +1498,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'tracheo-innominate-fistula': async () => {
             const m = await import('../data/trees/tracheo-innominate-fistula.js');
-            return { nodes: m.TRACHEO_INNOMINATE_FISTULA_NODES, entryNodeId: 'tif-start', categoryId: 'anesthesia-airway', moduleLabels: m.TRACHEO_INNOMINATE_FISTULA_MODULE_LABELS, citations: m.TRACHEO_INNOMINATE_FISTULA_CITATIONS, criticalActions: m.TRACHEO_INNOMINATE_FISTULA_CRITICAL_ACTIONS };
+            return { nodes: m.TRACHEO_INNOMINATE_FISTULA_NODES, entryNodeId: 'tif-start', categoryId: 'ent', moduleLabels: m.TRACHEO_INNOMINATE_FISTULA_MODULE_LABELS, citations: m.TRACHEO_INNOMINATE_FISTULA_CITATIONS, criticalActions: m.TRACHEO_INNOMINATE_FISTULA_CRITICAL_ACTIONS };
         },
         'le-fort-fracture': async () => {
             const m = await import('../data/trees/le-fort-fracture.js');
@@ -1580,9 +1580,17 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/cricothyrotomy.js');
             return { nodes: m.CRICOTHYROTOMY_NODES, entryNodeId: 'cric-start', categoryId: 'anesthesia-airway', moduleLabels: m.CRICOTHYROTOMY_MODULE_LABELS, citations: m.CRICOTHYROTOMY_CITATIONS, criticalActions: m.CRICOTHYROTOMY_CRITICAL_ACTIONS };
         },
+        'peritonsillar-abscess': async () => {
+            const m = await import('../data/trees/peritonsillar-abscess.js');
+            return { nodes: m.PERITONSILLAR_ABSCESS_NODES, entryNodeId: 'quinsy-start', categoryId: 'ent', moduleLabels: m.PERITONSILLAR_ABSCESS_MODULE_LABELS, citations: m.PERITONSILLAR_ABSCESS_CITATIONS, criticalActions: m.PERITONSILLAR_ABSCESS_CRITICAL_ACTIONS };
+        },
+        'sialolithiasis': async () => {
+            const m = await import('../data/trees/sialolithiasis.js');
+            return { nodes: m.SIALOLITHIASIS_NODES, entryNodeId: 'sialo-start', categoryId: 'ent', moduleLabels: m.SIALOLITHIASIS_MODULE_LABELS, citations: m.SIALOLITHIASIS_CITATIONS, criticalActions: m.SIALOLITHIASIS_CRITICAL_ACTIONS };
+        },
         'ear-infection': async () => {
             const m = await import('../data/trees/ear-infection.js');
-            return { nodes: m.EAR_INFECTION_NODES, entryNodeId: 'ear-start', categoryId: 'emergency-medicine', moduleLabels: m.EAR_INFECTION_MODULE_LABELS, citations: m.EAR_INFECTION_CITATIONS, criticalActions: m.EAR_INFECTION_CRITICAL_ACTIONS };
+            return { nodes: m.EAR_INFECTION_NODES, entryNodeId: 'ear-start', categoryId: 'ent', moduleLabels: m.EAR_INFECTION_MODULE_LABELS, citations: m.EAR_INFECTION_CITATIONS, criticalActions: m.EAR_INFECTION_CRITICAL_ACTIONS };
         },
         'lower-gi-bleed': async () => {
             const m = await import('../data/trees/lower-gi-bleed.js');
@@ -1654,7 +1662,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'adult-pharyngitis': async () => {
             const m = await import('../data/trees/adult-pharyngitis.js');
-            return { nodes: m.ADULT_PHARYNGITIS_NODES, entryNodeId: 'ap-start', categoryId: 'infectious-disease', moduleLabels: m.ADULT_PHARYNGITIS_MODULE_LABELS, citations: m.ADULT_PHARYNGITIS_CITATIONS, criticalActions: m.ADULT_PHARYNGITIS_CRITICAL_ACTIONS };
+            return { nodes: m.ADULT_PHARYNGITIS_NODES, entryNodeId: 'ap-start', categoryId: 'ent', moduleLabels: m.ADULT_PHARYNGITIS_MODULE_LABELS, citations: m.ADULT_PHARYNGITIS_CITATIONS, criticalActions: m.ADULT_PHARYNGITIS_CRITICAL_ACTIONS };
         },
         'penile-zipper-release': async () => {
             const m = await import('../data/trees/penile-zipper-release.js');

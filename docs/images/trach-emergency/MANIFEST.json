@@ -1,0 +1,26 @@
+{
+  "airway-routes-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/trach-emergency/airway-routes-atlas",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party artwork approved by owner for this ENT build.",
+    "license_evidence_url": "original://myMedKitt/trach-emergency/airway-routes-atlas",
+    "retrieval_timestamp": "2026-11-18",
+    "andy_approval_commit": "Owner approval in ENT build thread 01a1f048-855d-79a1-9030-ce657633691e: approve, now commit and push.",
+    "sha256": "cde3299d36784a4f547109300da95f542056b3569ed1a9cc39a5ac4c2bb9c852"
+  },
+  "trach-tube-anatomy.png": {
+    "author": "Cancer Research UK / Wikimedia Commons",
+    "title": "Diagram showing a fenestrated and a non fenestrated tracheostomy tube CRUK 066",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Diagram_showing_a_fenestrated_and_a_non_fenestrated_tracheostomy_tube_CRUK_066.svg",
+    "license_tag": "CC-BY-SA-4.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Diagram_showing_a_fenestrated_and_a_non_fenestrated_tracheostomy_tube_CRUK_066.svg",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "changes": "PNG rendering of SVG",
+    "retrieval_timestamp": "2026-04-08",
+    "andy_approval_commit": null,
+    "provenance_note": "Existing shipped image introduced in cef075ec. Source verified 2026-11-18. Separate owner approval record not located.",
+    "sha256": "3b3df8c20a52fe4eac6413110d5f523d458fb333362eea80602c3d2d25c94687"
+  }
+}

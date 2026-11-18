@@ -17,6 +17,11 @@ export const TRACHEO_INNOMINATE_FISTULA_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Tracheo-Innominate Fistula',
+    images: [{
+      src: 'images/tracheo-innominate-fistula/fistula-atlas.jpg',
+      alt: 'Paired cutaways of intact arterial and tracheal walls and a fistula carrying blood into the airway.',
+      caption: 'A defect between the innominate artery and anterior tracheal wall allows arterial blood to enter the airway. Schematic, not to scale. Original myMedKitt atlas illustration.',
+    }],
     body: '[TIF Steps Summary](#/info/tif-steps)\n\n**Tracheo-Innominate Fistula (TIF)** is a catastrophic complication of tracheostomy with near-100% mortality without intervention and 50-70% mortality even with surgery. [1][2]\n\n**Key Principle:** Massive hemorrhage occurring 3 days to 6 weeks after tracheostomy is **TIF until proven otherwise**. [1][3]\n\n**Incidence:** 0.1-1% of tracheostomies; accounts for ~10% of significant tracheostomy bleeds. [2]\n\n**This consult covers:**\n- Recognizing the sentinel bleed (warning sign)\n- Cuff hyperinflation technique\n- Finger tamponade (Utley maneuver)\n- Surgical activation\n- Stabilization and airway management\n\n**Time is critical.** A sentinel bleed precedes massive hemorrhage by only 24-48 hours. [1][4]',
     citation: [1, 2, 3, 4],
     next: 'tif-timing-check',

@@ -44,6 +44,11 @@ export const TRACH_EMERGENCY_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Tracheostomy or Laryngectomy?',
+    images: [{
+      src: 'images/trach-emergency/airway-routes-atlas.jpg',
+      alt: 'Sagittal comparison of a tracheostomy and a total laryngectomy with an end stoma.',
+      caption: 'A tracheostomy may retain upper airway continuity. After total laryngectomy the stoma is the only airway. Original myMedKitt atlas illustration.',
+    }],
     body: '**Laryngectomy = Total surgical removal of larynx**\n- NO connection between oropharynx and airway\n- CANNOT be intubated from above\n- Stoma is the ONLY airway\n\n**Tracheostomy = Tube through trachea, larynx intact**\n- Upper airway may be patent\n- Can potentially oxygenate/intubate from above\n- Dual oxygenation strategy possible\n\n**If uncertain:** Attempt to feel airflow from mouth during ventilation. No airflow = likely laryngectomy. [1][2]',
     citation: [1, 2],
     options: [
@@ -306,7 +311,7 @@ export const TRACH_EMERGENCY_NODES: DecisionNode[] = [
     type: 'question',
     module: 5,
     title: 'Bleeding: Timing & Severity',
-    body: '**Tracheostomy bleeding - assess timing and severity:**\n\n**Early bleeding (<48 hours post-op):**\n- Usually minor: skin edges, granulation\n- Related to suctioning, manipulation\n- Rarely life-threatening\n\n**Late bleeding (>72 hours, especially 7-14 days):**\n- **HIGH RISK for tracheo-innominate fistula (TIF)**\n- Innominate artery erosion - mortality approaches 50%\n- Any late bleeding may be "sentinel bleed" before massive hemorrhage\n\n**Sentinel bleed:**\n- Small self-limited bleed preceding massive hemorrhage (up to 50% of TIF cases)\n- **TREAT ANY LATE BLEEDING AS POTENTIAL TIF** [4][6][7][8]',
+    body: '[Open Tracheo-Innominate Fistula and RAPID](#/tree/tracheo-innominate-fistula) for suspected arterial hemorrhage.\n\n**Tracheostomy bleeding - assess timing and severity:**\n\n**Early bleeding (<48 hours post-op):**\n- Usually minor: skin edges, granulation\n- Related to suctioning, manipulation\n- Rarely life-threatening\n\n**Late bleeding (>72 hours, especially 7-14 days):**\n- **HIGH RISK for tracheo-innominate fistula (TIF)**\n- Innominate artery erosion - mortality approaches 50%\n- Any late bleeding may be "sentinel bleed" before massive hemorrhage\n\n**Sentinel bleed:**\n- Small self-limited bleed preceding massive hemorrhage (up to 50% of TIF cases)\n- **TREAT ANY LATE BLEEDING AS POTENTIAL TIF** [4][6][7][8]',
     citation: [4, 6, 7, 8],
     calculatorLinks: [
       { id: 'trach-bleeding', label: 'Bleeding Risk Assessment' },

@@ -1,0 +1,13 @@
+{
+  "fistula-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/tracheo-innominate-fistula/fistula-atlas",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party artwork approved by owner for this ENT build.",
+    "license_evidence_url": "original://myMedKitt/tracheo-innominate-fistula/fistula-atlas",
+    "retrieval_timestamp": "2026-11-18",
+    "andy_approval_commit": "Owner approval in ENT build thread 01a1f048-855d-79a1-9030-ce657633691e: approve, now commit and push.",
+    "sha256": "4d3e0ccfbaf8a59f290e1fd02c1b48dc77b88b9d927e55e2a9b4e09025533c0d"
+  }
+}
