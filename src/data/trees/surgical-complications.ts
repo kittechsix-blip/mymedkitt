@@ -19,6 +19,18 @@ export const SURGICAL_COMPLICATIONS_CRITICAL_ACTIONS: CriticalAction[] = [
   {
     text: "Peritonitis after colectomy: involve colorectal surgery for source control immediately.",
     nodeId: "sc-colectomy-anastomotic-leak-or-pelvic-abscess"
+  },
+  {
+    text: "Gas in an operated eye: avoid nitrous oxide, including Entonox, until the gas has fully resolved.",
+    nodeId: "sc-retina-gas-expansion-or-pressure-related-ischemia"
+  },
+  {
+    text: "After Roux-en-Y, a negative CT cannot exclude a threatened internal hernia. Involve bariatric surgery early.",
+    nodeId: "sc-rygb-internal-hernia-or-closed-loop-obstruction"
+  },
+  {
+    text: "Progressive neck swelling or stridor after anterior cervical surgery needs an immediate airway and spine response.",
+    nodeId: "sc-anterior-cervical-neck-hematoma-or-pharyngolaryngeal-edema"
   }
 ];
 
@@ -71,7 +83,19 @@ export const SURGICAL_COMPLICATIONS_NODES: DecisionNode[] = [
       {
         label: "Urology",
         next: "sc-urology"
-      }
+      },
+        {
+          label: "Bariatric surgery",
+          next: "sc-bariatric-surgery"
+        },
+        {
+          label: "Neurosurgery and spine",
+          next: "sc-neurosurgery-and-spine"
+        },
+        {
+          label: "Ophthalmology",
+          next: "sc-ophthalmology"
+        }
     ]
   },
   {
@@ -88,7 +112,19 @@ export const SURGICAL_COMPLICATIONS_NODES: DecisionNode[] = [
       {
         label: "Laparoscopic appendectomy",
         next: "sc-appy"
-      }
+      },
+        {
+          label: "Inguinal hernia repair",
+          next: "sc-inguinal"
+        },
+        {
+          label: "Umbilical hernia repair",
+          next: "sc-umbilical"
+        },
+        {
+          label: "Incisional or ventral hernia repair",
+          next: "sc-incisional"
+        }
     ]
   },
   {
@@ -1252,6 +1288,1043 @@ export const SURGICAL_COMPLICATIONS_NODES: DecisionNode[] = [
       37
     ],
     confidence: "recommended"
+  },
+  {
+    id: "sc-bariatric-surgery",
+    type: "question",
+    module: 1,
+    title: "Bariatric surgery",
+    body: "Select the operation documented in the operative report.",
+    options: [
+      {
+        label: "Sleeve gastrectomy",
+        next: "sc-sleeve"
+      },
+      {
+        label: "Roux-en-Y gastric bypass",
+        next: "sc-rygb"
+      },
+      {
+        label: "Adjustable gastric band (legacy)",
+        next: "sc-band"
+      }
+    ]
+  },
+  {
+    id: "sc-sleeve",
+    type: "question",
+    module: 2,
+    title: "Sleeve gastrectomy",
+    body: "The greater curvature and fundus are resected, leaving a narrow gastric tube along the lesser curvature. The pylorus, duodenum and intestinal continuity remain. A long staple line runs up to the angle of His.\n\n[Open before-and-after atlas](#/image/surgical-complications/sleeve-atlas.jpg)\n\n[Operative reference](https://www.niddk.nih.gov/health-information/weight-management/bariatric-surgery/types)\n\n**Select the suspected complication.**",
+    images: [
+      {"src": "images/surgical-complications/sleeve-atlas.jpg", "alt": "The dotted outline marks the removed fundus and greater curvature. A long lateral staple line borders the remaining sleeve, with the pylorus and duodenum still in continuity.", "caption": "The dotted outline marks the removed fundus and greater curvature. A long lateral staple line borders the remaining sleeve, with the pylorus and duodenum still in continuity."}
+    ],
+    citation: [
+      44,
+      45
+    ],
+    options: [
+      {
+        label: "Staple-line leak or subphrenic collection",
+        next: "sc-sleeve-staple-line-leak-or-subphrenic-collection"
+      },
+      {
+        label: "Sleeve narrowing, twist or dehydration",
+        next: "sc-sleeve-sleeve-narrowing-twist-or-dehydration"
+      },
+      {
+        label: "Postoperative bleeding",
+        next: "sc-sleeve-postoperative-bleeding"
+      }
+    ]
+  },
+  {
+    id: "sc-sleeve-staple-line-leak-or-subphrenic-collection",
+    type: "result",
+    module: 3,
+    title: "Staple-line leak or subphrenic collection",
+    body: "**When to suspect it**\nUnexplained tachycardia, new LUQ or left shoulder pain, fever, dyspnea or failure to tolerate liquids, especially early after surgery. Peritonism can be minimal.\n\n**Workup and interpretation**\nAssess perfusion, CBC, renal function and lactate; investigate PE or bleeding in parallel as indicated. If stable, CT abdomen/pelvis with IV and water-soluble oral contrast if safe and feasible. Perigastric gas/fluid can be significant without visible extravasation. Negative CT or swallow study cannot clear a deteriorating patient.",
+    recommendation: "NPO, IV fluids, broad IV enteric antibiotics, urgent bariatric surgery. Drainage, endoscopic therapy or washout depends on stability and containment. Shock or diffuse peritonitis warrants immediate operative assessment.",
+    citation: [
+      44,
+      46
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-sleeve-sleeve-narrowing-twist-or-dehydration",
+    type: "result",
+    module: 3,
+    title: "Sleeve narrowing, twist or dehydration",
+    body: "**When to suspect it**\nProgressive regurgitation, dysphagia or vomiting after diet advancement. Angulation near the incisura can impair emptying despite an intact staple line.\n\n**Workup and interpretation**\nCheck hydration, electrolytes, magnesium and renal function. Contrast upper GI series can demonstrate angulation or delayed transit; bariatric endoscopy defines narrowing. Severe pain, tachycardia or fever requires leak and obstruction evaluation first.",
+    recommendation: "IV rehydration and electrolyte correction. For protracted vomiting or neurologic signs give parenteral thiamine promptly, before or with carbohydrate; treat hypoglycemia immediately. Coordinate endoscopic dilation or revision with bariatric surgery.",
+    citation: [
+      44,
+      46,
+      47
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-sleeve-postoperative-bleeding",
+    type: "result",
+    module: 3,
+    title: "Postoperative bleeding",
+    body: "**When to suspect it**\nEarly tachycardia, syncope, distension or falling hemoglobin. Bleeding can be intraperitoneal without hematemesis or melena.\n\n**Workup and interpretation**\nAssess perfusion, serial hemoglobin, coagulation and crossmatch. CTA for ongoing extraluminal bleeding when stable; GI blood loss may need endoscopy. A normal first hemoglobin does not exclude hemorrhage.",
+    recommendation: "Activate bariatric surgery; restore circulating volume with blood products as indicated. Ongoing shock needs immediate hemorrhage control. Stable patients may need endoscopy, embolization or re-exploration according to the source.",
+    citation: [
+      44,
+      46
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-rygb",
+    type: "question",
+    module: 2,
+    title: "Roux-en-Y gastric bypass",
+    body: "Food passes from a small gastric pouch across the gastrojejunostomy into the Roux limb. The excluded stomach drains through the duodenum into the biliopancreatic limb. Those secretions meet food at the jejunojejunostomy. Mesenteric defects create sites for internal hernia.\n\n[Open before-and-after atlas](#/image/surgical-complications/rygb-atlas.jpg)\n\n[Operative reference](https://www.niddk.nih.gov/health-information/weight-management/bariatric-surgery/types)\n\n**Select the suspected complication.**",
+    images: [
+      {"src": "images/surgical-complications/rygb-atlas.jpg", "alt": "Food travels from the small pouch down the Roux limb. Secretions from the excluded stomach and duodenum join the food stream at the jejunojejunostomy.", "caption": "Food travels from the small pouch down the Roux limb. Secretions from the excluded stomach and duodenum join the food stream at the jejunojejunostomy."}
+    ],
+    citation: [
+      44,
+      45
+    ],
+    options: [
+      {
+        label: "Internal hernia or closed-loop obstruction",
+        next: "sc-rygb-internal-hernia-or-closed-loop-obstruction"
+      },
+      {
+        label: "Gastrojejunal or jejunojejunal leak",
+        next: "sc-rygb-gastrojejunal-or-jejunojejunal-leak"
+      },
+      {
+        label: "Marginal ulcer, bleeding or perforation",
+        next: "sc-rygb-marginal-ulcer-bleeding-or-perforation"
+      },
+      {
+        label: "Gastrojejunal stricture",
+        next: "sc-rygb-gastrojejunal-stricture"
+      }
+    ]
+  },
+  {
+    id: "sc-rygb-internal-hernia-or-closed-loop-obstruction",
+    type: "result",
+    module: 3,
+    title: "Internal hernia or closed-loop obstruction",
+    body: "**When to suspect it**\nIntermittent postprandial cramping or abrupt severe epigastric pain months to years after bypass. Vomiting may be scant, particularly with an obstructed biliopancreatic limb.\n\n**Workup and interpretation**\nCT abdomen/pelvis with IV and water-soluble oral contrast when feasible. Look for mesenteric swirl, clustered bowel, ischemia and dilation of the excluded stomach or biliopancreatic limb. Normal lactate, stool passage and negative CT cannot exclude intermittent strangulation.",
+    recommendation: "NPO, IV fluids and immediate bariatric surgical consultation for persistent or recurrent concerning pain. Suspected ischemia or peritonitis needs emergency exploration; do not discharge solely on a negative scan. A routine NG tube cannot decompress the excluded stomach.",
+    citation: [
+      44,
+      46
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-rygb-gastrojejunal-or-jejunojejunal-leak",
+    type: "result",
+    module: 3,
+    title: "Gastrojejunal or jejunojejunal leak",
+    body: "**When to suspect it**\nNew tachycardia, dyspnea, fever or abdominal/shoulder pain early after bypass, sometimes without rigidity.\n\n**Workup and interpretation**\nObtain CBC, metabolic panel, lactate and contrast CT if stable. Tell radiology this is Roux-en-Y; an oral contrast study evaluates only opacified segments. A collection or unexplained deterioration warrants surgical reassessment despite absent extravasation.",
+    recommendation: "NPO, IV fluids, broad IV antibiotics and immediate bariatric consultation. Shock or generalized peritonitis requires urgent surgical source control. Stable contained leaks may require drainage and specialist endoscopic treatment.",
+    citation: [
+      44,
+      46
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-rygb-marginal-ulcer-bleeding-or-perforation",
+    type: "result",
+    module: 3,
+    title: "Marginal ulcer, bleeding or perforation",
+    body: "**When to suspect it**\nEpigastric pain, hematemesis, melena or iron deficiency at the gastrojejunal join. Sudden severe pain or rigidity suggests perforation. Ask about NSAIDs, nicotine and acid suppression.\n\n**Workup and interpretation**\nAssess hemodynamics, CBC and crossmatch if bleeding. Stable suspected ulcer needs upper endoscopy. If perforation suspected, CT with IV contrast if stable and early operative review; a negative scan does not override peritonitis.",
+    recommendation: "Stop NSAIDs, begin PPI and coordinate bariatric/GI evaluation. Active bleeding needs resuscitation and urgent endoscopic hemostasis. Suspected perforation needs NPO, IV antibiotics and emergency surgical management.",
+    citation: [
+      44,
+      48
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-rygb-gastrojejunal-stricture",
+    type: "result",
+    module: 3,
+    title: "Gastrojejunal stricture",
+    body: "**When to suspect it**\nProgressive intolerance of solids then liquids, usually weeks after surgery. May present with dehydration and little abdominal pain.\n\n**Workup and interpretation**\nElectrolytes and renal function; endoscopy identifies stricture and excludes ulcer. A patient with significant pain, fever or tachycardia also needs evaluation for leak or internal hernia.",
+    recommendation: "Restore volume, give parenteral thiamine for prolonged vomiting, and contact bariatric endoscopy for balloon dilation. Admit if unable to tolerate fluids or if the diagnosis remains uncertain.",
+    citation: [
+      44,
+      46,
+      47
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-band",
+    type: "question",
+    module: 2,
+    title: "Adjustable gastric band (legacy)",
+    body: "An inflatable band encircles the proximal stomach and connects via tubing to a subcutaneous access port. The stomach and duodenum remain continuous. Confirm the device still exists and whether it has been revised.\n\n[Open before-and-after atlas](#/image/surgical-complications/band-atlas.jpg)\n\n[Operative reference](https://www.niddk.nih.gov/health-information/weight-management/bariatric-surgery/types)\n\n**Select the suspected complication.**",
+    images: [
+      {"src": "images/surgical-complications/band-atlas.jpg", "alt": "The adjustable band creates a small proximal pouch. Tubing connects the band to an access port implanted in the abdominal wall, shown separately here.", "caption": "The adjustable band creates a small proximal pouch. Tubing connects the band to an access port implanted in the abdominal wall, shown separately here."}
+    ],
+    citation: [
+      45,
+      49
+    ],
+    options: [
+      {
+        label: "Band slippage or acute outlet obstruction",
+        next: "sc-band-band-slippage-or-acute-outlet-obstruction"
+      },
+      {
+        label: "Band erosion or late port infection",
+        next: "sc-band-band-erosion-or-late-port-infection"
+      }
+    ]
+  },
+  {
+    id: "sc-band-band-slippage-or-acute-outlet-obstruction",
+    type: "result",
+    module: 3,
+    title: "Band slippage or acute outlet obstruction",
+    body: "**When to suspect it**\nAcute dysphagia, excessive salivation, regurgitation, epigastric pain or inability to swallow liquids after a fill or meal. Severe pain, fever or shock may indicate ischemia or perforation.\n\n**Workup and interpretation**\nAssess aspiration and perfusion. Radiographs can show abnormal band orientation or a dilated pouch; a water-soluble contrast study can show prolapse or obstruction when safe. Severe symptoms warrant surgery regardless of equivocal imaging.",
+    recommendation: "NPO, IV fluids, aspiration precautions and urgent bariatric surgery. Prompt complete band deflation through the correct port by a trained clinician can relieve obstruction. Persistent obstruction or suspected ischemia requires urgent operation even after deflation.",
+    citation: [
+      46,
+      49
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-band-band-erosion-or-late-port-infection",
+    type: "result",
+    module: 3,
+    title: "Band erosion or late port infection",
+    body: "**When to suspect it**\nLoss of restriction, recurrent port-site infection, upper GI bleeding or epigastric pain can reflect erosion into the stomach.\n\n**Workup and interpretation**\nInspect port and tubing course; check CBC and cultures if systemic illness. Endoscopy confirms intragastric erosion. CT evaluates abscess or perforation. Benign port appearance does not exclude erosion.",
+    recommendation: "Involve bariatric surgery for device removal and source control. Treat cellulitis or systemic infection with appropriate antibiotics. Avoid accessing an infected port through overlying cellulitis.",
+    citation: [
+      49
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-inguinal",
+    type: "question",
+    module: 2,
+    title: "Inguinal hernia repair",
+    body: "The groin defect is reduced. An open anterior repair often places mesh along the posterior wall of the inguinal canal; laparoscopic or robotic repairs typically place mesh in the preperitoneal space. Spermatic cord structures and inguinal nerves lie nearby.\n\n[Open before-and-after atlas](#/image/surgical-complications/inguinal-atlas.jpg)\n\n[Operative reference](https://pmc.ncbi.nlm.nih.gov/articles/PMC10588975/)\n\n**Select the suspected complication.**",
+    images: [
+      {"src": "images/surgical-complications/inguinal-atlas.jpg", "alt": "An indirect hernia follows the cord through the deep ring. In this open anterior repair, mesh reinforces the inguinal floor behind the cord.", "caption": "An indirect hernia follows the cord through the deep ring. In this open anterior repair, mesh reinforces the inguinal floor behind the cord."}
+    ],
+    citation: [
+      50,
+      51
+    ],
+    options: [
+      {
+        label: "Groin seroma, hematoma or ongoing bleeding",
+        next: "sc-inguinal-groin-seroma-hematoma-or-ongoing-bleeding"
+      },
+      {
+        label: "Acute testicular pain or impaired perfusion",
+        next: "sc-inguinal-acute-testicular-pain-or-impaired-perfusion"
+      },
+      {
+        label: "Urinary retention",
+        next: "sc-inguinal-urinary-retention"
+      },
+      {
+        label: "Recurrent incarcerated or strangulated hernia",
+        next: "sc-inguinal-recurrent-incarcerated-or-strangulated-hernia"
+      },
+      {
+        label: "Persistent postoperative inguinal pain",
+        next: "sc-inguinal-persistent-postoperative-inguinal-pain"
+      }
+    ]
+  },
+  {
+    id: "sc-inguinal-groin-seroma-hematoma-or-ongoing-bleeding",
+    type: "result",
+    module: 3,
+    title: "Groin seroma, hematoma or ongoing bleeding",
+    body: "**When to suspect it**\nEarly swelling and bruising may extend into the scrotum. Rapid enlargement, presyncope, severe pain or a falling hemoglobin suggests bleeding.\n\n**Workup and interpretation**\nExamine incision, groin, abdomen and scrotum. Check CBC and anticoagulants. Ultrasound can distinguish fluid from recurrent hernia; CT/CTA if deep or expanding bleeding is suspected and patient stable.",
+    recommendation: "Stable small collections usually need analgesia, support and surgical follow-up. Avoid routine aspiration near mesh. Expanding hematoma, skin compromise or instability needs resuscitation and urgent surgical control.",
+    citation: [
+      50,
+      51
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-inguinal-acute-testicular-pain-or-impaired-perfusion",
+    type: "result",
+    module: 3,
+    title: "Acute testicular pain or impaired perfusion",
+    body: "**When to suspect it**\nNew unilateral testicular pain, marked tenderness or swelling after cord dissection may reflect ischemic orchitis, infarction or torsion.\n\n**Workup and interpretation**\nExamine the testicle separately from the wound. Obtain urgent color Doppler comparing both sides and call urology and surgery. Preserved flow does not fully exclude partial torsion; never delay exploration for imaging when clinical suspicion is high.",
+    recommendation: "NPO, analgesia and urgent specialist assessment to preserve viability. Avoid attributing a painful swollen testicle to expected postoperative bruising.",
+    citation: [
+      50,
+      52
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-inguinal-urinary-retention",
+    type: "result",
+    module: 3,
+    title: "Urinary retention",
+    body: "**When to suspect it**\nSuprapubic pain, dribbling or inability to void shortly after anesthesia, particularly with baseline outlet obstruction.\n\n**Workup and interpretation**\nPalpate and perform bladder scan or postvoid residual. If bladder is empty despite oliguria, assess perfusion, renal function and alternative causes.",
+    recommendation: "Decompress symptomatic retention with an appropriate catheter per protocol. Reassess renal function if prolonged and arrange a dated voiding trial. Seek urology for difficult catheterization; avoid repeated traumatic attempts.",
+    citation: [
+      50,
+      51
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-inguinal-recurrent-incarcerated-or-strangulated-hernia",
+    type: "result",
+    module: 3,
+    title: "Recurrent incarcerated or strangulated hernia",
+    body: "**When to suspect it**\nPainful irreducible groin bulge, vomiting, distension or obstipation. Discoloration, peritonism or systemic toxicity raises concern for ischemia.\n\n**Workup and interpretation**\nExamine both groins and abdomen. Ultrasound or IV contrast CT if stable and uncertain. Normal lactate or continued flatus does not exclude early strangulation.",
+    recommendation: "NPO, IV fluids, analgesia and immediate surgery consultation. Avoid forceful reduction, particularly across a fresh repair. Suspected strangulation or peritonitis requires emergency operative assessment.",
+    citation: [
+      50
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-inguinal-persistent-postoperative-inguinal-pain",
+    type: "result",
+    module: 3,
+    title: "Persistent postoperative inguinal pain",
+    body: "**When to suspect it**\nActivity-limiting groin pain beyond three months may be neuropathic, mesh-related or due to recurrence. Burning, allodynia or radiation into scrotal skin differs from pain within the testis.\n\n**Workup and interpretation**\nMap pain and sensory changes; examine for recurrent bulge, infection and testicular pathology. Ultrasound can clarify suspected recurrence or scrotal disease. New acute testicular pain or an irreducible bulge needs its own emergency pathway.",
+    recommendation: "Provide appropriate non-opioid analgesia and refer to a specialist hernia service for multimodal evaluation, possible diagnostic nerve block and selected interventions.",
+    citation: [
+      50
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-umbilical",
+    type: "question",
+    module: 2,
+    title: "Umbilical hernia repair",
+    body: "The sac is reduced at the umbilical fascial ring, and the defect is closed with sutures, often reinforced by mesh. A postoperative pocket at the former sac site can mimic recurrence.\n\n[Open before-and-after atlas](#/image/surgical-complications/umbilical-atlas.jpg)\n\n[Operative reference](https://www.facs.org/for-patients/the-day-of-your-surgery/adult-umbilical-hernia/)\n\n**Select the suspected complication.**",
+    images: [
+      {"src": "images/surgical-complications/umbilical-atlas.jpg", "alt": "Preperitoneal fat protrudes through the umbilical fascial defect. After reduction and fascial closure, a preperitoneal mesh reinforces the repair above the intact peritoneum.", "caption": "Preperitoneal fat protrudes through the umbilical fascial defect. After reduction and fascial closure, a preperitoneal mesh reinforces the repair above the intact peritoneum."}
+    ],
+    citation: [
+      53
+    ],
+    options: [
+      {
+        label: "Seroma versus wound infection",
+        next: "sc-umbilical-seroma-versus-wound-infection"
+      },
+      {
+        label: "Recurrent entrapment or small bowel obstruction",
+        next: "sc-umbilical-recurrent-entrapment-or-small-bowel-obstruction"
+      }
+    ]
+  },
+  {
+    id: "sc-umbilical-seroma-versus-wound-infection",
+    type: "result",
+    module: 3,
+    title: "Seroma versus wound infection",
+    body: "**When to suspect it**\nSoft fullness at the navel is common after repair. Increasing warmth, purulent drainage, fever or progressive tenderness suggests infection.\n\n**Workup and interpretation**\nExamine wound, skin viability and abdomen. Ultrasound can show a superficial fluid collection. Obtain contrast CT if systemic illness, deep pain or concern for mesh infection. Fluid on imaging alone does not diagnose an abscess.",
+    recommendation: "Observe an uncomplicated seroma with surgical follow-up. Avoid routine aspiration through fresh mesh. Treat cellulitis; surgical drainage/culture and antibiotics are needed for an infected collection according to depth and severity.",
+    citation: [
+      6,
+      53,
+      54
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-umbilical-recurrent-entrapment-or-small-bowel-obstruction",
+    type: "result",
+    module: 3,
+    title: "Recurrent entrapment or small bowel obstruction",
+    body: "**When to suspect it**\nIncreasing umbilical pain, firm nonreducible bulge, vomiting or loss of bowel function after initial recovery.\n\n**Workup and interpretation**\nExamine for peritonism and skin change; CT with IV contrast in stable patients to locate the transition point and assess bowel enhancement. A small defect can strangulate part of the bowel wall without complete obstruction.",
+    recommendation: "NPO, IV fluids, decompression if significant vomiting and urgent general surgery. Persistent focal pain, ischemic signs or instability warrants immediate surgical assessment.",
+    citation: [
+      7,
+      53,
+      54
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-incisional",
+    type: "question",
+    module: 2,
+    title: "Incisional or ventral hernia repair",
+    body: "Scarred fascia from a previous laparotomy is reapproximated when feasible. Mesh may lie retrorectus, preperitoneal, onlay or intraperitoneal; large repairs may include component separation. Check the operative report for plane, drains and adhesiolysis.\n\n[Open before-and-after atlas](#/image/surgical-complications/incisional-atlas.jpg)\n\n[Operative reference](https://pmc.ncbi.nlm.nih.gov/articles/PMC4956629/)\n\n**Select the suspected complication.**",
+    images: [
+      {"src": "images/surgical-complications/incisional-atlas.jpg", "alt": "Bowel protrudes through the old midline incision. In this retrorectus repair, mesh lies behind both rectus muscles and superficial to the posterior sheath. The inset shows a possible superficial seroma.", "caption": "Bowel protrudes through the old midline incision. In this retrorectus repair, mesh lies behind both rectus muscles and superficial to the posterior sheath. The inset shows a possible superficial seroma."}
+    ],
+    citation: [
+      54,
+      55
+    ],
+    options: [
+      {
+        label: "Abdominal-wall collection or mesh infection",
+        next: "sc-incisional-abdominal-wall-collection-or-mesh-infection"
+      },
+      {
+        label: "Ileus, obstruction or missed bowel injury",
+        next: "sc-incisional-ileus-obstruction-or-missed-bowel-injury"
+      },
+      {
+        label: "Fascial dehiscence or evisceration",
+        next: "sc-incisional-fascial-dehiscence-or-evisceration"
+      }
+    ]
+  },
+  {
+    id: "sc-incisional-abdominal-wall-collection-or-mesh-infection",
+    type: "result",
+    module: 3,
+    title: "Abdominal-wall collection or mesh infection",
+    body: "**When to suspect it**\nSeroma can cause painless fullness; escalating pain, fever, erythema, purulent drainage or systemic illness suggests deep infection.\n\n**Workup and interpretation**\nCBC, renal function, cultures if septic and contrast CT for collection depth, rim changes, fistula and relationship to mesh. Early postoperative gas or fluid can be nonspecific; review images with the operating team.",
+    recommendation: "Avoid blind drainage. Observe uncomplicated collections. For sepsis, IV antibiotics and urgent surgical source control; drainage and mesh salvage or removal depend on mesh plane, organism and extent.",
+    citation: [
+      6,
+      54,
+      55
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-incisional-ileus-obstruction-or-missed-bowel-injury",
+    type: "result",
+    module: 3,
+    title: "Ileus, obstruction or missed bowel injury",
+    body: "**When to suspect it**\nPersistent vomiting, worsening distension or new focal pain after adhesiolysis. Fever, escalating pain, peritonitis or deterioration after initial improvement should prompt concern for bowel injury.\n\n**Workup and interpretation**\nCheck perfusion, CBC, electrolytes and lactate. Stable patients need CT abdomen/pelvis with IV contrast for transition point, impaired enhancement, free fluid or evolving collection. Negative early imaging cannot clear a worsening exam.",
+    recommendation: "NPO, IV fluids, NG decompression for significant vomiting and urgent surgery. Give broad IV enteric antibiotics if perforation or peritonitis suspected. Shock, threatened bowel or peritonitis requires immediate source-control assessment.",
+    citation: [
+      5,
+      7,
+      54
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-incisional-fascial-dehiscence-or-evisceration",
+    type: "result",
+    module: 3,
+    title: "Fascial dehiscence or evisceration",
+    body: "**When to suspect it**\nA sudden pop, new bulge or gush of serosanguineous fluid suggests disrupted fascia. Exposed bowel is an operative emergency.\n\n**Workup and interpretation**\nInspect gently; do not probe an intact skin closure. CT if stable and disruption is uncertain. Visible evisceration or peritonitis needs no imaging before surgical mobilization.",
+    recommendation: "Supine, NPO, IV access, protect exposed viscera with warm sterile saline-moistened dressing, avoid bedside reduction, and call surgery for immediate repair. Give IV antibiotics if bowel exposure or contamination.",
+    citation: [
+      54,
+      56
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-neurosurgery-and-spine",
+    type: "question",
+    module: 1,
+    title: "Neurosurgery and spine",
+    body: "Select the operation documented in the operative report.",
+    options: [
+      {
+        label: "Anterior cervical decompression and fusion (ACDF or corpectomy)",
+        next: "sc-anterior-cervical"
+      },
+      {
+        label: "Posterior lumbar decompression or laminectomy",
+        next: "sc-laminectomy"
+      },
+      {
+        label: "Posterior instrumented lumbar fusion (PLIF or TLIF)",
+        next: "sc-post-fusion"
+      },
+      {
+        label: "Anterior lumbar interbody fusion (ALIF)",
+        next: "sc-alif"
+      }
+    ]
+  },
+  {
+    id: "sc-anterior-cervical",
+    type: "question",
+    module: 2,
+    title: "Anterior cervical decompression and fusion (ACDF or corpectomy)",
+    body: "From the front of the neck, ACDF removes a disc and decompresses the cord or roots. A graft or cage bridges the disc space, often with anterior fixation. A corpectomy removes vertebral body as well as adjacent discs and needs a longer reconstruction. Laminectomy removes posterior bone. Confirm the actual operation and levels.\n\n[Open before-and-after atlas](#/image/surgical-complications/anterior-cervical-atlas.jpg)\n\n[Operative reference](https://www.orthoinfo.org/bodypart/neck/cervical-radiculopathy-surgical-treatment-options/)\n\n**Select the suspected complication.**",
+    images: [
+      {"src": "images/surgical-complications/anterior-cervical-atlas.jpg", "alt": "In this single-level anterior cervical discectomy and fusion, removing the protruding disc relieves ventral cord compression. An interbody spacer occupies the disc space and an anterior plate spans the adjacent vertebral bodies.", "caption": "In this single-level anterior cervical discectomy and fusion, removing the protruding disc relieves ventral cord compression. An interbody spacer occupies the disc space and an anterior plate spans the adjacent vertebral bodies."}
+    ],
+    citation: [
+      57,
+      58
+    ],
+    options: [
+      {
+        label: "Neck hematoma or pharyngolaryngeal edema · airway emergency",
+        next: "sc-anterior-cervical-neck-hematoma-or-pharyngolaryngeal-edema"
+      },
+      {
+        label: "New weakness or cord compression · emergency",
+        next: "sc-anterior-cervical-new-weakness-or-cord-compression"
+      },
+      {
+        label: "Persistent dysphagia or esophageal injury",
+        next: "sc-anterior-cervical-persistent-dysphagia-or-esophageal-injury"
+      }
+    ]
+  },
+  {
+    id: "sc-anterior-cervical-neck-hematoma-or-pharyngolaryngeal-edema",
+    type: "result",
+    module: 3,
+    title: "Neck hematoma or pharyngolaryngeal edema · airway emergency",
+    body: "**When to suspect it**\nRapid neck tightness, swelling, progressive dysphagia, drooling, voice change, anxiety or stridor. Oxygen saturation can remain normal until late; visible swelling may be modest.\n\n**Workup and interpretation**\nAssess voice, secretion handling and work of breathing at bedside. Call anesthesia, spine surgery and airway backup immediately. Do not send a threatened airway supine to CT. Stable patients may need flexible laryngoscopy or imaging with specialists.",
+    recommendation: "Upright if tolerated, oxygen, suction, preserve spontaneous ventilation when feasible and prepare a difficult-airway and surgical airway plan. For a suspected expanding hematoma with critical airway compromise, immediate wound release and evacuation may be needed before definitive hemostasis. Predominant edema requires expert airway control; prepare emergency front-of-neck access if oxygenation fails.",
+    citation: [
+      59,
+      80
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-anterior-cervical-new-weakness-or-cord-compression",
+    type: "result",
+    module: 3,
+    title: "New weakness or cord compression · emergency",
+    body: "**When to suspect it**\nNew arm or leg weakness, sensory level, gait deterioration or bladder dysfunction after cervical surgery. Neck pain may precede a compressive epidural hematoma.\n\n**Workup and interpretation**\nDocument baseline and current motor/sensory findings in all four limbs. Urgent cervical MRI and simultaneous spine consultation; CT assesses implants or bony alignment but cannot clear the epidural space. Rapid profound decline may prompt immediate return to OR.",
+    recommendation: "NPO, avoid hypotension, review anticoagulants and arrange reversal if indicated with specialists. Expedite decompression or implant revision for a compressive lesion. Avoid an observation trial for a new deficit.",
+    citation: [
+      60,
+      61
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-anterior-cervical-persistent-dysphagia-or-esophageal-injury",
+    type: "result",
+    module: 3,
+    title: "Persistent dysphagia or esophageal injury",
+    body: "**When to suspect it**\nMild early swallowing discomfort is common. Severe or worsening odynophagia, fever, crepitus, neck drainage, chest pain or recurrent aspiration suggests perforation or deep infection.\n\n**Workup and interpretation**\nAssess airway first. CT neck/chest with contrast in stable patients; coordinate water-soluble esophagram and further testing with spine/ENT or thoracic surgery. A negative initial study does not exclude a small perforation if suspicion remains high.",
+    recommendation: "NPO; avoid blind NG placement. Give broad IV antibiotics for suspected perforation or deep infection and arrange urgent specialist source control. Stable isolated dysphagia still needs swallowing assessment if aspiration or poor intake.",
+    citation: [
+      58,
+      59,
+      62
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-laminectomy",
+    type: "question",
+    module: 2,
+    title: "Posterior lumbar decompression or laminectomy",
+    body: "Through a posterior approach, the surgeon removes part or all of the lamina and thickened ligamentum flavum to expand the spinal canal. Decompression alone does not place fusion implants. Confirm levels and any incidental durotomy or added fusion.\n\n[Operative reference](https://www.aans.org/patients/conditions-treatments/lumbar-spinal-stenosis/)\n\n**Select the suspected complication.**",
+    citation: [
+      63
+    ],
+    options: [
+      {
+        label: "Compressive epidural hematoma or cauda equina syndrome",
+        next: "sc-laminectomy-compressive-epidural-hematoma-or-cauda-equina-syndrome"
+      },
+      {
+        label: "CSF leak or pseudomeningocele",
+        next: "sc-laminectomy-csf-leak-or-pseudomeningocele"
+      },
+      {
+        label: "Wound or deep spinal infection",
+        next: "sc-laminectomy-wound-or-deep-spinal-infection"
+      }
+    ]
+  },
+  {
+    id: "sc-laminectomy-compressive-epidural-hematoma-or-cauda-equina-syndrome",
+    type: "result",
+    module: 3,
+    title: "Compressive epidural hematoma or cauda equina syndrome",
+    body: "**When to suspect it**\nSevere escalating back/radicular pain, new weakness, saddle sensory loss, urinary retention or new incontinence after surgery.\n\n**Workup and interpretation**\nCompare motor, sensory and sacral function with discharge baseline. Assess bladder residual when appropriate; a low residual cannot exclude incomplete cauda equina syndrome. Call spine surgery and obtain emergency MRI.",
+    recommendation: "NPO, maintain perfusion, identify anticoagulants and discuss urgent reversal. Progressive deficit with compression requires emergency decompression. Transfer promptly if MRI or surgical treatment unavailable.",
+    citation: [
+      60,
+      61
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-laminectomy-csf-leak-or-pseudomeningocele",
+    type: "result",
+    module: 3,
+    title: "CSF leak or pseudomeningocele",
+    body: "**When to suspect it**\nOrthostatic headache, nausea, clear wound drainage or a fluctuant swelling after possible durotomy. Fever, meningismus or neurologic deficit changes urgency.\n\n**Workup and interpretation**\nInspect without probing. MRI can show a collection communicating with the thecal sac; routine CT may miss a leak. Evaluate for infection or compression and discuss localization with spine surgery.",
+    recommendation: "Protect the wound with a sterile dressing; avoid bedside aspiration or instrumentation. Consult spine for positioning, observation, diversion or repair. External CSF drainage, infection signs or neurologic change requires urgent inpatient assessment.",
+    citation: [
+      61,
+      64
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-laminectomy-wound-or-deep-spinal-infection",
+    type: "result",
+    module: 3,
+    title: "Wound or deep spinal infection",
+    body: "**When to suspect it**\nIncreasing focal back pain, drainage, dehiscence, fever or radicular symptoms days to weeks later. Fever may be absent.\n\n**Workup and interpretation**\nCBC, CRP/ESR with postoperative trends and blood cultures when indicated. MRI with and without contrast for deep infection or epidural collection. Early postoperative inflammatory changes require clinical correlation.",
+    recommendation: "Consult spine surgery. Obtain cultures before antibiotics when stable and neurologically intact if this can be done promptly. Sepsis or progressive deficit requires urgent empiric IV therapy and assessment for drainage/decompression.",
+    citation: [
+      65,
+      66
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-post-fusion",
+    type: "question",
+    module: 2,
+    title: "Posterior instrumented lumbar fusion (PLIF or TLIF)",
+    body: "Pedicle screws and rods stabilize motion segments while graft incorporates. PLIF/TLIF also place an interbody cage through a posterior or transforaminal corridor. Check the operative levels, baseline radiculopathy and any concurrent decompression.\n\n[Open before-and-after atlas](#/image/surgical-complications/post-fusion-atlas.jpg)\n\n[Operative reference](https://www.aans.org/patients/conditions-treatments/lumbar-spinal-stenosis/)\n\n**Select the suspected complication.**",
+    images: [
+      {"src": "images/surgical-complications/post-fusion-atlas.jpg", "alt": "In this single-level lumbar interbody fusion, a spacer occupies the collapsed disc space. Posterior pedicle screws connected by rods stabilize the adjacent vertebrae while fusion develops.", "caption": "In this single-level lumbar interbody fusion, a spacer occupies the collapsed disc space. Posterior pedicle screws connected by rods stabilize the adjacent vertebrae while fusion develops."}
+    ],
+    citation: [
+      63,
+      67
+    ],
+    options: [
+      {
+        label: "New radiculopathy, hardware malposition or compressive hematoma",
+        next: "sc-post-fusion-new-radiculopathy-hardware-malposition-or-compressive-hematoma"
+      },
+      {
+        label: "Deep implant infection",
+        next: "sc-post-fusion-deep-implant-infection"
+      },
+      {
+        label: "CSF leak after combined decompression",
+        next: "sc-post-fusion-csf-leak-after-combined-decompression"
+      }
+    ]
+  },
+  {
+    id: "sc-post-fusion-new-radiculopathy-hardware-malposition-or-compressive-hematoma",
+    type: "result",
+    module: 3,
+    title: "New radiculopathy, hardware malposition or compressive hematoma",
+    body: "**When to suspect it**\nNew severe dermatomal pain, foot drop, bilateral weakness or saddle symptoms. Distinguish baseline numbness from a new root or cauda equina deficit.\n\n**Workup and interpretation**\nSerial neurologic exams and immediate spine contact for any new deficit. CT best localizes screws, cage and fractures; emergency MRI with artifact reduction evaluates hematoma, abscess and neural compression. A normal radiograph does not exclude either.",
+    recommendation: "NPO, analgesia, preserve perfusion and coordinate urgent decompression or implant revision for symptomatic compression. Transfer if specialist care is unavailable.",
+    citation: [
+      60,
+      61,
+      67
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-post-fusion-deep-implant-infection",
+    type: "result",
+    module: 3,
+    title: "Deep implant infection",
+    body: "**When to suspect it**\nWorsening axial pain, persistent wound drainage, fever, loosening or new neurologic symptoms. Delayed infection may present without fever.\n\n**Workup and interpretation**\nCBC, inflammatory marker trend, blood cultures and contrast MRI with artifact reduction where available. CT can define bone destruction or guide sampling. A superficial swab is inadequate to establish a deep organism.",
+    recommendation: "Urgent spine consultation; obtain deep cultures when feasible. Sepsis or neurologic deterioration needs prompt IV antibiotics and surgical assessment. Debridement, retention or removal of hardware depends on stability and timing.",
+    citation: [
+      65,
+      66
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-post-fusion-csf-leak-after-combined-decompression",
+    type: "result",
+    module: 3,
+    title: "CSF leak after combined decompression",
+    body: "**When to suspect it**\nPositional headache, clear incision drainage, fluctuance or new radicular pain after fusion with decompression.\n\n**Workup and interpretation**\nReview operative report for dural repair. Examine wound and neurologic function; MRI for pseudomeningocele and neural compression, CT myelography only when directed for localization.",
+    recommendation: "Sterile dressing, avoid aspiration, involve operating spine service. Escalate external drainage, infection or neurologic change; persistent symptomatic leaks may need repair.",
+    citation: [
+      61,
+      64
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-alif",
+    type: "question",
+    module: 2,
+    title: "Anterior lumbar interbody fusion (ALIF)",
+    body: "An abdominal, usually retroperitoneal approach mobilizes the great or iliac vessels to reach the disc. A cage and graft restore the disc space. Posterior screws may be placed separately. Early abdominal complications differ from those after a posterior-only fusion.\n\n[Operative reference](https://surgeryreference.aofoundation.org/spine/degenerative/lumbar/approach/retroperitoneal-approach-for-alif)\n\n**Select the suspected complication.**",
+    citation: [
+      68
+    ],
+    options: [
+      {
+        label: "Retroperitoneal bleeding or iliac vascular injury",
+        next: "sc-alif-retroperitoneal-bleeding-or-iliac-vascular-injury"
+      },
+      {
+        label: "Ileus versus bowel or ureteral injury",
+        next: "sc-alif-ileus-versus-bowel-or-ureteral-injury"
+      },
+      {
+        label: "New weakness, saddle symptoms or bladder dysfunction",
+        next: "sc-post-fusion-new-radiculopathy-hardware-malposition-or-compressive-hematoma"
+      }
+    ]
+  },
+  {
+    id: "sc-alif-retroperitoneal-bleeding-or-iliac-vascular-injury",
+    type: "result",
+    module: 3,
+    title: "Retroperitoneal bleeding or iliac vascular injury",
+    body: "**When to suspect it**\nTachycardia, flank or abdominal pain, falling hemoglobin, distension, cool leg or diminished pulses. Large blood loss may be concealed.\n\n**Workup and interpretation**\nCompare femoral and pedal pulses and Doppler signals; document motor/sensory findings. CBC, coags, crossmatch. CTA abdomen/pelvis with runoff as indicated if stable. Bedside ultrasound cannot exclude retroperitoneal bleeding.",
+    recommendation: "Call vascular and spine surgery immediately, resuscitate with blood for hemorrhagic shock. Threatened limb or instability requires urgent intervention; avoid empiric heparin when bleeding is suspected.",
+    citation: [
+      17,
+      68
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-alif-ileus-versus-bowel-or-ureteral-injury",
+    type: "result",
+    module: 3,
+    title: "Ileus versus bowel or ureteral injury",
+    body: "**When to suspect it**\nDistension and vomiting can follow exposure. Worsening focal pain, peritonism, fever, flank pain or clear drain output suggests a deeper injury. Normal creatinine is possible with a unilateral ureteral injury.\n\n**Workup and interpretation**\nCheck volume, electrolytes, CBC, creatinine and urine. Contrast CT assesses collection, obstruction or perforation. Add delayed excretory images if urinary injury suspected; an ordinary portal venous CT can miss a leak.",
+    recommendation: "NPO, IV fluids, NG decompression for significant vomiting. Involve spine and general surgery for abdominal signs; involve urology for suspected leak or obstruction. Treat sepsis and arrange drainage/repair as indicated.",
+    citation: [
+      7,
+      28,
+      68,
+      69
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-ophthalmology",
+    type: "question",
+    module: 1,
+    title: "Ophthalmology",
+    body: "Select the operation documented in the operative report.",
+    options: [
+      {
+        label: "Cataract extraction with intraocular lens (IOL)",
+        next: "sc-cataract"
+      },
+      {
+        label: "Pars plana vitrectomy for retinal detachment with gas tamponade",
+        next: "sc-retina"
+      },
+      {
+        label: "Trabeculectomy (glaucoma filtering surgery)",
+        next: "sc-trab"
+      },
+      {
+        label: "LASIK refractive surgery",
+        next: "sc-lasik"
+      }
+    ]
+  },
+  {
+    id: "sc-cataract",
+    type: "question",
+    module: 2,
+    title: "Cataract extraction with intraocular lens (IOL)",
+    body: "Phacoemulsification removes the cloudy crystalline lens through a small corneal incision. A posterior chamber IOL usually sits inside the capsular bag. Confirm laterality, date, any posterior capsule rupture and what the patient could see immediately after surgery.\n\n[Open before-and-after atlas](#/image/surgical-complications/cataract-atlas.jpg)\n\n[Operative reference](https://www.aao.org/eye-health/treatments/what-is-cataract-surgery)\n\n**Select the suspected complication.**",
+    images: [
+      {"src": "images/surgical-complications/cataract-atlas.jpg", "alt": "The cloudy lens is removed. The intraocular lens sits behind the iris in the retained capsular bag.", "caption": "The cloudy lens is removed. The intraocular lens sits behind the iris in the retained capsular bag."}
+    ],
+    citation: [
+      70
+    ],
+    options: [
+      {
+        label: "Acute postoperative endophthalmitis · sight-threatening",
+        next: "sc-cataract-acute-postoperative-endophthalmitis"
+      },
+      {
+        label: "Early pressure spike or wound leak",
+        next: "sc-cataract-early-pressure-spike-or-wound-leak"
+      },
+      {
+        label: "Retinal tear or detachment",
+        next: "sc-cataract-retinal-tear-or-detachment"
+      },
+      {
+        label: "Cystoid macular edema or persistent corneal edema",
+        next: "sc-cataract-cystoid-macular-edema-or-persistent-corneal-edema"
+      },
+      {
+        label: "Posterior capsular opacification",
+        next: "sc-cataract-posterior-capsular-opacification"
+      }
+    ]
+  },
+  {
+    id: "sc-cataract-acute-postoperative-endophthalmitis",
+    type: "result",
+    module: 3,
+    title: "Acute postoperative endophthalmitis · sight-threatening",
+    body: "**When to suspect it**\nWorsening vision after initial improvement, redness, photophobia, pain, hypopyon or poor red reflex, often in the first postoperative week. Pain and hypopyon can both be absent.\n\n**Workup and interpretation**\nRecord monocular acuity including hand motion/light perception, pupils and slit-lamp findings. Immediate ophthalmology for dilated exam, assessment of vitritis and specialist B-scan if the fundus is obscured. Sterile toxic anterior segment syndrome can overlap; timing alone is unsafe.",
+    recommendation: "Call ophthalmology/retina now for intraocular sampling and prompt intravitreal antibiotics, with vitrectomy selected by the surgeon. Topical therapy alone is inadequate. Avoid empiric steroid escalation before infection is assessed.",
+    citation: [
+      70,
+      71
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-cataract-early-pressure-spike-or-wound-leak",
+    type: "result",
+    module: 3,
+    title: "Early pressure spike or wound leak",
+    body: "**When to suspect it**\nPain, halos, nausea, blurred vision or headache may reflect high IOP. A shallow chamber, hypotony or fluid leak can indicate wound failure.\n\n**Workup and interpretation**\nCheck acuity, pupil and anterior chamber. If an open globe or dehisced incision is possible, shield and avoid pressure, tonometry and ocular ultrasound. Otherwise measure IOP; careful clinician-directed fluorescein exam can demonstrate wound leak.",
+    recommendation: "Urgent ophthalmology. For high IOP with intact globe, initiate pressure lowering in consultation, accounting for cardiopulmonary/renal contraindications. For wound failure use a rigid shield without pressure, NPO and immediate operative assessment.",
+    citation: [
+      70
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-cataract-retinal-tear-or-detachment",
+    type: "result",
+    module: 3,
+    title: "Retinal tear or detachment",
+    body: "**When to suspect it**\nNew flashes, shower of floaters, curtain or field loss, often painless. Central acuity can remain good while the macula is attached.\n\n**Workup and interpretation**\nAssess each eye, fields and pupils. Same-day dilated peripheral retinal examination. If globe integrity is secure, B-scan can help in an obscured view; a negative ED scan cannot exclude a peripheral tear.",
+    recommendation: "Contact ophthalmology immediately for acute field loss and arrange same-day retinal assessment for new flashes/floaters. A tear may need retinopexy; detachment requires surgeon-directed repair.",
+    citation: [
+      70,
+      72
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-cataract-cystoid-macular-edema-or-persistent-corneal-edema",
+    type: "result",
+    module: 3,
+    title: "Cystoid macular edema or persistent corneal edema",
+    body: "**When to suspect it**\nAfter initial improvement, painless central blur or distortion over weeks suggests macular edema. Haze early after surgery can reflect corneal edema.\n\n**Workup and interpretation**\nCheck monocular acuity, pupils and slit lamp; ophthalmology can localize edema with dilated examination and macular OCT. A curtain, sudden deterioration, pain or inflammation requires urgent exclusion of retinal detachment, pressure rise or infection.",
+    recommendation: "Arrange prompt ophthalmology review; cause-specific topical anti-inflammatory treatment or other therapy is determined after assessment. Avoid reassuring a patient with progressive unexplained visual loss based on timing alone.",
+    citation: [
+      70
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-cataract-posterior-capsular-opacification",
+    type: "result",
+    module: 3,
+    title: "Posterior capsular opacification",
+    body: "**When to suspect it**\nGradual, painless haze, glare or reduced contrast months to years after an initially successful cataract operation can reflect opacification behind the IOL.\n\n**Workup and interpretation**\nCheck monocular acuity and arrange slit-lamp confirmation. Abrupt visual loss, pain, redness, flashes or a curtain requires urgent assessment for another cause.",
+    recommendation: "Arrange outpatient ophthalmology for visually significant symptoms and consideration of Nd:YAG posterior capsulotomy.",
+    citation: [
+      70
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-retina",
+    type: "question",
+    module: 2,
+    title: "Pars plana vitrectomy for retinal detachment with gas tamponade",
+    body: "Vitreous is removed via small pars plana ports. The surgeon treats retinal breaks with laser or cryotherapy and may leave intraocular gas to support the retina as it heals. Confirm gas versus silicone oil, prescribed position and whether the bubble remains.\n\n[Open before-and-after atlas](#/image/surgical-complications/retina-atlas.jpg)\n\n[Operative reference](https://www.asrs.org/patients/retinal-diseases/25/vitrectomy-surgery)\n\n**Select the suspected complication.**",
+    images: [
+      {"src": "images/surgical-complications/retina-atlas.jpg", "alt": "Subretinal fluid lifts the retina at a superior break. After vitrectomy, gas supports the reapposed retina while laser retinopexy forms an adhesion around the break.", "caption": "Subretinal fluid lifts the retina at a superior break. After vitrectomy, gas supports the reapposed retina while laser retinopexy forms an adhesion around the break."}
+    ],
+    citation: [
+      72,
+      73
+    ],
+    options: [
+      {
+        label: "Gas expansion or pressure-related ischemia · emergency",
+        next: "sc-retina-gas-expansion-or-pressure-related-ischemia"
+      },
+      {
+        label: "Recurrent detachment or new retinal break",
+        next: "sc-retina-recurrent-detachment-or-new-retinal-break"
+      },
+      {
+        label: "Post-vitrectomy endophthalmitis",
+        next: "sc-retina-post-vitrectomy-endophthalmitis"
+      }
+    ]
+  },
+  {
+    id: "sc-retina-gas-expansion-or-pressure-related-ischemia",
+    type: "result",
+    module: 3,
+    title: "Gas expansion or pressure-related ischemia · emergency",
+    body: "**When to suspect it**\nSudden pain, headache, nausea or severe vision loss after nitrous oxide, flying or ascent while gas remains. Elevated IOP also occurs without a recognized exposure.\n\n**Workup and interpretation**\nAsk explicitly about anesthetic, dental or ambulance nitrous oxide. Record acuity, pupil response and IOP when the globe is intact; contact retina immediately. Do not infer complete absorption from elapsed days alone.",
+    recommendation: "Stop nitrous oxide, alert anesthesia and ophthalmology immediately; give oxygen as clinically indicated. Urgent pressure lowering and possible gas aspiration/decompression are specialist-directed. Avoid nitrous oxide (including Entonox), flight and altitude gain until the gas has fully resolved and retina clears the patient.",
+    citation: [
+      72,
+      73
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-retina-recurrent-detachment-or-new-retinal-break",
+    type: "result",
+    module: 3,
+    title: "Recurrent detachment or new retinal break",
+    body: "**When to suspect it**\nNew curtain, missing field, flashes, floaters or sudden deterioration beyond the expected gas–fluid interface.\n\n**Workup and interpretation**\nCheck acuity and fields in each eye; urgent dilated retinal exam. Gas can obscure both direct view and ultrasound. An unrevealing ED scan cannot exclude redetachment.",
+    recommendation: "Call retina urgently and maintain the specific postoperative positioning instructions while awaiting review. Repair depends on the break location, macular status and cause of recurrence.",
+    citation: [
+      72
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-retina-post-vitrectomy-endophthalmitis",
+    type: "result",
+    module: 3,
+    title: "Post-vitrectomy endophthalmitis",
+    body: "**When to suspect it**\nIncreasing redness, pain or unexpected visual decline after surgery. Gas can make posterior examination difficult.\n\n**Workup and interpretation**\nDocument baseline with gas, acuity and anterior chamber inflammation; immediate ophthalmologic exam and specialist posterior assessment. Expected bubble-related blur does not account for progressive inflammatory signs.",
+    recommendation: "Emergency retina consultation for intraocular sampling, intravitreal antibiotics and possible surgical washout. Avoid delaying transfer for routine imaging or a trial of drops.",
+    citation: [
+      72,
+      74
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-trab",
+    type: "question",
+    module: 2,
+    title: "Trabeculectomy (glaucoma filtering surgery)",
+    body: "A guarded channel beneath a scleral flap diverts aqueous from the anterior chamber into a subconjunctival filtering bleb, usually superiorly under the lid. Either excessive or insufficient filtration can threaten vision.\n\n[Open before-and-after atlas](#/image/surgical-complications/trab-atlas.jpg)\n\n[Operative reference](https://glaucoma.org/treatment/surgery/incisional-surgery)\n\n**Select the suspected complication.**",
+    images: [
+      {"src": "images/surgical-complications/trab-atlas.jpg", "alt": "Aqueous passes from the anterior chamber through a surgically created opening and beneath the scleral flap into a subconjunctival filtering bleb. The flap is lifted here to show the route.", "caption": "Aqueous passes from the anterior chamber through a surgically created opening and beneath the scleral flap into a subconjunctival filtering bleb. The flap is lifted here to show the route."}
+    ],
+    citation: [
+      75
+    ],
+    options: [
+      {
+        label: "Leaking bleb or overfiltration with hypotony",
+        next: "sc-trab-leaking-bleb-or-overfiltration-with-hypotony"
+      },
+      {
+        label: "Bleb infection or bleb-related endophthalmitis · emergency",
+        next: "sc-trab-bleb-infection-or-bleb-related-endophthalmitis"
+      },
+      {
+        label: "Failed filtration or high IOP",
+        next: "sc-trab-failed-filtration-or-high-iop"
+      }
+    ]
+  },
+  {
+    id: "sc-trab-leaking-bleb-or-overfiltration-with-hypotony",
+    type: "result",
+    module: 3,
+    title: "Leaking bleb or overfiltration with hypotony",
+    body: "**When to suspect it**\nBlurred vision, tearing or discomfort with a shallow anterior chamber or low pressure. A leak can occur early or years later.\n\n**Workup and interpretation**\nCheck acuity, inspect bleb and chamber gently. Fluorescein dilution on Seidel testing supports a leak; negative Seidel does not exclude overfiltration. Avoid pressure/tonometry if frank wound disruption or open globe suspected.",
+    recommendation: "Urgent operating ophthalmologist assessment. Protect from rubbing or compression; avoid ocular massage. Bleb protection, leak repair and adjustment of pressure-lowering drops are specialist-directed.",
+    citation: [
+      75,
+      76
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-trab-bleb-infection-or-bleb-related-endophthalmitis",
+    type: "result",
+    module: 3,
+    title: "Bleb infection or bleb-related endophthalmitis · emergency",
+    body: "**When to suspect it**\nRed painful eye, discharge, white/infiltrated bleb, photophobia or decreased vision, even years after an initially successful operation.\n\n**Workup and interpretation**\nAssess acuity, bleb, anterior chamber and vitreous with ophthalmology. Vitritis or marked visual loss suggests intraocular extension. Lack of hypopyon cannot exclude early endophthalmitis.",
+    recommendation: "Contact ophthalmology immediately. Isolated blebitis requires intensive specialist-directed topical antibiotics and close review. Intraocular extension requires urgent intraocular sampling and intravitreal therapy.",
+    citation: [
+      74,
+      75,
+      77
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-trab-failed-filtration-or-high-iop",
+    type: "result",
+    module: 3,
+    title: "Failed filtration or high IOP",
+    body: "**When to suspect it**\nNew blurred vision, brow ache, nausea or a flat/scarred bleb; elevated pressure can be asymptomatic.\n\n**Workup and interpretation**\nRecord acuity and IOP only if globe intact. Inspect bleb and chamber depth; a shallow chamber can also occur with high IOP, including pupillary block. Appearance alone cannot establish the pressure or cause.",
+    recommendation: "Urgent ophthalmology for pressure control and cause-specific bleb intervention. Avoid unsupervised bleb massage, suture manipulation or restarting/stopping all glaucoma drops without a plan.",
+    citation: [
+      75
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-lasik",
+    type: "question",
+    module: 2,
+    title: "LASIK refractive surgery",
+    body: "The surgeon lifts a partial-thickness corneal flap, uses an excimer laser to reshape the stromal bed, then replaces the flap. The flap–stromal interface persists. PRK removes epithelium and has no LASIK flap.\n\n[Open before-and-after atlas](#/image/surgical-complications/lasik-atlas.jpg)\n\n[Operative reference](https://www.aao.org/Assets/d2a71fff-34e7-4b77-9553-f6ac33860074/638592360994900000/refractive-surgery-ppp-updated-2024-pdf)\n\n**Select the suspected complication.**",
+    images: [
+      {"src": "images/surgical-complications/lasik-atlas.jpg", "alt": "For myopia, central stromal ablation flattens the cornea. The inset shows the lifted flap. After replacement, its interface lies within the anterior stroma. Layer thicknesses are schematic.", "caption": "For myopia, central stromal ablation flattens the cornea. The inset shows the lifted flap. After replacement, its interface lies within the anterior stroma. Layer thicknesses are schematic."}
+    ],
+    citation: [
+      78
+    ],
+    options: [
+      {
+        label: "Flap displacement or striae",
+        next: "sc-lasik-flap-displacement-or-striae"
+      },
+      {
+        label: "Interface inflammation versus infectious keratitis",
+        next: "sc-lasik-interface-inflammation-versus-infectious-keratitis"
+      },
+      {
+        label: "Dry eye or epithelial surface injury",
+        next: "sc-lasik-dry-eye-or-epithelial-surface-injury"
+      }
+    ]
+  },
+  {
+    id: "sc-lasik-flap-displacement-or-striae",
+    type: "result",
+    module: 3,
+    title: "Flap displacement or striae",
+    body: "**When to suspect it**\nAbrupt monocular blur, pain, tearing or foreign-body sensation after rubbing or trauma. Flap injury can occur well after the original operation.\n\n**Workup and interpretation**\nAcuity, pupils and careful slit-lamp exam for a displaced flap edge, folds or epithelial defect. Assess trauma separately for open globe; avoid pressure or tonometry if suspected.",
+    recommendation: "Place a rigid shield without pressure, avoid rubbing, do not manipulate the flap, and arrange urgent corneal specialist assessment for possible repositioning.",
+    citation: [
+      78
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-lasik-interface-inflammation-versus-infectious-keratitis",
+    type: "result",
+    module: 3,
+    title: "Interface inflammation versus infectious keratitis",
+    body: "**When to suspect it**\nNew photophobia, redness, pain or worsening visual acuity. Diffuse lamellar keratitis tends to cause fine diffuse interface inflammation; focal infiltrate or epithelial breakdown raises concern for infection.\n\n**Workup and interpretation**\nCheck acuity and examine with slit lamp and fluorescein. Overlapping findings require urgent specialist examination; appearance or timing alone cannot safely exclude infection.",
+    recommendation: "Same-day urgent cornea consultation. Infection may require cultures and intensive antimicrobials; significant sterile interface inflammation may need steroids or flap lift. Do not start or increase steroids for an undifferentiated infiltrate.",
+    citation: [
+      78,
+      79
+    ],
+    confidence: "recommended"
+  },
+  {
+    id: "sc-lasik-dry-eye-or-epithelial-surface-injury",
+    type: "result",
+    module: 3,
+    title: "Dry eye or epithelial surface injury",
+    body: "**When to suspect it**\nGrittiness, fluctuating vision and irritation are common after LASIK. Severe pain, reduced acuity or unilateral worsening needs a different explanation.\n\n**Workup and interpretation**\nCheck acuity, inspect flap and use slit lamp/fluorescein to assess epithelium, staining or infiltrate. Surface symptoms alone cannot exclude infection or flap displacement.",
+    recommendation: "Preservative-free lubricants and surgeon follow-up for uncomplicated dry eye. Arrange urgent corneal review for epithelial defects, infiltrates, flap abnormalities or persistent loss of vision.",
+    citation: [
+      78,
+      79
+    ],
+    confidence: "recommended"
   }
 ];
 
@@ -1427,6 +2500,154 @@ export const SURGICAL_COMPLICATIONS_CITATIONS: Citation[] = [
   {
     num: 43,
     text: "Canadian Association of Gastroenterology. Management of bile acid diarrhea, 2020. https://doi.org/10.1093/jcag/gwz038"
+  },
+  {
+    num: 44,
+    text: "WSES/IFSO. Operative management of acute abdomen after bariatric surgery in the emergency setting: OBA guidelines, 2022. https://pmc.ncbi.nlm.nih.gov/articles/PMC9516804/"
+  },
+  {
+    num: 45,
+    text: "NIDDK. Types of weight-loss surgery: comparative operative anatomy. https://www.niddk.nih.gov/health-information/weight-management/bariatric-surgery/types"
+  },
+  {
+    num: 46,
+    text: "ASMBS. Bariatric emergencies for the general surgeon, 2023. https://asmbs.org/resources/asmbs-bariatric-emergencies-for-the-general-surgeon-statement/"
+  },
+  {
+    num: 47,
+    text: "ASMBS. Integrated health nutritional guidelines for surgical weight loss: micronutrients, 2016 update. https://asmbs.org/wp-content/uploads/2017/06/ASMBS-Nutritional-Guidelines-2016-Update.pdf"
+  },
+  {
+    num: 48,
+    text: "ASMBS. Literature review on treatment of marginal ulcers after metabolic and bariatric surgery. https://asmbs.org/resources/asmbs-literature-review-on-the-treatment-of-marginal-ulcers-after-metabolic-and-bariatric-surgery/"
+  },
+  {
+    num: 49,
+    text: "ASMBS. Consensus statement on laparoscopic adjustable gastric band management, 2022. https://asmbs.org/resources/asmbs-consensus-statement-on-laparoscopic-adjustable-gastric-band-management/"
+  },
+  {
+    num: 50,
+    text: "HerniaSurge Group. Update of the international guidelines for groin hernia management, 2023. https://pmc.ncbi.nlm.nih.gov/articles/PMC10588975/"
+  },
+  {
+    num: 51,
+    text: "American College of Surgeons. Adult inguinal and femoral groin hernia repair. https://www.facs.org/for-patients/the-day-of-your-surgery/adult-inguinal-and-femoral-groin-hernia-repair/"
+  },
+  {
+    num: 52,
+    text: "ACR Appropriateness Criteria. Acute onset of scrotal pain, 2024. https://acsearch.acr.org/docs/69363/Narrative/"
+  },
+  {
+    num: 53,
+    text: "American College of Surgeons. Adult umbilical hernia. https://www.facs.org/for-patients/the-day-of-your-surgery/adult-umbilical-hernia/"
+  },
+  {
+    num: 54,
+    text: "Tonolini M, Ippolito S. Multidetector CT of expected findings and early postoperative complications after current techniques for ventral hernia repair, 2016. https://pmc.ncbi.nlm.nih.gov/articles/PMC4956629/"
+  },
+  {
+    num: 55,
+    text: "European Hernia Society. Midline incisional hernia guidelines, 2023. https://pmc.ncbi.nlm.nih.gov/articles/PMC10638550/"
+  },
+  {
+    num: 56,
+    text: "European Hernia Society. Clinical guidelines on management of the abdominal wall in the open or burst abdomen, 2018. https://pubmed.ncbi.nlm.nih.gov/30178226/"
+  },
+  {
+    num: 57,
+    text: "American Academy of Orthopaedic Surgeons. Cervical radiculopathy: surgical treatment options. https://www.orthoinfo.org/bodypart/neck/cervical-radiculopathy-surgical-treatment-options/"
+  },
+  {
+    num: 58,
+    text: "AO Surgery Reference. Anterior cervical corpectomy and stabilization. https://surgeryreference.aofoundation.org/spine/tumors/metastatic-tumors/subaxial-cervical-unstable-low-escc/anterior-corpectomy-and-stabilzation"
+  },
+  {
+    num: 59,
+    text: "AO Surgery Reference. Complications of subaxial cervical surgery. https://surgeryreference.aofoundation.org/spine/trauma/subaxial-cervical/further-reading/surgical-compliations"
+  },
+  {
+    num: 60,
+    text: "Belgian Society of Neurosurgery. Consensus statement on postoperative spinal epidural hematoma, 2024. https://pmc.ncbi.nlm.nih.gov/articles/PMC11456791/"
+  },
+  {
+    num: 61,
+    text: "ACR Appropriateness Criteria. Low back pain: new or progressive symptoms after lumbar surgery. https://acsearch.acr.org/docs/69483/Narrative/"
+  },
+  {
+    num: 62,
+    text: "Hershman SH et al. Esophageal perforation following anterior cervical spine surgery: multicenter series and review, 2017. https://pmc.ncbi.nlm.nih.gov/articles/PMC5400185/"
+  },
+  {
+    num: 63,
+    text: "American Association of Neurological Surgeons. Lumbar spinal stenosis: decompression and fusion. https://www.aans.org/patients/conditions-treatments/lumbar-spinal-stenosis/"
+  },
+  {
+    num: 64,
+    text: "Radcliff K et al. Distinguishing pseudomeningocele, epidural hematoma, and postoperative infection on postoperative MRI. https://pubmed.ncbi.nlm.nih.gov/27755204/"
+  },
+  {
+    num: 65,
+    text: "ACR Appropriateness Criteria. Suspected spine infection, including after recent intervention. https://acsearch.acr.org/docs/3148734/Narrative/"
+  },
+  {
+    num: 66,
+    text: "Tai DBG et al. Diagnosis and management of spinal implant infections. Clinical Infectious Diseases, 2024. https://doi.org/10.1093/cid/ciae432"
+  },
+  {
+    num: 67,
+    text: "American Association of Neurological Surgeons. Minimally invasive spine surgery: instrumentation and interbody fusion. https://www.aans.org/patients/conditions-treatments/minimally-invasive-spine-surgery/"
+  },
+  {
+    num: 68,
+    text: "AO Surgery Reference. Retroperitoneal approach for anterior lumbar interbody fusion. https://surgeryreference.aofoundation.org/spine/degenerative/lumbar/approach/retroperitoneal-approach-for-alif"
+  },
+  {
+    num: 69,
+    text: "AO Spine. Ureteral injury after anterior lumbar spine interbody fusion. https://www.aofoundation.org/spine/about-aospine/Blog/2024_02-Blog-Ureteral-injury-after-ALIF"
+  },
+  {
+    num: 70,
+    text: "American Academy of Ophthalmology. Cataract in the adult eye Preferred Practice Pattern. https://www.aao.org/Assets/a7c4e054-2b43-4ac9-869a-d858ed48bb21/638876828052630000/cataract-in-the-adult-eye-ppp-7-9-25-pdf"
+  },
+  {
+    num: 71,
+    text: "Endophthalmitis Vitrectomy Study Group. Randomized trial of immediate vitrectomy and intravenous antibiotics after cataract or secondary IOL surgery, 1995. https://pubmed.ncbi.nlm.nih.gov/7487614/"
+  },
+  {
+    num: 72,
+    text: "American Society of Retina Specialists. Vitrectomy: indications, gas tamponade, risks and recovery. https://www.asrs.org/patients/retinal-diseases/25/vitrectomy-surgery"
+  },
+  {
+    num: 73,
+    text: "Royal College of Ophthalmologists. Safety alert: do not use nitrous oxide when there is gas in an operated eye, 2018. https://curriculum.rcophth.ac.uk/2018/12/ophthalmic-safety-alert-use-of-nitrous-oxide-when-there-is-gas-in-an-operated-eye/"
+  },
+  {
+    num: 74,
+    text: "European Society of Cataract and Refractive Surgeons. Guidelines for prevention and treatment of postoperative endophthalmitis. https://www.escrs.org/media/uljgvpn1/english_2018_updated.pdf"
+  },
+  {
+    num: 75,
+    text: "Glaucoma Research Foundation. Incisional surgery: trabeculectomy and filtering blebs. https://glaucoma.org/treatment/surgery/incisional-surgery"
+  },
+  {
+    num: 76,
+    text: "Collaborative Bleb-Related Infection Incidence and Treatment Study. Persistent hypotony after trabeculectomy, 2016. https://pubmed.ncbi.nlm.nih.gov/27174291/"
+  },
+  {
+    num: 77,
+    text: "Collaborative Bleb-Related Infection Incidence and Treatment Study. Clinical features of bleb-related infection: five-year survey, 2012. https://pubmed.ncbi.nlm.nih.gov/22883301/"
+  },
+  {
+    num: 78,
+    text: "American Academy of Ophthalmology. Refractive surgery Preferred Practice Pattern, 2024. https://www.aao.org/Assets/d2a71fff-34e7-4b77-9553-f6ac33860074/638592360994900000/refractive-surgery-ppp-updated-2024-pdf"
+  },
+  {
+    num: 79,
+    text: "American Academy of Ophthalmology. Bacterial keratitis: Preferred Practice Pattern summary benchmarks. https://www.aao.org/Assets/0ee2e42f-34f4-4f64-a249-4def7deec3f6/638090379485430000/ppp-summary-benchmarks-22-full-set-pdf"
+  },
+  {
+    num: 80,
+    text: "Colón LF et al. Management and treatment algorithm of airway complications after anterior cervical spine surgery: systematic review, 2024. https://pmc.ncbi.nlm.nih.gov/articles/PMC11467286/"
   }
 ];
 

@@ -155,5 +155,152 @@
       "https://www.mskcc.org/cancer-care/patient-education/about-your-whipple-procedure"
     ],
     "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "cataract-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/cataract-atlas.jpg",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration reviewed and approved by Andy on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T17:02:50.874255+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: Andy approved the seven ophthalmology and hernia plates.",
+    "sha256": "a4a37dcaa9f80e35326a2a561e005b87a434940faf3623371102125ab722893a",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "retina-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/retina-atlas.jpg",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration reviewed and approved by Andy on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T17:02:50.874920+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: Andy approved the seven ophthalmology and hernia plates.",
+    "sha256": "d0b80c924dd575a1c308ad7661910bab15145bfb5e57241a960e7dc2b848d7a2",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "trab-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/trab-atlas.jpg",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration reviewed and approved by Andy on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T17:02:50.875483+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: Andy approved the seven ophthalmology and hernia plates.",
+    "sha256": "cd05f85aeab6ff49fac2fa3de83dd2002bab0410c03cbb36be868e6d0566d440",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "lasik-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/lasik-atlas.jpg",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration reviewed and approved by Andy on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T17:02:50.876130+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: Andy approved the seven ophthalmology and hernia plates.",
+    "sha256": "30f9445aa39eb2c6c16d661eb9a7eae723b561f7fad9ff480bd6cc4ccfc7e4c4",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "inguinal-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/inguinal-atlas.jpg",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration reviewed and approved by Andy on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T17:02:50.876712+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: Andy approved the seven ophthalmology and hernia plates.",
+    "sha256": "f6d6fedb7c0ed35c75bdfbbf196993afd8bf5376db56fc882596de679b4da90e",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "umbilical-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/umbilical-atlas.jpg",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration reviewed and approved by Andy on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T17:02:50.877375+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: Andy approved the seven ophthalmology and hernia plates.",
+    "sha256": "aa226aa7bf2280904643e6b03f3cf0fb93def88447caedf1f546e6cb76d37633",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "incisional-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/incisional-atlas.jpg",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration reviewed and approved by Andy on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T17:02:50.878088+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: Andy approved the seven ophthalmology and hernia plates.",
+    "sha256": "81a3c2b60bd48c681ffacbeaeab41f3001e9dc8575acb06b8384b5fc75c2fee6",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "sleeve-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/sleeve-atlas.jpg",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted artwork approved for publication on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T17:14:28.430847+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: Andy approved the five original bariatric and spine plates and authorized publication.",
+    "sha256": "90e26f18d6b9b391dc005708621665aa3527ada19f84a973899a3cb723da966c",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json",
+    "clinical_source_urls": [
+      "https://www.niddk.nih.gov/health-information/weight-management/bariatric-surgery/types"
+    ]
+  },
+  "rygb-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/rygb-atlas.jpg",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted artwork approved for publication on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T17:14:28.431388+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: Andy approved the five original bariatric and spine plates and authorized publication.",
+    "sha256": "d9c129deea773fabc5972bfb1fa3540dc86e65c42d293a08a5fd456c4cf11efc",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json",
+    "clinical_source_urls": [
+      "https://www.niddk.nih.gov/health-information/weight-management/bariatric-surgery/types"
+    ]
+  },
+  "band-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/band-atlas.jpg",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted artwork approved for publication on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T17:14:28.431855+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: Andy approved the five original bariatric and spine plates and authorized publication.",
+    "sha256": "66a63bd6c98509a6196fd432be44e52b83c93432625d8b39eeefc2ea2eab7cac",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json",
+    "clinical_source_urls": [
+      "https://www.niddk.nih.gov/health-information/weight-management/bariatric-surgery/types"
+    ]
+  },
+  "anterior-cervical-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/anterior-cervical-atlas.jpg",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted artwork approved for publication on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T17:14:28.432451+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: Andy approved the five original bariatric and spine plates and authorized publication.",
+    "sha256": "ec21f27a56f73a6cfd247c42de461b68f562fe7fbe00e08c3f7fa76a8f1c656f",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json",
+    "clinical_source_urls": [
+      "https://www.orthoinfo.org/bodypart/neck/cervical-radiculopathy-surgical-treatment-options/"
+    ]
+  },
+  "post-fusion-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/post-fusion-atlas.jpg",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted artwork approved for publication on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T17:14:28.433320+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: Andy approved the five original bariatric and spine plates and authorized publication.",
+    "sha256": "26bdf89e185acfe7e849bd1a2a1e6cc8065f22f70e4990dd8106bbf96e6ed27f",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json",
+    "clinical_source_urls": [
+      "https://www.aans.org/patients/conditions-treatments/lumbar-spinal-stenosis/"
+    ]
   }
 }

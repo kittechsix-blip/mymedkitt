@@ -4224,7 +4224,7 @@ export const DEFAULT_CATEGORIES = [
                 subtitle: 'Postoperative anatomy, complications, ED workup and initial treatment',
                 categoryId: 'trauma-surg',
                 version: '1.0',
-                nodeCount: 70,
+                nodeCount: 131,
                 entryNodeId: 'sc-start',
             },
             {
