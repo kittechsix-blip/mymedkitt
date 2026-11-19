@@ -1,0 +1,3 @@
+Clinical review: independent AI-assisted Dr. Kitlowski playbook review, no blocking findings for proposal approval. Reviewed doses, exclusions, original SVG and both clinical photographs. Not physician sign-off.
+Visual review: Flow Rider source and image inspection. Individual responsive panels added; figure margins removed and photos linked for enlargement. Local links and image alt text verified. Full HTML browser rendering not verified because Playwright startup timed out. No app code changed; no commit/deploy.
+Next: Andy approves clinical outline and actual imagery, then implementation, full tests and live verification.

@@ -136,6 +136,18 @@ The clinical images in `docs/images/` are under review for licensing compliance.
 
 ---
 
+### Acute Keratitis (Stain Atlas)
+
+| File | Author | Source | License |
+|------|--------|--------|---------|
+| docs/images/acute-keratitis/hsv-dendrite.jpg | Imrankabirhossain | [Wikimedia Commons: Dendritic corneal ulcer](https://commons.wikimedia.org/wiki/File:Dendritic_corneal_ulcer.jpg) | CC BY-SA 4.0, unmodified |
+| docs/images/acute-keratitis/photokeratitis.png | Kwon DH, Moon JD, Park WJ, Kang WY, Kim SH, Lim HM, Ahn JS, Chae HJ | [Ann Occup Environ Med 2016, Figure 2](https://link.springer.com/article/10.1186/s40557-015-0087-7/figures/2) | CC BY 4.0, unmodified |
+| docs/images/acute-keratitis/pattern-1..6.svg | myMedKitt original artwork | n/a | Project artwork |
+
+Provenance, hashes and approval: `docs/images/acute-keratitis/MANIFEST.json`.
+
+---
+
 ## Fair Use Notice
 
 MedKitt is an educational tool for healthcare professionals. Our use of medical literature, guidelines, and educational images constitutes fair use under 17 U.S.C. § 107:

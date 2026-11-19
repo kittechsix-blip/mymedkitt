@@ -41,6 +41,13 @@ export const TOOLBAR_OVERFLOW = new Set([
 // toolbar validation entirely (the validator warned and skipped ~1,264 targets)
 // and is the root cause of the 2026-07-27 dead-toolbar-button CRITICAL.
 export const TOOLBAR_CONFIGS = {
+    'acute-keratitis': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'keratitis-steps' },
+        { id: 'atlas', label: 'Stain Atlas', icon: '👁️', action: 'overlay', target: 'keratitis-stain-atlas' },
+        { id: 'differential', label: 'Differential', icon: '🔎', action: 'overlay', target: 'keratitis-differential' },
+        { id: 'rx', label: 'Rx Guide', icon: '💊', action: 'overlay', target: 'keratitis-rx-guide' },
+        { id: 'escalate', label: 'Escalate', icon: '☎️', action: 'overlay', target: 'keratitis-escalate' },
+    ],
     'decompression-sickness': [
         { id: 'steps', label: 'Steps', icon: '📋', action: 'jump', target: 'dcs-start' },
         { id: 'recompress', label: 'Recompress', icon: '🫧', action: 'jump', target: 'dcs-recompression', pinned: true },

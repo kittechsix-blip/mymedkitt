@@ -1,3 +1,4 @@
+import { ACUTE_KERATITIS_INFO_PAGES } from './new-content/acute-keratitis-info.js';
 import { HG_INFO_PAGES } from './new-content/hyperglycemia-info.js';
 import { IO_SITES, IO_SAFETY, IO_CONFIRM, IO_SOURCES } from './io-anatomy.js';
 import { INH_INFO_PAGES } from './inh-info-pages.js';
@@ -30368,6 +30369,7 @@ const ONC_DSE_STOP_CYTOTOXIC_PAGE = {
     ],
 };
 export const INFO_PAGES = {
+    ...ACUTE_KERATITIS_INFO_PAGES,
     ...HG_INFO_PAGES,
     'phlegmasia-photos': PHLEGMASIA_PHOTOS,
     'block-visual-supraorbital': { id: 'block-visual-supraorbital', title: 'Supraorbital + supratrochlear visual guide', subtitle: 'Coverage and landmarks', sections: [{ heading: 'Expected coverage', image: { src: 'images/dental-nerve-blocks/exec-1df82e36-7522-4267-8536-8d748f44a258.jpg', alt: 'Supraorbital + supratrochlear expected sensory coverage', caption: 'Approximate distribution after a successful block; anatomy and response vary. Test before proceeding.' }, body: 'See the procedure for complete technique and safety checks.' }, { heading: 'Landmark orientation', image: { src: 'images/dental-nerve-blocks/exec-529d15ea-6242-4591-9463-8b40671ab176.jpg', alt: 'Supraorbital + supratrochlear landmark orientation', caption: 'Landmark orientation; use the written procedure for detailed technique.' }, body: 'Look straight ahead. Palpate the superior orbital rim for the supraorbital notch, usually near the pupil line; the supratrochlear nerve lies medial. Deposit superficial to the rim adjacent to the notch and extend medially. Keep the needle away from the globe. Aspirate.' }], citations: [{ num: 1, text: 'MSD Manual Professional Edition: regional anesthesia procedure guides; see consult references.' }] },

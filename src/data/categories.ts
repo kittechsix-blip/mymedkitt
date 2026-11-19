@@ -2789,6 +2789,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
     name: 'Ophthalmology',
     icon: 'ophthalmology.png',
     decisionTrees: [
+      { id: 'acute-keratitis', title: 'Acute Keratitis', subtitle: 'Corneal ulcer · Staining atlas · HSV / zoster · Contact lenses · Treatment and referral', categoryId: 'ophthalmology', version: '1.0', nodeCount: 24, entryNodeId: 'acute-keratitis-start' },
       {
         id: 'lateral-canthotomy',
         title: 'Lateral Canthotomy & Cantholysis',

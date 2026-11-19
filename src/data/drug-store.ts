@@ -166,9 +166,12 @@ const ACYCLOVIR: DrugEntry = {
   name: 'Acyclovir',
   genericName: 'Acyclovir',
   drugClass: 'Antiviral (Nucleoside Analog)',
-  route: 'IV',
-  indications: ['Neonatal HSV (suspected or confirmed)', 'HSV encephalitis'],
+  route: 'IV / PO',
+  indications: ['Neonatal HSV (suspected or confirmed)', 'HSV encephalitis', 'HSV epithelial keratitis', 'HSV geographic corneal ulcer'],
   dosing: [
+    {"indication": "HSV epithelial keratitis (dendritic, adult oral alternative)", "regimen": "400 mg PO five times daily for 7–10 days. Adult dosing assumes normal renal function. Oral HSV keratitis use is off-label; adjust for renal function with pharmacy/ophthalmology. Choose one antiviral regimen, not all alternatives. No topical steroid for active epithelial HSV. Geographic or stromal disease requires urgent specialist review."},
+    {"indication": "HSV geographic corneal ulcer (adult oral alternative)", "regimen": "800 mg PO five times daily for 14–21 days. Adult dosing assumes normal renal function. Oral HSV keratitis use is off-label; adjust for renal function with pharmacy/ophthalmology. Choose one antiviral regimen, not all alternatives. No topical steroid for active epithelial HSV. Geographic or stromal disease requires urgent specialist review."},
+
     {
       indication: 'Neonatal HSV (0-3 months)',
       regimen: '20 mg/kg IV q8h. Duration: minimum 5 doses or until HSV PCR results negative. If PCR not resulted after 5 doses, contact ID.',
@@ -182,11 +185,13 @@ const ACYCLOVIR: DrugEntry = {
   ],
   cautions: [
     'Crystalline nephropathy — ensure adequate hydration',
-    'Infuse over 1 hour',
+    'IV administration only: infuse over 1 hour; this instruction does not apply to oral dosing',
   ],
-  monitoring: 'Renal function (BUN, creatinine). Urine output. Hold tube #4 CSF for HSV PCR. Surface cultures: conjunctiva, throat, nasopharynx, rectum, vesicle fluid if present.',
-  notes: 'Empiric acyclovir should be started in any neonate with suspected HSV — fever, seizures, vesicular rash, CSF pleocytosis, or elevated LFTs without other explanation. Do not wait for PCR results to initiate treatment.',
+  monitoring: 'Renal function (BUN, creatinine). Urine output. Hold tube #4 CSF for HSV PCR. Surface cultures: conjunctiva, throat, nasopharynx, rectum, vesicle fluid if present. (Isolated HSV epithelial keratitis: CSF and neonatal surface testing are not routine; follow-up is ophthalmologist assessment of healing and visual acuity.)',
+  notes: 'NEONATAL HSV ONLY: Empiric acyclovir should be started in any neonate with suspected HSV — fever, seizures, vesicular rash, CSF pleocytosis, or elevated LFTs without other explanation. Do not wait for PCR results to initiate treatment.',
   citations: [
+    "White ML, Chodosh J. Herpes Simplex Virus Keratitis: A Treatment Guideline. AAO, 2014. https://www.aao.org/Assets/6564936e-9929-48b6-93cd-15872a1b388e/635424082284100000/hsv-keratitis-treatment-guideline-harvard-pdf",
+
     'Kimberlin DW, et al. Guidance on Management of Asymptomatic Neonates Born to Women with Active Genital Herpes Lesions. Pediatrics. 2013;131(2):e572-e579.',
     'Red Book: 2021-2024 Report of the Committee on Infectious Diseases. American Academy of Pediatrics.',
   ],
@@ -7482,7 +7487,7 @@ const CIPROFLOXACIN_OPHTHALMIC: DrugEntry = {
     },
     {
       indication: 'Bacterial keratitis / corneal ulcer (established infiltrate) — labeled regimen',
-      regimen: '**Day 1: 2 drops every 15 minutes for the first 6 hours, then 2 drops every 30 minutes for the remainder of the day.**\n**Day 2: 2 drops hourly.**\n**Days 3–14: 2 drops every 4 hours.**\n\n**A corneal infiltrate is an ophthalmology emergency, not an ED discharge.** Do not start this regimen and send the patient home — call ophthalmology.',
+      regimen: '**Day 1: 2 drops every 15 minutes for the first 6 hours, then 2 drops every 30 minutes for the remainder of the day.**\n**Day 2: 2 drops hourly.**\n**Days 3–14: 2 drops every 4 hours.**\n\n**Urgent ophthalmology consultation is required.** This is a labeled corneal-ulcer schedule, not an automatic taper if worsening. Large, central, deep or atypical ulcers may need fortified therapy. Outpatient treatment requires an agreed specialist plan, access to frequent drops and close reassessment.',
     },
     {
       indication: 'Bacterial conjunctivitis — labeled regimen',
@@ -7495,13 +7500,16 @@ const CIPROFLOXACIN_OPHTHALMIC: DrugEntry = {
   cautions: [
     'WHITE CRYSTALLINE PRECIPITATE on the corneal surface occurred in ~17% of corneal-ulcer patients in the labeling trials, typically within 24 hours to 7 days of starting therapy. It did not affect outcome or vision. It is the drug — do not mistake it for a worsening infiltrate.',
     'PEDIATRICS: safety and effectiveness in patients below 1 year of age have not been established. Use moxifloxacin 0.5% (labeled in all ages) in an infant.',
-    'Culture BEFORE starting therapy if there is any infiltrate',
+    'Obtain corneal scraping/cultures when indicated and immediately feasible: central/large, deep, melting, atypical or nonresponding ulcers. Coordinate with ophthalmology; do not delay sight-saving therapy during prolonged transfer.',
     'Systemic fluoroquinolone boxed warnings (tendinopathy, neuropathy, CNS effects) do not appear in the ophthalmic labeling',
     'Emerging fluoroquinolone resistance among ocular staphylococci; moxifloxacin has broader gram-positive activity',
   ],
   monitoring: 'Daily ophthalmology review while an epithelial defect persists in a contact lens wearer. Visual acuity, size of the defect on fluorescein, and presence or absence of an infiltrate or hypopyon.',
   notes: 'Strong Pseudomonas activity is the reason this is the contact-lens drug. The distinction that matters clinically: an ABRASION gets QID prophylaxis, an INFILTRATE gets the labeled loading regimen and an ophthalmologist tonight.',
   citations: [
+    "American Academy of Ophthalmology. Bacterial Keratitis Preferred Practice Pattern, 2024. https://www.aaojournal.org/article/S0161-6420(24)00007-1/fulltext",
+    "Ciprofloxacin ophthalmic solution 0.3% prescribing information, corneal ulcer schedule. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1ebdcd1f-1e64-aea0-e063-6294a90aa4e1",
+
     'Ciloxan (ciprofloxacin hydrochloride ophthalmic solution 0.3%) prescribing information. DailyMed SETID 91bd0351-f33c-43ca-bd77-7da97969985b.',
     'Wipperman JL, Dorsch JN. Evaluation and management of corneal abrasions. Am Fam Physician. 2013;87(2):114-120.',
     'Lin A, Rhee MK, Akpek EK, et al. Bacterial Keratitis Preferred Practice Pattern. Ophthalmology. 2019;126(1):P1-P55.',
@@ -7553,8 +7561,10 @@ const ERYTHROMYCIN_OINTMENT: DrugEntry = {
   genericName: 'Erythromycin 0.5% ophthalmic ointment',
   drugClass: 'Macrolide antibiotic — topical ophthalmic',
   route: 'Topical ophthalmic',
-  indications: ['Corneal abrasion prophylaxis', 'Superficial ocular infection of the conjunctiva and/or cornea', 'Neonatal ophthalmia prophylaxis (N. gonorrhoeae, C. trachomatis)'],
+  indications: ['UV photokeratitis (optional comfort/prophylaxis)', 'Corneal abrasion prophylaxis', 'Superficial ocular infection of the conjunctiva and/or cornea', 'Neonatal ophthalmia prophylaxis (N. gonorrhoeae, C. trachomatis)'],
   dosing: [
+    {"indication": "Photokeratitis (UV injury, optional adjunct)", "regimen": "Erythromycin 0.5% ophthalmic ointment four times daily for 2–3 days may be used for comfort/prophylaxis after infection and retained foreign body are excluded. Preservative-free tears, oral analgesia and cool compresses are primary supportive measures. No patching or take-home topical anesthetic. Not treatment for a microbial ulcer and not adequate Pseudomonas coverage in a contact-lens wearer."},
+
     {
       indication: 'Corneal abrasion prophylaxis',
       regimen: '**Apply a ribbon approximately 1 cm long inside the lower lid four times daily × 3–5 days**, or until the epithelial defect has healed and the patient has been asymptomatic for 24 hours.\n\n**The label reads "approximately 1 cm in length … up to six times daily, depending on the severity of the infection."** QID is the practice interval for abrasion prophylaxis (AFP 2013), which is why the consult says qid — the label permits up to 6× daily if you want it.\n\n**FIRST-LINE for the NON-contact-lens wearer.** Cheap, gentle, and the ointment vehicle lubricates, which by itself reduces pain with blinking.\n\n**NOT ADEQUATE FOR CONTACT LENS WEARERS** — they need Pseudomonas coverage. Use [ciprofloxacin 0.3%](#/drug/ciprofloxacin-ophthalmic/contact-lens-keratitis) or [moxifloxacin 0.5%](#/drug/moxifloxacin-ophthalmic/contact-lens-keratitis) instead.\n\n**BLURS VISION** for several minutes after each application — dose it at bedtime plus three daytime applications, and tell the patient not to drive right after.\n\n**NO PATCHING.** Cochrane found no benefit and possible harm.',
@@ -7577,6 +7587,8 @@ const ERYTHROMYCIN_OINTMENT: DrugEntry = {
   monitoring: 'Recheck visual acuity at follow-up. Return precautions: worsening pain, decreasing vision, purulent discharge, increasing photophobia — any of which suggests infectious keratitis.',
   notes: 'The default corneal-abrasion prophylaxis in most EDs on cost and tolerability. Its job is preventing secondary infection of an epithelial defect, nothing more. Note the id: the plain `erythromycin` entry in this store is the PROKINETIC (gastroparesis) drug — these are different drugs given different ways and must not be aliased.',
   citations: [
+    "American Academy of Ophthalmology EyeWiki. Photokeratitis. https://eyewiki.aao.org/Photokeratitis",
+
     'Erythromycin ophthalmic ointment USP 0.5% prescribing information. Bausch & Lomb Incorporated. DailyMed SETID 061ddd20-94a6-4e3c-ba84-1ebd8529eea6.',
     'Wipperman JL, Dorsch JN. Evaluation and management of corneal abrasions. Am Fam Physician. 2013;87(2):114-120.',
     'Lin A, Rhee MK, Akpek EK, et al. Bacterial Keratitis Preferred Practice Pattern. Ophthalmology. 2019;126(1):P1-P55.',
@@ -12373,8 +12385,12 @@ const VALACYCLOVIR: DrugEntry = {
   genericName: 'Valacyclovir hydrochloride',
   drugClass: 'Antiviral (nucleoside analog, prodrug of acyclovir)',
   route: 'PO',
-  indications: ['Genital herpes (HSV) — initial episode', 'Genital herpes — recurrent', 'Herpes zoster', 'HSV suppression'],
+  indications: ['Genital herpes (HSV) — initial episode', 'Genital herpes — recurrent', 'Herpes zoster', 'HSV suppression', 'HSV epithelial keratitis', 'HSV geographic corneal ulcer', 'Herpes zoster ophthalmicus'],
   dosing: [
+    {"indication": "HSV epithelial keratitis (dendritic, adult oral alternative)", "regimen": "500 mg PO twice daily for 7–10 days. Adult dosing assumes normal renal function. Oral HSV keratitis use is off-label; adjust for renal function with pharmacy/ophthalmology. Choose one antiviral regimen, not all alternatives. No topical steroid for active epithelial HSV. Geographic or stromal disease requires urgent specialist review."},
+    {"indication": "HSV geographic corneal ulcer (adult oral alternative)", "regimen": "1 g PO three times daily for 14–21 days. Adult dosing assumes normal renal function. Oral HSV keratitis use is off-label; adjust for renal function with pharmacy/ophthalmology. Choose one antiviral regimen, not all alternatives. No topical steroid for active epithelial HSV. Geographic or stromal disease requires urgent specialist review."},
+    {"indication": "Herpes zoster ophthalmicus (HZO, adult)", "regimen": "1 g PO three times daily for 7 days. Start promptly with same-day ophthalmology for ocular involvement. Do not withhold treatment solely because presentation is beyond 72 hours if ocular disease or new lesions are present.\n\nZoster renal schedule: CrCl 30–49 mL/min: 1 g every 12 hours; CrCl 10–29: 1 g every 24 hours; CrCl below 10: 500 mg every 24 hours. Give after hemodialysis on dialysis days. Severe/disseminated infection or an immunocompromised host may require admission and IV therapy."},
+
     {
       indication: 'Genital herpes — initial episode',
       regimen: '**Valacyclovir 1 g PO BID × 7-10 days.** Start as soon as possible after symptom onset (ideally <72 hr). Reduces lesion duration, viral shedding, and severity.',
@@ -12394,7 +12410,7 @@ const VALACYCLOVIR: DrugEntry = {
   ],
   contraindications: ['Known hypersensitivity to valacyclovir or acyclovir'],
   cautions: [
-    'Renal dose adjustment: CrCl 30-49 → 1 g q12h; CrCl 10-29 → 1 g q24h; CrCl <10 → 500 mg q24h',
+    'Herpes zoster renal dose adjustment (other indications have different schedules): CrCl 30-49 → 1 g q12h; CrCl 10-29 → 1 g q24h; CrCl <10 → 500 mg q24h',
     'Adequate hydration important — crystalline nephropathy at high doses or dehydration',
     'Thrombotic thrombocytopenic purpura / hemolytic uremic syndrome reported in immunocompromised at very high doses (8 g/day)',
     'Generally well-tolerated; nausea, headache common',
@@ -12402,6 +12418,10 @@ const VALACYCLOVIR: DrugEntry = {
   monitoring: 'Renal function if extended therapy, dehydration, or elderly. Symptom response 48-72 hr.',
   notes: 'Prodrug of acyclovir — better PO bioavailability allows simpler dosing. Equivalent efficacy to acyclovir. Not curative — does not eliminate latent virus. For STI screening: also test for HIV, syphilis, gonorrhea, chlamydia at initial diagnosis.',
   citations: [
+    "White ML, Chodosh J. Herpes Simplex Virus Keratitis: A Treatment Guideline. AAO, 2014. https://www.aao.org/Assets/6564936e-9929-48b6-93cd-15872a1b388e/635424082284100000/hsv-keratitis-treatment-guideline-harvard-pdf",
+    "VALTREX prescribing information, herpes zoster dosing and renal adjustment. https://www.dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=56a62c21-bead-4f3b-a24e-c3fd0b4a732f",
+    "American Academy of Ophthalmology. Herpes Zoster Ophthalmicus: Pearls. https://www.aao.org/eyenet/article/herpes-zoster-ophthalmicus-pearls",
+
     'Workowski KA et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187.',
     'Corey L et al. Once-daily valacyclovir to reduce the risk of transmission of genital herpes. NEJM. 2004;350(1):11-20.',
   ],
@@ -14838,7 +14858,183 @@ const GADOTERATE: DrugEntry = {
   ],
 };
 
+
+// Acute keratitis: approved indication-specific ophthalmic regimens.
+const VANCOMYCIN_OPHTHALMIC: DrugEntry = {
+  "id": "vancomycin-ophthalmic",
+  "name": "Vancomycin fortified ophthalmic 25–50 mg/mL",
+  "genericName": "Vancomycin fortified ophthalmic 25–50 mg/mL",
+  "drugClass": "Compounded glycopeptide ophthalmic antibiotic",
+  "route": "Topical ophthalmic",
+  "indications": [
+    "Severe bacterial keratitis"
+  ],
+  "dosing": [
+    {
+      "indication": "Severe bacterial keratitis",
+      "regimen": "Specialist-directed regimen: 1 drop of vancomycin 25–50 mg/mL in the affected eye hourly, including overnight, plus tobramycin 15 mg/mL 1 drop hourly. Alternate the two drugs every 30 minutes. Ophthalmology may prescribe initial loading and adjust antibiotics to smear, cultures and local resistance. This is one severe-ulcer regimen, not a universal combination for every ulcer."
+    }
+  ],
+  "cautions": [
+    "Sterile compounded ophthalmic preparation only. Do not instill a systemic preparation or compound drops at home.",
+    "Immediate ophthalmology coordination; culture before treatment when indicated and promptly feasible, without delaying urgent therapy.",
+    "No empiric topical steroid or steroid-antibiotic combination."
+  ],
+  "monitoring": "Ophthalmology-directed reassessment of visual acuity, epithelial defect, infiltrate, thinning and treatment response.",
+  "notes": "Gram-positive coverage including MRSA. Fortified topical therapy is distinct from IV vancomycin.",
+  "citations": [
+    "American Academy of Ophthalmology. Bacterial Keratitis Preferred Practice Pattern, 2024. https://www.aaojournal.org/article/S0161-6420(24)00007-1/fulltext",
+    "American Academy of Ophthalmology EyeWiki. Bacterial Keratitis. https://eyewiki.aao.org/Bacterial_Keratitis"
+  ]
+};
+
+const TOBRAMYCIN_OPHTHALMIC: DrugEntry = {
+  "id": "tobramycin-ophthalmic",
+  "name": "Tobramycin fortified ophthalmic 15 mg/mL",
+  "genericName": "Tobramycin fortified ophthalmic 15 mg/mL",
+  "drugClass": "Compounded aminoglycoside ophthalmic antibiotic",
+  "route": "Topical ophthalmic",
+  "indications": [
+    "Severe bacterial keratitis"
+  ],
+  "dosing": [
+    {
+      "indication": "Severe bacterial keratitis",
+      "regimen": "Specialist-directed regimen: 1 drop of tobramycin 15 mg/mL in the affected eye hourly, including overnight, plus vancomycin 25–50 mg/mL 1 drop hourly. Alternate the two drugs every 30 minutes. Initial loading and antibiotic selection are ophthalmologist-directed. The standard commercial 0.3% solution is not the same concentration."
+    }
+  ],
+  "cautions": [
+    "Sterile compounded ophthalmic preparation only. Do not instill a systemic preparation or compound drops at home.",
+    "Immediate ophthalmology coordination; culture before treatment when indicated and promptly feasible, without delaying urgent therapy.",
+    "No empiric topical steroid or steroid-antibiotic combination.",
+    "Aminoglycoside epithelial toxicity can complicate prolonged intensive therapy; reassess with ophthalmology."
+  ],
+  "monitoring": "Ophthalmology-directed reassessment of visual acuity, epithelial defect, infiltrate, thinning and treatment response.",
+  "notes": "",
+  "citations": [
+    "American Academy of Ophthalmology. Bacterial Keratitis Preferred Practice Pattern, 2024. https://www.aaojournal.org/article/S0161-6420(24)00007-1/fulltext",
+    "American Academy of Ophthalmology EyeWiki. Bacterial Keratitis. https://eyewiki.aao.org/Bacterial_Keratitis"
+  ]
+};
+
+const GANCICLOVIR_OPHTHALMIC: DrugEntry = {
+  "id": "ganciclovir-ophthalmic",
+  "name": "Ganciclovir 0.15% ophthalmic gel (Zirgan)",
+  "genericName": "Ganciclovir 0.15% ophthalmic gel (Zirgan)",
+  "drugClass": "Topical antiviral",
+  "route": "Topical ophthalmic",
+  "indications": [
+    "HSV dendritic epithelial keratitis"
+  ],
+  "dosing": [
+    {
+      "indication": "HSV dendritic epithelial keratitis",
+      "regimen": "1 drop in the affected eye five times daily while awake until the ulcer heals, then 1 drop three times daily for 7 additional days. Choose topical or appropriate oral treatment with ophthalmology; do not routinely combine all options."
+    }
+  ],
+  "cautions": [
+    "No topical steroid for active epithelial HSV.",
+    "Dendritic-ulcer regimen does not replace specialist assessment of geographic, stromal or endothelial disease.",
+    "Ophthalmic gel only, not systemic ganciclovir. Avoid contact lenses during active disease.",
+    "Safety and effectiveness below age 2 years have not been established in the label."
+  ],
+  "monitoring": "Ophthalmology-directed reassessment of visual acuity, epithelial defect, infiltrate, thinning and treatment response.",
+  "notes": "",
+  "citations": [
+    "ZIRGAN prescribing information, 2026. https://www.accessdata.fda.gov/drugsatfda_docs/label/2026/022211s007lbl.pdf",
+    "White ML, Chodosh J. Herpes Simplex Virus Keratitis: A Treatment Guideline. AAO, 2014. https://www.aao.org/Assets/6564936e-9929-48b6-93cd-15872a1b388e/635424082284100000/hsv-keratitis-treatment-guideline-harvard-pdf"
+  ]
+};
+
+const NATAMYCIN_OPHTHALMIC: DrugEntry = {
+  "id": "natamycin-ophthalmic",
+  "name": "Natamycin 5% ophthalmic suspension (Natacyn)",
+  "genericName": "Natamycin 5% ophthalmic suspension (Natacyn)",
+  "drugClass": "Topical polyene antifungal",
+  "route": "Topical ophthalmic",
+  "indications": [
+    "Fungal keratitis"
+  ],
+  "dosing": [
+    {
+      "indication": "Fungal keratitis",
+      "regimen": "1 drop in the affected eye every 1–2 hours initially, with urgent corneal specialist involvement and diagnostic sampling. Shake suspension before use. Species, depth and response determine agent, duration and taper; do not prescribe an automatic ED taper."
+    }
+  ],
+  "cautions": [
+    "For susceptible fungi; not a universal treatment for every fungal organism or deep infection.",
+    "Do not add empiric topical corticosteroid.",
+    "Failure to improve requires reassessment of organism, penetration, adherence and diagnosis."
+  ],
+  "monitoring": "Ophthalmology-directed reassessment of visual acuity, epithelial defect, infiltrate, thinning and treatment response.",
+  "notes": "",
+  "citations": [
+    "NATACYN prescribing information, 2025. https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/050514s022lbl.pdf"
+  ]
+};
+
+const PHMB_OPHTHALMIC: DrugEntry = {
+  "id": "phmb-ophthalmic",
+  "name": "Polyhexamethylene biguanide (PHMB) 0.02% ophthalmic",
+  "genericName": "Polyhexamethylene biguanide (PHMB) 0.02% ophthalmic",
+  "drugClass": "Specialist topical antiamoebic biguanide",
+  "route": "Topical ophthalmic",
+  "indications": [
+    "Acanthamoeba keratitis"
+  ],
+  "dosing": [
+    {
+      "indication": "Acanthamoeba keratitis",
+      "regimen": "Specialist-only reference: Polyhexamethylene biguanide (PHMB) 0.02% ophthalmic. Intensive administration frequency, combinations (sometimes including a diamidine), duration and taper must be prescribed by the treating corneal specialist after urgent diagnostic assessment. This card is not a stand-alone ED prescription or compounding recipe."
+    }
+  ],
+  "cautions": [
+    "Use only a sterile ophthalmic preparation supplied for this purpose. Never substitute skin antiseptic, mouthwash, contact-lens solution or a different concentration.",
+    "Prolonged therapy and close corneal follow-up are usually needed.",
+    "Do not start empiric topical corticosteroid."
+  ],
+  "monitoring": "Ophthalmology-directed reassessment of visual acuity, epithelial defect, infiltrate, thinning and treatment response.",
+  "notes": "",
+  "citations": [
+    "CDC. Clinical Overview of Acanthamoeba Keratitis. https://www.cdc.gov/acanthamoeba/hcp/clinical-overview-acanthamoeba-keratitis/"
+  ]
+};
+
+const CHLORHEXIDINE_OPHTHALMIC: DrugEntry = {
+  "id": "chlorhexidine-ophthalmic",
+  "name": "Chlorhexidine 0.02% ophthalmic",
+  "genericName": "Chlorhexidine 0.02% ophthalmic",
+  "drugClass": "Specialist topical antiamoebic biguanide",
+  "route": "Topical ophthalmic",
+  "indications": [
+    "Acanthamoeba keratitis"
+  ],
+  "dosing": [
+    {
+      "indication": "Acanthamoeba keratitis",
+      "regimen": "Specialist-only reference: Chlorhexidine 0.02% ophthalmic. Intensive administration frequency, combinations (sometimes including a diamidine), duration and taper must be prescribed by the treating corneal specialist after urgent diagnostic assessment. This card is not a stand-alone ED prescription or compounding recipe."
+    }
+  ],
+  "cautions": [
+    "Use only a sterile ophthalmic preparation supplied for this purpose. Never substitute skin antiseptic, mouthwash, contact-lens solution or a different concentration.",
+    "Prolonged therapy and close corneal follow-up are usually needed.",
+    "Do not start empiric topical corticosteroid."
+  ],
+  "monitoring": "Ophthalmology-directed reassessment of visual acuity, epithelial defect, infiltrate, thinning and treatment response.",
+  "notes": "",
+  "citations": [
+    "CDC. Clinical Overview of Acanthamoeba Keratitis. https://www.cdc.gov/acanthamoeba/hcp/clinical-overview-acanthamoeba-keratitis/"
+  ]
+};
+
 export const ALL_DRUGS: DrugEntry[] = [
+  VANCOMYCIN_OPHTHALMIC,
+  TOBRAMYCIN_OPHTHALMIC,
+  GANCICLOVIR_OPHTHALMIC,
+  NATAMYCIN_OPHTHALMIC,
+  PHMB_OPHTHALMIC,
+  CHLORHEXIDINE_OPHTHALMIC,
+
   ...HG_DRUGS,
   ACAMPROSATE,
   ACETAMINOPHEN,

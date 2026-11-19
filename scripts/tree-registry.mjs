@@ -3,6 +3,7 @@
 // When adding a new consult, ADD IT HERE (and only here).
 
 export const TREE_REGISTRY = {
+  'acute-keratitis': { prefix: 'ACUTE_KERATITIS', entryNodeId: 'acute-keratitis-start', categoryId: 'ophthalmology' },
   'decompression-sickness': { prefix: 'DECOMPRESSION_SICKNESS', entryNodeId: 'dcs-start', categoryId: 'emergency-medicine' },
   'arterial-line': { prefix: 'ARTERIAL_LINE', entryNodeId: 'aline-start', categoryId: 'procedures' },
   'asystole': { prefix: 'ASYSTOLE', entryNodeId: 'asystole-start', categoryId: 'emergency-medicine' },

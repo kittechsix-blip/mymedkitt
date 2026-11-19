@@ -4,6 +4,7 @@
  */
 /** Clinical synonyms for common queries */
 export const CLINICAL_SYNONYMS = {
+    'acute-keratitis': ['keratitis', 'corneal ulcer', 'contact lens infection', 'dendritic ulcer', 'HSV keratitis', 'pseudodendrite', 'herpes zoster ophthalmicus', 'photokeratitis', 'welding flash', 'Acanthamoeba keratitis', 'fungal keratitis', 'fluorescein uptake patterns'],
     'decompression-sickness': ['decompression illness', 'DCS', 'DCI', 'scuba diving', 'diving injury', 'diver', 'bends', 'caisson disease', 'rapid ascent', 'fast ascent', 'spinal decompression sickness', 'arterial gas embolism', 'recompression', 'hyperbaric oxygen', 'weakness urinary retention after scuba'],
     'thyroid': ['myxedema coma', 'myxoedema coma', 'decompensated hypothyroidism'],
     'paracentesis': ['sbp', 'spontaneous bacterial peritonitis', 'infected ascites', 'cirrhosis fever', 'sbp albumin'],

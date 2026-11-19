@@ -1,0 +1,26 @@
+{
+  "status": "proposed-not-approved-not-published",
+  "artwork": "Original SVG schematics created for myMedKitt; reviewed clinically; no third-party source imagery copied",
+  "images": [
+    {
+      "file": "hsv-dendrite.jpg",
+      "author": "Imrankabirhossain",
+      "title": "Dendritic corneal ulcer",
+      "license": "CC-BY-SA-4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Dendritic_corneal_ulcer.jpg",
+      "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Dendritic_corneal_ulcer.jpg",
+      "modifications": "None; CSS display resize only",
+      "placement": "HSV branch and Stain Atlas"
+    },
+    {
+      "file": "photokeratitis.png",
+      "author": "Kwon DH et al.",
+      "title": "Figure 2, 10.1186/s40557-015-0087-7",
+      "license": "CC-BY-4.0",
+      "source_url": "https://link.springer.com/article/10.1186/s40557-015-0087-7/figures/2",
+      "license_evidence_url": "https://link.springer.com/content/pdf/10.1186/s40557-015-0087-7.pdf",
+      "modifications": "None",
+      "placement": "UV branch and Stain Atlas"
+    }
+  ]
+}
