@@ -14467,7 +14467,7 @@ const VANCOMYCIN_OPHTHALMIC = {
     "dosing": [
         {
             "indication": "Severe bacterial keratitis",
-            "regimen": "Specialist-directed regimen: 1 drop of vancomycin 25–50 mg/mL in the affected eye hourly, including overnight, plus tobramycin 15 mg/mL 1 drop hourly. Alternate the two drugs every 30 minutes. Ophthalmology may prescribe initial loading and adjust antibiotics to smear, cultures and local resistance. This is one severe-ulcer regimen, not a universal combination for every ulcer."
+            "regimen": "Specialist-directed regimen: 1 drop of vancomycin 25–50 mg/mL in the affected eye hourly, including overnight, plus tobramycin 9–14 mg/mL 1 drop hourly. Alternate the two drugs every 30 minutes. Ophthalmology may prescribe initial loading and adjust antibiotics to smear, cultures and local resistance. This is one severe-ulcer regimen, not a universal combination for every ulcer."
         }
     ],
     "cautions": [
@@ -14484,8 +14484,8 @@ const VANCOMYCIN_OPHTHALMIC = {
 };
 const TOBRAMYCIN_OPHTHALMIC = {
     "id": "tobramycin-ophthalmic",
-    "name": "Tobramycin fortified ophthalmic 15 mg/mL",
-    "genericName": "Tobramycin fortified ophthalmic 15 mg/mL",
+    "name": "Tobramycin fortified ophthalmic 9–14 mg/mL",
+    "genericName": "Tobramycin fortified ophthalmic 9–14 mg/mL",
     "drugClass": "Compounded aminoglycoside ophthalmic antibiotic",
     "route": "Topical ophthalmic",
     "indications": [
@@ -14494,7 +14494,7 @@ const TOBRAMYCIN_OPHTHALMIC = {
     "dosing": [
         {
             "indication": "Severe bacterial keratitis",
-            "regimen": "Specialist-directed regimen: 1 drop of tobramycin 15 mg/mL in the affected eye hourly, including overnight, plus vancomycin 25–50 mg/mL 1 drop hourly. Alternate the two drugs every 30 minutes. Initial loading and antibiotic selection are ophthalmologist-directed. The standard commercial 0.3% solution is not the same concentration."
+            "regimen": "Specialist-directed regimen: 1 drop of tobramycin 9–14 mg/mL in the affected eye hourly, including overnight, plus vancomycin 25–50 mg/mL 1 drop hourly. Alternate the two drugs every 30 minutes. Initial loading and antibiotic selection are ophthalmologist-directed. The standard commercial 0.3% solution is not the same concentration."
         }
     ],
     "cautions": [
@@ -14506,7 +14506,7 @@ const TOBRAMYCIN_OPHTHALMIC = {
     "monitoring": "Ophthalmology-directed reassessment of visual acuity, epithelial defect, infiltrate, thinning and treatment response.",
     "notes": "",
     "citations": [
-        "American Academy of Ophthalmology. Bacterial Keratitis Preferred Practice Pattern, 2024. https://www.aaojournal.org/article/S0161-6420(24)00007-1/fulltext",
+        "American Academy of Ophthalmology. Bacterial Keratitis Preferred Practice Pattern, 2024. Table 4 (fortified tobramycin 9–14 mg/mL, P108) and Appendix 6 (14 mg/mL preparation, P120). https://www.aaojournal.org/article/S0161-6420(24)00007-1/fulltext",
         "American Academy of Ophthalmology EyeWiki. Bacterial Keratitis. https://eyewiki.aao.org/Bacterial_Keratitis"
     ]
 };
