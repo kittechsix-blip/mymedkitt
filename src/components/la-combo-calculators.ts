@@ -4,6 +4,14 @@
 // Max = weight x mg/kg, never above the adult cap. Pure logic is exported for tests. Inputs are never stored.
 // Sources: Roberts & Hedges 8th ed. Ch. 30; ASRA LAST practice advisory (Neal 2018); Malamed, Handbook of Local Anesthesia (articaine, mepivacaine).
 
+// Injectable solution conversion only: percent w/v × 10 = mg/mL.
+// Floor displayed volume ceilings so rounding cannot recommend more than the mg limit.
+export const floorVolume = (ml: number): number => Math.floor(Math.max(0, ml) * 100) / 100;
+export function localAnestheticVolume(maxMg: number, percent: number): number | null {
+  if (!Number.isFinite(maxMg) || maxMg <= 0 || !Number.isFinite(percent) || percent <= 0) return null;
+  return floorVolume(maxMg / (percent * 10));
+}
+
 import type { CalculatorDefinition } from './calculator.js';
 
 export interface LaAgent { id: number; name: string; mgPerKg: number; capMg: number; }
@@ -12,8 +20,8 @@ export interface LaAgent { id: number; name: string; mgPerKg: number; capMg: num
 export const LA_AGENTS: LaAgent[] = [
   { id: 1, name: 'Lidocaine (plain)', mgPerKg: 4.5, capMg: 300 },
   { id: 2, name: 'Lidocaine with epinephrine', mgPerKg: 7, capMg: 500 },
-  { id: 3, name: 'Bupivacaine (plain)', mgPerKg: 2.5, capMg: 175 },
-  { id: 4, name: 'Bupivacaine with epinephrine', mgPerKg: 3, capMg: 225 },
+  { id: 3, name: 'Bupivacaine (plain, non-dental)', mgPerKg: 2.5, capMg: 175 },
+  { id: 4, name: 'Bupivacaine with epinephrine (non-dental)', mgPerKg: 3, capMg: 225 },
   { id: 5, name: 'Ropivacaine', mgPerKg: 3, capMg: 200 },
   { id: 6, name: 'Mepivacaine', mgPerKg: 4.4, capMg: 400 },
   { id: 7, name: 'Articaine with epinephrine (dental)', mgPerKg: 7, capMg: 500 },
@@ -41,18 +49,18 @@ export interface LaComboResult {
   max1: number; max2: number; capped1: boolean; capped2: boolean;
   maxMl1: number; maxMl2: number;
   used: number;           // fraction of the shared limit used (0-1+)
-  remainingMg2: number;   // 'remaining' mode: mg of drug 2 still allowed
+  remainingMg2: number;   // 'remaining' mode: mg of drug 2 remaining ceiling
   remainingMl2: number;
   splitMl1: number; splitMl2: number; // 'split' mode: each drug at half its own max
 }
 
-const r1 = (x: number) => Math.round(x * 10) / 10;
+const r1 = floorVolume;
 
 export function laCombo(i: LaComboInput): LaComboResult {
   const a1 = agentOf(i.agent1);
   const a2 = agentOf(i.agent2);
   const empty: LaComboResult = { mode: 'incomplete', max1: 0, max2: 0, capped1: false, capped2: false, maxMl1: 0, maxMl2: 0, used: 0, remainingMg2: 0, remainingMl2: 0, splitMl1: 0, splitMl2: 0 };
-  if (!a1 || !a2 || !(i.weightKg > 0) || !(i.mgPerMl1 > 0) || !(i.mgPerMl2 > 0)) return empty;
+  if (![i.weightKg, i.mgPerMl1, i.mgPerMl2, i.ml1, i.ml2].every(Number.isFinite) || i.ml1 < 0 || i.ml2 < 0 || !a1 || !a2 || !(i.weightKg > 0) || !(i.mgPerMl1 > 0) || !(i.mgPerMl2 > 0)) return empty;
   const m1 = agentMaxMg(a1, i.weightKg);
   const m2 = agentMaxMg(a2, i.weightKg);
   const base = { ...empty, max1: m1.mg, max2: m2.mg, capped1: m1.capped, capped2: m2.capped, maxMl1: m1.mg / i.mgPerMl1, maxMl2: m2.mg / i.mgPerMl2 };
@@ -89,18 +97,18 @@ export const LA_COMBO_CALCULATOR: CalculatorDefinition = {
   id: 'la-combo-max',
   title: 'Two Local Anesthetics: Combined Max',
   subtitle: 'Toxicity adds up across both drugs',
-  description: 'For giving two local anesthetics in one session. Toxicity is treated as additive: each drug uses a share of one shared limit equal to the mg given divided by that drug’s own max, and both shares together must stay under 100%. Leave the volumes blank to see an even split; enter the volume of one drug to see how much of the other you can still give; enter both to check the total.',
+  description: 'For giving two local anesthetics in one session. Do not use these general bupivacaine regimens for dentistry; use the dental calculator with its 90 mg sitting cap. Toxicity is treated as additive: each drug uses a share of one shared limit equal to the mg given divided by that drug’s own max, and both shares together must stay under 100%. Leave the volumes blank to see standalone ceilings, not suggested doses; enter the volume of one drug to see how much of the other you can still give; enter both to check the total.',
   fields: [
     { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, valueIsPoints: true, unit: 'kg', description: 'Use lean or ideal body weight in obesity' },
     { name: 'agent1', label: 'Drug 1', type: 'select', points: 0, hideOptionPoints: true, selectOptions: AGENT_OPTIONS },
-    { name: 'conc1', label: 'Drug 1 concentration', type: 'select', points: 0, hideOptionPoints: true, selectOptions: CONC_OPTIONS },
+    { name: 'conc1', label: 'Drug 1 strength (%)', type: 'select', points: 0, hideOptionPoints: true, selectOptions: CONC_OPTIONS },
     { name: 'ml1', label: 'Drug 1 volume given or planned (optional)', type: 'number', points: 0, valueIsPoints: true, unit: 'mL' },
     { name: 'agent2', label: 'Drug 2', type: 'select', points: 0, hideOptionPoints: true, selectOptions: [AGENT_OPTIONS[2], ...AGENT_OPTIONS.filter((_, i) => i !== 2)] },
-    { name: 'conc2', label: 'Drug 2 concentration', type: 'select', points: 0, hideOptionPoints: true, selectOptions: [CONC_OPTIONS[3], ...CONC_OPTIONS.filter((_, i) => i !== 3)] },
+    { name: 'conc2', label: 'Drug 2 strength (%)', type: 'select', points: 0, hideOptionPoints: true, selectOptions: [CONC_OPTIONS[3], ...CONC_OPTIONS.filter((_, i) => i !== 3)] },
     { name: 'ml2', label: 'Drug 2 volume given or planned (optional)', type: 'number', points: 0, valueIsPoints: true, unit: 'mL' },
   ],
   results: [],
-  thresholdNote: 'The limit is a ceiling, not a target: use the smallest effective volume, aspirate before every injection, and inject slowly. Risk is higher in the elderly, in heart, liver or kidney disease, in pregnancy, and in very vascular sites (face, scalp, intercostal).',
+  thresholdNote: '1 mL = 1 cc. Volume ceilings are rounded down. The limit is a ceiling, not a target: use the smallest effective volume, aspirate before every injection, and inject slowly. Risk is higher in the elderly, in heart, liver or kidney disease, in pregnancy, and in very vascular sites (face, scalp, intercostal).',
   citations: [
     'Roberts JR, Custalow CB, Thomsen TW, eds. Roberts and Hedges’ Clinical Procedures in Emergency Medicine and Acute Care. 8th ed. Elsevier; 2023. Ch. 30, Local and Topical Anesthesia.',
     'Neal JM, Barrington MJ, Fettiplace MR, et al. The Third American Society of Regional Anesthesia and Pain Medicine Practice Advisory on Local Anesthetic Systemic Toxicity: Executive Summary 2017. Reg Anesth Pain Med. 2018;43(2):113-123.',
@@ -122,29 +130,29 @@ export const LA_COMBO_CALCULATOR: CalculatorDefinition = {
     const alone = `**Each drug alone:**\n- ${a1.name}: ${Math.round(r.max1)} mg${cap(r.capped1)} = ${r1(r.maxMl1)} mL at ${i.mgPerMl1} mg/mL\n- ${a2.name}: ${Math.round(r.max2)} mg${cap(r.capped2)} = ${r1(r.maxMl2)} mL at ${i.mgPerMl2} mg/mL`;
     if (r.mode === 'split') {
       return {
-        value: `${r1(r.splitMl1)} mL + ${r1(r.splitMl2)} mL`,
-        label: 'Even split (half of each max)',
-        description: `**Together, an even split:** up to **${r1(r.splitMl1)} mL** of ${a1.name} **plus** up to **${r1(r.splitMl2)} mL** of ${a2.name}.\n\nAny mix works as long as the two shares add up to 100% or less. Enter the volume of one drug to see how much of the other you can still give.\n\n${alone}\n\n${LAST}`,
-        colorVar: '--color-primary',
+        value: '--',
+        label: 'Enter one volume to calculate the remaining ceiling',
+        description: `Choose the procedure-appropriate volume of one agent, then enter it above. The other agent's remaining ceiling will be shown in mL (cc). Do not give both standalone maximum doses.\n\n${alone}\n\n${LAST}`,
+        colorVar: '--color-text-muted',
       };
     }
     const pct = Math.round(r.used * 100);
     const colorVar = pct >= 80 ? '--color-danger' : pct >= 50 ? '--color-warning' : '--color-primary';
-    const status = pct >= 100 ? 'Over the limit: STOP' : pct >= 80 ? 'At the limit: STOP' : pct >= 50 ? 'Approaching the limit' : 'Well within the limit';
+    const status = r.used >= 1 ? 'At or over the limit: STOP' : pct >= 80 ? 'Near the ceiling: reassess' : pct >= 50 ? 'Approaching the limit' : 'Well within the limit';
     if (r.mode === 'remaining') {
       const given = i.ml1 > 0 ? { a: a1, ml: i.ml1, conc: i.mgPerMl1 } : { a: a2, ml: i.ml2, conc: i.mgPerMl2 };
       const other = i.ml1 > 0 ? { a: a2, conc: i.mgPerMl2 } : { a: a1, conc: i.mgPerMl1 };
       return {
-        value: pct >= 100 ? '0 mL' : `${r1(r.remainingMl2)} mL`,
-        label: pct >= 100 ? `No ${other.a.name} left` : `${other.a.name} still allowed`,
-        description: `**Already used:** ${given.ml} mL of ${given.a.name} = ${Math.round(given.ml * given.conc)} mg = **${pct}% of the shared limit** (${status.toLowerCase()}).\n\n**Still allowed:** up to **${Math.round(r.remainingMg2)} mg = ${r1(r.remainingMl2)} mL** of ${other.a.name} at ${other.conc} mg/mL.\n\n${alone}\n\n${pct >= 80 ? `**WARNING:** at or over the limit. Do not give more; watch for toxicity. ${LAST}` : LAST}`,
+        value: r.used >= 1 ? '0 mL' : `${r1(r.remainingMl2)} mL`,
+        label: r.used >= 1 ? `No ${other.a.name} left` : `${other.a.name} remaining ceiling`,
+        description: `**Already used:** ${given.ml} mL of ${given.a.name} = ${Math.round(given.ml * given.conc)} mg = **${pct}% of the shared limit** (${status.toLowerCase()}).\n\n**Remaining mathematical ceiling:** **${Math.round(r.remainingMg2)} mg = ${r1(r.remainingMl2)} mL** of ${other.a.name} at ${other.conc} mg/mL.\n\n${alone}\n\n${pct >= 80 ? `**CAUTION:** near or above the ceiling. Reassess before any further injection; stop if the ceiling is reached or toxicity is suspected. ${LAST}` : LAST}`,
         colorVar,
       };
     }
     return {
       value: `${pct}% of limit`,
       label: status,
-      description: `**${a1.name}:** ${i.ml1} mL = ${Math.round(i.ml1 * i.mgPerMl1)} mg = ${Math.round(((i.ml1 * i.mgPerMl1) / r.max1) * 100)}% of its max\n**${a2.name}:** ${i.ml2} mL = ${Math.round(i.ml2 * i.mgPerMl2)} mg = ${Math.round(((i.ml2 * i.mgPerMl2) / r.max2) * 100)}% of its max\n\n**Together: ${pct}% of the shared limit.**\n\n${alone}\n\n${pct >= 80 ? `**WARNING:** at or over the limit. Do not give more; watch for toxicity. ${LAST}` : LAST}`,
+      description: `**${a1.name}:** ${i.ml1} mL = ${Math.round(i.ml1 * i.mgPerMl1)} mg = ${Math.round(((i.ml1 * i.mgPerMl1) / r.max1) * 100)}% of its max\n**${a2.name}:** ${i.ml2} mL = ${Math.round(i.ml2 * i.mgPerMl2)} mg = ${Math.round(((i.ml2 * i.mgPerMl2) / r.max2) * 100)}% of its max\n\n**Together: ${pct}% of the shared limit.**\n\n${alone}\n\n${pct >= 80 ? `**CAUTION:** near or above the ceiling. Reassess before any further injection; stop if the ceiling is reached or toxicity is suspected. ${LAST}` : LAST}`,
       colorVar,
     };
   },

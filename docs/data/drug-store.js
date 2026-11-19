@@ -1195,17 +1195,17 @@ const BUPIVACAINE = {
         {
             indication: 'Occipital Nerve Block',
             regimen: '**2-3 mL of 0.5% PLAIN bupivacaine per side** (10-15 mg per side). NO EPINEPHRINE — risk of arterial vasoconstriction near vertebral system. Inject medial to occipital artery pulsation, ~1/3 distance from inion to mastoid process. Aspirate before injecting. Onset 5-15 min. Duration 4-8 h (longer than lidocaine). May add 40 mg methylprednisolone OR 4 mg dexamethasone for steroid adjunct (mixed in same syringe).',
-            weightCalc: { dosePerKg: 2, unit: 'mg', maxDose: 175, label: 'Max plain dose (no epi)' },
+            weightCalc: { localAnestheticPercents: [0.25, 0.5], dosePerKg: 2, unit: 'mg', maxDose: 175, label: 'Max plain dose (no epi)' },
         },
         {
             indication: 'Peripheral nerve block (general)',
             regimen: '0.25-0.5% plain bupivacaine, volume per block target. Max plain dose: **2 mg/kg** (max ~175 mg). With epinephrine 1:200,000: max 3 mg/kg (max ~225 mg) — but NEVER use epi for occipital, dorsal penile, digital, or ear blocks. Onset 10-20 min, duration 4-8 h sensory, up to 24 h motor in some blocks.',
-            weightCalc: { dosePerKg: 2, unit: 'mg', maxDose: 175, label: 'Max plain dose' },
+            weightCalc: { localAnestheticPercents: [0.25, 0.5], dosePerKg: 2, unit: 'mg', maxDose: 175, label: 'Max plain dose' },
         },
         {
             indication: 'Local infiltration',
             regimen: '0.25% bupivacaine, infiltrate to effect up to max dose. Preferred over lidocaine when prolonged analgesia desired (laceration repair anticipating outpatient follow-up, post-procedure pain control).',
-            weightCalc: { dosePerKg: 2, unit: 'mg', maxDose: 175, label: 'Max plain dose' },
+            weightCalc: { localAnestheticPercents: [0.25, 0.5], dosePerKg: 2, unit: 'mg', maxDose: 175, label: 'Max plain dose' },
         },
     ],
     contraindications: [
@@ -1223,6 +1223,7 @@ const BUPIVACAINE = {
     monitoring: 'Test block adequacy with pinprick after 10-15 min. Observe 15-30 min post-block for vasovagal or LAST (local anesthetic systemic toxicity).',
     notes: 'Long-acting amide LA preferred for occipital nerve blocks because the prolonged duration (4-8 h vs lidocaine 30-90 min) often outlasts the headache cycle and may break the autonomic-pain loop in cluster headache. Steroid adjunct (methylprednisolone 40 mg OR dexamethasone 4 mg) controversial for cluster (Ashkenazi 2008, Cuadrado 2017 — no added benefit beyond LA alone); reasonable for cervicogenic HA and hemicrania continua.',
     citations: [
+        'DailyMed. Bupivacaine hydrochloride injection prescribing information: strengths and maximum recommended dosage. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e391f807-7699-6d82-e053-2a95a90ab641',
         'Blumenfeld A, et al. Expert consensus recommendations for the performance of peripheral nerve blocks for headaches. Headache. 2013;53(3):437-46.',
         'Tobin J, Flitman S. Occipital nerve blocks: when and what to inject? Headache. 2009;49(10):1521-33.',
         'Ashkenazi A, et al. Greater occipital nerve block using LA alone or with triamcinolone for transformed migraine. J Neurol Neurosurg Psychiatry. 2008;79(4):415-7.',
@@ -3272,7 +3273,7 @@ const LIDOCAINE = {
         {
             indication: 'Occipital Nerve Block',
             regimen: '**2-3 mL of 1-2% PLAIN lidocaine per side**. NO EPINEPHRINE — risk of arterial vasoconstriction near vertebral artery supply. Shorter duration than bupivacaine (30-90 min vs 4-8 h) — use when bupivacaine unavailable, when shorter block desired (diagnostic block), or when patient prefers shorter numbness. Inject medial to occipital artery pulsation, ~1/3 distance from inion to mastoid process. Aspirate before injecting. Max plain dose **4.5 mg/kg** (cap ~300 mg). May add 40 mg methylprednisolone OR 4 mg dexamethasone for steroid adjunct.',
-            weightCalc: { dosePerKg: 4.5, unit: 'mg', maxDose: 300, label: 'Max plain dose (no epi)' },
+            weightCalc: { localAnestheticPercents: [0.5, 1, 1.5, 2], dosePerKg: 4.5, unit: 'mg', maxDose: 300, label: 'Max plain dose (no epi)' },
         },
         {
             indication: 'Epistaxis (topical anesthesia)',
@@ -3285,7 +3286,7 @@ const LIDOCAINE = {
         {
             indication: 'Hematoma block',
             regimen: '5–10 mL of 1% plain lidocaine (10 mg/mL) injected directly into fracture hematoma via 20-gauge needle. Aspirate dark blood to confirm placement. US-guided for improved accuracy. Wait 5–10 min for full effect. For combined radius + ulna fractures, second injection into ulnar hematoma.',
-            weightCalc: { dosePerKg: 4.5, unit: 'mg', label: 'Max dose (1% = 10 mg/mL)' },
+            weightCalc: { localAnestheticPercents: [0.5, 1, 1.5, 2], dosePerKg: 4.5, unit: 'mg', maxDose: 300, label: 'Max plain dose' },
         },
         {
             indication: 'TCA Overdose — Ventricular Arrhythmia',
@@ -3329,6 +3330,7 @@ const LIDOCAINE = {
     monitoring: 'Test block adequacy with pinprick before procedure. Onset: 2\u20135 min. Duration: 30\u201360 min.',
     notes: 'For penile block, NEVER use formulations containing epinephrine. The penis is supplied by end-arteries \u2014 epinephrine can cause ischemic necrosis.',
     citations: [
+        'DailyMed. Lidocaine hydrochloride injection prescribing information: strengths and maximum recommended dosage. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3b2dd84e-cee8-4e58-d494-395a65a353a0',
         'Burnett AL, Sharlip ID. Standard Operating Procedures for Priapism. J Sex Med. 2013;10(1):180-94.',
     ],
 };

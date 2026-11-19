@@ -9,6 +9,7 @@ import { ADROGUE_MADIAS_CALCULATOR } from './adrogue-madias.js';
 import { FROSTBITE_CAUCHY_CALCULATOR, FROSTBITE_REPERFUSION_CALCULATOR, FROSTBITE_ILOPROST_RATE_CALCULATOR } from './frostbite-calculators.js';
 import { HEMOLYSIS_LABS_CALCULATOR, RETIC_INDEX_CALCULATOR } from './hemolytic-anemia-calculators.js';
 import { VKDB_TYPE_RISK_CALCULATOR, VKDB_LAB_PATTERN_CALCULATOR, VKDB_DOSES_CALCULATOR } from './vkdb-calculators.js';
+import { floorVolume } from './la-combo-calculators.js';
 import { LA_COMBO_CALCULATOR, laCapMg } from './la-combo-calculators.js';
 import { KAWASAKI_CRITERIA_CALCULATOR, KAWASAKI_INCOMPLETE_CALCULATOR, KAWASAKI_HIGH_RISK_CALCULATOR, KAWASAKI_CORONARY_Z_CALCULATOR, KAWASAKI_DOSES_CALCULATOR } from './kawasaki-calculators.js';
 import { RIBSCORE_CALCULATOR } from './ribscore.js';
@@ -40197,7 +40198,7 @@ const FNB_LA_MAX_DOSE_CALCULATOR = {
     id: 'fnb-la-max-dose',
     title: 'Max Local Anesthetic Dose',
     subtitle: 'Weight-based max for facial blocks',
-    description: 'Calculates the maximum safe local-anesthetic dose for facial nerve blocks and how many mL that allows at the chosen concentration. Facial blocks use small volumes, but verify whenever combining a block with wound infiltration. Maxima per Roberts & Hedges / ASRA.',
+    description: 'Calculates the local-anesthetic dose ceiling for facial nerve blocks and how many mL that allows at the chosen concentration. Facial blocks use small volumes, but verify whenever combining a block with wound infiltration. Maxima per Roberts & Hedges / ASRA.',
     fields: [
         {
             name: 'weight',
@@ -40214,7 +40215,7 @@ const FNB_LA_MAX_DOSE_CALCULATOR = {
             type: 'select',
             points: 0,
             hideOptionPoints: true,
-            description: 'Max mg/kg encoded in the option value',
+            description: 'Select the anesthetic and epinephrine formulation',
             selectOptions: [
                 { label: 'Lidocaine (plain) — 4.5 mg/kg, max 300 mg', points: 45 },
                 { label: 'Lidocaine WITH epinephrine — 7 mg/kg, max 500 mg', points: 70 },
@@ -40224,7 +40225,7 @@ const FNB_LA_MAX_DOSE_CALCULATOR = {
         },
         {
             name: 'conc',
-            label: 'Concentration',
+            label: 'Anesthetic strength (%)',
             type: 'select',
             points: 0,
             hideOptionPoints: true,
@@ -40238,7 +40239,7 @@ const FNB_LA_MAX_DOSE_CALCULATOR = {
         },
     ],
     results: [],
-    thresholdNote: 'These are maxima — use the smallest effective volume. Aspirate before every injection; the face is densely vascular.',
+    thresholdNote: 'Dose ceiling, not a target. Count all local anesthetic already given; mixed agents share an additive limit. 1 mL = 1 cc. Volume ceilings rounded down. Use the smallest effective volume. Aspirate before every injection; the face is densely vascular.',
     citations: [
         'Roberts JR, Custalow CB, Thomsen TW, eds. Roberts and Hedges\u2019 Clinical Procedures in Emergency Medicine and Acute Care. 8th ed. Elsevier; 2023. Ch. 30, Local and Topical Anesthesia.',
         'Neal JM, et al. ASRA Practice Advisory on Local Anesthetic Systemic Toxicity. Reg Anesth Pain Med. 2018;43(2):113-123.',
@@ -40247,7 +40248,7 @@ const FNB_LA_MAX_DOSE_CALCULATOR = {
         const weight = values['weight'] || 0;
         const mgPerKg = (values['agent'] || 0) / 10; // 45→4.5, 70→7, 25→2.5, 30→3
         const mgPerMl = (values['conc'] || 0) / 10; // 25→2.5, 50→5, 100→10, 200→20
-        if (weight <= 0 || mgPerKg <= 0 || mgPerMl <= 0) {
+        if (![weight, mgPerKg, mgPerMl].every(Number.isFinite) || weight <= 0 || mgPerKg <= 0 || mgPerMl <= 0) {
             return {
                 value: '--',
                 label: 'Enter values',
@@ -40255,13 +40256,16 @@ const FNB_LA_MAX_DOSE_CALCULATOR = {
                 colorVar: '--color-text-muted',
             };
         }
+        const validStrengths = { 45: [50, 100, 200], 70: [50, 100, 200], 25: [25, 50], 30: [25, 50] };
+        if (!validStrengths[values.agent]?.includes(values.conc))
+            return { value: '--', label: 'Confirm agent and strength', description: 'Choose a listed strength matching the selected injectable anesthetic on the vial.', colorVar: '--color-warning' };
         const capMg = laCapMg(values['agent'] || 0);
         const capped = weight * mgPerKg > capMg;
-        const maxMg = Math.round(Math.min(weight * mgPerKg, capMg));
-        const maxMl = Math.round((maxMg / mgPerMl) * 10) / 10;
+        const maxMg = Math.min(weight * mgPerKg, capMg);
+        const maxMl = floorVolume(maxMg / mgPerMl);
         return {
-            value: `${maxMg} mg`,
-            label: 'Maximum Safe Dose',
+            value: `${maxMl} mL (cc)`,
+            label: 'Maximum volume ceiling, not a target',
             description: `**MAX DOSE:** **${maxMg} mg** (${capped ? `adult cap; ${weight} kg × ${mgPerKg} mg/kg would be ${Math.round(weight * mgPerKg)} mg` : `${weight} kg × ${mgPerKg} mg/kg`})\n\n**MAX VOLUME at this concentration:** **${maxMl} mL** (${maxMg} mg ÷ ${mgPerMl} mg/mL)\n\n**REMEMBER:** Facial blocks need only 1–3 mL each; ear ring blocks ~6–8 mL. Use the smallest effective volume and ASPIRATE before every injection.`,
             colorVar: '--color-primary',
         };
@@ -40290,7 +40294,7 @@ const FNB_VOLUME_TRACKER_CALCULATOR = {
         },
         {
             name: 'conc',
-            label: 'Concentration',
+            label: 'Anesthetic strength (%)',
             type: 'select',
             points: 0,
             hideOptionPoints: true,
@@ -40304,7 +40308,7 @@ const FNB_VOLUME_TRACKER_CALCULATOR = {
         { name: 'volume', label: 'Total Volume Given So Far', type: 'number', points: 0, valueIsPoints: true, unit: 'mL', description: 'Sum of all injections at this concentration' },
     ],
     results: [],
-    thresholdNote: 'Stay well under 100% of max. Suspected LAST → stop, O2, treat seizures, 20% lipid emulsion 1.5 mL/kg.',
+    thresholdNote: 'Ceiling, not a target. 1 mL = 1 cc. Count all local anesthetics; mixed agents share an additive limit. Volume ceilings rounded down. Stay well under 100% of max. Suspected LAST → stop, O2, treat seizures, 20% lipid emulsion 1.5 mL/kg.',
     citations: [
         'Roberts JR, et al. Roberts and Hedges\u2019 Clinical Procedures. 8th ed. Elsevier; 2023. Ch. 30.',
         'Neal JM, et al. ASRA Practice Advisory on LAST. Reg Anesth Pain Med. 2018;43(2):113-123.',
@@ -40314,7 +40318,7 @@ const FNB_VOLUME_TRACKER_CALCULATOR = {
         const mgPerKg = (values['agent'] || 0) / 10;
         const mgPerMl = (values['conc'] || 0) / 10;
         const volume = values['volume'] || 0;
-        if (weight <= 0 || mgPerKg <= 0 || mgPerMl <= 0 || volume <= 0) {
+        if (![weight, mgPerKg, mgPerMl].every(Number.isFinite) || weight <= 0 || mgPerKg <= 0 || mgPerMl <= 0 || !Number.isFinite(volume) || volume <= 0) {
             return {
                 value: '--',
                 label: 'Enter values',
@@ -40322,6 +40326,9 @@ const FNB_VOLUME_TRACKER_CALCULATOR = {
                 colorVar: '--color-text-muted',
             };
         }
+        const validStrengths = { 45: [50, 100, 200], 70: [50, 100, 200], 25: [25, 50], 30: [25, 50] };
+        if (!validStrengths[values.agent]?.includes(values.conc))
+            return { value: '--', label: 'Confirm agent and strength', description: 'Choose a listed strength matching the selected injectable anesthetic on the vial.', colorVar: '--color-warning' };
         const capMg = laCapMg(values['agent'] || 0);
         const capped = weight * mgPerKg > capMg;
         const maxMg = Math.min(weight * mgPerKg, capMg);
@@ -40337,14 +40344,18 @@ const FNB_VOLUME_TRACKER_CALCULATOR = {
             label = 'Approaching Limit';
             colorVar = '--color-warning';
         }
+        else if (givenMg < maxMg) {
+            label = 'Near ceiling: reassess';
+            colorVar = '--color-danger';
+        }
         else {
-            label = 'At / Over Limit — STOP';
+            label = 'At / Over Limit: STOP';
             colorVar = '--color-danger';
         }
         return {
             value: `${pct}% of max`,
             label,
-            description: `**GIVEN:** ${Math.round(givenMg)} mg (${volume} mL × ${mgPerMl} mg/mL)\n\n**MAXIMUM:** ${Math.round(maxMg)} mg (${capped ? 'adult cap' : `${weight} kg × ${mgPerKg} mg/kg`})\n\n**REMAINING:** ${Math.max(0, Math.round(maxMg - givenMg))} mg\n\n${pct >= 80 ? '**WARNING:** At or over the maximum — do not give more; watch for LAST.' : 'Continue to aspirate before every injection and use the smallest effective volume.'}`,
+            description: `**GIVEN:** ${Math.round(givenMg)} mg (${volume} mL × ${mgPerMl} mg/mL)\n\n**MAXIMUM:** ${Math.round(maxMg)} mg (${capped ? 'adult cap' : `${weight} kg × ${mgPerKg} mg/kg`})\n\n**REMAINING CEILING:** ${floorVolume(Math.max(0, maxMg - givenMg) / mgPerMl)} mL (cc) = ${Math.max(0, maxMg - givenMg)} mg\n\n${givenMg >= maxMg ? '**WARNING:** At or over the maximum: stop injecting; watch for LAST.' : 'Continue to aspirate before every injection and use the smallest effective volume.'}`,
             colorVar,
         };
     },
@@ -40496,7 +40507,7 @@ const DNB_LA_MAX_DOSE_CALCULATOR = {
     id: 'dnb-la-max-dose',
     title: 'Max LA Dose (Cartridges)',
     subtitle: 'Weight-based max → # of dental cartridges',
-    description: 'Calculates the maximum safe local-anesthetic dose for intraoral dental blocks and converts it to how many 1.8 mL dental cartridges that allows at the chosen concentration. Dental LA is dispensed in 1.8 mL cartridges, so tracking cartridge count is the practical safety check. Maxima per Roberts & Hedges / Malamed / ASRA.',
+    description: 'Calculates the local-anesthetic dose ceiling for intraoral dental blocks and converts it to how many 1.8 mL dental cartridges that allows at the chosen concentration. This calculator assumes 1.8 mL cartridges; verify the product volume before interpreting the cartridge count. Maxima per Roberts & Hedges / Malamed / ASRA.',
     fields: [
         {
             name: 'weight',
@@ -40505,7 +40516,7 @@ const DNB_LA_MAX_DOSE_CALCULATOR = {
             points: 0,
             valueIsPoints: true,
             unit: 'kg',
-            description: 'Use lean/ideal body weight in obese patients; pediatric maxima are weight-critical',
+            description: 'Use lean/ideal body weight in obese patients; adult dental calculator',
         },
         {
             name: 'agent',
@@ -40513,17 +40524,17 @@ const DNB_LA_MAX_DOSE_CALCULATOR = {
             type: 'select',
             points: 0,
             hideOptionPoints: true,
-            description: 'Max mg/kg encoded in the option value',
+            description: 'Select the anesthetic and epinephrine formulation',
             selectOptions: [
                 { label: 'Lidocaine 2% with epi — 7 mg/kg, max 500 mg', points: 70 },
                 { label: 'Lidocaine 2% plain — 4.5 mg/kg, max 300 mg', points: 45 },
-                { label: 'Articaine 4% with epi — 7 mg/kg, max 500 mg', points: 70 },
-                { label: 'Bupivacaine 0.5% with epi — 3 mg/kg, max 225 mg', points: 30 },
+                { label: 'Articaine 4% with epi — 7 mg/kg, max 500 mg', points: 71 },
+                { label: 'Bupivacaine 0.5% with epi — 3 mg/kg, dental cap 90 mg', points: 30 },
             ],
         },
         {
             name: 'conc',
-            label: 'Concentration',
+            label: 'Anesthetic strength (%)',
             type: 'select',
             points: 0,
             hideOptionPoints: true,
@@ -40536,17 +40547,18 @@ const DNB_LA_MAX_DOSE_CALCULATOR = {
         },
     ],
     results: [],
-    thresholdNote: 'These are maxima — use the smallest effective volume. 1 dental cartridge = 1.8 mL. Aspirate before every injection; double-aspirate for the inferior alveolar block.',
+    thresholdNote: 'Dose ceiling, not a target. Count all local anesthetic already given; mixed agents share an additive limit. 1 mL = 1 cc. Volume ceilings rounded down. Use the smallest effective volume. Adult dental use. Bupivacaine: 90 mg per dental sitting; not recommended under age 12. Confirm cartridge volume; this calculator assumes 1.8 mL. Aspirate before every injection; double-aspirate for the inferior alveolar block.',
     citations: [
+        'DailyMed. Bupivacaine HCl injection: Use in Dentistry. 0.5% with epinephrine; total dose ordinarily not over 90 mg per sitting in healthy adults. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e391f807-7699-6d82-e053-2a95a90ab641',
         'Malamed SF. Handbook of Local Anesthesia. 7th ed. Elsevier; 2020. Maximum recommended doses.',
         'Roberts JR, et al. Roberts and Hedges\u2019 Clinical Procedures. 8th ed. Elsevier; 2023. Ch. 30.',
         'Neal JM, et al. ASRA Practice Advisory on LAST. Reg Anesth Pain Med. 2018;43(2):113-123.',
     ],
     computeResult: (values) => {
         const weight = values['weight'] || 0;
-        const mgPerKg = (values['agent'] || 0) / 10; // 70→7, 45→4.5, 30→3
+        const mgPerKg = (values['agent'] === 71 ? 70 : (values['agent'] || 0)) / 10; // 70→7, 45→4.5, 30→3
         const mgPerMl = (values['conc'] || 0) / 10; // 50→5, 200→20, 400→40
-        if (weight <= 0 || mgPerKg <= 0 || mgPerMl <= 0) {
+        if (![weight, mgPerKg, mgPerMl].every(Number.isFinite) || weight <= 0 || mgPerKg <= 0 || mgPerMl <= 0) {
             return {
                 value: '--',
                 label: 'Enter values',
@@ -40554,14 +40566,17 @@ const DNB_LA_MAX_DOSE_CALCULATOR = {
                 colorVar: '--color-text-muted',
             };
         }
-        const capMg = laCapMg(values['agent'] || 0);
+        const validStrengths = { 45: [200], 70: [200], 71: [400], 30: [50] };
+        if (!validStrengths[values.agent]?.includes(values.conc))
+            return { value: '--', label: 'Confirm agent and strength', description: 'Choose a listed strength matching the selected injectable anesthetic on the vial.', colorVar: '--color-warning' };
+        const capMg = values['agent'] === 30 ? 90 : laCapMg(values['agent'] === 71 ? 70 : (values['agent'] || 0));
         const capped = weight * mgPerKg > capMg;
-        const maxMg = Math.round(Math.min(weight * mgPerKg, capMg));
-        const maxMl = Math.round((maxMg / mgPerMl) * 10) / 10;
+        const maxMg = Math.min(weight * mgPerKg, capMg);
+        const maxMl = floorVolume(maxMg / mgPerMl);
         const cartridges = Math.floor(maxMl / 1.8);
         return {
-            value: `${cartridges} cartridges`,
-            label: 'Maximum Safe Dose',
+            value: `${maxMl} mL (cc)`,
+            label: 'Maximum volume ceiling, not a target',
             description: `**MAX DOSE:** **${maxMg} mg** (${capped ? `adult cap; ${weight} kg × ${mgPerKg} mg/kg would be ${Math.round(weight * mgPerKg)} mg` : `${weight} kg × ${mgPerKg} mg/kg`})\n\n**MAX VOLUME at this concentration:** **${maxMl} mL** (${maxMg} mg ÷ ${mgPerMl} mg/mL)\n\n**MAX DENTAL CARTRIDGES (1.8 mL each):** **${cartridges}**\n\n**REMEMBER:** Each intraoral block uses only ~0.3–1.8 mL. Use the smallest effective volume, track cartridge count, and ASPIRATE before every injection.`,
             colorVar: '--color-primary',
         };
@@ -40584,13 +40599,13 @@ const DNB_VOLUME_TRACKER_CALCULATOR = {
             selectOptions: [
                 { label: 'Lidocaine 2% with epi — 7 mg/kg, max 500 mg', points: 70 },
                 { label: 'Lidocaine 2% plain — 4.5 mg/kg, max 300 mg', points: 45 },
-                { label: 'Articaine 4% with epi — 7 mg/kg, max 500 mg', points: 70 },
-                { label: 'Bupivacaine 0.5% with epi — 3 mg/kg, max 225 mg', points: 30 },
+                { label: 'Articaine 4% with epi — 7 mg/kg, max 500 mg', points: 71 },
+                { label: 'Bupivacaine 0.5% with epi — 3 mg/kg, dental cap 90 mg', points: 30 },
             ],
         },
         {
             name: 'conc',
-            label: 'Concentration',
+            label: 'Anesthetic strength (%)',
             type: 'select',
             points: 0,
             hideOptionPoints: true,
@@ -40603,17 +40618,18 @@ const DNB_VOLUME_TRACKER_CALCULATOR = {
         { name: 'cartridges', label: 'Cartridges Given So Far', type: 'number', points: 0, valueIsPoints: true, unit: 'cartridges', description: 'Number of 1.8 mL cartridges used at this concentration' },
     ],
     results: [],
-    thresholdNote: 'Stay well under 100% of max. Suspected LAST → stop, O2, treat seizures, 20% lipid emulsion 1.5 mL/kg.',
+    thresholdNote: 'Ceiling, not a target. 1 mL = 1 cc. Count all local anesthetics; mixed agents share an additive limit. Volume ceilings rounded down. Adult dental use; bupivacaine cap 90 mg per sitting, not recommended under age 12. Confirm the assumed 1.8 mL cartridge. Stay well under 100% of max. Suspected LAST → stop, O2, treat seizures, 20% lipid emulsion 1.5 mL/kg.',
     citations: [
+        'DailyMed. Bupivacaine HCl injection: Use in Dentistry. 0.5% with epinephrine; total dose ordinarily not over 90 mg per sitting in healthy adults. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e391f807-7699-6d82-e053-2a95a90ab641',
         'Malamed SF. Handbook of Local Anesthesia. 7th ed. Elsevier; 2020.',
         'Neal JM, et al. ASRA Practice Advisory on LAST. Reg Anesth Pain Med. 2018;43(2):113-123.',
     ],
     computeResult: (values) => {
         const weight = values['weight'] || 0;
-        const mgPerKg = (values['agent'] || 0) / 10;
+        const mgPerKg = (values['agent'] === 71 ? 70 : (values['agent'] || 0)) / 10;
         const mgPerMl = (values['conc'] || 0) / 10;
         const cartridges = values['cartridges'] || 0;
-        if (weight <= 0 || mgPerKg <= 0 || mgPerMl <= 0 || cartridges <= 0) {
+        if (![weight, mgPerKg, mgPerMl].every(Number.isFinite) || weight <= 0 || mgPerKg <= 0 || mgPerMl <= 0 || !Number.isFinite(cartridges) || cartridges <= 0) {
             return {
                 value: '--',
                 label: 'Enter values',
@@ -40621,7 +40637,10 @@ const DNB_VOLUME_TRACKER_CALCULATOR = {
                 colorVar: '--color-text-muted',
             };
         }
-        const capMg = laCapMg(values['agent'] || 0);
+        const validStrengths = { 45: [200], 70: [200], 71: [400], 30: [50] };
+        if (!validStrengths[values.agent]?.includes(values.conc))
+            return { value: '--', label: 'Confirm agent and strength', description: 'Choose a listed strength matching the selected injectable anesthetic on the vial.', colorVar: '--color-warning' };
+        const capMg = values['agent'] === 30 ? 90 : laCapMg(values['agent'] === 71 ? 70 : (values['agent'] || 0));
         const capped = weight * mgPerKg > capMg;
         const maxMg = Math.min(weight * mgPerKg, capMg);
         const givenMg = cartridges * 1.8 * mgPerMl;
@@ -40636,14 +40655,18 @@ const DNB_VOLUME_TRACKER_CALCULATOR = {
             label = 'Approaching Limit';
             colorVar = '--color-warning';
         }
+        else if (givenMg < maxMg) {
+            label = 'Near ceiling: reassess';
+            colorVar = '--color-danger';
+        }
         else {
-            label = 'At / Over Limit — STOP';
+            label = 'At / Over Limit: STOP';
             colorVar = '--color-danger';
         }
         return {
             value: `${pct}% of max`,
             label,
-            description: `**GIVEN:** ${Math.round(givenMg)} mg (${cartridges} cartridges × 1.8 mL × ${mgPerMl} mg/mL)\n\n**MAXIMUM:** ${Math.round(maxMg)} mg (${capped ? 'adult cap' : `${weight} kg × ${mgPerKg} mg/kg`})\n\n**REMAINING:** ${Math.max(0, Math.round(maxMg - givenMg))} mg (~${Math.max(0, Math.floor((maxMg - givenMg) / (1.8 * mgPerMl)))} more cartridges)\n\n${pct >= 80 ? '**WARNING:** At or over the maximum — do not give more; watch for LAST.' : 'Continue to aspirate before every injection and use the smallest effective volume.'}`,
+            description: `**GIVEN:** ${Math.round(givenMg)} mg (${cartridges} cartridges × 1.8 mL × ${mgPerMl} mg/mL)\n\n**MAXIMUM:** ${Math.round(maxMg)} mg (${capped ? 'adult cap' : `${weight} kg × ${mgPerKg} mg/kg`})\n\n**REMAINING CEILING:** ${floorVolume(Math.max(0, maxMg - givenMg) / mgPerMl)} mL (cc) = ${Math.max(0, maxMg - givenMg)} mg (~${Math.max(0, Math.floor((maxMg - givenMg) / (1.8 * mgPerMl)))} more cartridges)\n\n${givenMg >= maxMg ? '**WARNING:** At or over the maximum: stop injecting; watch for LAST.' : 'Continue to aspirate before every injection and use the smallest effective volume.'}`,
             colorVar,
         };
     },

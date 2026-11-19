@@ -2,6 +2,7 @@
 // Searchable alphabetical drug list + detail modal overlay.
 // Drug names in tree body text use [name](#/drug/id) to open the modal.
 
+import { localAnestheticVolume } from './la-combo-calculators.js';
 import { getAllDrugs, getDrug } from '../services/drug-service.js';
 import type { WeightCalc } from '../data/drug-store.js';
 import { router } from '../services/router.js';
@@ -586,7 +587,7 @@ function renderDoseResults(
         row.appendChild(volLine);
       }
     } else {
-      doseEl.textContent = `Give ${fmtNum(dose)} ${wc.unit}`;
+      doseEl.textContent = wc.localAnestheticPercents ? `Dose ceiling: ${fmtNum(dose)} ${wc.unit}` : `Give ${fmtNum(dose)} ${wc.unit}`;
       row.appendChild(doseEl);
 
       const detail = document.createElement('div');
@@ -606,8 +607,42 @@ function renderDoseResults(
       }
     }
 
+    if (wc.localAnestheticPercents) {
+      const strengthLabel = document.createElement('label');
+      strengthLabel.className = 'dose-calc-result-detail';
+      strengthLabel.textContent = 'Anesthetic strength (%)';
+      const strength = document.createElement('select');
+      strength.className = 'dose-calc-input dose-calc-input-wide';
+      strength.setAttribute('aria-label', 'Anesthetic strength (%)');
+      const blank = document.createElement('option');
+      blank.value = ''; blank.textContent = 'Select the strength on the vial';
+      strength.appendChild(blank);
+      for (const percent of wc.localAnestheticPercents) {
+        const option = document.createElement('option');
+        option.value = String(percent);
+        option.textContent = `${percent}% (${percent * 10} mg/mL)`;
+        strength.appendChild(option);
+      }
+      strengthLabel.appendChild(strength);
+      row.appendChild(strengthLabel);
+      const volume = document.createElement('div');
+      volume.className = 'dose-calc-result-volume';
+      volume.setAttribute('aria-live', 'polite');
+      volume.textContent = 'Select a strength to see the volume ceiling in mL (cc).';
+      row.appendChild(volume);
+      strength.addEventListener('change', () => {
+        const percent = Number(strength.value);
+        const ml = localAnestheticVolume(dose, percent);
+        volume.textContent = ml === null ? 'Select a strength to see the volume ceiling in mL (cc).' : `Volume ceiling: ${ml} mL (cc) at ${percent}% (${percent * 10} mg/mL)`;
+      });
+      const caution = document.createElement('div');
+      caution.className = 'dose-calc-result-detail';
+      caution.textContent = 'Ceiling, not a target dose. Use the smallest effective volume for the procedure. Count all local anesthetic already given; different agents have additive toxicity. Injectable solutions only. 1 mL = 1 cc. Volume rounded down to 0.01 mL.';
+      row.appendChild(caution);
+    }
+
     // Add to doses button (if drug context provided)
-    if (drugCtx) {
+    if (drugCtx && !wc.localAnestheticPercents) {
       const addBtn = document.createElement('button');
       addBtn.className = 'dose-calc-add-btn';
 
