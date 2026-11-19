@@ -36,7 +36,7 @@ export const ACUTE_KERATITIS_INFO_PAGES = {
             },
             {
                 "num": 3,
-                "text": "Ciprofloxacin ophthalmic solution 0.3%. US prescribing information. Corneal ulcer regimen. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1ebdcd1f-1e64-aea0-e063-6294a90aa4e1"
+                "text": "Ciprofloxacin hydrochloride ophthalmic solution 0.3% (Sandoz). US prescribing information, 2022. Corneal ulcer regimen. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ab52b14d-345b-47ff-a832-465caddd3801"
             },
             {
                 "num": 4,
@@ -177,7 +177,7 @@ export const ACUTE_KERATITIS_INFO_PAGES = {
             },
             {
                 "num": 3,
-                "text": "Ciprofloxacin ophthalmic solution 0.3%. US prescribing information. Corneal ulcer regimen. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1ebdcd1f-1e64-aea0-e063-6294a90aa4e1"
+                "text": "Ciprofloxacin hydrochloride ophthalmic solution 0.3% (Sandoz). US prescribing information, 2022. Corneal ulcer regimen. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ab52b14d-345b-47ff-a832-465caddd3801"
             },
             {
                 "num": 4,
@@ -270,7 +270,7 @@ export const ACUTE_KERATITIS_INFO_PAGES = {
             },
             {
                 "num": 3,
-                "text": "Ciprofloxacin ophthalmic solution 0.3%. US prescribing information. Corneal ulcer regimen. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1ebdcd1f-1e64-aea0-e063-6294a90aa4e1"
+                "text": "Ciprofloxacin hydrochloride ophthalmic solution 0.3% (Sandoz). US prescribing information, 2022. Corneal ulcer regimen. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ab52b14d-345b-47ff-a832-465caddd3801"
             },
             {
                 "num": 4,
@@ -375,7 +375,7 @@ export const ACUTE_KERATITIS_INFO_PAGES = {
             },
             {
                 "num": 3,
-                "text": "Ciprofloxacin ophthalmic solution 0.3%. US prescribing information. Corneal ulcer regimen. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1ebdcd1f-1e64-aea0-e063-6294a90aa4e1"
+                "text": "Ciprofloxacin hydrochloride ophthalmic solution 0.3% (Sandoz). US prescribing information, 2022. Corneal ulcer regimen. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ab52b14d-345b-47ff-a832-465caddd3801"
             },
             {
                 "num": 4,
@@ -460,7 +460,7 @@ export const ACUTE_KERATITIS_INFO_PAGES = {
             },
             {
                 "num": 3,
-                "text": "Ciprofloxacin ophthalmic solution 0.3%. US prescribing information. Corneal ulcer regimen. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1ebdcd1f-1e64-aea0-e063-6294a90aa4e1"
+                "text": "Ciprofloxacin hydrochloride ophthalmic solution 0.3% (Sandoz). US prescribing information, 2022. Corneal ulcer regimen. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ab52b14d-345b-47ff-a832-465caddd3801"
             },
             {
                 "num": 4,
@@ -504,4 +504,39 @@ export const ACUTE_KERATITIS_INFO_PAGES = {
             }
         ]
     }
+};
+// Target of the Stop button that getToolbarConfig adds to every consult
+// (`${consultId}-stop`). Wording is lifted from the approved Rx Guide
+// "Avoid treatment shortcuts" section and the tree's stain/morphology cautions.
+ACUTE_KERATITIS_INFO_PAGES['acute-keratitis-stop'] = {
+    id: 'acute-keratitis-stop',
+    title: 'Acute Keratitis: Do NOT',
+    subtitle: 'Critical pitfalls to avoid',
+    sections: [
+        {
+            heading: '🛑 Do NOT give an empiric steroid for an undifferentiated ulcer',
+            body: 'No empiric steroid or steroid-antibiotic combination for an undifferentiated ulcer. [1,4] [Microbial keratitis](#/node/acute-keratitis-microbial).',
+        },
+        {
+            heading: '🛑 Do NOT send home a topical anesthetic',
+            body: 'No take-home topical anesthetic in this keratitis pathway; selected simple-abrasion guidance does not generalize to infection or UV photokeratitis. [12] [UV photokeratitis](#/node/acute-keratitis-uv).',
+        },
+        {
+            heading: '🛑 Do NOT patch microbial keratitis or UV injury',
+            body: 'Do not patch microbial keratitis or UV injury. [1,10]',
+        },
+        {
+            heading: '🛑 Do NOT continue contact lens wear',
+            body: 'Stop contact lenses; retain lenses/case if ophthalmology requests microbiology. [1]',
+        },
+        {
+            heading: '🛑 Do NOT let a normal stain reassure you',
+            body: 'Limited or normal fluorescein staining does not exclude uveitis, scleritis, angle closure, endophthalmitis or deeper corneal disease. [13] [Uncertain diagnosis](#/node/acute-keratitis-uncertain).',
+        },
+        {
+            heading: '🛑 Do NOT name the organism from morphology',
+            body: 'A ring is nonspecific and may be absent. Obtain specialist microbiologic assessment; morphology alone cannot establish the organism. [8,9,13] [Atypical keratitis](#/node/acute-keratitis-atypical).',
+        },
+    ],
+    citations: ACUTE_KERATITIS_INFO_PAGES['keratitis-rx-guide'].citations,
 };

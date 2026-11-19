@@ -2322,7 +2322,15 @@ body.critical-actions-open {
   cursor: pointer;
   padding: 0 1px;
   vertical-align: super;
+  position: relative;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Bigger invisible hit area for superscript citation buttons. */
+.cite-link::after {
+  content: "";
+  position: absolute;
+  inset: -8px -3px;
 }
 
 .cite-highlight {
@@ -2853,7 +2861,9 @@ body.critical-actions-open {
 }
 
 .info-modal-panel {
-  max-width: 100%;
+  /* Reading-column cap so toolbar panels don't stretch edge to edge on desktop
+     (Flow Rider 2026-11-19, Acute Keratitis at 1440px). */
+  max-width: min(760px, 100%);
 }
 
 .info-modal-panel--wide {

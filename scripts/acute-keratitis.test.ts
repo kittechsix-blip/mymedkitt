@@ -4,6 +4,7 @@ import { existsSync } from 'node:fs';
 import { ACUTE_KERATITIS_NODES as nodes, ACUTE_KERATITIS_CITATIONS as citations, ACUTE_KERATITIS_CRITICAL_ACTIONS as critical } from '../src/data/trees/acute-keratitis.ts';
 import { INFO_PAGES } from '../docs/data/info-pages.js';
 import { TOOLBAR_CONFIGS } from '../docs/data/toolbar-configs.js';
+import { ALL_DRUGS as DRUG_STORE } from '../docs/data/drug-store.js';
 import { loadCorpus } from './search-corpus.ts';
 const byId = new Map(nodes.map(n => [n.id,n]));
 test('keratitis pathways resolve and reach disposition', () => {
@@ -23,6 +24,13 @@ test('keratitis pathways resolve and reach disposition', () => {
 test('all five toolbar destinations are real reference pages',()=>{
  const tools=TOOLBAR_CONFIGS['acute-keratitis'];assert.equal(tools.length,5);
  for(const t of tools)assert.ok(INFO_PAGES[t.target!],t.target);
+});
+test('auto-added Stop button has a page and every panel drug link resolves',()=>{
+ assert.ok(INFO_PAGES['acute-keratitis-stop'],'acute-keratitis-stop missing');
+ const ids=new Set(DRUG_STORE.map((d:{id:string})=>d.id));
+ for(const page of Object.values(INFO_PAGES).filter((p:any)=>/keratitis/.test(p.id))as any[]){
+  for(const m of JSON.stringify(page).matchAll(/#\/drug\/([a-z0-9-]+)/g))assert.ok(ids.has(m[1]),`${page.id} -> ${m[1]}`);
+ }
 });
 const {index}=await loadCorpus();
 for(const q of ['acute keratitis','corneal ulcer','HSV keratitis','UV photokeratitis','Acanthamoeba keratitis','fluorescein uptake patterns']){

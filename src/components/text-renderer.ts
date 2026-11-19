@@ -54,11 +54,11 @@ function renderLineWithLinksAndCitations(container: HTMLElement, line: string): 
   // Four-way combined pattern (in priority order — leftmost-longest wins per JS regex semantics):
   //   1) Bold span:        **inner**                                → groups 1
   //   2) Markdown links:   [text](url)                              → groups 2,3
-  //   3) Citation refs:    [N]                                      → groups 4,5
+  //   3) Citation refs:    [N] or [N,N,N]                           → groups 4,5
   //   4) Weight-dose:      optional ** + number unit/kg/time + **   → groups 6,7,8,9,10
   // Bold span comes first so **[Drug](#/drug/x)** is captured as a single bold token,
   // then its inner content is recursively rendered (preserving inline links/citations).
-  const combinedPattern = /\*\*([\s\S]+?)\*\*|\[([^\]]+)\]\(([^)]+)\)|(\[(\d+)\])|(\*\*)?(\d+\.?\d*(?:\s*[-–]\s*\d+\.?\d*)?)\s*(mg|mcg|units?|U|mL|mEq|g)\/kg(?:\/(day|hr?|min|dose))?(\*\*)?/g;
+  const combinedPattern = /\*\*([\s\S]+?)\*\*|\[([^\]]+)\]\(([^)]+)\)|(\[(\d+(?:\s*,\s*\d+)*)\])|(\*\*)?(\d+\.?\d*(?:\s*[-–]\s*\d+\.?\d*)?)\s*(mg|mcg|units?|U|mL|mEq|g)\/kg(?:\/(day|hr?|min|dose))?(\*\*)?/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
   while ((match = combinedPattern.exec(line)) !== null) {
@@ -103,13 +103,14 @@ function renderLineWithLinksAndCitations(container: HTMLElement, line: string): 
         container.appendChild(link);
       }
     } else if (match[5] !== undefined) {
-      // Citation ref: [N]
-      const num = match[5];
-      const btn = document.createElement('button');
-      btn.className = 'cite-link';
-      btn.textContent = `[${num}]`;
-      btn.addEventListener('click', () => scrollToCardCitation(num));
-      container.appendChild(btn);
+      // Citation ref: [N] or [N,N,N], one tappable button per number
+      for (const num of match[5].split(/\s*,\s*/)) {
+        const btn = document.createElement('button');
+        btn.className = 'cite-link';
+        btn.textContent = `[${num}]`;
+        btn.addEventListener('click', () => scrollToCardCitation(num));
+        container.appendChild(btn);
+      }
     } else if (match[7] !== undefined) {
       // Weight-dose pattern: e.g. "0.5 mg/kg/hr", "**0.1 U/kg/hr**"
       const doseText = match[0].replace(/\*\*/g, '');

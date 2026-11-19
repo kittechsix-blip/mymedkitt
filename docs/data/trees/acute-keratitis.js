@@ -175,11 +175,10 @@ export const ACUTE_KERATITIS_NODES = [
         "type": "info",
         "module": 4,
         "title": "Suspected Microbial Corneal Ulcer",
-        "body": "Contact ophthalmology now. Determine whether urgent corneal sampling is indicated and immediately available using [Escalate](#/info/keratitis-escalate). Obtain indicated samples before antibiotics when feasible, but do not delay sight-saving treatment during prolonged transfer. [1,2]\n\nContact-lens-associated disease requires antipseudomonal coverage. An abrasion prophylaxis or conjunctivitis-frequency regimen is inadequate for an established ulcer. [1,3]",
+        "body": "Contact ophthalmology now. Determine whether urgent corneal sampling is indicated and immediately available using [Escalate](#/info/keratitis-escalate). Obtain indicated samples before antibiotics when feasible, but do not delay sight-saving treatment during prolonged transfer. [1,2]\n\nContact-lens-associated disease requires antipseudomonal coverage. An abrasion prophylaxis or conjunctivitis-frequency regimen is inadequate for an established ulcer. [1]",
         "citation": [
             1,
-            2,
-            3
+            2
         ],
         "safetyLevel": "critical",
         "summary": "Ophthalmology, appropriate sampling and intensive topical therapy proceed without avoidable delay.",
@@ -441,7 +440,7 @@ export const ACUTE_KERATITIS_CITATIONS = [
     },
     {
         "num": 3,
-        "text": "Ciprofloxacin ophthalmic solution 0.3%. US prescribing information. Corneal ulcer regimen. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1ebdcd1f-1e64-aea0-e063-6294a90aa4e1"
+        "text": "Ciprofloxacin hydrochloride ophthalmic solution 0.3% (Sandoz). US prescribing information, 2022. Corneal ulcer regimen. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ab52b14d-345b-47ff-a832-465caddd3801"
     },
     {
         "num": 4,

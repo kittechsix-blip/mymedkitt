@@ -2,6 +2,7 @@
 // Slide-up modal overlays for detailed clinical reference content.
 // Data loaded via info-service (Supabase → IndexedDB → hardcoded fallback).
 import { getInfoPage } from '../services/info-service.js';
+import { showDrugModal } from './drug-store.js';
 // -------------------------------------------------------------------
 // Body Text with Clickable Footnotes
 // -------------------------------------------------------------------
@@ -24,7 +25,7 @@ function infoBoldAware(parent, text) {
 /** Render a line of info page body text with inline links, bold, and citation refs. */
 function renderInfoBodyLine(container, line) {
     // Combined pattern: internal/external markdown links OR citation refs [N]
-    const combinedPattern = /\[([^\]]+)\]\((#\/[^)]+|https:\/\/[^)]+)\)|\[(\d+)\](?:\[(\d+)\])*/g;
+    const combinedPattern = /\[([^\]]+)\]\((#\/[^)]+|https:\/\/[^)]+)\)|\[\d+(?:\s*,\s*\d+)*\](?:\[\d+(?:\s*,\s*\d+)*\])*/g;
     let lastIndex = 0;
     let match;
     while ((match = combinedPattern.exec(line)) !== null) {
@@ -68,12 +69,14 @@ function renderInfoBodyLine(container, line) {
                     window.location.hash = '#/tree/' + linkId;
                 }
                 else if (linkType === 'drug') {
-                    // Re-open as drug modal after brief delay to let overlay destroy
+                    // Open the drug modal once this overlay is gone. Nothing listens for a
+                    // 'medkitt-show-drug' event, so call the modal directly.
                     const slashIdx = linkId.indexOf('/');
                     setTimeout(() => {
-                        window.dispatchEvent(new CustomEvent('medkitt-show-drug', {
-                            detail: slashIdx !== -1 ? { id: linkId.slice(0, slashIdx), hint: linkId.slice(slashIdx + 1) } : { id: linkId }
-                        }));
+                        if (slashIdx !== -1)
+                            showDrugModal(linkId.slice(0, slashIdx), linkId.slice(slashIdx + 1));
+                        else
+                            showDrugModal(linkId);
                     }, 50);
                 }
                 else if (linkType === 'calculator') {
@@ -83,7 +86,7 @@ function renderInfoBodyLine(container, line) {
             container.appendChild(btn);
         }
         else {
-            // Citation ref: [N] or [N][N]
+            // Citation ref: [N], [N][N], or [N,N,N]
             const fullMatch = match[0];
             const nums = fullMatch.match(/\d+/g) ?? [];
             for (let i = 0; i < nums.length; i++) {
