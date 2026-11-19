@@ -53,8 +53,8 @@ export const STOP_PAGES_03: Record<string, InfoPage> = {
         body: 'Trocar insertion carries an unacceptable rate of visceral injury including cardiac and aortic perforation. All chest tubes must be placed by blunt dissection with a Kelly clamp and finger sweep — never use a trocar, ever. [See insertion node](#/node/ctube-tube-insert).',
       },
       {
-        heading: '🛑 Do NOT delay needle decompression for imaging',
-        body: 'Tension pneumothorax is a clinical diagnosis. If the patient has hemodynamic compromise with absent breath sounds, do not wait for a chest X-ray. Needle decompress immediately at the 4th–5th ICS anterior axillary line, then place a chest tube. [See tension node](#/node/ctube-tension).',
+        heading: '🛑 Do NOT delay decompression for imaging',
+        body: 'Tension pneumothorax is a clinical diagnosis. If the patient has hemodynamic compromise with absent breath sounds, do not wait for a chest X-ray. A trained clinician should perform immediate finger thoracostomy at the 4th/5th ICS mid-axillary line, followed by a chest drain. Use needle decompression if open decompression would be delayed. [See tension node](#/node/ctube-tension).',
       },
       {
         heading: '🛑 Do NOT insert below the 6th ICS',
@@ -132,7 +132,7 @@ export const STOP_PAGES_03: Record<string, InfoPage> = {
     sections: [
       {
         heading: '🛑 Do NOT delay decompression for imaging',
-        body: 'Tension pneumothorax is a clinical diagnosis. Hypotension + absent breath sounds + JVD = act now. Waiting for a chest X-ray or CT in a deteriorating patient is dangerous and potentially fatal. [See needle decompression node](#/node/needle-decompression).',
+        body: 'Tension pneumothorax is a clinical diagnosis. Hypotension + absent breath sounds + JVD = act now. Waiting for a chest X-ray or CT in a deteriorating patient is dangerous and potentially fatal. [See emergency decompression node](#/node/needle-decompression).',
       },
       {
         heading: '🛑 Do NOT misinterpret absent sliding as diagnostic',

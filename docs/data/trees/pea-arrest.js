@@ -4,7 +4,7 @@
 export const PEA_ARREST_CRITICAL_ACTIONS = [
     { text: 'POCUS at first pulse check — cardiac activity present?', nodeId: 'pea-pocus' },
     { text: 'Wide complex PEA → NaHCO₃ 1-2 mEq/kg IV push immediately', nodeId: 'pea-wide' },
-    { text: 'No lung sliding → needle decompression 2nd ICS MCL', nodeId: 'pea-tension' },
+    { text: 'Suspected tension PTX in arrest → finger thoracostomy, 4th/5th ICS mid-axillary line, by trained clinician; needle fallback if delayed', nodeId: 'pea-tension' },
     { text: 'Pericardial effusion + RV collapse → emergent pericardiocentesis', nodeId: 'pea-tamponade' },
     { text: 'RV dilation + McConnell sign → tPA 50mg IV push', nodeId: 'pea-massive-pe' },
     { text: 'Collapsed IVC → 1-2L rapid IV bolus', nodeId: 'pea-hypovolemia' },
@@ -276,10 +276,10 @@ export const PEA_ARREST_NODES = [
         type: 'info',
         module: 4,
         title: 'Mechanical Hyperinflation / Auto-PEEP',
-        body: '**Mechanical hyperinflation (auto-PEEP) — RV inflow obstruction from air trapping.**\n\n**Clues:**\n• Ventilated patient (especially asthma, COPD)\n• Hyperexpanded chest, bilateral air entry\n• Progressive hypotension preceding arrest\n• Absent lung sliding may be BILATERAL (distinguish from tension PTX)\n\n**Immediate treatment:**\n• **Disconnect ventilator** — allow passive exhalation for 10-15 seconds\n• Manually compress chest to assist exhalation\n• Reduce respiratory rate and tidal volume\n• Increase expiratory time (I:E ratio 1:4 or 1:5)\n\n**If no improvement:**\n• Consider bilateral needle decompression (tension PTX may coexist)\n• Reduce PEEP to zero temporarily\n\n**Key concept:** External cardiac compression may worsen auto-PEEP — cannot compress a hyperinflated chest effectively. Fixing the ventilator problem may restore circulation.',
+        body: "**Mechanical hyperinflation (auto-PEEP) — RV inflow obstruction from air trapping.**\n\n**Clues:**\n• Ventilated patient (especially asthma, COPD)\n• Hyperexpanded chest, bilateral air entry\n• Progressive hypotension preceding arrest\n• Absent lung sliding may be BILATERAL (distinguish from tension PTX)\n\n**Immediate treatment:**\n• **Disconnect ventilator** — allow passive exhalation for 10-15 seconds\n• Manually compress chest to assist exhalation\n• Reduce respiratory rate and tidal volume\n• Increase expiratory time (I:E ratio 1:4 or 1:5)\n\n**If no improvement:**\n• If tension PTX is suspected, decompress immediately: finger thoracostomy by a trained clinician, or needle if open decompression would be delayed\n• Reduce PEEP to zero temporarily\n\n**Key concept:** External cardiac compression may worsen auto-PEEP — cannot compress a hyperinflated chest effectively. Fixing the ventilator problem may restore circulation.",
         citation: [2, 5],
         next: 'pea-cpr',
-        summary: 'Disconnect ventilator for 10-15 sec to decompress; reduce RR and TV; bilateral needle decompression if no improvement',
+        summary: "Disconnect ventilator to relieve auto-PEEP; reduce RR and TV; if tension PTX is suspected, decompress without imaging delay",
     },
     {
         id: 'pea-tamponade',
@@ -297,10 +297,10 @@ export const PEA_ARREST_NODES = [
         type: 'info',
         module: 4,
         title: 'Tension Pneumothorax',
-        body: '**Tension PTX: absent lung sliding on POCUS → immediate decompression.**\n\n**Needle decompression:**\n• 2nd ICS midclavicular line (traditional)\n• 4th/5th ICS anterior axillary line (newer guidance — higher success)\n• Use 14g angiocath, minimum 5 cm length\n\n**DO NOT wait for CXR** — this is a clinical/POCUS diagnosis in arrest.\n\n**Follow with:**\n• Finger thoracostomy or chest tube\n• [Chest Tube Consult](#/tree/chest-tube)\n\n**Bilateral tension PTX** should be considered in trauma arrest — decompress both sides.',
-        citation: [5, 7],
+        body: "Suspected tension pneumothorax with hemodynamic instability, severe respiratory compromise or arrest requires immediate decompression.\nDo NOT wait for CXR or CT. Do not delay decompression for intubation; manage airway and circulation in parallel.\nAbsent lung sliding alone is not diagnostic of tension pneumothorax; interpret POCUS with the clinical findings.\n\nFINGER THORACOSTOMY\nA trained clinician with immediately available equipment should perform finger thoracostomy.\nSite: 4th or 5th intercostal space, mid-axillary line, within the triangle of safety.\nEnter over the superior rib edge, bluntly open the pleura and confirm entry with a finger sweep.\nFollow promptly with a chest drain, especially in a spontaneously breathing patient; do not leave an open thoracostomy as definitive treatment.\n\nNEEDLE: FALLBACK IF FINGER THORACOSTOMY WOULD BE DELAYED\nDo not delay decompression while waiting for expertise or equipment. Use an appropriate large-bore decompression catheter at the lateral 4th or 5th intercostal space per local protocol, then proceed to thoracostomy and chest drain.\nReassess immediately; persistent tension requires prompt open decompression by a trained clinician.\n\n[Chest Tube procedure](#/tree/chest-tube)\n\nIn traumatic arrest with suspected chest injury, perform bilateral finger thoracostomies promptly with a trained team. [7]",
+        citation: [5, 7, 17],
         next: 'pea-cpr',
-        summary: 'Needle decompression 2nd ICS MCL or 4th-5th ICS AAL; do NOT wait for CXR; follow with finger thoracostomy or chest tube',
+        summary: "Tension pneumothorax: finger thoracostomy by trained clinician, lateral 4th/5th ICS, then chest drain; needle fallback if delayed",
         safetyLevel: 'critical',
     },
     {
@@ -443,4 +443,5 @@ export const PEA_ARREST_CITATIONS = [
     { num: 14, text: 'Weingart S. Pulseless Electrical Activity is Stupid. EMCrit. https://emcrit.org/emcrit/pea-is-stupid/' },
     { num: 15, text: 'Bergman R. Wide vs Narrow QRS Complex Approach to PEA Arrest. Resuscitation. 2016;109:e13.' },
     { num: 16, text: 'Perkins GD, Ji C, Deakin CD, et al. A Randomized Trial of Epinephrine in Out-of-Hospital Cardiac Arrest (PARAMEDIC-2). N Engl J Med. 2018;379(8):711-721. Epi improved 30-day survival (3.2% vs 2.4%) but increased severe neurologic disability; packs contained 10 doses — trial did NOT set a cumulative dose cap.' },
+    { num: 17, text: "NICE NG39. Major trauma: assessment and initial management. Recommendations 1.3.4–1.3.6 and 1.4.1–1.4.2. https://www.nice.org.uk/guidance/ng39/chapter/recommendations ; Merck Manual Professional. Tension Pneumothorax. Updated October 2026. https://www.merckmanuals.com/professional/injuries-poisoning/thoracic-trauma/tension-pneumothorax" },
 ];

@@ -398,11 +398,11 @@ export const HYPOTENSION_WORKUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Tension Pneumothorax',
-    body: '**Tension pneumothorax = immediate needle decompression.**\n\n**Clinical diagnosis — do NOT wait for imaging:**\n• Hypotension + respiratory distress\n• Absent breath sounds (affected side)\n• Tracheal deviation (late sign)\n• JVD\n• Absent lung slide on POCUS\n\n**Treatment:**\n\n**1. Needle decompression:**\n• 14-16G needle/angiocath\n• **5th intercostal space, anterior axillary line** (preferred)\n• OR 2nd intercostal space, midclavicular line\n• Hiss of air confirms diagnosis\n\n**2. Chest tube:**\n• Follow needle decompression immediately\n• 28-36 Fr tube thoracostomy\n\n**3. Intubated patients:**\n• May present as acute hypotension after intubation\n• Immediately disconnect vent and bag with low pressures',
-    citation: [1, 9],
+    body: "Suspected tension pneumothorax with hemodynamic instability, severe respiratory compromise or arrest requires immediate decompression.\nDo NOT wait for CXR or CT. Do not delay decompression for intubation; manage airway and circulation in parallel.\nAbsent lung sliding alone is not diagnostic of tension pneumothorax; interpret POCUS with the clinical findings.\n\nFINGER THORACOSTOMY\nA trained clinician with immediately available equipment should perform finger thoracostomy.\nSite: 4th or 5th intercostal space, mid-axillary line, within the triangle of safety.\nEnter over the superior rib edge, bluntly open the pleura and confirm entry with a finger sweep.\nFollow promptly with a chest drain, especially in a spontaneously breathing patient; do not leave an open thoracostomy as definitive treatment.\n\nNEEDLE: FALLBACK IF FINGER THORACOSTOMY WOULD BE DELAYED\nDo not delay decompression while waiting for expertise or equipment. Use an appropriate large-bore decompression catheter at the lateral 4th or 5th intercostal space per local protocol, then proceed to thoracostomy and chest drain.\nReassess immediately; persistent tension requires prompt open decompression by a trained clinician.\n\n[Chest Tube procedure](#/tree/chest-tube)",
+    citation: [1, 9, 14],
     next: 'hypotension-disposition',
 
-    summary: 'Clinical diagnosis — needle decompress 5th ICS anterior axillary line; follow with chest tube immediately',
+    summary: "Tension pneumothorax: finger thoracostomy by trained clinician, lateral 4th/5th ICS, then chest drain; needle fallback if delayed",
     safetyLevel: 'critical',
   },
 
@@ -570,7 +570,7 @@ export const HYPOTENSION_WORKUP_CRITICAL_ACTIONS = [
   { text: 'Sepsis Hour-1 bundle: lactate, cultures, antibiotics, 30 mL/kg crystalloid, vasopressors', nodeId: 'shock-septic' },
   { text: 'Norepinephrine is first-line for ALL shock types — can start peripherally', nodeId: 'hypotension-vasopressors' },
   { text: 'PLR with >10-15% VTI increase predicts fluid responsiveness (sens 89%, spec 91%)', nodeId: 'hypotension-fluid-responsiveness' },
-  { text: 'Tension PTX: needle decompress 5th ICS anterior axillary line — clinical diagnosis', nodeId: 'shock-tension-ptx' },
+  { text: 'Suspected tension PTX: finger thoracostomy, 4th/5th ICS mid-axillary line, by trained clinician; needle fallback if delayed', nodeId: 'shock-tension-ptx' },
   { text: 'Adrenal crisis: hydrocortisone 100 mg IV if refractory shock + steroid history', nodeId: 'shock-adrenal' },
   { text: 'Source control within 6-12 hours critical for septic shock', nodeId: 'hypotension-source-control' },
 ];
@@ -589,4 +589,5 @@ export const HYPOTENSION_WORKUP_CITATIONS: Citation[] = [
   { num: 11, text: 'Creager MA, et al. 2026 AHA/ACC/ACCP/ACEP/CHEST/SCAI/SHM/SIR/SVM/SVN Guideline for the Evaluation and Management of Acute Pulmonary Embolism in Adults. Circulation. 2026;153(12):e977-e1051.' },
   { num: 12, text: 'Monnet X, Marik PE, Teboul JL. Prediction of Fluid Responsiveness. Crit Care Med. 2016;44(5):994-1002.' },
   { num: 13, text: 'Scheeren TWL, Bakker J, Kaufmann T, et al. Current Thinking About Norepinephrine in Septic Shock. J Crit Care. 2021;66:153-157.' },
+  { num: 14, text: "NICE NG39. Major trauma: assessment and initial management. Recommendations 1.3.4–1.3.6 and 1.4.1–1.4.2. https://www.nice.org.uk/guidance/ng39/chapter/recommendations ; Merck Manual Professional. Tension Pneumothorax. Updated October 2026. https://www.merckmanuals.com/professional/injuries-poisoning/thoracic-trauma/tension-pneumothorax" },
 ];

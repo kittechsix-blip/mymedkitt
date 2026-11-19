@@ -322,8 +322,8 @@ export const ASTHMA_EXACERBATION_NODES = [
         type: 'info',
         module: 5,
         title: 'Vent Troubleshooting',
-        body: '**Common Problems and Solutions:** [3][14]\n\n**HYPOTENSION Post-Intubation:**\nMost common cause = air trapping\n1. **Disconnect ETT** from vent for 30-60 sec\n2. **Compress chest** to expel trapped air\n3. **Reconnect** with LOWER rate, LONGER expiratory time\n4. If persists → pneumothorax? → needle decompression\n\n**HIGH PLATEAU PRESSURES (>30):**\n• Auto-PEEP from air trapping\n• Decrease rate further\n• Increase expiratory time\n• Consider sedation if patient fighting vent\n\n**BREATH STACKING:**\n• Patient triggering extra breaths\n• Deep sedation with propofol + fentanyl\n• May need paralysis (cisatracurium)\n• Decrease sensitivity if auto-triggering\n\n**WORSENING OXYGENATION:**\nRule out:\n• Pneumothorax (CXR, ultrasound)\n• Mucus plugging (suction)\n• Right mainstem intubation\n• Atelectasis\n\n**BRONCHOSPASM ON VENT:**\n• Continue continuous nebs through circuit\n• Add ketamine infusion\n• Add magnesium if not given',
-        citation: [3, 14],
+        body: "**Common Problems and Solutions:** [3][14]\n\n**HYPOTENSION Post-Intubation:**\nMost common cause = air trapping\n1. **Disconnect ETT** from vent for 30-60 sec\n2. **Compress chest** to expel trapped air\n3. **Reconnect** with LOWER rate, LONGER expiratory time\n4. If shock persists, assess for tension pneumothorax: immediate finger thoracostomy by trained clinician; needle fallback if delayed; follow with chest drain. Do not wait for imaging in suspected tension.\n\n**HIGH PLATEAU PRESSURES (>30):**\n• Auto-PEEP from air trapping\n• Decrease rate further\n• Increase expiratory time\n• Consider sedation if patient fighting vent\n\n**BREATH STACKING:**\n• Patient triggering extra breaths\n• Deep sedation with propofol + fentanyl\n• May need paralysis (cisatracurium)\n• Decrease sensitivity if auto-triggering\n\n**WORSENING OXYGENATION:**\nRule out:\n• Pneumothorax (CXR, ultrasound)\n• Mucus plugging (suction)\n• Right mainstem intubation\n• Atelectasis\n\n**BRONCHOSPASM ON VENT:**\n• Continue continuous nebs through circuit\n• Add ketamine infusion\n• Add magnesium if not given",
+        citation: [3, 14, 17],
         next: 'asthma-vent-ongoing',
         summary: 'Hypotension = disconnect ETT test; high plateau = lower rate; breath stacking = deep sedation ± paralysis',
     },
@@ -503,4 +503,5 @@ export const ASTHMA_EXACERBATION_CITATIONS = [
         num: 16,
         text: 'Gupta D et al. Guidelines for diagnosis and management of bronchial asthma: Joint ICS/NCCP (I) recommendations. Lung India 2015;32(Suppl 1):S3-S42.',
     },
+    { num: 17, text: "NICE NG39. Major trauma: assessment and initial management. Recommendations 1.3.4–1.3.6 and 1.4.1–1.4.2. https://www.nice.org.uk/guidance/ng39/chapter/recommendations ; Merck Manual Professional. Tension Pneumothorax. Updated October 2026. https://www.merckmanuals.com/professional/injuries-poisoning/thoracic-trauma/tension-pneumothorax" },
 ];

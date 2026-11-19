@@ -256,9 +256,9 @@ export const CHEST_PAIN_HUB_NODES: DecisionNode[] = [
     type: 'result',
     module: 2,
     title: 'Pneumothorax - Treat',
-    body: 'Open [Pneumothorax](#/tree/pneumothorax).\n\n- **Tension physiology (hypotension, severe distress, tracheal shift):** immediate needle/finger decompression, then tube \u2014 **do not wait for imaging.**\n- **Stable:** size and symptom-based management per BTS (observation, aspiration, or small-bore drain).\n\n**Pitfall:** a post-procedure or ventilated patient with sudden chest pain/hypotension is tension pneumothorax until proven otherwise.',
+    body: 'Open [Pneumothorax](#/tree/pneumothorax).\n\n- **Tension physiology (hypotension, severe distress, tracheal shift):** immediate finger thoracostomy by a trained clinician; needle fallback if open decompression would be delayed, then tube \u2014 **do not wait for imaging.**\n- **Stable:** size and symptom-based management per BTS (observation, aspiration, or small-bore drain).\n\n**Pitfall:** a post-procedure or ventilated patient with sudden chest pain/hypotension is tension pneumothorax until proven otherwise.',
     recommendation: 'Tension is decompressed clinically before imaging; stable PTX is size-based.',
-    citation: [12, 16],
+    citation: [12, 16, 19],
     safetyLevel: 'critical',
     confidence: 'definitive',
   },
@@ -443,4 +443,5 @@ export const CHEST_PAIN_HUB_CITATIONS: Citation[] = [
   { num: 16, text: 'Roberts ME, Rahman NM, Maskell NA, et al; BTS Pleural Guideline Development Group. British Thoracic Society Guideline for pleural disease. Thorax. 2023;78(Suppl 3):s1-s42. doi:10.1136/thorax-2022-219784' },
   { num: 17, text: 'Lichtenstein D, Meziere G, Biderman P, Gepner A. The "lung point": an ultrasound sign specific to pneumothorax. Intensive Care Med. 2000;26(10):1434-1440. doi:10.1007/s001340000627' },
   { num: 18, text: 'Rao SV, O\'Donoghue ML, Ruel M, et al. 2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for the Management of Patients With Acute Coronary Syndromes. Circulation. 2025;151(13):e771-e862. doi:10.1161/CIR.0000000000001309' },
+  { num: 19, text: "NICE NG39. Major trauma: assessment and initial management. Recommendations 1.3.4\u20131.3.6 and 1.4.1\u20131.4.2. https://www.nice.org.uk/guidance/ng39/chapter/recommendations" },
 ];

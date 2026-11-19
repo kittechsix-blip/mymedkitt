@@ -6,7 +6,7 @@ import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
 export const CHEST_TUBE_CRITICAL_ACTIONS = [
-  { text: 'Tension PTX - needle decompression at 4th-5th ICS anterior axillary line (higher success than 2nd ICS)', nodeId: 'ctube-tension' },
+  { text: 'Suspected tension PTX: finger thoracostomy, 4th/5th ICS mid-axillary line, by trained clinician; needle fallback if delayed', nodeId: 'ctube-tension' },
   { text: 'NEVER use trocars for chest tube insertion - unacceptable visceral injury rate', nodeId: 'ctube-tube-insert' },
   { text: 'Traumatic PTX <35mm on CT - observation safe in stable patients not on PPV', nodeId: 'ctube-traumatic-observe' },
   { text: 'Insert over SUPERIOR rib edge to avoid neurovascular bundle (though it runs variably)', nodeId: 'ctube-anatomy' },
@@ -100,11 +100,11 @@ export const CHEST_TUBE_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Tension Pneumothorax \u2014 Emergent Decompression',
-    body: 'Clinical diagnosis \u2014 do NOT delay for imaging.\n\nSigns: hypotension, tachycardia, JVD, tracheal deviation (late sign), absent breath sounds, decreased SpO2, obstructive shock.\n\nNEEDLE DECOMPRESSION (temporizing)\n\u2022 14-16 gauge angiocatheter\n\u2022 2nd intercostal space, midclavicular line (traditional) OR 4th-5th intercostal space, anterior axillary line (preferred \u2014 thinner chest wall, higher success rate)\n\u2022 Insert perpendicular over superior rib edge\n\u2022 Rush of air confirms tension\n\u2022 Leave catheter in place\n\nFINGER THORACOSTOMY (more reliable)\n\u2022 Same site as chest tube (5th ICS, mid-axillary line, triangle of safety)\n\u2022 Blunt dissection into pleural space with finger sweep\n\u2022 Provides more reliable decompression than needle\n\nProceed immediately to definitive chest tube placement.',
-    citation: [21, 22],
+    body: "Suspected tension pneumothorax with hemodynamic instability, severe respiratory compromise or arrest requires immediate decompression.\nDo NOT wait for CXR or CT. Do not delay decompression for intubation; manage airway and circulation in parallel.\nAbsent lung sliding alone is not diagnostic of tension pneumothorax; interpret POCUS with the clinical findings.\n\nFINGER THORACOSTOMY\nA trained clinician with immediately available equipment should perform finger thoracostomy.\nSite: 4th or 5th intercostal space, mid-axillary line, within the triangle of safety.\nEnter over the superior rib edge, bluntly open the pleura and confirm entry with a finger sweep.\nFollow promptly with a chest drain, especially in a spontaneously breathing patient; do not leave an open thoracostomy as definitive treatment.\n\nNEEDLE: FALLBACK IF FINGER THORACOSTOMY WOULD BE DELAYED\nDo not delay decompression while waiting for expertise or equipment. Use an appropriate large-bore decompression catheter at the lateral 4th or 5th intercostal space per local protocol, then proceed to thoracostomy and chest drain.\nReassess immediately; persistent tension requires prompt open decompression by a trained clinician.\n\n[Chest Tube procedure](#/tree/chest-tube)",
+    citation: [21, 22, 23],
     next: 'ctube-anatomy',
   
-    summary: 'Needle decompression 4th-5th ICS anterior axillary line — finger thoracostomy more reliable',
+    summary: "Tension pneumothorax: finger thoracostomy by trained clinician, lateral 4th/5th ICS, then chest drain; needle fallback if delayed",
     safetyLevel: 'critical',
   },
 
@@ -799,6 +799,7 @@ export const CHEST_TUBE_CITATIONS: Citation[] = [
   { num: 20, text: 'Hallifax RJ, McKeown E, Sivakumar P, et al. Ambulatory Management of Primary Spontaneous Pneumothorax. Lancet. 2020;396(10243):39-49.' },
   { num: 21, text: 'Coccolini F, Cremonini C, Moore EE, et al. Thoracic Trauma WSES-AAST Guidelines. World J Emerg Surg. 2025;20(1):78.' },
   { num: 22, text: 'Anderson D, Chen SA, Godoy LA, Brown LM, Cooke DT. Comprehensive Review of Chest Tube Management. JAMA Surg. 2022;157(3):269-274.' },
+  { num: 23, text: "NICE NG39. Major trauma: assessment and initial management. Recommendations 1.3.4–1.3.6 and 1.4.1–1.4.2. https://www.nice.org.uk/guidance/ng39/chapter/recommendations ; Merck Manual Professional. Tension Pneumothorax. Updated October 2026. https://www.merckmanuals.com/professional/injuries-poisoning/thoracic-trauma/tension-pneumothorax" },
 ];
 
 // -------------------------------------------------------------------

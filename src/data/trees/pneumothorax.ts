@@ -6,13 +6,13 @@
 import type { DecisionNode } from '../../models/types.js';
 
 export const PNEUMOTHORAX_CRITICAL_ACTIONS = [
-  { text: 'Needle decompression at 2nd ICS MCL if tension PTX (hypotension + JVD + tracheal deviation)', nodeId: 'needle-decompression' },
+  { text: 'Suspected tension PTX: immediate finger thoracostomy, 4th/5th ICS mid-axillary line, by trained clinician; needle fallback if delayed', nodeId: 'needle-decompression' },
   { text: 'Asymptomatic / minimally symptomatic PSP: conservative management is first-line REGARDLESS of size (ERS/EACTS/ESTS 2024, BTS 2023)', nodeId: 'small-ptx' },
   { text: 'Symptomatic PSP requiring intervention: needle aspiration PREFERRED over chest tube (ERS 2024 strong recommendation)', nodeId: 'large-ptx' },
   { text: 'If chest drain used for PSP: small-bore pigtail (<14 Fr); large-bore (>28 Fr) only for SSP with hemothorax/air leak', nodeId: 'large-ptx' },
   { text: 'Lung point on POCUS is pathognomonic for PTX (100% specificity)', nodeId: 'confirmed-ptx' },
   { text: 'Normal lung sliding, B-lines, or seashore sign excludes PTX (NPV >99%)', nodeId: 'normal-findings' },
-  { text: 'Do NOT delay needle decompression for imaging if tension suspected', nodeId: 'needle-decompression' },
+  { text: 'Do NOT delay decompression for imaging if tension suspected', nodeId: 'needle-decompression' },
   { text: 'Occult PTX on POCUS requires chest tube if positive pressure ventilation planned', nodeId: 'trauma-efast' },
 ];
 
@@ -185,9 +185,9 @@ export const PNEUMOTHORAX_NODES: DecisionNode[] = [
     id: 'needle-decompression',
     type: 'result',
     module: 4,
-    title: 'Immediate Needle Decompression',
-    body: '**Needle decompression STAT:**\n• **14-gauge angiocath**\n• **2nd ICS, mid-clavicular line**\n• OR **4th-5th ICS, anterior axillary line**\n\n**Follow with chest tube placement.**\n\nSee [Chest Tube / Pneumothorax Management](#/tree/chest-tube) for tube thoracostomy procedure.',
-    citation: [1],
+    title: "Immediate Finger Thoracostomy",
+    body: "Suspected tension pneumothorax with hemodynamic instability, severe respiratory compromise or arrest requires immediate decompression.\nDo NOT wait for CXR or CT. Do not delay decompression for intubation; manage airway and circulation in parallel.\nAbsent lung sliding alone is not diagnostic of tension pneumothorax; interpret POCUS with the clinical findings.\n\nFINGER THORACOSTOMY\nA trained clinician with immediately available equipment should perform finger thoracostomy.\nSite: 4th or 5th intercostal space, mid-axillary line, within the triangle of safety.\nEnter over the superior rib edge, bluntly open the pleura and confirm entry with a finger sweep.\nFollow promptly with a chest drain, especially in a spontaneously breathing patient; do not leave an open thoracostomy as definitive treatment.\n\nNEEDLE: FALLBACK IF FINGER THORACOSTOMY WOULD BE DELAYED\nDo not delay decompression while waiting for expertise or equipment. Use an appropriate large-bore decompression catheter at the lateral 4th or 5th intercostal space per local protocol, then proceed to thoracostomy and chest drain.\nReassess immediately; persistent tension requires prompt open decompression by a trained clinician.\n\n[Chest Tube procedure](#/tree/chest-tube)",
+    citation: [1, 7],
     confidence: 'definitive',
   },
 
@@ -262,4 +262,5 @@ export const PNEUMOTHORAX_CITATIONS: { num: number; text: string }[] = [
   { num: 4, text: 'Sistrom CL, Reiheld CT, Gay SB, et al. Accuracy of Transthoracic Sonography in Detection of Pneumothorax After Sonographically Guided Lung Biopsy. J Ultrasound Med. 2004;23(4):495-503. https://doi.org/10.7863/jum.2004.23.4.495' },
   { num: 5, text: 'Dietrich CF, Mathis G, Blaivas M, et al. EFSUMB Guidelines and Recommendations on the Clinical Use of Lung Ultrasound. Ultraschall Med. 2012;33(1):32-9. https://doi.org/10.1055/s-0031-1286386' },
   { num: 6, text: 'Mummadi SR, Lehmann KJ, Murray E, et al; ERS/EACTS/ESTS Task Force. ERS/EACTS/ESTS clinical practice guidelines on adults with spontaneous pneumothorax. Eur Respir J. 2024;63(5):2300797. https://doi.org/10.1183/13993003.00797-2023' },
+  { num: 7, text: "NICE NG39. Major trauma: assessment and initial management. Recommendations 1.3.4–1.3.6 and 1.4.1–1.4.2. https://www.nice.org.uk/guidance/ng39/chapter/recommendations ; Merck Manual Professional. Tension Pneumothorax. Updated October 2026. https://www.merckmanuals.com/professional/injuries-poisoning/thoracic-trauma/tension-pneumothorax" },
 ];

@@ -120,9 +120,9 @@ export const ACUTE_CYANOSIS_HYPOXEMIA_HUB_NODES = [
         type: 'result',
         module: 2,
         title: 'Vascular - Treat',
-        body: 'Open [Pneumothorax](#/tree/pneumothorax) for the pleural emergency.\n\n- **Tension pneumothorax:** immediate needle/finger decompression, then tube \u2014 **do not wait for imaging.**\n- **Massive PE (SBP <90 / shock):** resuscitate in place, bedside echo for RV strain, activate PERT; systemic thrombolysis or catheter therapy. Do not send a crashing unresuscitated patient to CT. Submassive PE \u2192 monitored bed + PERT discussion. When stable enough, confirm with CTPA and risk-stratify (PESI, toolbar).\n\nRight-heart decompensation from PE can be anchored with [Right Heart Failure](#/tree/right-heart-failure).',
+        body: 'Open [Pneumothorax](#/tree/pneumothorax) for the pleural emergency.\n\n- **Tension pneumothorax:** immediate finger thoracostomy by a trained clinician; needle fallback if open decompression would be delayed, then tube \u2014 **do not wait for imaging.**\n- **Massive PE (SBP <90 / shock):** resuscitate in place, bedside echo for RV strain, activate PERT; systemic thrombolysis or catheter therapy. Do not send a crashing unresuscitated patient to CT. Submassive PE \u2192 monitored bed + PERT discussion. When stable enough, confirm with CTPA and risk-stratify (PESI, toolbar).\n\nRight-heart decompensation from PE can be anchored with [Right Heart Failure](#/tree/right-heart-failure).',
         recommendation: 'Tension PTX = clinical decompression before imaging; massive PE = resuscitate + lyse/intervene, echo first.',
-        citation: [6, 7, 8],
+        citation: [6, 7, 8, 25],
         safetyLevel: 'critical',
         confidence: 'definitive',
     },
@@ -305,4 +305,5 @@ export const ACUTE_CYANOSIS_HYPOXEMIA_HUB_CITATIONS = [
     { num: 22, text: 'Roca O, Caralt B, Messika J, et al. An Index Combining Respiratory Rate and Oxygenation to Predict Outcome of Nasal High-Flow Therapy. Am J Respir Crit Care Med. 2019;199(11):1368-1376. doi:10.1164/rccm.201803-0589OC. PMID: 30576221' },
     { num: 23, text: 'Barker SJ, Tremper KK, Hyatt J. Effects of methemoglobinemia on pulse oximetry and mixed venous oximetry. Anesthesiology. 1989;70(1):112-117. PMID: 2912291' },
     { num: 24, text: 'Goss GA, Hayes JA, Burdon JG. Deoxyhaemoglobin concentrations in the detection of central cyanosis. Thorax. 1988;43(3):212-213. PMID: 3406907. (Original threshold: Lundsgaard C, Van Slyke DD. Cyanosis. Medicine. 1923;2(1):1-76.)' },
+    { num: 25, text: "NICE NG39. Major trauma: assessment and initial management. Recommendations 1.3.4\u20131.3.6 and 1.4.1\u20131.4.2. https://www.nice.org.uk/guidance/ng39/chapter/recommendations" },
 ];

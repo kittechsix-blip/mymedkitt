@@ -278,8 +278,8 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'H\'s & T\'s — Reversible Causes',
-    body: '**Search for reversible causes at EVERY pulse check.**\n\n**The 5 H\'s:**\n• **Hypoxia** — POCUS: lung sliding, B-lines. Rx: secure airway, FiO2 100%\n• **Hypovolemia** — POCUS: flat IVC, no cardiac activity. Rx: volume, blood\n• **H+ (Acidosis)** — wide QRS, prolonged arrest. Rx: NaHCO3 1-2 mEq/kg\n• **Hypo/HyperK** — peaked T\'s, sine wave (hyperK); flat T\'s, U waves (hypoK). Rx: calcium, insulin/dextrose\n• **Hypothermia** — core temp <30\u00b0C. Rx: active rewarming, prolonged resuscitation\n\n**The 5 T\'s:**\n• **Tension PTX** — POCUS: absent lung sliding. Rx: needle decompression → chest tube\n• **Tamponade** — POCUS: pericardial effusion + RV collapse. Rx: pericardiocentesis\n• **Thrombosis (PE)** — POCUS: RV dilation, McConnell\'s sign. Rx: tPA, surgical/catheter embolectomy\n• **Thrombosis (MI)** — consider emergent cath. Rx: PCI if available\n• **Toxins** — wide QRS (TCA/Na-channel), bradycardia (beta/CCB). Rx: specific antidotes\n\n[H\'s & T\'s Quick Reference](#/info/ca-hs-ts-table)',
-    citation: [1, 4, 5, 11],
+    body: "**Search for reversible causes at EVERY pulse check.**\n\n**The 5 H's:**\n• **Hypoxia** — POCUS: lung sliding, B-lines. Rx: secure airway, FiO2 100%\n• **Hypovolemia** — POCUS: flat IVC, no cardiac activity. Rx: volume, blood\n• **H+ (Acidosis)** — wide QRS, prolonged arrest. Rx: NaHCO3 1-2 mEq/kg\n• **Hypo/HyperK** — peaked T's, sine wave (hyperK); flat T's, U waves (hypoK). Rx: calcium, insulin/dextrose\n• **Hypothermia** — core temp <30°C. Rx: active rewarming, prolonged resuscitation\n\n**The 5 T's:**\n• **Tension PTX** — clinical tension, supported by POCUS; absent sliding alone is not diagnostic. Rx: finger thoracostomy by trained clinician → chest drain; needle fallback if delayed\n• **Tamponade** — POCUS: pericardial effusion + RV collapse. Rx: pericardiocentesis\n• **Thrombosis (PE)** — POCUS: RV dilation, McConnell's sign. Rx: tPA, surgical/catheter embolectomy\n• **Thrombosis (MI)** — consider emergent cath. Rx: PCI if available\n• **Toxins** — wide QRS (TCA/Na-channel), bradycardia (beta/CCB). Rx: specific antidotes\n\n[H's & T's Quick Reference](#/info/ca-hs-ts-table)",
+    citation: [1, 4, 5, 11, 19],
     next: 'ca-pocus-arrest',
     summary: 'Reversible causes EVERY check — hyperK and tension PTX priority',
     safetyLevel: 'critical',
@@ -388,4 +388,5 @@ export const CARDIAC_ARREST_CITATIONS: Citation[] = [
   { num: 16, text: 'Kudenchuk PJ et al. Amiodarone, Lidocaine, or Placebo (ALPS). NEJM. 2016.' },
   { num: 17, text: 'Nielsen N et al. TTM at 33\u00b0C vs 36\u00b0C. NEJM. 2013.' },
   { num: 18, text: 'Dankiewicz J et al. TTM2 Trial. NEJM. 2021.' },
+  { num: 19, text: "NICE NG39. Major trauma: assessment and initial management. Recommendations 1.3.4–1.3.6 and 1.4.1–1.4.2. https://www.nice.org.uk/guidance/ng39/chapter/recommendations ; Merck Manual Professional. Tension Pneumothorax. Updated October 2026. https://www.merckmanuals.com/professional/injuries-poisoning/thoracic-trauma/tension-pneumothorax" },
 ];

@@ -226,7 +226,7 @@ export const STOP_PAGES_11 = {
             },
             {
                 heading: '🛑 Do NOT wait for CXR to decompress tension pneumothorax',
-                body: 'Tension pneumothorax in PEA arrest is a clinical and POCUS diagnosis — absent lung sliding confirms it in seconds. Any delay for imaging in pulseless arrest is lethal. Needle decompress immediately at 2nd ICS MCL or 4th/5th ICS AAL, then follow with thoracostomy. [See this node](#/node/pea-tension).',
+                body: 'Suspected tension pneumothorax in PEA arrest requires immediate decompression without waiting for imaging. Absent lung sliding alone is not diagnostic. A trained clinician should perform finger thoracostomy at the lateral 4th/5th ICS, followed by a chest drain. Use needle decompression if open decompression would be delayed. [See this node](#/node/pea-tension).',
             },
             {
                 heading: '🛑 Do NOT miss auto-PEEP as a cause of arrest in ventilated patients',

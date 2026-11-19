@@ -12397,7 +12397,7 @@ const PEA_RUSH_PROTOCOL = {
         },
         {
             heading: 'TANK — Volume Status',
-            body: '**IVC (subxiphoid longitudinal):**\n• **Collapsed IVC** (<1 cm, >50% respiratory variation) = hypovolemia\n• **Plethoric IVC** (>2 cm, no variation) = obstructive cause (PE, tamponade) or cardiogenic\n\n**Lungs (bilateral anterior):**\n• **Absent lung sliding** = pneumothorax → needle decompression\n• **B-lines** = pulmonary edema (cardiogenic, fluid overload)\n\n**FAST (Focused Assessment with Sonography for Trauma):**\n• Free fluid (Morison, splenorenal, pelvis) = hemorrhage',
+            body: '**IVC (subxiphoid longitudinal):**\n• **Collapsed IVC** (<1 cm, >50% respiratory variation) = hypovolemia\n• **Plethoric IVC** (>2 cm, no variation) = obstructive cause (PE, tamponade) or cardiogenic\n\n**Lungs (bilateral anterior):**\n• **Suspected tension pneumothorax** (clinical findings; absent lung sliding alone is not diagnostic) → finger thoracostomy by trained clinician; needle fallback if delayed\n• **B-lines** = pulmonary edema (cardiogenic, fluid overload)\n\n**FAST (Focused Assessment with Sonography for Trauma):**\n• Free fluid (Morison, splenorenal, pelvis) = hemorrhage',
         },
         {
             heading: 'PIPES — Aorta',
@@ -12405,7 +12405,7 @@ const PEA_RUSH_PROTOCOL = {
         },
         {
             heading: 'Integration with PEA Width',
-            body: '• **Wide QRS PEA** → look for hyperkalemia signs (clinical), treat empirically\n• **Narrow QRS PEA** → RUSH findings direct treatment:\n  - RV dilation → tPA for PE\n  - Pericardial effusion → pericardiocentesis\n  - No lung sliding → needle decompression\n  - Collapsed IVC → volume resuscitation',
+            body: '• **Wide QRS PEA** → look for hyperkalemia signs (clinical), treat empirically\n• **Narrow QRS PEA** → RUSH findings direct treatment:\n  - RV dilation → tPA for PE\n  - Pericardial effusion → pericardiocentesis\n  - Suspected tension PTX → finger thoracostomy by trained clinician; needle fallback if delayed\n  - Collapsed IVC → volume resuscitation',
         },
     ],
     citations: [
@@ -12413,6 +12413,7 @@ const PEA_RUSH_PROTOCOL = {
         { num: 2, text: 'Breitkreutz R et al. Focused Echo in Life Support. Resuscitation. 2010;81(11):1431-1433.' },
         { num: 3, text: 'Driver BE et al. Treatable Causes of Cardiac Arrest by Ultrasound. Resuscitation. 2017;120:116-120.' },
         { num: 4, text: 'Taming the SRU. RUSH Exam Protocol. tamingthesru.com.' },
+        { num: 5, text: "NICE NG39. Major trauma: assessment and initial management. Recommendations 1.3.4\u20131.3.6 and 1.4.1\u20131.4.2. https://www.nice.org.uk/guidance/ng39/chapter/recommendations" },
     ],
 };
 const PEA_WIDE_NARROW = {
@@ -12426,7 +12427,7 @@ const PEA_WIDE_NARROW = {
         },
         {
             heading: 'Narrow Complex PEA (QRS ≤120ms)',
-            body: '**Think: Obstructive or hypovolemic**\n\n| Cause | POCUS Finding | First Treatment |\n|-------|---------------|------------------|\n| Cardiac tamponade | Pericardial effusion + RV collapse | Pericardiocentesis |\n| Tension pneumothorax | Absent lung sliding | Needle decompression |\n| Massive PE | RV dilation, McConnell sign | tPA 50mg IV push |\n| Hypovolemia | Collapsed IVC, empty heart | 1-2L crystalloid rapid bolus |\n| Auto-PEEP | Ventilated patient | Disconnect ventilator, decompress |',
+            body: '**Think: Obstructive or hypovolemic**\n\n| Cause | POCUS Finding | First Treatment |\n|-------|---------------|------------------|\n| Cardiac tamponade | Pericardial effusion + RV collapse | Pericardiocentesis |\n| Tension pneumothorax | Clinical tension; POCUS supportive | Finger thoracostomy by trained clinician; needle fallback if delayed |\n| Massive PE | RV dilation, McConnell sign | tPA 50mg IV push |\n| Hypovolemia | Collapsed IVC, empty heart | 1-2L crystalloid rapid bolus |\n| Auto-PEEP | Ventilated patient | Disconnect ventilator, decompress |',
         },
         {
             heading: 'Clinical Pearl',
@@ -12436,6 +12437,7 @@ const PEA_WIDE_NARROW = {
     citations: [
         { num: 1, text: 'Littmann L et al. A Simplified and Structured Teaching Tool for the Evaluation and Management of PEA. Med Princ Pract. 2014;23(1):1-6.' },
         { num: 2, text: 'Farkas J. PEA Cardiac Arrest. EMCrit IBCC. https://emcrit.org/ibcc/pea/' },
+        { num: 3, text: "NICE NG39. Major trauma: assessment and initial management. Recommendations 1.3.4\u20131.3.6 and 1.4.1\u20131.4.2. https://www.nice.org.uk/guidance/ng39/chapter/recommendations" },
     ],
 };
 const VF_DSD = {
@@ -12477,7 +12479,7 @@ const CA_HS_TS_TABLE = {
         },
         {
             heading: "The T's",
-            body: '| Cause | POCUS / Clue | Treatment |\n|-------|-------------|----------|\n| **Tension PTX** | Absent lung sliding | Needle decompression → chest tube |\n| **Tamponade** | Pericardial effusion + RV collapse | Pericardiocentesis |\n| **Thrombosis (PE)** | RV dilation, McConnell sign | tPA 50mg IV push, CPR 60-90 min |\n| **Thrombosis (MI)** | Wall motion abnormality, STEMI | PCI if ROSC; continue ACLS |\n| **Toxins** | Medication history, tox screen | Specific antidote (NaHCO₃, DigiFab, lipid, glucagon) |',
+            body: '| Cause | POCUS / Clue | Treatment |\n|-------|-------------|----------|\n| **Tension PTX** | Clinical tension; POCUS supportive | Finger thoracostomy by trained clinician; needle fallback if delayed → chest tube |\n| **Tamponade** | Pericardial effusion + RV collapse | Pericardiocentesis |\n| **Thrombosis (PE)** | RV dilation, McConnell sign | tPA 50mg IV push, CPR 60-90 min |\n| **Thrombosis (MI)** | Wall motion abnormality, STEMI | PCI if ROSC; continue ACLS |\n| **Toxins** | Medication history, tox screen | Specific antidote (NaHCO₃, DigiFab, lipid, glucagon) |',
         },
         {
             heading: 'Clinical Approach',
@@ -12488,6 +12490,7 @@ const CA_HS_TS_TABLE = {
         { num: 1, text: 'Panchal AR et al. 2023 AHA Focused Update on ACLS. Circulation. 2023.' },
         { num: 2, text: 'Farkas J. Cardiac Arrest. EMCrit IBCC. https://emcrit.org/ibcc/' },
         { num: 3, text: 'Taming the SRU. Reversible Causes of Cardiac Arrest. tamingthesru.com.' },
+        { num: 4, text: "NICE NG39. Major trauma: assessment and initial management. Recommendations 1.3.4\u20131.3.6 and 1.4.1\u20131.4.2. https://www.nice.org.uk/guidance/ng39/chapter/recommendations" },
     ],
 };
 // -------------------------------------------------------------------
@@ -19294,7 +19297,7 @@ const PEA_ARREST_SUMMARY = {
         },
         {
             heading: '4. Treatable Causes',
-            body: '• [Wide-complex differential](#/node/pea-causes-wide)\n• [Hyperkalemia in arrest — calcium, bicarb, insulin/dextrose](#/node/pea-hyperK)\n• [TCA / Na-channel blocker — sodium bicarbonate](#/node/pea-tca)\n• [Severe acidosis — bicarbonate](#/node/pea-acidosis)\n• [Narrow-complex POCUS-directed differential](#/node/pea-causes-narrow)\n• [Mechanical hyperinflation / auto-PEEP — disconnect, prolonged exhalation](#/node/pea-autopeep)\n• [Tamponade — pericardiocentesis](#/node/pea-tamponade)\n• [Tension pneumothorax — needle decompression / finger thoracostomy](#/node/pea-tension)\n• [Massive PE — thrombolysis](#/node/pea-massive-pe)\n• [Hypovolemia — volume resuscitation](#/node/pea-hypovolemia)',
+            body: '• [Wide-complex differential](#/node/pea-causes-wide)\n• [Hyperkalemia in arrest — calcium, bicarb, insulin/dextrose](#/node/pea-hyperK)\n• [TCA / Na-channel blocker — sodium bicarbonate](#/node/pea-tca)\n• [Severe acidosis — bicarbonate](#/node/pea-acidosis)\n• [Narrow-complex POCUS-directed differential](#/node/pea-causes-narrow)\n• [Mechanical hyperinflation / auto-PEEP — disconnect, prolonged exhalation](#/node/pea-autopeep)\n• [Tamponade — pericardiocentesis](#/node/pea-tamponade)\n• [Tension pneumothorax — finger thoracostomy; needle fallback if delayed](#/node/pea-tension)\n• [Massive PE — thrombolysis](#/node/pea-massive-pe)\n• [Hypovolemia — volume resuscitation](#/node/pea-hypovolemia)',
         },
         {
             heading: '5. CPR & Medications',
@@ -19308,6 +19311,7 @@ const PEA_ARREST_SUMMARY = {
     citations: [
         { num: 1, text: 'Littmann L, Bustin DJ, Haley MW. A simplified and structured teaching tool for the evaluation and management of pulseless electrical activity. Med Princ Pract. 2014;23(1):1-6.' },
         { num: 2, text: 'Farkas J. PEA arrest. EMCrit Internet Book of Critical Care. emcrit.org/ibcc/pea.' },
+        { num: 3, text: "NICE NG39. Major trauma: assessment and initial management. Recommendations 1.3.4\u20131.3.6 and 1.4.1\u20131.4.2. https://www.nice.org.uk/guidance/ng39/chapter/recommendations" },
     ],
 };
 // -------------------------------------------------------------------
