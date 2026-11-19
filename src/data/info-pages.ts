@@ -20496,7 +20496,7 @@ const PEDS_TRAUMA_SUMMARY: InfoPage = {
     },
     {
       heading: '4. Thoracoabdominal Trauma',
-      body: '• [Compliant chest wall: pulmonary contusion without rib fractures](#/node/peds-trauma-torso)\n• [Stable abdominal trauma: non-operative management for most solid organ injuries](#/node/peds-trauma-solid-organ)\n• [Unstable abdominal trauma: activate MTP, surgical consult, OR](#/node/peds-trauma-abd-unstable)\n• [Tension PTX: needle decompression → chest tube; hemothorax >15 mL/kg → thoracotomy](#/node/peds-trauma-chest)',
+      body: '• [Compliant chest wall: pulmonary contusion without rib fractures](#/node/peds-trauma-torso)\n• [Stable abdominal trauma: non-operative management for most solid organ injuries](#/node/peds-trauma-solid-organ)\n• [Unstable abdominal trauma: activate MTP, surgical consult, OR](#/node/peds-trauma-abd-unstable)\n• [Traumatic tension PTX: finger/open thoracostomy by trained clinician, chest drain; needle fallback if delayed; hemothorax >15 mL/kg → thoracotomy](#/node/peds-trauma-chest)',
     },
     {
       heading: '5. Orthopedic Trauma',
