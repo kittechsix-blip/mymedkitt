@@ -7280,7 +7280,7 @@ const CIPROFLOXACIN_OPHTHALMIC = {
     ],
     cautions: [
         'WHITE CRYSTALLINE PRECIPITATE on the corneal surface occurred in ~17% of corneal-ulcer patients in the labeling trials, typically within 24 hours to 7 days of starting therapy. It did not affect outcome or vision. It is the drug — do not mistake it for a worsening infiltrate.',
-        'PEDIATRICS: safety and effectiveness in patients below 1 year of age have not been established. Use moxifloxacin 0.5% (labeled in all ages) in an infant.',
+        'PEDIATRICS: current labeling states safety and effectiveness are established in all ages, supported by controlled studies in adults, children and neonates (Sandoz prescribing information, 2022).',
         'Obtain corneal scraping/cultures when indicated and immediately feasible: central/large, deep, melting, atypical or nonresponding ulcers. Coordinate with ophthalmology; do not delay sight-saving therapy during prolonged transfer.',
         'Systemic fluoroquinolone boxed warnings (tendinopathy, neuropathy, CNS effects) do not appear in the ophthalmic labeling',
         'Emerging fluoroquinolone resistance among ocular staphylococci; moxifloxacin has broader gram-positive activity',
@@ -7290,7 +7290,6 @@ const CIPROFLOXACIN_OPHTHALMIC = {
     citations: [
         "American Academy of Ophthalmology. Bacterial Keratitis Preferred Practice Pattern, 2024. https://www.aaojournal.org/article/S0161-6420(24)00007-1/fulltext",
         "Ciprofloxacin hydrochloride ophthalmic solution 0.3% (Sandoz) prescribing information, 2022, corneal ulcer schedule. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ab52b14d-345b-47ff-a832-465caddd3801",
-        'Ciloxan (ciprofloxacin hydrochloride ophthalmic solution 0.3%) prescribing information. DailyMed SETID 91bd0351-f33c-43ca-bd77-7da97969985b.',
         'Wipperman JL, Dorsch JN. Evaluation and management of corneal abrasions. Am Fam Physician. 2013;87(2):114-120.',
         'Lin A, Rhee MK, Akpek EK, et al. Bacterial Keratitis Preferred Practice Pattern. Ophthalmology. 2019;126(1):P1-P55.',
     ],
