@@ -1,7 +1,7 @@
 // MedKitt - Eclampsia
 // ED management of seizures in pregnancy with preeclampsia
 // 5 modules: Recognition -> Seizure Control -> BP Management -> Maternal/Fetal Stabilization -> Delivery
-// Based on ACOG 2020, SMFM 2022, and EM literature
+// Based on ACOG Practice Bulletin 222 (2020), ACOG Committee Opinion 767, and cited literature
 export const ECLAMPSIA_NODES = [
     // ===================================================================
     // MODULE 1: Recognition & Definitions
@@ -25,7 +25,7 @@ export const ECLAMPSIA_NODES = [
         module: 1,
         title: 'Preeclampsia Spectrum',
         body: '**Eclampsia exists on the spectrum of hypertensive disorders of pregnancy.** [1,3]\n\n**Preeclampsia without severe features:**\n- BP ≥140/90 on two occasions ≥4h apart after 20 weeks\n- Proteinuria (≥300mg/24h or protein/creatinine ≥0.3)\n- OR other end-organ dysfunction without severe features\n\n**Preeclampsia with severe features (any of):** [1]\n- SBP ≥160 or DBP ≥110 (two readings 4h apart)\n- Platelets <100,000\n- Liver enzymes >2x normal OR RUQ/epigastric pain\n- Creatinine >1.1 or doubling of baseline\n- Pulmonary edema\n- New-onset headache unresponsive to meds\n- Visual disturbances\n\n**HELLP Syndrome:** [3]\n- **H**emolysis (LDH >600, schistocytes)\n- **E**levated **L**iver enzymes (AST/ALT >2x normal)\n- **L**ow **P**latelets (<100,000)\n\n**Key point:** 20-38% of eclampsia occurs WITHOUT prior diagnosis of preeclampsia or hypertension. [2]',
-        images: [{ src: 'images/eclampsia/hypertensive-retinopathy.jpg', alt: 'Fundoscopic photo showing grade III/IV hypertensive retinopathy with flame hemorrhages, cotton wool spots, and papilledema', caption: 'Hypertensive retinopathy — flame hemorrhages, cotton wool spots, and papilledema seen in severe preeclampsia/eclampsia indicating end-organ damage. (CC BY 3.0, Frank Wood)' }],
+        images: [{ src: 'images/eclampsia/hypertensive-retinopathy.jpg', alt: 'Fundoscopic photo showing grade III/IV hypertensive retinopathy with flame hemorrhages, cotton wool spots, and papilledema', caption: 'Hypertensive retinopathy. Image: Frank Wood, CC BY 3.0, via Wikimedia Commons (commons.wikimedia.org/wiki/File:Hypertensiveretinopathy.jpg)' }],
         citation: [1, 2, 3],
         next: 'eclampsia-warning',
         summary: '20-38% of eclampsia occurs WITHOUT prior preeclampsia diagnosis or hypertension',
@@ -320,7 +320,7 @@ export const ECLAMPSIA_NODES = [
         type: 'info',
         module: 5,
         title: 'Postpartum Management',
-        body: '**Most maternal deaths from eclampsia occur postpartum.** [1,2]\n\n**Magnesium continuation:**\n- Continue 24-48 hours after delivery OR after last seizure\n- Minimum 24 hours\n- Some protocols extend to 48 hours for severe cases\n\n**Postpartum monitoring:**\n- Frequent vital signs (q1h initially)\n- Continued neurologic assessment\n- Strict I/O\n- Watch for pulmonary edema (fluid mobilization post-delivery)\n\n**BP management postpartum:** [6]\n- Continue IV agents if needed\n- Transition to oral agents:\n  - Labetalol 200-400mg PO q8-12h\n  - Nifedipine 30-60mg daily (extended release)\n  - Avoid ACE inhibitors if breastfeeding (enalapril OK)\n- Target BP <150/100 before discharge\n\n**Late postpartum eclampsia:**\n- Can occur up to 4 weeks postpartum (most within 48h)\n- Evaluate any postpartum seizure for eclampsia\n- Lower threshold for imaging (rule out CVT, PRES)\n\n**Breastfeeding:**\n- Safe with magnesium\n- Safe with labetalol, nifedipine, enalapril\n- Encourage breastfeeding',
+        body: '**Most maternal deaths from eclampsia occur postpartum.** [1,2]\n\n**Magnesium continuation:**\n- Continue 24-48 hours after delivery OR after last seizure\n- Minimum 24 hours\n- Some protocols extend to 48 hours for severe cases\n\n**Postpartum monitoring:**\n- Frequent vital signs (q1h initially)\n- Continued neurologic assessment\n- Strict I/O\n- Watch for pulmonary edema (fluid mobilization post-delivery)\n\n**BP management postpartum:** [6]\n- Continue IV agents if needed\n- Transition to oral agents:\n  - Labetalol 200-400mg PO q8-12h\n  - Nifedipine 30-60mg daily (extended release)\n  - Enalapril is an option if breastfeeding\n- Target BP <150/100 before discharge\n\n**Late postpartum eclampsia:**\n- Can occur up to 4 weeks postpartum (most within 48h)\n- Evaluate any postpartum seizure for eclampsia\n- Lower threshold for imaging (rule out CVT, PRES)\n\n**Breastfeeding:**\n- Safe with magnesium\n- Safe with labetalol, nifedipine, enalapril\n- Encourage breastfeeding',
         citation: [1, 2, 6],
         next: 'eclampsia-disposition',
         summary: 'Continue mag 24-48h postpartum — most maternal deaths from eclampsia occur postpartum',
@@ -389,7 +389,7 @@ export const ECLAMPSIA_CRITICAL_ACTIONS = [
     { text: 'Labs: CBC, CMP, LFTs, uric acid, 24h protein or spot protein/Cr ratio', nodeId: 'eclampsia-postictal' },
 ];
 export const ECLAMPSIA_CITATIONS = [
-    { num: 1, text: 'American College of Obstetricians and Gynecologists. Gestational Hypertension and Preeclampsia: ACOG Practice Bulletin No. 222 (Interim Update). Obstet Gynecol. 2020;135(6):e237-e260. doi:10.1097/AOG.0000000000003891. PMID: 32443079. Magnesium toxicity: Table 2, p. e248; clinical monitoring and calcium rescue: pp. e247-e248. Full text: https://kansaspqc.kdhe.ks.gov/wp-content/uploads/2025/09/ACOG-Gestation-HTN-and-Preeclampsia-Practice-Bulletin.pdf . Replaced Practice Bulletin No. 202; current ACOG guidance as of this audit. Focused update: ACOG Clinical Practice Update: Biomarker Prediction of Preeclampsia With Severe Features. Obstet Gynecol. 2024;143(6):e153-e154. doi:10.1097/AOG.0000000000005576.' },
+    { num: 1, text: 'American College of Obstetricians and Gynecologists. Gestational Hypertension and Preeclampsia: ACOG Practice Bulletin No. 222 (Interim Update). Obstet Gynecol. 2020;135(6):e237-e260. doi:10.1097/AOG.0000000000003891. PMID: 32443079. Magnesium toxicity: Table 2, p. e248; clinical monitoring and calcium rescue: pp. e247-e248. Full text: https://doi.org/10.1097/AOG.0000000000003891 . Replaced Practice Bulletin No. 202; current ACOG guidance as of this audit. Focused update: ACOG Clinical Practice Update: Biomarker Prediction of Preeclampsia With Severe Features. Obstet Gynecol. 2024;143(6):e153-e154. doi:10.1097/AOG.0000000000005576.' },
     { num: 2, text: 'Sibai BM. Diagnosis, prevention, and management of eclampsia. Obstet Gynecol. 2005;105(2):402-410. doi:10.1097/01.AOG.0000152351.13671.99. PMID: 15684172.' },
     { num: 3, text: 'Haram K, Svendsen E, Abildgaard U. The HELLP syndrome: clinical issues and management. A review. BMC Pregnancy Childbirth. 2009;9:8. doi:10.1186/1471-2393-9-8. PMID: 19245695. PMCID: PMC2654858 (free full text).' },
     { num: 4, text: 'Duley L, Gulmezoglu AM, Henderson-Smart DJ, Chou D. Magnesium sulphate and other anticonvulsants for women with pre-eclampsia. Cochrane Database Syst Rev. 2010;2010(11):CD000025. doi:10.1002/14651858.CD000025.pub2. PMID: 21069663. PMCID: PMC7061250 (free full text).' },
