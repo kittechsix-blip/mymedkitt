@@ -9607,7 +9607,7 @@ const AMPHOTERICIN_B: DrugEntry = {
   dosing: [
     {
       indication: 'Cryptococcal Meningitis (induction)',
-      regimen: '3-4 mg/kg/day IV × 1 week (induction phase). Combine with flucytosine 25 mg/kg PO q6h. Follow with fluconazole 400-800 mg/day for consolidation. Initiate ONLY after ID consultation.',
+      regimen: '3-4 mg/kg/day IV × at least 2 weeks (induction phase). Combine with flucytosine 25 mg/kg PO q6h. Follow with fluconazole 400-800 mg/day for at least 8 weeks for consolidation. Initiate ONLY after ID consultation.',
       weightCalc: { dosePerKg: 4, unit: 'mg' },
     },
   ],
@@ -9672,7 +9672,7 @@ const FLUCONAZOLE: DrugEntry = {
   dosing: [
     {
       indication: 'Cryptococcal Meningitis (consolidation)',
-      regimen: '400-800 mg PO/IV daily. Begin after 1-week induction with amphotericin B + flucytosine. Continue for minimum 8 weeks consolidation, then 200 mg/day maintenance until immune reconstitution (CD4 >200 for ≥6 months on ART).',
+      regimen: '400-800 mg PO/IV daily. Begin after at least 2 weeks of induction with amphotericin B + flucytosine. Continue for minimum 8 weeks consolidation, then 200 mg/day maintenance until immune reconstitution (CD4 >200 for ≥6 months on ART).',
     },
   ],
   contraindications: [
@@ -9703,7 +9703,7 @@ const FLUCYTOSINE: DrugEntry = {
   dosing: [
     {
       indication: 'Cryptococcal Meningitis (induction)',
-      regimen: '25 mg/kg PO q6h × 1 week (induction phase). Always combine with amphotericin B liposomal. Dose adjust for renal impairment. Initiate ONLY after ID consultation.',
+      regimen: '25 mg/kg PO q6h × at least 2 weeks (induction phase). Always combine with amphotericin B liposomal. Dose adjust for renal impairment. Initiate ONLY after ID consultation.',
       weightCalc: { dosePerKg: 25, unit: 'mg', dailyDivided: 4 },
     },
   ],
