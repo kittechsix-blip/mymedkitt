@@ -1472,7 +1472,7 @@ const LAZY_HASHES = {
   './infographics/wide-complex-tachycardia.html': '75747d52e6',
   './infographics/wrist-injuries.html': 'bb87eb596a',
   './infographics/xylazine-toxicity.html': 'c41e63537e',
-  './skill/skill-meta.json': '7c4e811439',
+  './skill/skill-meta.json': '0177d0c6e5',
 };
 // AUTO-GENERATED ASSETS END
 
