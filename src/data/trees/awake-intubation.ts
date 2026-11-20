@@ -1312,7 +1312,7 @@ export const AWAKE_INTUBATION_CITATIONS: Citation[] = [
   { num: 10, text: "Pulmodyne. EZ-Spray: powered atomization device, oxygen 7–10 L/min. https://www.pulmodyne.com/product/ez-spray" },
   { num: 1, text: 'Weingart S. EMCrit 145 — Awake Intubation Lecture from SMACC. EMCrit Blog. 2015. https://emcrit.org/emcrit/awakeintubation/' },
   { num: 2, text: 'Sandefur BJ, Driver BE, Long B. Managing Awake Intubation. Ann Emerg Med. 2025;85(1):21-30. doi:10.1016/j.annemergmed.2024.07.017. PMID: 39480375' },
-  { num: 3, text: 'Ahmad I, et al. Difficult Airway Society Guidelines for Awake Tracheal Intubation (ATI) in Adults. Anaesthesia. 2020;75(4):509-528. PMID: 31729018' },
+  { num: 3, text: 'Ahmad I, et al. Difficult Airway Society Guidelines for Awake Tracheal Intubation (ATI) in Adults. Anaesthesia. 2020;75(4):509-528. PMID: 31729018. https://doi.org/10.1111/anae.14904' },
   { num: 4, text: 'LITFL. Awake Intubation. Life in the Fast Lane. 2024. https://litfl.com/awake-intubation/' },
   { num: 5, text: 'Farkas J. Angioedema. EMCrit IBCC. 2024. https://emcrit.org/ibcc/angioedema/' },
   { num: 6, text: 'Farkas J. Epiglottitis. EMCrit IBCC. 2024. https://emcrit.org/ibcc/epiglottitis/' },
