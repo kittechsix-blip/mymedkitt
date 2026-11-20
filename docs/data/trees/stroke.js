@@ -17,7 +17,7 @@ export const STROKE_NODES = [
             { id: 'nihss', label: 'NIHSS Calculator' },
             { id: 'stroke-syndrome-calculator', label: 'Syndrome Calculator' },
         ],
-        images: [{ src: 'images/stroke/stroke-ct-hemorrhage.jpg', alt: 'CT head showing intracerebral hemorrhage', caption: 'Hemorrhagic stroke on CT: hyperdense blood in cerebellum — MUST rule out before thrombolytics. IVtPA and EVT contraindicated if ICH present (Wikimedia Commons, CC BY-SA 4.0)' }],
+        images: [{ src: 'images/stroke/stroke-ct-hemorrhage.jpg', alt: 'CT head showing intracerebral hemorrhage', caption: 'Hemorrhagic stroke on CT: hyperdense blood in cerebellum — MUST rule out before thrombolytics. IVT and EVT contraindicated if ICH present Bobjgalindo, Wikimedia Commons, CC BY-SA 4.0 (link to the confirmed file page and licence; add to ATTRIBUTION.md)' }],
         next: 'stroke-deficit',
         summary: 'Establish last-known-well time, get NIHSS, fingerstick glucose — CT to rule out hemorrhage before thrombolytics',
         skippable: true,
@@ -88,7 +88,7 @@ export const STROKE_NODES = [
         type: 'question',
         module: 2,
         title: 'IVT Eligibility',
-        body: 'Review [Thrombolysis Contraindications](#/info/stroke-contraindications) before proceeding.\n\n**BP requirement:** Must be <185/110 mmHg\n\u2022 [Labetalol](#/drug/labetalol/stroke) 10\u201320 mg IV bolus (first-line)\n\u2022 [Nicardipine](#/drug/nicardipine/stroke) 5 mg/hr IV infusion (second-line)\n\nIf BP cannot be controlled to <185/110, thrombolysis is contraindicated.\n\n**Labs:** Do NOT wait for coags unless patient is on anticoagulants or has known coagulopathy. Fingerstick glucose is the only required pre-treatment lab.',
+        body: 'Review [Thrombolysis Contraindications](#/info/stroke-contraindications) before proceeding.\n\n**BP requirement:** Must be <185/110 mmHg\n\u2022 [Labetalol](#/drug/labetalol/thrombolysis) 10\u201320 mg IV bolus (first-line)\n\u2022 [Nicardipine](#/drug/nicardipine/stroke) 5 mg/hr IV infusion (second-line)\n\nIf BP cannot be controlled to <185/110, thrombolysis is contraindicated.\n\n**Labs:** Do NOT wait for coags unless patient is on anticoagulants or has known coagulopathy. Fingerstick glucose is the only required pre-treatment lab.',
         citation: [1, 2],
         treatment: {
             firstLine: {
@@ -130,7 +130,7 @@ export const STROKE_NODES = [
         type: 'info',
         module: 2,
         title: 'Administer Thrombolysis',
-        body: '**Preferred:** [Tenecteplase](#/drug/tenecteplase/stroke) 0.25 mg/kg IV bolus (max 25 mg) \u2014 single dose over 5 seconds.\n\n**Alternative:** [Alteplase](#/drug/alteplase/stroke) 0.9 mg/kg IV (max 90 mg) \u2014 10% bolus over 1 min, remainder over 60 min.\n\nTenecteplase is preferred per current guidelines due to equivalent efficacy, single bolus administration, and simpler dosing.\n\n[IVT Consent Infographic](#/calculator/ivt-consent) | [Patient Consent Info](#/info/stroke-consent)\n\n**Post-thrombolysis orders:**\n\u2022 BP <180/105 \u00D7 24h ([Labetalol](#/drug/labetalol/stroke) or [Nicardipine](#/drug/nicardipine/stroke))\n\u2022 Neuro checks q15min \u00D7 2h, then q30min \u00D7 6h, then q1h \u00D7 16h\n\u2022 No antithrombotics \u00D7 24h\n\u2022 No arterial/central lines, NG tube, or Foley \u00D7 24h if possible\n\u2022 Any neuro decline \u2192 emergent NCCT',
+        body: '**Preferred:** [Tenecteplase](#/drug/tenecteplase/stroke) 0.25 mg/kg IV bolus (max 25 mg) \u2014 single dose over 5 seconds.\n\n**Alternative:** [Alteplase](#/drug/alteplase/stroke) 0.9 mg/kg IV (max 90 mg) \u2014 10% bolus over 1 min, remainder over 60 min.\n\nTenecteplase is preferred per current guidelines due to equivalent efficacy, single bolus administration, and simpler dosing.\n\n[IVT Consent Infographic](#/calculator/ivt-consent) | [Patient Consent Info](#/info/stroke-consent)\n\n**Post-thrombolysis orders:**\n\u2022 BP <180/105 \u00D7 24h ([Labetalol](#/drug/labetalol/thrombolysis) or [Nicardipine](#/drug/nicardipine/stroke))\n\u2022 Neuro checks q15min \u00D7 2h, then q30min \u00D7 6h, then q1h \u00D7 16h\n\u2022 No antithrombotics \u00D7 24h\n\u2022 No arterial/central lines, NG tube, or Foley \u00D7 24h if possible\n\u2022 Any neuro decline \u2192 emergent NCCT',
         citation: [1, 4, 5],
         treatment: {
             firstLine: {
@@ -374,7 +374,7 @@ export const STROKE_NODES = [
         type: 'info',
         module: 5,
         title: 'Post-Thrombolysis Management',
-        body: '**BP management \u00D7 24h:**\n\u2022 Target <180/105 mmHg\n\u2022 [Labetalol](#/drug/labetalol/stroke) bolus \u00B1 infusion (first-line)\n\u2022 [Nicardipine](#/drug/nicardipine/stroke) infusion (alternative)\n\u2022 [Clevidipine](#/drug/clevidipine/stroke) (if faster titration needed)\n\n**Neuro checks protocol:**\n\u2022 Every 15 min \u00D7 2h\n\u2022 Then every 30 min \u00D7 6h\n\u2022 Then hourly \u00D7 16h\n\u2022 Any decline \u2192 emergent NCCT\n\n**Antithrombotics:**\n\u2022 NO aspirin, heparin, or anticoagulants \u00D7 24h post-thrombolysis\n\u2022 Repeat NCCT at 24h\n\u2022 If no hemorrhage: start antiplatelets',
+        body: '**BP management \u00D7 24h:**\n\u2022 Target <180/105 mmHg\n\u2022 [Labetalol](#/drug/labetalol/thrombolysis) bolus \u00B1 infusion (first-line)\n\u2022 [Nicardipine](#/drug/nicardipine/stroke) infusion (alternative)\n\u2022 [Clevidipine](#/drug/clevidipine/stroke) (if faster titration needed)\n\n**Neuro checks protocol:**\n\u2022 Every 15 min \u00D7 2h\n\u2022 Then every 30 min \u00D7 6h\n\u2022 Then hourly \u00D7 16h\n\u2022 Any decline \u2192 emergent NCCT\n\n**Antithrombotics:**\n\u2022 NO aspirin, heparin, or anticoagulants \u00D7 24h post-thrombolysis\n\u2022 Repeat NCCT at 24h\n\u2022 If no hemorrhage: start antiplatelets',
         citation: [1, 2, 13],
         treatment: {
             firstLine: {
@@ -459,7 +459,7 @@ export const STROKE_NODES = [
         type: 'result',
         module: 5,
         title: 'Cardioembolic Stroke \u2014 Anticoagulation',
-        body: '**DOAC (direct oral anticoagulant) preferred over warfarin** (unless mechanical valve or moderate-severe mitral stenosis).\n\nRecommended agents:\n\u2022 [Apixaban](#/drug/apixaban/atrial fibrillation) 5 mg BID (preferred for stroke prevention, ARISTOTLE trial)\n\u2022 [Rivaroxaban](#/drug/rivaroxaban/atrial fibrillation) 20 mg daily with food\n\n**Timing of anticoagulation initiation** (based on stroke severity):\n\u2022 TIA: 1\u20133 days\n\u2022 Minor stroke (NIHSS <8): 4\u20137 days\n\u2022 Moderate stroke (NIHSS 8\u201315): 7\u201314 days\n\u2022 Severe stroke (NIHSS >15 or large infarct): \u226514 days\n\n**Do NOT bridge with heparin** \u2014 no benefit over delayed DOAC, increases bleeding.\n\nDiscontinue antiplatelet when DOAC initiated (unless concurrent ACS/stent).',
+        body: '**DOAC (direct oral anticoagulant) preferred over warfarin** (unless mechanical valve or moderate-severe mitral stenosis).\n\nRecommended agents:\n\u2022 [Apixaban](#/drug/apixaban/atrial fibrillation) 5 mg BID (preferred for stroke prevention, ARISTOTLE trial)\n\u2022 [Rivaroxaban](#/drug/rivaroxaban/atrial fibrillation) 20 mg daily with the evening meal\n\n**Timing of anticoagulation initiation** (based on stroke severity):\n\u2022 TIA: 1\u20133 days\n\u2022 Minor stroke (NIHSS <8): 4\u20137 days\n\u2022 Moderate stroke (NIHSS 8\u201315): 7\u201314 days\n\u2022 Severe stroke (NIHSS >15 or large infarct): \u226514 days\n\n**Do NOT bridge with heparin** \u2014 no benefit over delayed DOAC, increases bleeding.\n\nDiscontinue antiplatelet when DOAC initiated (unless concurrent ACS/stent).',
         recommendation: 'Start DOAC based on stroke severity timing. Do not bridge with heparin. Ensure rate/rhythm control of AF.',
         confidence: 'definitive',
         citation: [1, 2, 11, 21],
@@ -598,5 +598,5 @@ export const STROKE_CLINICAL_NOTES = [
     'EVT extends the treatment window to 24 hours for select patients with LVO and favorable perfusion imaging. HERMES meta-analysis: NNT ~5 for functional independence.',
     'DAPT (aspirin + clopidogrel) for minor stroke/TIA should be limited to 21 days — extending beyond increases bleeding risk without additional stroke reduction benefit.',
     'Do NOT bridge with heparin when initiating anticoagulation for cardioembolic stroke — delayed DOAC initiation based on stroke severity is preferred.',
-    'Emergent CEA (within 2 weeks) for symptomatic carotid stenosis 70-99% provides the greatest benefit when performed early after the index event.',
+    'Early CEA (within 2 weeks) for symptomatic carotid stenosis 70-99% provides the greatest benefit when performed early after the index event.',
 ];

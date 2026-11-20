@@ -420,7 +420,7 @@ export const ACETAMINOPHEN_OD_NODES: DecisionNode[] = [
     type: 'question',
     module: 4,
     title: 'High-Risk (Massive) Overdose',
-    body: '[High-Dose NAC & Massive Overdose](#/info/apap-massive-od)\n\n**Definition of massive overdose:** [8][14]\n• >30 grams ingested (or >0.5 g/kg if <60 kg)\n• APAP level above the **300 line** on the nomogram\n\n**Clinical presentation:** Early **lactic acidosis** + **altered mental status** within 12 hours — due to mitochondrial dysfunction, **BEFORE liver damage occurs**. Other symptoms during Stage 1 (within 24h) suggest massive ingestion or coingestant. [8][16]\n\n**Standard NAC may be INADEQUATE** — NAC neutralizes NAPQI in a 1:1 molar ratio, so the dose must scale with the amount of acetaminophen. [8]\n\n**Activate all four interventions:**',
+    body: '[High-Dose NAC & Massive Overdose](#/info/apap-massive-od)\n\n**Definition of massive overdose:** [8][14]\n• >30 grams ingested (or >0.5 g/kg if <60 kg)\n• APAP level above the **300 line** on the nomogram\n\n**Clinical presentation:** Early **lactic acidosis** + **altered mental status** within 12 hours — due to mitochondrial dysfunction, **BEFORE liver damage occurs**. Other symptoms during Stage 1 (within 24h) suggest massive ingestion or coingestant. [8][16]\n\n**Standard NAC may be INADEQUATE** — NAC neutralizes NAPQI in a 1:1 molar ratio, so the dose must scale with the amount of acetaminophen. [8]\n\n**Consider the following interventions (with toxicology):**',
     citation: [8, 14, 16],
     options: [
       {
