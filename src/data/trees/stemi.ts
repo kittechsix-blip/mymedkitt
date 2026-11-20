@@ -261,8 +261,8 @@ export const STEMI_NODES: DecisionNode[] = [
     type: 'question',
     module: 3,
     title: 'P2Y12 Inhibitor Selection',
-    body: 'Load with ONE P2Y12 inhibitor before or at time of PCI. Discuss with interventional cardiologist.\n\n**[Prasugrel](#/drug/prasugrel/acs)** 60 mg loading \u2192 10 mg daily\n\u2022 More potent platelet inhibition, lower ischemic events vs clopidogrel; ticagrelor and prasugrel are Class I equivalents (no preference) in 2025 ACC/AHA [18][23]\n\u2022 **CONTRAINDICATED:** prior stroke/TIA \u2014 basis: TRITON-TIMI 38 (n=13,608), where patients with prior stroke/TIA had net clinical harm with prasugrel [37]\n\u2022 **No benefit:** age >75y, weight <60 kg \u2014 basis: TRITON-TIMI 38 prespecified subgroups showing no net clinical benefit [37]\n\n**[Ticagrelor](#/drug/ticagrelor/acs)** 180 mg loading \u2192 90 mg BID\n\u2022 Fewer stent thromboses and lower death rate vs clopidogrel [19]\n\u2022 Higher stroke/ICH risk vs clopidogrel [19]\n\n**[Clopidogrel](#/drug/clopidogrel/acs)** 600 mg loading \u2192 75 mg daily\n\u2022 Variable metabolism (CYP2C19) [20]\n\u2022 Use if CI to prasugrel AND ticagrelor, or high bleeding risk [5][23]\n\n**2025 ACC/AHA update:** Ticagrelor AND prasugrel are now Class I without distinction in PCI-managed STEMI; clopidogrel is the recommended concurrent P2Y12 agent for fibrinolytic-managed STEMI. [5][23]',
-    citation: [5, 18, 19, 20, 23, 37],
+    body: 'Load with ONE P2Y12 inhibitor before or at time of PCI. Discuss with interventional cardiologist.\n\n**[Prasugrel](#/drug/prasugrel/acs)** 60 mg loading \u2192 10 mg daily\n\u2022 More potent platelet inhibition, lower ischemic events vs clopidogrel; ticagrelor and prasugrel are Class I equivalents (no preference) in 2025 ACC/AHA [18][23]\n\u2022 **CONTRAINDICATED:** prior stroke/TIA \u2014 basis: TRITON-TIMI 38 (n=13,608), where patients with prior stroke/TIA had net clinical harm with prasugrel [37]\n\u2022 **No benefit:** age >75y, weight <60 kg \u2014 basis: TRITON-TIMI 38 prespecified subgroups showing no net clinical benefit [37]\n\n**[Ticagrelor](#/drug/ticagrelor/acs)** 180 mg loading \u2192 90 mg BID\n\u2022 Fewer stent thromboses and lower death rate vs clopidogrel [19]\n\u2022 Higher stroke/ICH risk vs clopidogrel [19]\n\n**[Clopidogrel](#/drug/clopidogrel/acs)** dose depends on reperfusion strategy:\n\u2022 **Primary PCI:** 600 mg loading \u2192 75 mg daily\n\u2022 **With fibrinolysis:** 300 mg loading if age \u226475y (CLARITY-TIMI 28) [39]; age >75y: 75 mg with NO loading dose (COMMIT) [40] \u2192 75 mg daily. Do NOT give 600 mg with a fibrinolytic.\n\u2022 Variable metabolism (CYP2C19) [20]\n\u2022 Use if CI to prasugrel AND ticagrelor, or high bleeding risk [5][23]\n\n**2025 ACC/AHA update:** Ticagrelor AND prasugrel are now Class I without distinction in PCI-managed STEMI; clopidogrel is the recommended concurrent P2Y12 agent for fibrinolytic-managed STEMI. [5][23]',
+    citation: [5, 18, 19, 20, 23, 37, 39, 40],
     treatment: {
       firstLine: {
         drug: 'Prasugrel',
@@ -282,7 +282,7 @@ export const STEMI_NODES: DecisionNode[] = [
       },
       otherOption: {
         drug: 'Clopidogrel',
-        dose: '600 mg loading, then 75 mg',
+        dose: 'Primary PCI: 600 mg loading, then 75 mg | With fibrinolysis: 300 mg loading if age <=75y; age >75y 75 mg with NO loading dose, then 75 mg',
         route: 'PO',
         frequency: 'Once for loading, then daily',
         duration: '12 months DAPT',
@@ -298,7 +298,7 @@ export const STEMI_NODES: DecisionNode[] = [
       },
       {
         label: 'Clopidogrel (for fibrinolysis OR if prasugrel/ticagrelor CI)',
-        description: '2025 ACC/AHA: clopidogrel is the P2Y12 agent for fibrinolytic-managed STEMI.',
+        description: '2025 ACC/AHA: clopidogrel is the P2Y12 agent for fibrinolytic-managed STEMI. With a lytic: 300 mg load if age <=75y, 75 mg with no load if >75y. Never 600 mg with a lytic.',
         next: 'stemi-anticoag',
       },
     ],
@@ -675,6 +675,8 @@ export const STEMI_CITATIONS: Citation[] = [
   { num: 36, text: 'Levy B, Clere-Jehl R, Legras A, et al. Epinephrine versus Norepinephrine for Cardiogenic Shock After Acute Myocardial Infarction (OptimaCC). J Am Coll Cardiol. 2018;72(2):173-182. doi:10.1016/j.jacc.2018.04.051. PMID: 29976291.' },
   { num: 37, text: 'Wiviott SD, Braunwald E, McCabe CH, et al.; TRITON-TIMI 38 Investigators. Prasugrel versus Clopidogrel in Patients with Acute Coronary Syndromes. N Engl J Med. 2007;357(20):2001-2015. doi:10.1056/NEJMoa0706482. PMID: 17982182.' },
   { num: 38, text: 'Bainey KR, Welsh RC, Zheng Y, et al. Pharmaco-Invasive Strategy With Half-Dose Tenecteplase in Patients With STEMI: Prespecified Pooled Analysis of Patients Aged \u226575 Years in STREAM-1 and 2. Circ Cardiovasc Interv. 2024;17(12):e014251. doi:10.1161/CIRCINTERVENTIONS.124.014251. PMID: 39689189.' },
+  { num: 39, text: 'Sabatine MS, Cannon CP, Gibson CM, et al.; CLARITY-TIMI 28 Investigators. Addition of Clopidogrel to Aspirin and Fibrinolytic Therapy for Myocardial Infarction with ST-Segment Elevation. N Engl J Med. 2005;352(12):1179-1189. doi:10.1056/NEJMoa050522.' },
+  { num: 40, text: 'Chen ZM, Jiang LX, Chen YP, et al.; COMMIT Collaborative Group. Addition of clopidogrel to aspirin in 45,852 patients with acute myocardial infarction: randomised placebo-controlled trial. Lancet. 2005;366(9497):1607-1621. doi:10.1016/S0140-6736(05)67660-X.' },
 ];
 
 // -------------------------------------------------------------------
