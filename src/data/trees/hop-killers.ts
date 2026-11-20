@@ -546,7 +546,7 @@ export const HOP_KILLERS_MODULE_LABELS = [
 export const HOP_KILLERS_CITATIONS: Citation[] = [
   { num: 1, text: 'Weingart SD. EMCrit LAMW Series: The Physiologically Difficult Airway. EMCrit.org.' },
   { num: 2, text: 'Heffner AC, et al. Predictors of post-intubation hypotension. J Crit Care. 2012;27(6):587-593.' },
-  { num: 3, text: 'Weingart SD. Push-dose pressors for immediate blood pressure control. AJEM. 2015;33(2):278-279.' },
+  { num: 3, text: 'Weingart S. Push-dose pressors for immediate blood pressure control. Clin Exp Emerg Med. 2015;2(2):131-132. doi:10.15441/ceem.15.010' },
   { num: 4, text: 'Weingart SD, et al. Delayed sequence intubation. Ann Emerg Med. 2015;65(4):349-355.' },
   { num: 5, text: 'Weingart SD, Levitan RM. Preoxygenation and prevention of desaturation. Ann Emerg Med. 2012;59(3):165-175.' },
   { num: 6, text: 'Farkas J. IBCC: Ventilatory management of severe metabolic acidosis. EMCrit.org.' },
