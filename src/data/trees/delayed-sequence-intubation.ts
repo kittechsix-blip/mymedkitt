@@ -357,7 +357,7 @@ export const DELAYED_SEQUENCE_INTUBATION_MODULE_LABELS = [
 export const DELAYED_SEQUENCE_INTUBATION_CITATIONS: Citation[] = [
   { num: 1, text: 'Weingart SD, et al. Delayed sequence intubation: a prospective observational study. Ann Emerg Med. 2015;65(4):349-355. https://emcrit.org/dsi/' },
   { num: 2, text: 'Weingart SD. EMCrit Episode 366: DSI for All - Delayed Sequence Intubation. EMCrit.org. 2023.' },
-  { num: 3, text: 'DSI vs RSI in Trauma Patients RCT. Canadian Journal of Emergency Medicine. 2023. DOI: 10.1007/s43678-024-00730-3' },
+  { num: 3, text: 'Bandyopadhyay A, et al. Peri-intubation Hypoxia After Delayed Versus Rapid Sequence Intubation in Critically Injured Patients on Arrival to Trauma Triage: A Randomized Controlled Trial. Anesth Analg. 2023;136(5):913-919. https://pubmed.ncbi.nlm.nih.gov/37058727' },
   { num: 4, text: 'Merelman AH, et al. Apnea after low-dose ketamine during delayed sequence intubation. Am J Emerg Med. 2016;34(11):2228.e1-2228.e2.' },
   { num: 5, text: 'Weingart SD. Alternatives to RSI: Contemporary airway management with ketamine. West J Emerg Med. 2019.' },
   { num: 6, text: 'Weingart SD. EMCrit Episode 137: DSI Update - Delayed Sequence Intubation. EMCrit.org. 2019.' },
