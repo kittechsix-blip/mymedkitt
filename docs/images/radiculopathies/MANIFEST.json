@@ -1,0 +1,38 @@
+{
+  "dermatomes.png": {
+    "author": "Goran tek-en",
+    "license_tag": "CC-BY-SA-4.0",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Dermatomes_labeled,_female-male_front-back_3d-shaded.svg",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Dermatomes_labeled,_female-male_front-back_3d-shaded.svg",
+    "andy_approval_commit": "2026-11-20 physician approval in Radiculopathies consult review",
+    "retrieval_timestamp": "2026-11-20",
+    "sha256": "02b7c6f1b968f1fcd4299a7786f532e70e25e52aa656c3ebed3d95032f6bb2cd"
+  },
+  "upper-motor-exam.webp": {
+    "author": "Kittech Six",
+    "license_tag": "Author-permission",
+    "source_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/radiculopathies/CREDITS.md",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/radiculopathies/CREDITS.md",
+    "andy_approval_commit": "2026-11-20 physician approval in Radiculopathies consult review",
+    "retrieval_timestamp": "2026-11-20",
+    "sha256": "930d5488e912cf65d6082f1f510870068e5fe2c119e54048ffc5abe4af26be6b"
+  },
+  "lower-motor-exam.webp": {
+    "author": "Kittech Six",
+    "license_tag": "Author-permission",
+    "source_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/radiculopathies/CREDITS.md",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/radiculopathies/CREDITS.md",
+    "andy_approval_commit": "2026-11-20 physician approval in Radiculopathies consult review",
+    "retrieval_timestamp": "2026-11-20",
+    "sha256": "9d6be8db1c9dfdc109ffb292f774e03187373235a28f37ca6a0a62b434f48b09"
+  },
+  "tendon-reflex-exam.webp": {
+    "author": "Kittech Six",
+    "license_tag": "Author-permission",
+    "source_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/radiculopathies/CREDITS.md",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/radiculopathies/CREDITS.md",
+    "andy_approval_commit": "2026-11-20 physician approval in Radiculopathies consult review",
+    "retrieval_timestamp": "2026-11-20",
+    "sha256": "2f1dcea6c47d4b54e5f192f4081822d0b75633cbf5bda87e9bf24620c927ff1e"
+  }
+}

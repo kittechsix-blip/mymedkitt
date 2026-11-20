@@ -7,7 +7,7 @@ import { getAllDrugs } from './drug-service.js';
 import { getAllCalculators } from '../components/calculator.js';
 import { sanitizeSearchInput } from './sanitize.js';
 import { pediSearchAnswer } from '../components/pedi-resus-engine.js';
-import { CLINICAL_SYNONYMS, DRUG_SYNONYMS } from './search-synonyms.js';
+import { CLINICAL_SYNONYMS, CONSULT_TITLE_ALIASES, DRUG_SYNONYMS } from './search-synonyms.js';
 import { oncPin, oncPrefix, setOncEntries } from './onc-search-pin.js';
 import { buildQuestionDocs, createQuestionIndex, drugInput, previewFor, routeFor } from './question-search.js';
 // ===================================================================
@@ -504,7 +504,7 @@ function alphabeticalPrefixSearch(query) {
         for (const tree of cat.decisionTrees) {
             if (seenTreeIds.has(tree.id))
                 continue;
-            if (matchesPrefix(tree.title, query) || tree.id.startsWith(query)) {
+            if (matchesPrefix(tree.title, query) || tree.id.startsWith(query) || CONSULT_TITLE_ALIASES[tree.id]?.includes(query)) {
                 seenTreeIds.add(tree.id);
                 results.push({
                     type: 'consult',

@@ -328,6 +328,7 @@ export const TREE_REGISTRY = {
   'cervical-spine':   { prefix: 'CERVICAL_SPINE',      entryNodeId: 'cspine-start',     categoryId: 'trauma-surg' },
   'neurogenic-shock': { prefix: 'NEUROGENIC_SHOCK',    entryNodeId: 'neuro-shock-start',     categoryId: 'critical-care' },
   'cauda-equina':     { prefix: 'CAUDA_EQUINA',        entryNodeId: 'ces-start',          categoryId: 'neurology' },
+  'radiculopathies': { prefix: 'RADICULOPATHIES', entryNodeId: 'rad-start', categoryId: 'neurology' },
   'cervical-spine-nontraumatic': { prefix: 'CERVICAL_SPINE_NONTRAUMATIC', entryNodeId: 'csnt-start', categoryId: 'emergency-medicine' },
   'brain-herniation': { prefix: 'BRAIN_HERNIATION',    entryNodeId: 'hern-start',      categoryId: 'neurology' },
   'necrotizing-fasciitis': { prefix: 'NECROTIZING_FASCIITIS', entryNodeId: 'nf-start',  categoryId: 'infectious-disease' },
