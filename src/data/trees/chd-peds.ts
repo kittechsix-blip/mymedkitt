@@ -17,7 +17,7 @@ export const CHD_PEDS_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Cyanotic or Shocked Neonate',
-    body: '**Congenital Heart Disease (CHD)** affects ~1% of live births. Critical CHD presents in the first weeks of life as the ductus arteriosus closes.\n\n**KEY ASSESSMENT**\n• Cyanosis that does NOT improve with supplemental O2\n• Poor perfusion, weak pulses, shock\n• Murmur (may be absent in critical lesions)\n• Hepatomegaly, respiratory distress\n\n**REFERENCES**\n• **Hyperoxia Test**\n• **4-Extremity Vitals**\n• **PGE1 Dosing**\n• [THE MISFITS - Other causes of sick neonate](#/tree/misfits-peds)\n\nWhat is the primary presentation?',
+    body: '**Congenital Heart Disease (CHD)** affects ~1% of live births. Critical CHD presents in the first weeks of life as the ductus arteriosus closes.\n\n**KEY ASSESSMENT**\n• Cyanosis that does NOT improve with supplemental O2\n• Poor perfusion, weak pulses, shock\n• Murmur (may be absent in critical lesions)\n• Hepatomegaly, respiratory distress\n\n**REFERENCES**\n• [THE MISFITS - Other causes of sick neonate](#/tree/misfits-peds)\n• [THE MISFITS - Other causes of sick neonate](#/tree/misfits-peds)\n\nWhat is the primary presentation?',
     citation: [1, 2],
     options: [
       {
