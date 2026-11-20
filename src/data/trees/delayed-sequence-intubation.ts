@@ -63,7 +63,7 @@ export const DELAYED_SEQUENCE_INTUBATION_NODES: DecisionNode[] = [
     module: 1,
     title: 'Standard RSI Appropriate',
     body: 'Patient is tolerating standard preoxygenation — proceed with RSI. [1][5]',
-    recommendation: '**Standard RSI Indicated**\n\nPatient can tolerate preoxygenation — DSI not required. [1][5]\n\n**Proceed with RSI:**\n- Preoxygenate with NC 15 L/min + NRB or BVM with PEEP\n- Target SpO2 >95% for 3 minutes\n- Then induction + paralysis + intubation\n\n**Consider the **Physiologically Difficult Airway** consult** if:\n- Hypotensive\n- Hypoxemic\n- Severely acidotic\n- RV failure\n- Elevated ICP',
+    recommendation: '**Standard RSI Indicated**\n\nPatient can tolerate preoxygenation — DSI not required. [1][5]\n\n**Proceed with RSI:**\n- Preoxygenate with NC 15 L/min + NRB or BVM with PEEP\n- Target SpO2 >95% for 3 minutes\n- Then induction + paralysis + intubation\n\nConsider the [Physiologically Difficult Airway](#/tree/hop-killers) consult if:\n- Hypotensive\n- Hypoxemic\n- Severely acidotic\n- RV failure\n- Elevated ICP',
     citation: [1, 5],
 
     summary: 'Patient tolerates preoxygenation — use standard RSI, not DSI',
