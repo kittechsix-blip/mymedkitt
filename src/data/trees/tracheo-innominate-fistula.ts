@@ -17,6 +17,11 @@ export const TRACHEO_INNOMINATE_FISTULA_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Tracheo-Innominate Fistula',
+    images: [{
+      src: 'images/tracheo-innominate-fistula/fistula-atlas.jpg',
+      alt: 'Paired cutaways of intact arterial and tracheal walls and a fistula carrying blood into the airway.',
+      caption: 'A defect between the innominate artery and anterior tracheal wall allows arterial blood to enter the airway. Schematic, not to scale. Original myMedKitt atlas illustration.',
+    }],
     body: '[TIF Steps Summary](#/info/tif-steps)\n\n**Tracheo-Innominate Fistula (TIF)** is a catastrophic complication of tracheostomy with near-100% mortality without intervention and 50-70% mortality even with surgery. [1][2]\n\n**Key Principle:** Massive hemorrhage occurring 3 days to 6 weeks after tracheostomy is **TIF until proven otherwise**. [1][3]\n\n**Incidence:** 0.1-1% of tracheostomies; accounts for ~10% of significant tracheostomy bleeds. [2]\n\n**This consult covers:**\n- Recognizing the sentinel bleed (warning sign)\n- Cuff hyperinflation technique\n- Finger tamponade (Utley maneuver)\n- Surgical activation\n- Stabilization and airway management\n\n**Time is critical.** A sentinel bleed precedes massive hemorrhage by only 24-48 hours. [1][4]',
     citation: [1, 2, 3, 4],
     next: 'tif-timing-check',
@@ -149,7 +154,7 @@ export const TRACHEO_INNOMINATE_FISTULA_NODES: DecisionNode[] = [
     safetyLevel: 'critical',
     images: [
       {
-        src: 'images/tracheo-innominate-fistula/cuff-hyperinflation.png',
+        src: 'images/tracheo-innominate-fistula/cuff-hyperinflation.svg',
         alt: 'Cuff hyperinflation technique showing tracheostomy cuff inflated to tamponade the innominate artery against the tracheal wall',
         caption: 'Cuff hyperinflation: inflate cuff with ~50 mL air to tamponade the innominate artery.',
       },
@@ -227,7 +232,7 @@ export const TRACHEO_INNOMINATE_FISTULA_NODES: DecisionNode[] = [
     safetyLevel: 'critical',
     images: [
       {
-        src: 'images/tracheo-innominate-fistula/utley-maneuver.png',
+        src: 'images/tracheo-innominate-fistula/utley-maneuver.svg',
         alt: 'Utley maneuver technique showing finger inserted through tracheostomy stoma compressing the innominate artery against the posterior sternum',
         caption: 'Utley maneuver: finger through stoma compresses innominate artery against sternum.',
       },
@@ -244,7 +249,7 @@ export const TRACHEO_INNOMINATE_FISTULA_NODES: DecisionNode[] = [
     citation: [1, 7],
     images: [
       {
-        src: 'images/tracheo-innominate-fistula/utley-maneuver.png',
+        src: 'images/tracheo-innominate-fistula/utley-maneuver.svg',
         alt: 'Utley maneuver step-by-step showing finger through stoma compressing the innominate artery against the posterior sternum',
         caption: 'Utley maneuver: finger through stoma, compress artery anteriorly against sternum.',
       },

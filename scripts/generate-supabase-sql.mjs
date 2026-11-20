@@ -102,6 +102,7 @@ const CROSS_LISTINGS = {
   'generalized-pruritus-hub': [{ categoryId: 'dermatology', displayTitle: null, displaySubtitle: null, entryNodeId: 'prur-sick-check' }],
   'proximal-weakness-hub': [{ categoryId: 'neurology', displayTitle: null, displaySubtitle: null, entryNodeId: 'pmw-sick-check' }],
   'behavior-change-hub': [{ categoryId: 'psychiatry', displayTitle: null, displaySubtitle: null, entryNodeId: 'beh-sick-check' }],
+  'sore-throat-hub': [{ categoryId: 'ent', displayTitle: null, displaySubtitle: null, entryNodeId: 'st-start' }],
   'otalgia-hub': [{ categoryId: 'ent', displayTitle: null, displaySubtitle: null, entryNodeId: 'otalgia-sick-check' }],
   'gi-bleed-hub': [{ categoryId: 'gastroenterology', displayTitle: null, displaySubtitle: null, entryNodeId: 'gib-start' }],
   'culture-positive-results-ed': [{ categoryId: 'emergency-medicine' }],

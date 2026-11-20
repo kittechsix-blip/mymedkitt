@@ -44,6 +44,11 @@ export const TRACH_EMERGENCY_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Tracheostomy or Laryngectomy?',
+    images: [{
+      src: 'images/trach-emergency/airway-routes-atlas.jpg',
+      alt: 'Sagittal comparison of a tracheostomy and a total laryngectomy with an end stoma.',
+      caption: 'A tracheostomy may retain upper airway continuity. After total laryngectomy the stoma is the only airway. Original myMedKitt atlas illustration.',
+    }],
     body: '**Laryngectomy = Total surgical removal of larynx**\n- NO connection between oropharynx and airway\n- CANNOT be intubated from above\n- Stoma is the ONLY airway\n\n**Tracheostomy = Tube through trachea, larynx intact**\n- Upper airway may be patent\n- Can potentially oxygenate/intubate from above\n- Dual oxygenation strategy possible\n\n**If uncertain:** Attempt to feel airflow from mouth during ventilation. No airflow = likely laryngectomy. [1][2]',
     citation: [1, 2],
     options: [
@@ -138,7 +143,7 @@ export const TRACH_EMERGENCY_NODES: DecisionNode[] = [
     title: 'Tracheostomy Tube Types',
     body: '**CUFFED vs UNCUFFED:**\n- **Cuffed:** Inflatable balloon creates seal for mechanical ventilation\n- **Uncuffed:** For spontaneous breathers, allows speech with finger occlusion\n\n**INNER CANNULA:**\n- Removable inner tube for easy cleaning\n- **ALWAYS remove inner cannula first** when troubleshooting obstruction\n- Not all tubes have inner cannulas\n\n**FENESTRATED:**\n- Holes in outer cannula allow airflow through vocal cords\n- Used for speech and weaning\n- **Must use non-fenestrated inner cannula for suctioning**\n- Fenestrations can cause granulation tissue formation\n\n**SPEAKING VALVES (Passy-Muir):**\n- One-way valve allows air through cords on exhalation\n- **MUST deflate cuff** before placing speaking valve\n- Remove immediately if respiratory distress [2][4][5]',
     citation: [2, 4, 5],
-    images: [{ src: 'images/trach-emergency/trach-tube-anatomy.png', alt: 'Diagram of fenestrated and non-fenestrated tracheostomy tubes', caption: 'Trach tube anatomy: fenestrated (speaking valve compatible) vs non-fenestrated — inner cannula removal is first step in obstruction management (Wikimedia Commons, CC BY-SA 4.0)' }],
+    images: [{ src: 'images/trach-emergency/trach-tube-anatomy.png', alt: 'Diagram of fenestrated and non-fenestrated tracheostomy tubes', caption: 'Trach tube anatomy: fenestrated (speaking valve compatible) vs non-fenestrated — inner cannula removal is first step in obstruction management (Cancer Research UK / Wikimedia Commons, CC BY-SA 4.0, PNG rendering)' }],
     next: 'trach-sizing',
 
     summary: 'Cuffed vs uncuffed, inner cannula removal first for obstruction, deflate cuff before speaking valve',
@@ -306,7 +311,7 @@ export const TRACH_EMERGENCY_NODES: DecisionNode[] = [
     type: 'question',
     module: 5,
     title: 'Bleeding: Timing & Severity',
-    body: '**Tracheostomy bleeding - assess timing and severity:**\n\n**Early bleeding (<48 hours post-op):**\n- Usually minor: skin edges, granulation\n- Related to suctioning, manipulation\n- Rarely life-threatening\n\n**Late bleeding (>72 hours, especially 7-14 days):**\n- **HIGH RISK for tracheo-innominate fistula (TIF)**\n- Innominate artery erosion - mortality approaches 50%\n- Any late bleeding may be "sentinel bleed" before massive hemorrhage\n\n**Sentinel bleed:**\n- Small self-limited bleed preceding massive hemorrhage (up to 50% of TIF cases)\n- **TREAT ANY LATE BLEEDING AS POTENTIAL TIF** [4][6][7][8]',
+    body: '[Open Tracheo-Innominate Fistula and RAPID](#/tree/tracheo-innominate-fistula) for suspected arterial hemorrhage.\n\n**Tracheostomy bleeding - assess timing and severity:**\n\n**Early bleeding (<48 hours post-op):**\n- Usually minor: skin edges, granulation\n- Related to suctioning, manipulation\n- Rarely life-threatening\n\n**Late bleeding (>72 hours, especially 7-14 days):**\n- **HIGH RISK for tracheo-innominate fistula (TIF)**\n- Innominate artery erosion - mortality approaches 50%\n- Any late bleeding may be "sentinel bleed" before massive hemorrhage\n\n**Sentinel bleed:**\n- Small self-limited bleed preceding massive hemorrhage (up to 50% of TIF cases)\n- **TREAT ANY LATE BLEEDING AS POTENTIAL TIF** [4][6][7][8]',
     citation: [4, 6, 7, 8],
     calculatorLinks: [
       { id: 'trach-bleeding', label: 'Bleeding Risk Assessment' },

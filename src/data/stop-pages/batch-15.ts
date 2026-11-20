@@ -131,7 +131,67 @@ const DYSTONIC_REACTION_STOP: InfoPage = {
   citations: [],
 };
 
+const PERITONSILLAR_ABSCESS_STOP: InfoPage = {
+  id: 'peritonsillar-abscess-stop',
+  title: 'Peritonsillar Abscess (Adult) — Do NOT',
+  subtitle: 'Critical pitfalls to avoid',
+  sections: [
+    {
+      heading: 'Do NOT delay airway support for CT',
+      body: 'Stridor or deteriorating secretion control warrants immediate airway expertise. [Review this decision](#/node/quinsy-airway).',
+    },
+    {
+      heading: 'Do NOT assume neck stiffness is uncomplicated quinsy',
+      body: 'Assess for deep extension. [Review this decision](#/node/quinsy-extension).',
+    },
+    {
+      heading: 'Do NOT drain cellulitis',
+      body: 'Confirm a collection when the examination is unclear. [Review this decision](#/node/quinsy-cellulitis).',
+    },
+    {
+      heading: 'Do NOT repeat blind passes after a dry tap',
+      body: 'Reassess anatomy and involve ENT. [Review this decision](#/node/quinsy-drain).',
+    },
+    {
+      heading: 'Do NOT discharge before a swallowing trial',
+      body: 'Observe for bleeding and confirm the patient can take the planned treatment. [Review this decision](#/node/quinsy-dispo).',
+    },
+  ],
+  citations: [],
+};
+
+const SIALOLITHIASIS_STOP: InfoPage = {
+  id: 'sialolithiasis-stop',
+  title: 'Sialolithiasis (Adult) — Do NOT',
+  subtitle: 'Critical pitfalls to avoid',
+  sections: [
+    {
+      heading: 'Do NOT anchor on a stone with tongue elevation',
+      body: 'Deep infection can threaten the airway. [Review this decision](#/node/sialo-danger).',
+    },
+    {
+      heading: 'Do NOT probe a duct blindly',
+      body: 'Use conservative treatment and arrange specialist stone removal when needed. [Review this decision](#/node/sialo-stone).',
+    },
+    {
+      heading: 'Do NOT give routine antibiotics for obstruction alone',
+      body: 'Look for bacterial infection before prescribing. [Review this decision](#/node/sialo-stone).',
+    },
+    {
+      heading: 'Do NOT overlook an abscess when treatment fails',
+      body: 'Reevaluate the gland and adjacent neck spaces. [Review this decision](#/node/sialo-danger).',
+    },
+    {
+      heading: 'Do NOT attribute facial weakness to simple obstruction',
+      body: 'Investigate a mass or other serious cause. [Review this decision](#/node/sialo-refer).',
+    },
+  ],
+  citations: [],
+};
+
 export const STOP_PAGES_15: Record<string, InfoPage> = {
+  'sialolithiasis-stop': SIALOLITHIASIS_STOP,
+  'peritonsillar-abscess-stop': PERITONSILLAR_ABSCESS_STOP,
   'supraglottic-airway-stop': SUPRAGLOTTIC_AIRWAY_STOP,
   'thoracotomy-procedure-stop': THORACOTOMY_PROCEDURE_STOP,
   'h-pylori-stop': H_PYLORI_STOP,
