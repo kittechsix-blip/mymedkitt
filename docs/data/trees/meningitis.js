@@ -290,7 +290,7 @@ export const MENINGITIS_NODES = [
         type: 'info',
         module: 3,
         title: 'Empiric: Suspected Cryptococcal',
-        body: '**Cryptococcal meningitis** is the 2nd highest cause of mortality in HIV/AIDS patients. *C. neoformans* causes ~1 million cases/year in HIV/AIDS, with ~600,000 annual deaths. [17]\n\nTypically subacute: weeks of evolving headache, neck stiffness, malaise.\n\n**Serum cryptococcal antigen (CrAg):** 99.7% sensitive, 94.1% specific \u2014 send immediately. [17]\n\n**Empiric antifungal regimen (after ID consultation):**\n\u2022 [Amphotericin B liposomal](#/drug/amphotericin-b/cryptococcal meningitis) 3\u20134 mg/kg/day IV [22,30]\n\u2022 [Flucytosine](#/drug/flucytosine/cryptococcal meningitis) 25 mg/kg PO q6h [22,30]\n\u2022 Induction \u00d7 1 week, then [Fluconazole](#/drug/fluconazole/cryptococcal meningitis) 400\u2013800 mg/day [22,30]\n\n**ALSO give empiric bacterial coverage** (Ceftriaxone + Vancomycin + Ampicillin) until CSF results available. [1,27]\n\n**\u26a0\ufe0f Do NOT give corticosteroids** \u2014 associated with worsened outcomes in cryptococcal meningitis. [1,30,31]',
+        body: '**Cryptococcal meningitis** is the 2nd highest cause of mortality in HIV/AIDS patients. *C. neoformans* causes ~1 million cases/year in HIV/AIDS, with ~600,000 annual deaths. [17]\n\nTypically subacute: weeks of evolving headache, neck stiffness, malaise.\n\n**Serum cryptococcal antigen (CrAg):** 99.7% sensitive, 94.1% specific \u2014 send immediately. [17]\n\n**Empiric antifungal regimen (after ID consultation):**\n\u2022 [Amphotericin B liposomal](#/drug/amphotericin-b/cryptococcal meningitis) 3\u20134 mg/kg/day IV [22,30]\n\u2022 [Flucytosine](#/drug/flucytosine/cryptococcal meningitis) 25 mg/kg PO q6h [22,30]\n\u2022 Induction \u00d7 at least 2 weeks (until clinical improvement and negative CSF culture), then [Fluconazole](#/drug/fluconazole/cryptococcal meningitis) 400\u2013800 mg/day for at least 8 weeks [30]\n\n**ALSO give empiric bacterial coverage** (Ceftriaxone + Vancomycin + Ampicillin) until CSF results available. [1,27]\n\n**\u26a0\ufe0f Do NOT give corticosteroids** \u2014 associated with worsened outcomes in cryptococcal meningitis. [1,30,31]',
         citation: [1, 17, 21, 22, 27, 30, 31],
         treatment: {
             firstLine: {
@@ -298,7 +298,7 @@ export const MENINGITIS_NODES = [
                 dose: 'Amphotericin B 3-4 mg/kg/day; Flucytosine 25 mg/kg',
                 route: 'Amphotericin B IV; Flucytosine PO',
                 frequency: 'Amphotericin B daily; Flucytosine q6h',
-                duration: 'Induction 1 week, then consolidation with Fluconazole 400-800 mg/day',
+                duration: 'Induction at least 2 weeks, then consolidation with Fluconazole 400-800 mg/day for at least 8 weeks',
                 notes: 'NO corticosteroids - worsened outcomes; ID consultation required',
             },
             monitoring: 'Renal function and electrolytes daily (amphotericin nephrotoxicity); flucytosine levels if available; serial LPs for elevated ICP',
@@ -423,7 +423,7 @@ export const MENINGITIS_NODES = [
         type: 'info',
         module: 4,
         title: 'Fungal Meningitis Management',
-        body: 'Fungal meningitis is primarily a disease of **immunocompromised** populations. Most cases present **subacutely** with weeks of evolving symptoms. [8]\n\n**Most common cause:** *Cryptococcus neoformans* (~1 million cases/year in HIV/AIDS). [17]\n\nOther causes: *Histoplasma*, *Coccidioides*, *Candida* species.\n\n**Treatment (requires ID consultation):**\n\u2022 **Induction (1 week):** [Amphotericin B liposomal](#/drug/amphotericin-b/cryptococcal meningitis) 3\u20134 mg/kg/day IV + [Flucytosine](#/drug/flucytosine/cryptococcal meningitis) 25 mg/kg PO q6h [22,30]\n\u2022 **Consolidation:** [Fluconazole](#/drug/fluconazole/cryptococcal meningitis) 400\u2013800 mg/day PO [22,30]\n\u2022 This regimen showed lowest mortality in a Cochrane review of 13 studies (2426 participants) [22]\n\n**\u26a0\ufe0f Do NOT give corticosteroids** \u2014 dexamethasone is associated with **worsened outcomes** in cryptococcal and listerial meningitis. Discontinue immediately if either pathogen identified. [1,21,30,31]',
+        body: 'Fungal meningitis is primarily a disease of **immunocompromised** populations. Most cases present **subacutely** with weeks of evolving symptoms. [8]\n\n**Most common cause:** *Cryptococcus neoformans* (~1 million cases/year in HIV/AIDS). [17]\n\nOther causes: *Histoplasma*, *Coccidioides*, *Candida* species.\n\n**Treatment (requires ID consultation):**\n\u2022 **Induction (at least 2 weeks, until clinical improvement and negative CSF culture):** [Amphotericin B liposomal](#/drug/amphotericin-b/cryptococcal meningitis) 3\u20134 mg/kg/day IV + [Flucytosine](#/drug/flucytosine/cryptococcal meningitis) 25 mg/kg PO q6h [22,30]\n\u2022 **Consolidation:** [Fluconazole](#/drug/fluconazole/cryptococcal meningitis) 400\u2013800 mg/day PO for at least 8 weeks [30]\n\u2022 This regimen showed lowest mortality in a Cochrane review of 13 studies (2426 participants) [22]\n\n**\u26a0\ufe0f Do NOT give corticosteroids** \u2014 dexamethasone is associated with **worsened outcomes** in cryptococcal and listerial meningitis. Discontinue immediately if either pathogen identified. [1,21,30,31]',
         citation: [1, 8, 17, 21, 22, 30, 31],
         treatment: {
             firstLine: {
@@ -431,7 +431,7 @@ export const MENINGITIS_NODES = [
                 dose: 'Amphotericin B 3-4 mg/kg/day; Flucytosine 25 mg/kg',
                 route: 'Amphotericin B IV; Flucytosine PO',
                 frequency: 'Amphotericin B daily; Flucytosine q6h',
-                duration: 'Induction 1 week, then consolidation with Fluconazole 400-800 mg/day PO',
+                duration: 'Induction at least 2 weeks, then consolidation with Fluconazole 400-800 mg/day PO for at least 8 weeks',
                 notes: 'ID consultation required; NO corticosteroids - discontinue if started empirically',
             },
             monitoring: 'Renal function and electrolytes daily; flucytosine levels if available; serial LPs for elevated ICP management',
