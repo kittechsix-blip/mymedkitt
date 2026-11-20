@@ -485,7 +485,7 @@ export const CHD_PEDS_CITATIONS: Citation[] = [
   { num: 1, text: 'Kemper AR, et al. Strategies for implementing screening for critical congenital heart disease. Pediatrics. 2011;128(5):e1259-e1267.' },
   { num: 2, text: 'Oster ME, et al. Lessons learned from newborn screening for critical congenital heart defects. Pediatrics. 2016;137(5):e20154573.' },
   { num: 3, text: 'Mahle WT, et al. Role of pulse oximetry in examining newborns for congenital heart disease. Pediatrics. 2009;124(2):823-836.' },
-  { num: 4, text: 'Jones RWA, et al. Arterial oxygen tension and response to oxygen breathing in differential diagnosis of heart disease in infancy. Arch Dis Child. 1976;51(9):667-673.' },
+  { num: 4, text: 'Jones RWA, et al. Arterial oxygen tension and response to oxygen breathing in differential diagnosis of congenital heart disease in infancy. PMID 999325. Arch Dis Child. 1976;51(9):667-673.' },
   { num: 5, text: 'Steinhorn RH. Neonatal pulmonary hypertension. Pediatr Crit Care Med. 2010;11(2 Suppl):S79-S84.' },
   { num: 6, text: 'Allen HD, et al. Moss & Adams Heart Disease in Infants, Children, and Adolescents. 9th ed. Wolters Kluwer; 2016.' },
   { num: 7, text: 'Tanel RE, et al. Tetralogy of Fallot: A review for the emergency physician. Pediatr Emerg Care. 2020;36(6):301-306.' },
