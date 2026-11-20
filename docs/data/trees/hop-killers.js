@@ -496,11 +496,11 @@ export const HOP_KILLERS_MODULE_LABELS = [
 export const HOP_KILLERS_CITATIONS = [
     { num: 1, text: 'Weingart SD. EMCrit LAMW Series: The Physiologically Difficult Airway. EMCrit.org.' },
     { num: 2, text: 'Heffner AC, et al. Predictors of post-intubation hypotension. J Crit Care. 2012;27(6):587-593.' },
-    { num: 3, text: 'Weingart SD. Push-dose pressors for immediate blood pressure control. AJEM. 2015;33(2):278-279.' },
+    { num: 3, text: 'Weingart S. Push-dose pressors for immediate blood pressure control. Clin Exp Emerg Med. 2015;2(2):131-132. doi:10.15441/ceem.15.010' },
     { num: 4, text: 'Weingart SD, et al. Delayed sequence intubation. Ann Emerg Med. 2015;65(4):349-355.' },
     { num: 5, text: 'Weingart SD, Levitan RM. Preoxygenation and prevention of desaturation. Ann Emerg Med. 2012;59(3):165-175.' },
     { num: 6, text: 'Farkas J. IBCC: Ventilatory management of severe metabolic acidosis. EMCrit.org.' },
     { num: 7, text: 'Farkas J. IBCC: RV failure and pulmonary hypertension. EMCrit.org.' },
     { num: 8, text: 'Martyn JAJ, et al. Succinylcholine-induced hyperkalemia. Anesthesiology. 2006;104(1):158-169.' },
-    { num: 9, text: 'Zeiler FA, et al. Ketamine and ICP: A systematic review. J Neurotrauma. 2016;33(24):2089-2104.' },
+    { num: 9, text: 'Zeiler FA, Teitelbaum J, West M, Gillman LM. The ketamine effect on ICP in traumatic brain injury. Neurocrit Care. 2014;21(1):163-173. doi:10.1007/s12028-013-9950-y' },
 ];
