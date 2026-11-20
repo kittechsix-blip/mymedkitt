@@ -552,5 +552,5 @@ export const HOP_KILLERS_CITATIONS: Citation[] = [
   { num: 6, text: 'Farkas J. IBCC: Ventilatory management of severe metabolic acidosis. EMCrit.org.' },
   { num: 7, text: 'Farkas J. IBCC: RV failure and pulmonary hypertension. EMCrit.org.' },
   { num: 8, text: 'Martyn JAJ, et al. Succinylcholine-induced hyperkalemia. Anesthesiology. 2006;104(1):158-169.' },
-  { num: 9, text: 'Zeiler FA, et al. Ketamine and ICP: A systematic review. J Neurotrauma. 2016;33(24):2089-2104.' },
+  { num: 9, text: 'Zeiler FA, Teitelbaum J, West M, Gillman LM. The ketamine effect on ICP in traumatic brain injury. Neurocrit Care. 2014;21(1):163-173. doi:10.1007/s12028-013-9950-y' },
 ];
