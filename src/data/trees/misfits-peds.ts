@@ -607,7 +607,7 @@ export const MISFITS_PEDS_CITATIONS: Citation[] = [
   { num: 4, text: 'Christian CW, et al. AAP Committee on Child Abuse and Neglect. The evaluation of suspected child physical abuse. Pediatrics. 2015;135(5):e1337-e1354.' },
   { num: 5, text: 'Maguire S, et al. Which clinical features distinguish inflicted from non-inflicted brain injury? Arch Dis Child. 2009;94(11):860-867.' },
   { num: 6, text: 'Oster ME, et al. Lessons learned from newborn screening for critical congenital heart defects. Pediatrics. 2016;137(5):e20154573.' },
-  { num: 7, text: 'Speiser PW, et al. Congenital adrenal hyperplasia due to steroid 21-hydroxylase deficiency. J Clin Endocrinol Metab. 2010;95(9):4133-4160.' },
+  { num: 7, text: 'Speiser PW, et al. Congenital Adrenal Hyperplasia Due to Steroid 21-Hydroxylase Deficiency: An Endocrine Society Clinical Practice Guideline. J Clin Endocrinol Metab. 2018;103(11):4043-4088. PMID 30272171.' },
   { num: 8, text: 'Adamkin DH, et al. AAP Committee on Fetus and Newborn. Postnatal glucose homeostasis in late-preterm and term infants. Pediatrics. 2011;127(3):575-579.' },
   { num: 9, text: 'Saudubray JM, et al. Clinical approach to treatable inborn metabolic diseases. J Inherit Metab Dis. 2006;29(2-3):261-274.' },
   { num: 10, text: 'Polin RA, et al. AAP Committee on Fetus and Newborn. Management of neonates with suspected or proven early-onset bacterial sepsis. Pediatrics. 2012;129(5):1006-1015.' },
