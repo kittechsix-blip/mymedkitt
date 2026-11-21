@@ -144,8 +144,12 @@ function handleCategory(params) {
     const main = clearMain();
     renderSpecialtyView(main, id);
 }
-const ONC_TREE_ID = 'onc-drug-side-effects';
-const ONC_VIRTUAL_ID = /^odse-(drug|reg|class|cancer|ctype|cx)-/; // frozen deep-link scheme, see data/onc-drugs/index.ts
+// Drug-card consults (src/data/drug-consults.ts). The data is not imported here so Home stays light: treeId -> frozen virtual-id scheme,
+// kept equal to each consult's config by scripts/transplant-drugs.test.ts.
+const DRUG_CONSULT_VIRTUAL_ID = {
+    'onc-drug-side-effects': /^odse-(drug|reg|class|cancer|ctype|cx)-/, // see data/onc-drugs/index.ts
+    'transplant-drug-side-effects': /^tdse-(drug|reg|class|organ|cx)-/, // see data/transplant-drugs/index.ts
+};
 function handleTree(params) {
     hideGlobalTabBar();
     const id = params['id'] ?? 'unknown';
@@ -154,8 +158,8 @@ function handleTree(params) {
     removeContextualToolbar();
     if (renderProcedureApp(main, id))
         return;
-    if (id === ONC_TREE_ID) {
-        void import('./components/onc-drug-consult.js').then((m) => m.renderOncConsult(main));
+    if (DRUG_CONSULT_VIRTUAL_ID[id]) {
+        void import('./components/onc-drug-consult.js').then((m) => m.renderOncConsult(main, undefined, id));
         return;
     }
     void renderConsultFlow(main, id);
@@ -179,11 +183,11 @@ function handleTreeNode(params) {
     const nodeId = params['nodeId'] ?? 'unknown';
     setCurrentTreeId(treeId);
     const main = clearMain();
-    // Virtual drug / regimen / class / cancer / complaint ids are not tree nodes: the oncology component renders them.
+    // Virtual drug / regimen / class / cancer / organ / complaint ids are not tree nodes: the drug-consult component renders them.
     // Real odse-tox-* nodes fall through to the normal consult flow.
-    if (treeId === ONC_TREE_ID && ONC_VIRTUAL_ID.test(nodeId)) {
+    if (DRUG_CONSULT_VIRTUAL_ID[treeId]?.test(nodeId)) {
         removeContextualToolbar();
-        void import('./components/onc-drug-consult.js').then((m) => m.renderOncConsult(main, nodeId));
+        void import('./components/onc-drug-consult.js').then((m) => m.renderOncConsult(main, nodeId, treeId));
         return;
     }
     void renderConsultFlow(main, treeId, { jumpToNodeId: nodeId });

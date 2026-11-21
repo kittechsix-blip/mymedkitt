@@ -5,6 +5,7 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { TREE_REGISTRY } from '../tree-registry.mjs';
 import { CLINICAL_SYNONYMS, DRUG_SYNONYMS } from '../../src/services/search-synonyms.ts';
 import type { Cited, OncData } from '../../src/data/onc-drugs/types.ts';
+import type { DrugConsultConfig } from '../../src/data/onc-drugs/consult.ts';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 export const DOCS = path.join(ROOT, 'docs');
@@ -50,7 +51,10 @@ export async function loadEnv(): Promise<Env> {
   }
   const realNodeIds = new Set<string>();
   for (const n of nodeIdx.nodes) realNodeIds.add(n.id);
-  for (const n of ans.extraNodes) if (!n.id.startsWith('odse-drug-') && !n.id.startsWith('odse-reg-')) realNodeIds.add(n.id);
+  // the virtual card ids of EVERY drug consult are not real nodes
+  const dc = await imp('data/drug-consults.js');
+  const virtualPrefixes: string[] = Object.values(dc.DRUG_CONSULTS as Record<string, { cfg: DrugConsultConfig }>).flatMap((x) => [`${x.cfg.prefix}drug-`, `${x.cfg.prefix}reg-`]);
+  for (const n of ans.extraNodes) if (!virtualPrefixes.some((p) => n.id.startsWith(p))) realNodeIds.add(n.id);
   return {
     trees: new Map(), realNodeIds, consultNames, drugNames,
     calcTitles: new Set(calcMod.getAllCalculators().map((c: { title: string }) => norm(c.title))),
@@ -88,6 +92,7 @@ function allCited(d: OncData): { where: string; c: Cited }[] {
   for (const r of d.drugs) {
     if (r.mechanism) out.push({ where: `drug ${r.id}.mechanism`, c: r.mechanism });
     (r.alsoOnLabel ?? []).forEach((c, i) => out.push({ where: `drug ${r.id}.alsoOnLabel[${i}]`, c }));
+    (r.interactions ?? []).forEach((c, i) => out.push({ where: `drug ${r.id}.interactions[${i}]`, c }));
     (Array.isArray(r.boxedWarning) ? r.boxedWarning : r.boxedWarning ? [r.boxedWarning] : []).forEach((c, i) => out.push({ where: `drug ${r.id}.boxedWarning[${i}]`, c }));
     for (const e of r.effects ?? []) {
       if (e.timing) out.push({ where: `drug ${r.id}.${e.tox}.timing`, c: e.timing });
@@ -100,7 +105,10 @@ function allCited(d: OncData): { where: string; c: Cited }[] {
 }
 
 /** Returns error strings, each starting with a CODE. Empty array = clean. Does NOT require the data to be non-empty. */
-export async function checkOnc(d: OncData, env: Env, od: { resolveEffects: Function; pinNames: Function; virtualNodeId: Function; ONC_CANCER_TYPES?: { id: string }[] }, opts: { treeOrphans?: boolean } = {}): Promise<string[]> {
+export async function checkOnc(d: OncData, env: Env, od: { resolveEffects: Function; pinNames: Function; virtualIds: Function; ONC_CONSULT: DrugConsultConfig; ONC_CANCER_TYPES?: { id: string }[] }, opts: { treeOrphans?: boolean; consult?: DrugConsultConfig } = {}): Promise<string[]> {
+  const cfg = opts.consult ?? od.ONC_CONSULT;
+  const kind = cfg.indicationKind; // 'cancer' | 'organ'
+  const KIND = kind.toUpperCase();
   const errs: string[] = [];
   const e = (code: string, msg: string) => errs.push(`${code}: ${msg}`);
   const norm = env.norm;
@@ -113,12 +121,13 @@ export async function checkOnc(d: OncData, env: Env, od: { resolveEffects: Funct
   // cited strings
   for (const { where, c } of allCited(d)) {
     if (/\d/.test(c.v) && c.cite.length < 1) e('CITE-DIGIT', `${where} "${c.v}" has a number and no citation`);
-    if (where.includes('.alsoOnLabel[') && c.cite.length < 1) e('LABEL-CITE', `${where} "${c.v.slice(0, 60)}" has no citation (every label item must be cited)`);
+    if ((where.includes('.alsoOnLabel[') || where.includes('.interactions[')) && c.cite.length < 1) e('LABEL-CITE', `${where} "${c.v.slice(0, 60)}" has no citation (every label item must be cited)`);
     for (const k of c.cite) if (!d.sources[k]?.text) e('CITE-KEY', `${where} cites unknown source ${k}`);
   }
   for (const r of d.regimens) for (const k of r.cite) if (!d.sources[k]?.text) e('CITE-KEY', `regimen ${r.id} cites unknown source ${k}`);
 
   const classIds = new Set(d.classes.map((c) => c.id));
+  const browseIds = new Set((d.browseClasses ?? d.classes).map((c) => c.id));
   const cancerIds = new Set(d.cancers.map((c) => c.id));
   const cxIds = new Set(d.complaints.map((c) => c.id));
   const toxIds = new Set(d.toxicities.map((t) => t.id));
@@ -127,14 +136,15 @@ export async function checkOnc(d: OncData, env: Env, od: { resolveEffects: Funct
   // drugs
   for (const r of d.drugs) {
     if (!r.classIds.length || r.classIds.some((c) => !classIds.has(c))) e('DRUG-CLASS', `${r.id} needs >=1 valid class`);
+    if (r.browseClassIds && (!r.browseClassIds.length || r.browseClassIds.some((c) => !browseIds.has(c)))) e('DRUG-CLASS', `${r.id} needs >=1 valid browse class`);
     if (r.brandSource && !d.sources[r.brandSource]?.text) e('CITE-KEY', `drug ${r.id}.brandSource cites unknown source ${r.brandSource}`);
     { const seenN = new Map<string, string>(); for (const n of [r.generic, ...r.brands, ...(r.formerBrands ?? []), ...(r.searchOnlyBrands ?? [])]) { const k = norm(n); if (seenN.has(k) && k) e('BRAND-DUP', `${r.id} lists "${n}" twice (also "${seenN.get(k)}")`); seenN.set(k, n); } }
     if (d.sources[r.label]?.kind !== 'fda-pi') e('DRUG-LABEL', `${r.id} label must be an fda-pi source`);
-    if (r.cancers.some((c) => !cancerIds.has(c))) e('DRUG-CANCER', `${r.id} has an unknown cancer`);
+    if (r.cancers.some((c) => !cancerIds.has(c))) e(`DRUG-${KIND}`, `${r.id} has an unknown ${kind}`);
     const eff = od.resolveEffects(r, d) as { tox: { id: string }; timing?: Cited; note?: Cited; cite: string[] }[];
     // a card needs something to show: a resolved effect, an alsoOnLabel line or a boxed warning (a label with no emergency-presentation warning is legitimate)
     const boxedN = Array.isArray(r.boxedWarning) ? r.boxedWarning.length : r.boxedWarning ? 1 : 0;
-    if (eff.length < 1 && !(r.alsoOnLabel?.length) && boxedN < 1) e('DRUG-EFFECT', `${r.id} has no resolved effect, no alsoOnLabel line and no boxed warning`);
+    if (eff.length < 1 && !(r.alsoOnLabel?.length) && !(r.interactions?.length) && boxedN < 1) e('DRUG-EFFECT', `${r.id} has no resolved effect, no alsoOnLabel or interactions line and no boxed warning`);
     if (r.labelAge !== undefined && !/^Label last revised (19|20)\d\d; current availability not confirmed\.$/.test(r.labelAge)) e('LABEL-AGE', `${r.id}.labelAge must be the plain sentence "Label last revised <year>; current availability not confirmed." (no citation, nothing else)`);
     for (const x of eff) {
       // a timing, when present, must be cited; every effect needs at least one citation from timing, note or its own cite list
@@ -171,22 +181,23 @@ export async function checkOnc(d: OncData, env: Env, od: { resolveEffects: Funct
       if (drugIds.has(u.id)) e('REGIMEN', `${r.id} lists "${u.id}" as uncarded but it now has a card: remove it from uncarded`);
       if (!u.name?.trim()) e('REGIMEN', `${r.id} uncarded "${u.id}" has no display name`);
     }
-    if (r.cancers.some((x) => !cancerIds.has(x))) e('REGIMEN', `${r.id} has an unknown cancer`);
+    if (r.cancers.some((x) => !cancerIds.has(x))) e('REGIMEN', `${r.id} has an unknown ${kind}`);
   }
 
   // cancer types: a `type` must be one of the plain types in cancer-types.ts
   const typeIds = new Set((od.ONC_CANCER_TYPES ?? []).map((t) => t.id));
-  for (const c of d.cancers) if (c.type !== undefined && !typeIds.has(c.type)) e('CANCER-TYPE', `cancer ${c.id} has unknown type "${c.type}"`);
+  if (cfg.indicationTypes) for (const c of d.cancers) if (c.type !== undefined && !typeIds.has(c.type)) e('CANCER-TYPE', `cancer ${c.id} has unknown type "${c.type}"`);
 
   // toxicity pages
-  const oncTree = await tree(env, env.oncTreeId);
+  const oncTree = await tree(env, cfg.treeId);
   const referenced = new Set<string>();
   for (const t of d.toxicities) {
+    if (t.plainOnly === true) continue; // no page by design: effects render as plain lines
     const tr = await tree(env, t.page.tree);
     if (!tr) { e('TOX-PAGE', `${t.id}: tree ${t.page.tree} is not registered`); continue; }
     const n = tr.nodes.find((x) => x.id === t.page.node);
     if (!n) { e('TOX-PAGE', `${t.id}: node ${t.page.node} does not exist in ${t.page.tree}`); continue; }
-    if (t.page.tree === env.oncTreeId) referenced.add(n.id);
+    if (t.page.tree === cfg.treeId) referenced.add(n.id);
     if (!n.summary || !n.summary.trim()) e('TOX-PAGE', `${t.id}: node ${n.id} has no summary`);
     if (!n.citation?.length) e('TOX-PAGE', `${t.id}: node ${n.id} has no citation`);
     for (const num of n.citation ?? []) if (!tr.cites.has(num)) e('TOX-PAGE', `${t.id}: node ${n.id} cites [${num}] missing from ${t.page.tree}`);
@@ -202,14 +213,15 @@ export async function checkOnc(d: OncData, env: Env, od: { resolveEffects: Funct
   for (const c of d.classes) for (const x of c.effects) usedTox.add(x.tox);
   for (const r of d.drugs) for (const o of r.effects ?? []) usedTox.add(o.tox);
   for (const t of d.toxicities) if (!usedTox.has(t.id)) e('ORPHAN-TOX', `toxicity ${t.id} is used by no class or drug`);
-  for (const c of d.classes) if (!d.drugs.some((x) => x.classIds.includes(c.id))) e('ORPHAN-CLASS', `class ${c.id} has no drug`);
-  for (const c of d.cancers) if (!d.drugs.some((x) => x.cancers.includes(c.id)) && !d.regimens.some((x) => x.cancers.includes(c.id))) e('ORPHAN-CANCER', `cancer ${c.id} has no drug or regimen`);
+  for (const c of d.classes) if (!d.drugs.some((x) => x.classIds.includes(c.id) || (x.browseClassIds ?? []).includes(c.id))) e('ORPHAN-CLASS', `class ${c.id} has no drug`);
+  for (const c of d.browseClasses ?? []) if (!d.drugs.some((x) => (x.browseClassIds ?? x.classIds).includes(c.id))) e('ORPHAN-CLASS', `browse class ${c.id} has no drug`);
+  for (const c of d.cancers) if (!d.drugs.some((x) => x.cancers.includes(c.id)) && !d.regimens.some((x) => x.cancers.includes(c.id))) e(`ORPHAN-${KIND}`, `${kind} ${c.id} has no drug or regimen`);
   for (const c of d.complaints) if (!d.toxicities.some((t) => t.complaints.includes(c.id))) e('ORPHAN-COMPLAINT', `complaint ${c.id} has no toxicity`);
   // ORPHAN-NODE applies to the shipped tree only: a synthetic dataset (the fixture) cannot own its management pages
   if (oncTree && opts.treeOrphans !== false) {
     const byId = new Map(oncTree.nodes.map((n) => [n.id, n]));
     const reach = new Set<string>();
-    const queue = ['odse-start'];
+    const queue = [cfg.startNode];
     while (queue.length) {
       const id = queue.pop()!;
       if (reach.has(id) || !byId.has(id)) continue;
@@ -219,16 +231,16 @@ export async function checkOnc(d: OncData, env: Env, od: { resolveEffects: Funct
       for (const o of n.options ?? []) if (o.next) queue.push(o.next);
     }
     for (const n of oncTree.nodes) {
-      if (!n.id.startsWith('odse-tox-')) continue;
-      if (!reach.has(n.id)) e('ORPHAN-NODE', `${n.id} is not reachable from odse-start`);
+      if (!n.id.startsWith(`${cfg.prefix}tox-`)) continue;
+      if (!reach.has(n.id)) e('ORPHAN-NODE', `${n.id} is not reachable from ${cfg.startNode}`);
       if (!referenced.has(n.id)) e('ORPHAN-NODE', `${n.id} is referenced by no toxicity page`);
     }
   }
 
   // virtual ids
   const vids = new Set<string>();
-  const vid = (kind: string, slug: string) => {
-    const id = od.virtualNodeId(kind, slug) as string;
+  const vid = (vkind: string, slug: string) => {
+    const id = od.virtualIds(cfg).virtualNodeId(vkind, slug) as string;
     if (vids.has(id)) e('VID', `duplicate virtual id ${id}`);
     vids.add(id);
     if (env.realNodeIds.has(id)) e('VID', `virtual id ${id} collides with a real node`);
@@ -236,7 +248,8 @@ export async function checkOnc(d: OncData, env: Env, od: { resolveEffects: Funct
   d.drugs.forEach((x) => vid('drug', x.id));
   d.regimens.forEach((x) => vid('reg', x.id));
   d.classes.forEach((x) => vid('class', x.id));
-  d.cancers.forEach((x) => vid('cancer', x.id));
+  (d.browseClasses ?? []).forEach((x) => { if (!d.classes.some((c) => c.id === x.id)) vid('class', x.id); });
+  d.cancers.forEach((x) => vid(kind, x.id));
   d.complaints.forEach((x) => vid('cx', x.id));
 
   // no weight-based dosing in card data
@@ -258,8 +271,8 @@ export async function checkOnc(d: OncData, env: Env, od: { resolveEffects: Funct
   const pin = (label: string, names: string[]) => {
     for (const nm of names) {
       const n = norm(nm);
-      // 3 characters pin only for an editor alias that contains a digit (5FU, 6MP); everything else keeps the 4-character floor
-      const digitAlias = n.length === 3 && /\d/.test(n) && d.drugs.some((r) => label === `drug:${r.id}` && (r.editorAliases ?? []).some((a) => norm(a) === n));
+      // 3 characters pin only for an editor alias that contains a digit (5FU, 6MP), or for any editor alias when the consult's floor is 3; everything else keeps the 4-character floor
+      const digitAlias = n.length === 3 && (cfg.editorAliasPinFloor === 3 || /\d/.test(n)) && d.drugs.some((r) => label === `drug:${r.id}` && (r.editorAliases ?? []).some((a) => norm(a) === n));
       if (n.length < 4 && !digitAlias) { e('PIN-SHORT', `${label} pinnable name "${nm}" is under 4 characters`); continue; }
       if (owner.has(n) && owner.get(n) !== label) e('PIN-DUP', `"${nm}" pins both ${owner.get(n)} and ${label}`);
       owner.set(n, label);
@@ -268,7 +281,7 @@ export async function checkOnc(d: OncData, env: Env, od: { resolveEffects: Funct
       if (env.calcTitles.has(n)) e('PIN-COLLIDE', `"${nm}" (${label}) collides with a calculator title`);
     }
   };
-  for (const r of d.drugs) pin(`drug:${r.id}`, od.pinNames(r) as string[]);
-  for (const r of d.regimens) pin(`reg:${r.id}`, od.pinNames(r) as string[]);
+  for (const r of d.drugs) pin(`drug:${r.id}`, od.pinNames(r, cfg) as string[]);
+  for (const r of d.regimens) pin(`reg:${r.id}`, od.pinNames(r, cfg) as string[]);
   return errs;
 }

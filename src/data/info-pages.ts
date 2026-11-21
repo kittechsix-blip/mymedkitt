@@ -1,5 +1,7 @@
 import { ACUTE_KERATITIS_INFO_PAGES } from './new-content/acute-keratitis-info.js';
 import { HG_INFO_PAGES } from './new-content/hyperglycemia-info.js';
+import { TPE_INFO_PAGES } from './new-content/transplant-patient-ed-info.js';
+import { TDSE_STOP_PAGE } from './new-content/transplant-drug-side-effects-stop.js';
 import { IO_SITES, IO_SAFETY, IO_CONFIRM, IO_SOURCES } from './io-anatomy.js';
 import { INH_INFO_PAGES } from './inh-info-pages.js';
 import { INFO_PAGES_HTNE } from './new-content/hypertensive-emergency-adult-info.js';
@@ -31648,6 +31650,10 @@ const ONC_DSE_STOP_CYTOTOXIC_PAGE: InfoPage = {
 export const INFO_PAGES: Record<string, InfoPage> = {
   ...ACUTE_KERATITIS_INFO_PAGES,
   ...HG_INFO_PAGES,
+  // Transplant Patient in the ED overlays (33)
+  ...TPE_INFO_PAGES,
+  // Transplant Drugs Side-effects: Stop page (drug-card consult)
+  'transplant-drug-side-effects-stop': TDSE_STOP_PAGE,
   'phlegmasia-photos': PHLEGMASIA_PHOTOS,
   'block-visual-supraorbital': { id: 'block-visual-supraorbital', title: 'Supraorbital + supratrochlear visual guide', subtitle: 'Coverage and landmarks', sections: [{ heading: 'Expected coverage', image: { src: 'images/dental-nerve-blocks/exec-1df82e36-7522-4267-8536-8d748f44a258.jpg', alt: 'Supraorbital + supratrochlear expected sensory coverage', caption: 'Approximate distribution after a successful block; anatomy and response vary. Test before proceeding.' }, body: 'See the procedure for complete technique and safety checks.' }, { heading: 'Landmark orientation', image: { src: 'images/dental-nerve-blocks/exec-529d15ea-6242-4591-9463-8b40671ab176.jpg', alt: 'Supraorbital + supratrochlear landmark orientation', caption: 'Landmark orientation; use the written procedure for detailed technique.' }, body: 'Look straight ahead. Palpate the superior orbital rim for the supraorbital notch, usually near the pupil line; the supratrochlear nerve lies medial. Deposit superficial to the rim adjacent to the notch and extend medially. Keep the needle away from the globe. Aspirate.' }], citations: [{ num: 1, text: 'MSD Manual Professional Edition: regional anesthesia procedure guides; see consult references.' }] },
   'block-visual-infraorbital': { id: 'block-visual-infraorbital', title: 'Infraorbital visual guide', subtitle: 'Coverage and landmarks', sections: [{ heading: 'Expected coverage', image: { src: 'images/dental-nerve-blocks/exec-ccb36f07-179f-4e82-9460-bd0893177e85.jpg', alt: 'Infraorbital expected sensory coverage', caption: 'Approximate distribution after a successful block; anatomy and response vary. Test before proceeding.' }, body: 'See the procedure for complete technique and safety checks.' }, { heading: 'Landmark orientation', image: { src: 'images/dental-nerve-blocks/exec-ebbf1a7e-cf53-45f1-b2c5-492468d2ae96.jpg', alt: 'Infraorbital landmark orientation', caption: 'Landmark orientation; use the written procedure for detailed technique.' }, body: 'Look straight ahead. The foramen is approximately 1 cm below the infraorbital rim near the pupil line. Intraorally identify the mucobuccal fold above the first premolar and keep a finger over the foramen. Aspirate and deposit adjacent to, never into, the foramen.' }], citations: [{ num: 1, text: 'MSD Manual Professional Edition: regional anesthesia procedure guides; see consult references.' }] },

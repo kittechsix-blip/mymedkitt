@@ -11,6 +11,8 @@ export interface Toxicity {
   complaints: string[];                                // Complaint ids
   ask: Cited[];                                        // screening questions for this effect
   lethality: 1 | 2 | 3;                                // 1 = most lethal, shown first
+  /** transplant consult only: no management page exists, so the category has no row and its effects render as plain lines (page is an unused sentinel). Never set in oncology. */
+  plainOnly?: true;
 }
 /** rank is an optional promotion: ranked effects sort before unranked ones (lowest first); otherwise lethality ascending */
 export interface ClassEffect {
@@ -47,12 +49,16 @@ export interface OncDrug {
   /** names pinned to rank 1 even though the drug is pin:false (each must be a searchable name; the collision gate applies) */
   pinAlso?: string[];
   classIds: string[]; mechanism?: Cited; cancers: string[];
+  /** Set only by a consult projection (src/data/transplant-drugs): the classes this card is LISTED under in that consult. Absent = classIds. Never drives effects or mechanism. */
+  browseClassIds?: string[];
   label: SourceKey;                                    // FDA PI anchor, required
   tier: 'full' | 'short';
   effects?: DrugEffectOverride[];                      // merged over class effects by tox id
   boxedWarning?: Cited | Cited[];                      // one Cited per boxed item; use an array when the label lists several
   /** label warnings and interactions with no management page: short statements, EVERY item cited (digits or not). Shown as "Also on the label". */
   alsoOnLabel?: Cited[];
+  /** drug-drug interaction lines (same line format as alsoOnLabel, every item cited): shown as their own collapsed section "Drug interactions (N)" above "Also on the label", in array order. Absent = nothing renders. */
+  interactions?: Cited[];
   pharmacyDrugId?: string;                             // existing drug-store id
   pin?: boolean;                                       // default true
 }
@@ -87,6 +93,8 @@ export interface OncData {
   complaints: Complaint[];
   toxicities: Toxicity[];
   classes: DrugClass[];
+  /** Classes used for browse listings only (a consult projection sets it); absent = classes. */
+  browseClasses?: DrugClass[];
   regimens: Regimen[];
   drugs: OncDrug[];
 }

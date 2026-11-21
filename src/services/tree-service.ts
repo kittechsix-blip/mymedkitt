@@ -1503,6 +1503,14 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/oncological-emergencies.js');
       return { nodes: m.ONCOLOGICAL_EMERGENCIES_NODES, entryNodeId: 'onc-start', categoryId: 'heme-onc', moduleLabels: m.ONCOLOGICAL_EMERGENCIES_MODULE_LABELS, citations: m.ONCOLOGICAL_EMERGENCIES_CITATIONS, criticalActions: m.ONCOLOGICAL_EMERGENCIES_CRITICAL_ACTIONS };
     },
+    'transplant-drug-side-effects': async () => {
+      const m = await import('../data/trees/transplant-drug-side-effects.js');
+      return { nodes: m.TRANSPLANT_DRUG_SIDE_EFFECTS_NODES, entryNodeId: 'tdse-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.TRANSPLANT_DRUG_SIDE_EFFECTS_MODULE_LABELS, citations: m.TRANSPLANT_DRUG_SIDE_EFFECTS_CITATIONS, criticalActions: m.TRANSPLANT_DRUG_SIDE_EFFECTS_CRITICAL_ACTIONS };
+    },
+    'transplant-patient-ed': async () => {
+      const m = await import('../data/trees/transplant-patient-ed.js');
+      return { nodes: m.TRANSPLANT_PATIENT_ED_NODES, entryNodeId: 'tpe-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.TRANSPLANT_PATIENT_ED_MODULE_LABELS, citations: m.TRANSPLANT_PATIENT_ED_CITATIONS, criticalActions: m.TRANSPLANT_PATIENT_ED_CRITICAL_ACTIONS };
+    },
     'pediatric-arthritis': async () => {
       const m = await import('../data/trees/pediatric-arthritis.js');
       return { nodes: m.PEDIATRIC_ARTHRITIS_NODES, entryNodeId: 'peds-arth-start', categoryId: 'pediatrics', moduleLabels: m.MODULE_LABELS, citations: m.CITATIONS, criticalActions: m.PEDIATRIC_ARTHRITIS_CRITICAL_ACTIONS };

@@ -187,6 +187,19 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'onc-stop-immuno', label: 'Stop: immuno', icon: '🛑', action: 'overlay', target: 'onc-drug-side-effects-stop' },
     { id: 'onc-stop-chemo', label: 'Stop: chemo', icon: '🛑', action: 'overlay', target: 'onc-drug-side-effects-stop-cytotoxic' },
   ],
+  // Transplant drug-card consult: the cards carry the content; no tools. Its Stop page (transplant-drug-side-effects-stop) is added by getToolbarConfig, which appends a Stop button when no base item is a stop item (same for transplant-patient-ed).
+  'transplant-drug-side-effects': [],
+  'transplant-patient-ed': [
+    { id: 'tpe-heart-btn', label: 'Heart', icon: '\u2764\uFE0F', action: 'jump', target: 'tpe-heart' },
+    { id: 'tpe-liver-btn', label: 'Liver', icon: '\u{1FAC0}', action: 'jump', target: 'tpe-liver' },
+    { id: 'tpe-lung-btn', label: 'Lung', icon: '\u{1FAC1}', action: 'jump', target: 'tpe-lung' },
+    { id: 'tpe-kidney-btn', label: 'Kidney', icon: '\u{1FAD8}', action: 'jump', target: 'tpe-kidney' },
+    { id: 'tpe-cmv-btn', label: 'CMV', icon: '\u{1F9A0}', action: 'jump', target: 'tpe-cmv' },
+    { id: 'tpe-bk-btn', label: 'BK', icon: '\u{1F9A0}', action: 'jump', target: 'tpe-bk' },
+    { id: 'tpe-cni-btn', label: 'CNI', icon: '\u{1F48A}', action: 'jump', target: 'tpe-cni-toxicity' },
+    { id: 'tpe-cni-htn-btn', label: 'CNI HTN', icon: '\u{1FA78}', action: 'jump', target: 'tpe-cni-hypertension' },
+    { id: 'tpe-cytopenia-btn', label: 'Counts', icon: '\u{1FA78}', action: 'jump', target: 'tpe-cytopenia' },
+  ],
   'oncological-emergencies': [
     { id: 'summary', label: 'Onc Steps', icon: '📋', action: 'overlay', target: 'onc-emergency-summary' },
     { id: 'chemo', label: 'Chemo Ref', icon: '💊', action: 'overlay', target: 'chemo-regimens' },

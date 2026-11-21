@@ -1,0 +1,24 @@
+// DRAFT info page for the "Transplant Patient in the ED" consult. Opens from a link [text](#/info/tpe-kidney-vascular-detail) in the tpe-kidney nodes.
+// Every bullet restates a row of evidence/kidney.ledger.md (map: drafts/tpe-kidney.compose.md). Citation numbers are local to this page. No immunosuppressant doses.
+
+import type { InfoPage } from '../info-pages.js';
+
+export const TPE_KIDNEY_VASCULAR_DETAIL_INFO: InfoPage = {
+  id: "tpe-kidney-vascular-detail",
+  title: "Graft vessels, obstruction and urine leak: details",
+  subtitle: "What KDIGO 2009 names as causes, and what it does not cover",
+  sections: [
+    {"heading": "What KDIGO 2009 names", "body": "\nKDIGO 2009, kidney recipients:\n\u2022 ultrasound can diagnose arterial occlusion, venous thrombosis, urinary obstruction, urine leak, perinephric hematoma and post-biopsy arteriovenous fistula (rationale) [1]\n\u2022 mild to moderate calyceal distension can be normal in a kidney allograft, so a baseline ultrasound may help later comparison (rationale) [1]\n\u2022 causes needing rapid treatment: acute rejection, obstruction, urine leak, vascular compromise, some recurrent diseases such as FSGS (rationale) [1]\n\u2022 those rapid-treatment causes are more common in the first days to weeks after transplant than in later months to years (rationale) [1]\n\u2022 when hypertension is hard to control, especially with unexplained graft dysfunction, consider screening for vascular compromise (within or proximal to the allograft artery) (rationale) [1]\n\u2022 screening for allograft vascular compromise usually needs an angiogram, CT angiography or magnetic resonance imaging of the allograft vasculature (rationale) [1]\n\u2022 risk factors reported for erythrocytosis include renal artery stenosis and hydronephrosis (rationale) [1]\n\u2022 ANCA vasculitis relapse in the allograft can affect function through acute arteritis, ureteral stenosis and obstructive uropathy (rationale) [1]\n\u2022 reported risk of major protocol-biopsy complications (bleeding, hematuria with ureteric obstruction, peritonitis, graft loss) is approximately 1% (rationale) [1]\n\u2022 dehydration, urinary obstruction and acute CNI toxicity (by showing high blood levels) should be ruled out before biopsy (rationale) [1]"},
+    {"heading": "What KDIGO 2009 does not cover", "body": "\nKDIGO 2009, kidney recipients:\n\u2022 Not in KDIGO 2009: treatment of ureteric obstruction, urine leak, lymphocele, renal artery stenosis or graft thrombosis, or contrast safety for imaging. Nearest: screening for allograft vascular compromise usually needs an angiogram, CT angiography or magnetic resonance imaging of the allograft vasculature (rationale) [1]\n\u2022 Related consults: [Hypertensive Emergency (Adult)](#/tree/hypertensive-emergency-adult/node/hypertensive-emergency-adult-start) (severe hypertension); [Adult UTI](#/tree/adult-uti/node/uti-pyelonephritis) (pyelonephritis care)."},
+  ],
+  citations: [
+    { num: 1, text: "Kidney Disease: Improving Global Outcomes (KDIGO) Transplant Work Group. KDIGO clinical practice guideline for the care of kidney transplant recipients. Am J Transplant 2009;9(Suppl 3):S1-S155. Cited by recommendation number or section, with the printed page (S6-S111). Based on information available as of March 2009." },
+    { num: 2, text: "PROGRAF (tacrolimus) capsules, injection and granules for oral suspension. FDA prescribing information, SPL version 30. DailyMed page revised 8/2023; SPL effective 2023-08-25. Setid 7f667de1-9dfa-4bd6-8ba0-15ee2d78873b. Cited by section number." },
+    { num: 3, text: "ASTAGRAF XL (tacrolimus extended-release capsules). FDA prescribing information. DailyMed page revised 8/2023. Setid 550a5cd4-fbf2-4c09-b577-6bde8fcbdf6e. Cited by section number." },
+    { num: 4, text: "ENVARSUS XR (tacrolimus extended-release tablets). FDA prescribing information. DailyMed page revised 4/2024. Setid de2315b0-6344-43ac-9aea-3e3b68d828e7. Cited by section number." },
+    { num: 5, text: "Kotton CN, Kamar N, Wojciechowski D, et al. The Second International Consensus Guidelines on the Management of BK Polyomavirus in Kidney Transplantation. Transplantation 2024;108(9):1834-1866." },
+    { num: 6, text: "Fourth International Consensus Guidelines on the Management of Cytomegalovirus in Solid Organ Transplantation. The Transplantation Society, 2025 (PMC12180710)." },
+    { num: 8, text: "Te H, et al. AASLD/AST practice guideline on adult liver transplantation: diagnosis and management of non-graft-related complications. Liver Transpl 2025 (LVT0785); Question 15." },
+    { num: 7, text: "NEORAL, GENGRAF and SANDIMMUNE (cyclosporine). FDA prescribing information (older format, cited by heading). Setids 94461af3-11f1-4670-95d4-2965b9538ae3, e896cbfe-4745-4088-82a3-8dc10b75c41f, 5e5926a7-1de0-4b54-a5c0-286b6200ff82." },
+  ],
+};

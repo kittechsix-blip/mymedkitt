@@ -6842,6 +6842,8 @@ button.onc-group-toggle { display: flex; align-items: center; justify-content: s
 .onc-group[hidden] { display: none; }
 .onc-label-age { font-size: 12px; color: var(--color-text-secondary); margin: 2px 0 0; }
 .onc-no-effects { font-size: 14px; color: var(--color-text-secondary); margin: 12px 0 8px; }
+.onc-card-note { font-size: 14px; font-weight: 600; color: var(--color-text-primary); margin: 8px 0 4px; }
+.onc-card-note--drug { font-weight: 400; margin: 4px 0; }
 
 /* effect row flags: Life-threatening (tier 1 or boxed) and the Boxed warning marker */
 .onc-flags { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px; }

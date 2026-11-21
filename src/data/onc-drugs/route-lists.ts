@@ -6,9 +6,10 @@ import type { OncData } from './types.js';
 /** "Class name (drug, drug)" per class that carries any of the toxicities, in class order; more than 5 members is shown as "(N drugs)".
  *  A class name that already ends in a parenthesised drug list (for example "Estrogen receptor antagonists (tamoxifen, fulvestrant)") is shown without it,
  *  so the parentheses name only the drugs that carry the effect. No class carries it yet: "no card lists it yet". */
-export function routeClassList(toxIds: string[], data: Pick<OncData, 'classes' | 'drugs'>): string {
+export function routeClassList(toxIds: string[], data: Pick<OncData, 'classes' | 'drugs'> & { browseClasses?: OncData['classes'] }): string {
   const want = new Set(toxIds);
-  const classIdx = new Map(data.classes.map((c, i) => [c.id, i]));
+  const browse = data.browseClasses ?? data.classes;
+  const classIdx = new Map(browse.map((c, i) => [c.id, i]));
   const classHas = new Set(data.classes.filter((c) => c.effects.some((e) => want.has(e.tox))).map((c) => c.id));
   // a drug carries the effect when one of its classes lists it or it declares it itself, unless it drops it; drugs sharing the same classes are grouped
   const groups = new Map<string, { order: number; name: string; members: string[] }>();
@@ -16,10 +17,10 @@ export function routeClassList(toxIds: string[], data: Pick<OncData, 'classes' |
     const ov = (d.effects ?? []).filter((o) => want.has(o.tox));
     if (ov.some((o) => o.drop)) continue;
     if (!(d.classIds.some((c) => classHas.has(c)) || ov.length > 0)) continue;
-    const ids = d.classIds.filter((c) => classIdx.has(c)).sort((a, b) => classIdx.get(a)! - classIdx.get(b)!);
+    const ids = (d.browseClassIds ?? d.classIds).filter((c) => classIdx.has(c)).sort((a, b) => classIdx.get(a)! - classIdx.get(b)!);
     if (!ids.length) continue;
     const key = ids.join('|');
-    const g = groups.get(key) ?? { order: classIdx.get(ids[0])!, name: ids.map((c) => data.classes[classIdx.get(c)!].name).join(' / '), members: [] as string[] };
+    const g = groups.get(key) ?? { order: classIdx.get(ids[0])!, name: ids.map((c) => browse[classIdx.get(c)!].name).join(' / '), members: [] as string[] };
     g.members.push(d.generic);
     groups.set(key, g);
   }

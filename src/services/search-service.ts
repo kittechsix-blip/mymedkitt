@@ -127,6 +127,8 @@ interface AnswerIndexFile {
   extraNodes: NodeIndexEntry[];
   /** oncology drug cards: exact-name pin and prefix names (scripts/build-search-answer-index.mjs) */
   onc?: OncIndexEntry[];
+  /** transplant drug cards, same shape; installed after `onc` so an oncology pin wins a shared name */
+  tdse?: OncIndexEntry[];
   /** reviewed synonym pairs (scripts/synonyms.review.tsv rows marked y) */
   synonyms?: { a: string; b: string; oneWay?: true }[];
 }
@@ -212,11 +214,11 @@ async function loadAnswerIndex(): Promise<void> {
     const res = await fetch('data/search-answer-index.json');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     answerIndex = (await res.json()) as AnswerIndexFile;
-    setOncEntries(answerIndex.onc);
+    setOncEntries([...(answerIndex.onc ?? []), ...(answerIndex.tdse ?? [])]);
     questionIndexStale = true;
     scheduleQuestionIndex();
     // card names join the typo-tolerant index
-    if (answerIndex.onc?.length && indexedDocs.length > 0) buildSearchIndex();
+    if ((answerIndex.onc?.length || answerIndex.tdse?.length) && indexedDocs.length > 0) buildSearchIndex();
   } catch (e) {
     console.warn('[SearchService] Could not load search-answer-index.json:', e);
   } finally {
@@ -330,15 +332,16 @@ export function buildSearchIndex(): void {
   }
 
   // Oncology drug cards (identity only): typo-tolerant names land on the card.
-  for (const e of answerIndex?.onc ?? []) {
+  for (const e of [...(answerIndex?.onc ?? []), ...(answerIndex?.tdse ?? [])]) {
     const nodeId = e.route.slice(e.route.lastIndexOf('/') + 1);
+    const treeId = e.route.split('/')[2]; // /tree/<treeId>/node/<nodeId>
     indexedDocs.push({
       id: `onc-${nodeId}`,
       type: 'node',
       title: e.title,
       subtitle: e.sub,
       keywords: e.all,
-      treeId: ONC_TREE,
+      treeId,
       nodeId,
     });
   }
@@ -393,8 +396,6 @@ export function search(query: string): SearchResult[] {
   };
   return [card, ...core.filter(r => r.route.split('?')[0] !== ped.route.split('?')[0])];
 }
-
-const ONC_TREE = 'onc-drug-side-effects';
 
 /** An exact drug / brand / regimen name opens its card first (src/services/onc-search-pin.ts). */
 function pinOnc(query: string, core: SearchResult[]): SearchResult[] {

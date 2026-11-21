@@ -3,7 +3,8 @@
  *  so the parentheses name only the drugs that carry the effect. No class carries it yet: "no card lists it yet". */
 export function routeClassList(toxIds, data) {
     const want = new Set(toxIds);
-    const classIdx = new Map(data.classes.map((c, i) => [c.id, i]));
+    const browse = data.browseClasses ?? data.classes;
+    const classIdx = new Map(browse.map((c, i) => [c.id, i]));
     const classHas = new Set(data.classes.filter((c) => c.effects.some((e) => want.has(e.tox))).map((c) => c.id));
     // a drug carries the effect when one of its classes lists it or it declares it itself, unless it drops it; drugs sharing the same classes are grouped
     const groups = new Map();
@@ -13,11 +14,11 @@ export function routeClassList(toxIds, data) {
             continue;
         if (!(d.classIds.some((c) => classHas.has(c)) || ov.length > 0))
             continue;
-        const ids = d.classIds.filter((c) => classIdx.has(c)).sort((a, b) => classIdx.get(a) - classIdx.get(b));
+        const ids = (d.browseClassIds ?? d.classIds).filter((c) => classIdx.has(c)).sort((a, b) => classIdx.get(a) - classIdx.get(b));
         if (!ids.length)
             continue;
         const key = ids.join('|');
-        const g = groups.get(key) ?? { order: classIdx.get(ids[0]), name: ids.map((c) => data.classes[classIdx.get(c)].name).join(' / '), members: [] };
+        const g = groups.get(key) ?? { order: classIdx.get(ids[0]), name: ids.map((c) => browse[classIdx.get(c)].name).join(' / '), members: [] };
         g.members.push(d.generic);
         groups.set(key, g);
     }

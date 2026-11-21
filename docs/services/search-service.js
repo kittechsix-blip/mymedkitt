@@ -107,11 +107,11 @@ async function loadAnswerIndex() {
         if (!res.ok)
             throw new Error(`HTTP ${res.status}`);
         answerIndex = (await res.json());
-        setOncEntries(answerIndex.onc);
+        setOncEntries([...(answerIndex.onc ?? []), ...(answerIndex.tdse ?? [])]);
         questionIndexStale = true;
         scheduleQuestionIndex();
         // card names join the typo-tolerant index
-        if (answerIndex.onc?.length && indexedDocs.length > 0)
+        if ((answerIndex.onc?.length || answerIndex.tdse?.length) && indexedDocs.length > 0)
             buildSearchIndex();
     }
     catch (e) {
@@ -224,15 +224,16 @@ export function buildSearchIndex() {
         indexedDocs.push(...trickDocs);
     }
     // Oncology drug cards (identity only): typo-tolerant names land on the card.
-    for (const e of answerIndex?.onc ?? []) {
+    for (const e of [...(answerIndex?.onc ?? []), ...(answerIndex?.tdse ?? [])]) {
         const nodeId = e.route.slice(e.route.lastIndexOf('/') + 1);
+        const treeId = e.route.split('/')[2]; // /tree/<treeId>/node/<nodeId>
         indexedDocs.push({
             id: `onc-${nodeId}`,
             type: 'node',
             title: e.title,
             subtitle: e.sub,
             keywords: e.all,
-            treeId: ONC_TREE,
+            treeId,
             nodeId,
         });
     }
@@ -286,7 +287,6 @@ export function search(query) {
     };
     return [card, ...core.filter(r => r.route.split('?')[0] !== ped.route.split('?')[0])];
 }
-const ONC_TREE = 'onc-drug-side-effects';
 /** An exact drug / brand / regimen name opens its card first (src/services/onc-search-pin.ts). */
 function pinOnc(query, core) {
     const hit = query ? oncPin(query) : null;

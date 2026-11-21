@@ -95,6 +95,7 @@ const CROSS_LISTINGS = {
   'headache-hub':     [{ categoryId: 'neurology', displayTitle: null, displaySubtitle: null, entryNodeId: 'hh-start' }],
   'unilateral-facial-pain-hub': [{ categoryId: 'neurology', displayTitle: null, displaySubtitle: null, entryNodeId: 'ufp-start' }],
   'chest-pain-hub':   [{ categoryId: 'cardiology', displayTitle: null, displaySubtitle: null, entryNodeId: 'cp-start' }],
+  'transplant-patient-ed': [{ categoryId: 'emergency-medicine', displayTitle: null, displaySubtitle: null, entryNodeId: 'tpe-start' }],
   'dyspnea-hub':      [{ categoryId: 'critical-care', displayTitle: 'Shortness of Breath Hub', displaySubtitle: null, entryNodeId: 'dysp-start' }],
   'altered-mental-status-hub': [{ categoryId: 'neurology', displayTitle: null, displaySubtitle: null, entryNodeId: 'ams-start' }],
   'generalized-weakness-hub': [{ categoryId: 'neurology', displayTitle: null, displaySubtitle: null, entryNodeId: 'gw-start' }],

@@ -8,9 +8,13 @@ import { ONC_TOXICITIES } from './toxicities.js';
 import { ONC_CLASSES } from './classes.js';
 import { ONC_REGIMENS } from './regimens.js';
 import { ONC_GROUPS } from './drugs/index.js';
+import { virtualIds } from './consult.js';
+import type { DrugConsultConfig, VirtualKind } from './consult.js';
+import { ONC_CANCER_TYPES, OTHER_CANCER_TYPE } from './cancer-types.js';
 
 export * from './types.js';
 export * from './cancer-types.js';
+export * from './consult.js';
 export { ONC_SOURCES, ONC_CANCERS, ONC_COMPLAINTS, ONC_TOXICITIES, ONC_CLASSES, ONC_REGIMENS, ONC_GROUPS };
 
 export const ONC_TREE_ID = 'onc-drug-side-effects';
@@ -99,26 +103,31 @@ export const ONC_DATA: OncData = {
 
 // ---- virtual node ids (public deep-link contract: do not rename) ----
 
-export type VirtualKind = 'drug' | 'reg' | 'class' | 'cancer' | 'ctype' | 'cx';
 export const VIRTUAL_PREFIX = 'odse-';
-const KINDS: VirtualKind[] = ['drug', 'reg', 'class', 'cancer', 'ctype', 'cx'];
 
-export function virtualNodeId(kind: VirtualKind, slug: string): string {
-  return `${VIRTUAL_PREFIX}${kind}-${slug}`;
-}
+export const ONC_CONSULT: DrugConsultConfig = {
+  key: 'onc',
+  treeId: ONC_TREE_ID,
+  title: 'Oncology Drugs Side-effects',
+  categoryId: 'heme-onc',
+  prefix: VIRTUAL_PREFIX,
+  kinds: ['drug', 'reg', 'class', 'cancer', 'ctype', 'cx'],
+  indicationKind: 'cancer',
+  indicationTab: 'Cancer',
+  indicationHeading: 'Cancers',
+  indicationTypes: { types: ONC_CANCER_TYPES, other: OTHER_CANCER_TYPE },
+  filterPlaceholder: 'Drug, brand, class, cancer, complaint',
+  complaintNote: 'Drug causes only. The usual workup (infection, progression, clot) still applies.',
+  classSectionOrder: ['Cytotoxic chemotherapy', 'Targeted therapy', 'Hormonal therapy', 'Antibodies and cell therapies', 'Immune checkpoint inhibitors', 'Other classes'],
+  startNode: 'odse-start',
+  editorAliasPinFloor: 4,
+};
 
+const ONC_IDS = virtualIds(ONC_CONSULT);
+export const virtualNodeId = ONC_IDS.virtualNodeId;
 /** Cheap check used by the router before loading the component. */
-export function isVirtualNodeId(nodeId: string): boolean {
-  return KINDS.some((k) => nodeId.startsWith(`${VIRTUAL_PREFIX}${k}-`));
-}
-
-export function parseVirtualNodeId(nodeId: string): { kind: VirtualKind; slug: string } | null {
-  for (const k of KINDS) {
-    const p = `${VIRTUAL_PREFIX}${k}-`;
-    if (nodeId.startsWith(p) && nodeId.length > p.length) return { kind: k, slug: nodeId.slice(p.length) };
-  }
-  return null;
-}
+export const isVirtualNodeId = ONC_IDS.isVirtualNodeId;
+export const parseVirtualNodeId = ONC_IDS.parseVirtualNodeId;
 
 export const cardNodeId = (drug: Pick<OncDrug, 'id'>): string => virtualNodeId('drug', drug.id);
 
@@ -195,14 +204,37 @@ export function resolveEffects(drug: OncDrug, data: Pick<OncData, 'classes' | 't
   });
 }
 
+/**
+ * Consult option `rowCategories` (transplant only): an effect whose category is NOT in the list is not a row with a category link;
+ * it is shown as a plain line (the effect's own existing text and citations, unchanged) at the top of "Also on the label".
+ * Boxed ones first, in effect order. Without the option every effect is a row (oncology).
+ */
+export function splitEffects(effects: ResolvedEffect[], rowCategories?: readonly string[]): { rows: ResolvedEffect[]; plain: ResolvedEffect[] } {
+  if (!rowCategories) return { rows: effects, plain: [] };
+  const keep = new Set(rowCategories);
+  const rows = effects.filter((e) => keep.has(e.tox.id));
+  const plain = effects.filter((e) => !keep.has(e.tox.id)).sort((a, b) => Number(b.boxed === true) - Number(a.boxed === true));
+  return { rows, plain };
+}
+/** The plain line for an effect: its category label as the head, then its own drug-specific text, timing and class note exactly as written, with their citations. */
+export function plainEffectLine(e: ResolvedEffect): Cited {
+  const parts = [e.quirk, e.timing, e.note].filter((x): x is Cited => !!x);
+  const cite = [...new Set([...parts.flatMap((p) => p.cite), ...e.cite])];
+  return { v: parts.length ? `${e.tox.label}: ${parts.map((p) => p.v).join('; ')}` : e.tox.label, cite };
+}
+
 // ---- display helpers ----
+
+/** Transplant consult only (DrugConsultConfig.timingTimeUnits): a first clause with a stated time unit, or the owner-approved clause, is also a badge. Oncology never passes the flag. */
+const TIME_UNIT = /\b(minutes?|hours?|days?|weeks?|months?|years?)\b/i;
+const TIMING_NON_DIABETIC = 'Non-diabetic cases: usually after a few days';
 
 /**
  * Short badge for a timing string, derived mechanically: the text before the first top-level comma (not inside parentheses,
  * not the thousands comma in a number such as 1,000 mg/m2), only when it contains a digit and is at most 48 characters.
  * Anything else is returned whole. The full string always appears, with its citations, in the expanded row.
  */
-export function shortTiming(v: string): string {
+export function shortTiming(v: string, timeUnits = false): string {
   let depth = 0;
   for (let i = 0; i < v.length; i++) {
     const ch = v[i];
@@ -210,7 +242,7 @@ export function shortTiming(v: string): string {
     else if (ch === ')') depth = Math.max(0, depth - 1);
     else if (ch === ',' && depth === 0 && !(/\d/.test(v[i - 1] ?? '') && /\d/.test(v[i + 1] ?? ''))) {
       const head = v.slice(0, i).trim();
-      return /\d/.test(head) && head.length <= 48 ? head : v;
+      return (/\d/.test(head) || (timeUnits && (TIME_UNIT.test(head) || head === TIMING_NON_DIABETIC))) && head.length <= 48 ? head : v;
     }
   }
   return v;
@@ -263,21 +295,21 @@ export function regimenNames(r: Regimen): string[] {
 export const MIN_PIN_LENGTH_DIGIT_ALIAS = 3;
 
 /**
- * Names that are pinned to rank 1: pin !== false, normalized length >= 4 (3 for an editor alias with a digit).
+ * Names that are pinned to rank 1: pin !== false, normalized length >= 4 (3 for an editor alias with a digit; with cfg.editorAliasPinFloor 3, for any editor alias).
  * `pinAlso` (drug only) pins the listed names even when the drug itself is pin:false; each must still be a searchable name and clear the length rule.
  */
-export function pinNames(item: OncDrug | Regimen): string[] {
+export function pinNames(item: OncDrug | Regimen, cfg: DrugConsultConfig = ONC_CONSULT): string[] {
   const isDrug = 'generic' in item;
   const also = isDrug ? new Set((item.pinAlso ?? []).map(normName)) : new Set<string>();
   if (item.pin === false && !also.size) return [];
   const skip = new Set(((isDrug ? item.unpinnedNames : undefined) ?? []).map(normName));
-  const digitAliases = new Set(isDrug ? (item.editorAliases ?? []).filter((a) => /\d/.test(a)).map(normName) : []);
+  const shortAliases = new Set(isDrug ? (item.editorAliases ?? []).filter((a) => cfg.editorAliasPinFloor === 3 || /\d/.test(a)).map(normName) : []);
   const names = isDrug ? searchNames(item) : regimenNames(item);
   return names.filter((n) => {
     const k = normName(n);
     if (skip.has(k)) return false;
     if (item.pin === false && !also.has(k)) return false;
-    return k.length >= MIN_PIN_LENGTH || (digitAliases.has(k) && k.length >= MIN_PIN_LENGTH_DIGIT_ALIAS);
+    return k.length >= MIN_PIN_LENGTH || (shortAliases.has(k) && k.length >= MIN_PIN_LENGTH_DIGIT_ALIAS);
   });
 }
 
@@ -304,28 +336,29 @@ const squash = (s: string): string => s.replace(/\s+/g, ' ').trim();
  * One identity-only document per card: title, class, brands and cancers ONLY. Never side-effect text, so symptom
  * queries ("fever after chemo") are not disturbed. `onc` feeds src/services/onc-search-pin.ts.
  */
-export function oncSearchDocs(data: OncData = ONC_DATA): { nodes: OncSearchNode[]; onc: OncSearchEntry[] } {
+export function oncSearchDocs(data: OncData = ONC_DATA, cfg: DrugConsultConfig = ONC_CONSULT): { nodes: OncSearchNode[]; onc: OncSearchEntry[] } {
   const cancerName = new Map(data.cancers.map((c) => [c.id, c.name]));
-  const className = new Map(data.classes.map((c) => [c.id, c.name]));
+  const className = new Map((data.browseClasses ?? data.classes).map((c) => [c.id, c.name]));
+  const ids = cfg === ONC_CONSULT ? ONC_IDS : virtualIds(cfg);
   const nodes: OncSearchNode[] = [];
   const onc: OncSearchEntry[] = [];
   const seen = new Set<string>();
   const add = (kind: VirtualKind, slug: string, title: string, sub: string, parts: string[], pin: string[], all: string[]): void => {
-    const id = virtualNodeId(kind, slug);
+    const id = ids.virtualNodeId(kind, slug);
     if (seen.has(id)) throw new Error(`duplicate onc card id ${id}`);
     seen.add(id);
-    nodes.push({ id, treeId: ONC_TREE_ID, title: squash(title), summary: '', body: squash(parts.filter(Boolean).join('. ')).slice(0, 600), recommendation: '', ml: squash(sub) });
-    onc.push({ route: `/tree/${ONC_TREE_ID}/node/${id}`, title: squash(title), sub: squash(sub), pin, all });
+    nodes.push({ id, treeId: cfg.treeId, title: squash(title), summary: '', body: squash(parts.filter(Boolean).join('. ')).slice(0, 600), recommendation: '', ml: squash(sub) });
+    onc.push({ route: `/tree/${cfg.treeId}/node/${id}`, title: squash(title), sub: squash(sub), pin, all });
   };
   for (const d of data.drugs) {
-    const cls = d.classIds.map((c) => className.get(c)).filter(Boolean).join(', ');
+    const cls = (d.browseClassIds ?? d.classIds).map((c) => className.get(c)).filter(Boolean).join(', ');
     const cancers = d.cancers.map((c) => cancerName.get(c)).filter(Boolean).join(', ');
-    add('drug', d.id, cardTitle(d), cls, [[...d.brands, ...(d.formerBrands ?? []), ...(d.searchOnlyBrands ?? [])].join(', '), cls, cancers], pinNames(d), searchNames(d));
+    add('drug', d.id, cardTitle(d), cls, [[...d.brands, ...(d.formerBrands ?? []), ...(d.searchOnlyBrands ?? [])].join(', '), cls, cancers], pinNames(d, cfg), searchNames(d));
   }
   for (const r of data.regimens) {
     const cancers = r.cancers.map((c) => cancerName.get(c)).filter(Boolean).join(', ');
     const comps = r.drugs.map((id) => data.drugs.find((d) => d.id === id)?.generic ?? r.uncarded?.find((u) => u.id === id)?.name).filter(Boolean).join(', ');
-    add('reg', r.id, `${r.acronym} (${r.expansion})`, 'Regimen', [comps, cancers], pinNames(r), regimenNames(r));
+    add('reg', r.id, `${r.acronym} (${r.expansion})`, 'Regimen', [comps, cancers], pinNames(r, cfg), regimenNames(r));
   }
   return { nodes, onc };
 }

@@ -1,0 +1,5 @@
+const D='/Users/kittechsix/Developer/mymedkitt-transplant/research/transplant-sources/drafts/';
+for (const p of ['heart','liver','lung','cmv','bk','cni-toxicity','cni-hypertension']) { const m = await import(D+`tpe-${p}.nodes.ts`); console.log('==',p,'nodes',m.NODES.map(n=>n.id).length,'exports',Object.keys(m).join(','));
+ const used=new Set(); const w=(v)=>{ if(typeof v==='string'){for(const x of v.matchAll(/\[(\d+)\]/g)) used.add(+x[1]);} else if(Array.isArray(v)) v.forEach(w); else if(v&&typeof v==='object') for(const [k,x] of Object.entries(v)){ if(k==='citation') x.forEach(c=>used.add(c)); w(x);} }; w(m.NODES); w(m.CRITICAL_ACTIONS);
+ console.log(' used',[...used].sort((a,b)=>a-b).join(','),' declared',m.CITATIONS.map(c=>c.num).join(','));
+ for(const c of m.CITATIONS) { const id=(c.text.match(/10\.\d{4,}\/[^\s,;)]+/)||c.text.match(/set ?ID[: ]+([0-9a-f-]{36})/i)||c.text.match(/https?:\/\/\S+/)||['?'])[0]; console.log('  ',c.num,id.replace(/[.]$/,''),'|',c.text.length,'|',c.text.slice(0,60)); } }

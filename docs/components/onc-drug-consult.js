@@ -17,10 +17,14 @@ import { showDrugModal } from './drug-store.js';
 import { getDrug } from '../data/drug-store.js';
 import { trackConsultOpen } from '../services/kittmd-analytics.js';
 import { CONSULT_DISCLAIMER, RETURN_ROUTE_KEY } from './consult-flow.js';
-import { ONC_DATA, ONC_TREE_ID, cardTitle, parseVirtualNodeId, resolveEffects, virtualNodeId, normName, searchNames, regimenNames, shortTiming, boxedItems, displayBrands, ONC_CANCER_TYPES, OTHER_CANCER_TYPE, } from '../data/onc-drugs/index.js';
-const CATEGORY_ID = 'heme-onc';
-const TITLE = 'Oncology Drugs Side-effects';
-let homeTab = 'complaint';
+import { ONC_TREE_ID, cardTitle, resolveEffects, virtualIds, normName, searchNames, regimenNames, shortTiming, boxedItems, displayBrands, splitEffects, plainEffectLine, } from '../data/onc-drugs/index.js';
+import { DRUG_CONSULTS } from '../data/drug-consults.js';
+const activeOf = (treeId) => {
+    const e = DRUG_CONSULTS[treeId] ?? DRUG_CONSULTS[ONC_TREE_ID];
+    return { cfg: e.cfg, data: e.data, ids: virtualIds(e.cfg) };
+};
+let active = activeOf(ONC_TREE_ID);
+const homeTabs = new Map(); // per consult; absent = 'complaint'
 function el(tag, cls, text) {
     const e = document.createElement(tag);
     if (cls)
@@ -29,7 +33,7 @@ function el(tag, cls, text) {
         e.textContent = text;
     return e;
 }
-const routeFor = (kind, slug) => `/tree/${ONC_TREE_ID}/node/${virtualNodeId(kind, slug)}`;
+const routeFor = (kind, slug) => `/tree/${active.cfg.treeId}/node/${active.ids.virtualNodeId(kind, slug)}`;
 function button(cls, text, onClick) {
     const b = el('button', cls, text);
     b.type = 'button';
@@ -148,14 +152,14 @@ class Refs {
 // -------------------------------------------------------------------
 function header(main, title) {
     const h = el('div', 'consult-flow-header');
-    h.style.background = getSpecialtyGradient(CATEGORY_ID);
+    h.style.background = getSpecialtyGradient(active.cfg.categoryId);
     const back = el('button', 'consult-flow-header__back', '←');
     back.setAttribute('aria-label', 'Back');
     back.addEventListener('click', () => {
         if (window.history.length > 1)
             window.history.back();
         else
-            router.navigate(`/category/${CATEGORY_ID}`);
+            router.navigate(`/category/${active.cfg.categoryId}`);
     });
     const t = el('div', 'consult-flow-header__title', title);
     const home = el('button', 'consult-flow-header__home', '🏠');
@@ -169,7 +173,7 @@ function notFound(main, what) {
     box.setAttribute('role', 'status');
     box.appendChild(el('h2', 'onc-notfound__title', 'Not found'));
     box.appendChild(el('p', 'onc-notfound__text', `${what} is not in this consult.`));
-    box.appendChild(button('onc-btn', `Back to ${TITLE}`, () => router.navigate(`/tree/${ONC_TREE_ID}`)));
+    box.appendChild(button('onc-btn', `Back to ${active.cfg.title}`, () => router.navigate(`/tree/${active.cfg.treeId}`)));
     main.appendChild(box);
 }
 let jumpHooked = false;
@@ -190,18 +194,21 @@ function hookJumpEvents() {
             return;
         e.stopImmediatePropagation();
         try {
-            sessionStorage.setItem(RETURN_ROUTE_KEY, window.location.hash.replace(/^#/, '') || `/tree/${ONC_TREE_ID}`);
+            sessionStorage.setItem(RETURN_ROUTE_KEY, window.location.hash.replace(/^#/, '') || `/tree/${active.cfg.treeId}`);
         }
         catch { /* back falls through to the category */ }
-        router.navigate(`/tree/${ONC_TREE_ID}/node/${id}`);
+        router.navigate(`/tree/${active.cfg.treeId}/node/${id}`);
     }), true);
 }
 /** Entry point from app.ts. `nodeId` is a virtual odse-<kind>-<slug> id, or undefined for the consult home. */
-export async function renderOncConsult(main, nodeId) {
+export async function renderOncConsult(main, nodeId, treeId = ONC_TREE_ID) {
     const requested = window.location.hash;
-    const cfg = isTreeHidden(ONC_TREE_ID) ? null : await getTreeConfig(ONC_TREE_ID);
+    const cfg = isTreeHidden(treeId) ? null : await getTreeConfig(treeId);
     if (window.location.hash !== requested)
         return; // user already moved on
+    active = activeOf(treeId); // after the await and the stale guard, never before
+    const TITLE = active.cfg.title;
+    const CATEGORY_ID = active.cfg.categoryId;
     main.innerHTML = '';
     main.classList.add('onc-root');
     document.querySelector('.app-header')?.style.removeProperty('display');
@@ -212,14 +219,14 @@ export async function renderOncConsult(main, nodeId) {
         return;
     }
     hookJumpEvents();
-    addRecentConsult(ONC_TREE_ID, TITLE, CATEGORY_ID);
-    trackConsultOpen(ONC_TREE_ID);
-    const data = ONC_DATA;
+    addRecentConsult(active.cfg.treeId, TITLE, CATEGORY_ID);
+    trackConsultOpen(active.cfg.treeId);
+    const data = active.data;
     const body = el('div', 'onc-body');
     const refs = new Refs(data, () => body);
     header(main, TITLE);
     main.appendChild(body);
-    const parsed = nodeId ? parseVirtualNodeId(nodeId) : null;
+    const parsed = nodeId ? active.ids.parseVirtualNodeId(nodeId) : null;
     if (!nodeId)
         renderHome(body, data);
     else if (!parsed)
@@ -232,7 +239,7 @@ export async function renderOncConsult(main, nodeId) {
     body.appendChild(el('div', 'wizard-disclaimer', CONSULT_DISCLAIMER));
     // Overlay and calculator actions only: a `jump` action would act on a controller that is not showing a tree node.
     const controller = new ConsultFlowController(cfg.nodes);
-    renderContextualToolbar(ONC_TREE_ID, controller, cfg.entryNodeId, cfg.moduleLabels);
+    renderContextualToolbar(active.cfg.treeId, controller, cfg.entryNodeId, cfg.moduleLabels);
     // The red Critical button stays on the consult home only: drug, class, cancer, regimen and complaint pages need the first screen for content.
     // The management pages (real tree nodes) keep it through the normal consult flow.
     if (!nodeId && cfg.criticalActions && cfg.criticalActions.length > 0) {
@@ -240,7 +247,7 @@ export async function renderOncConsult(main, nodeId) {
         bar.appendChild(createCriticalActionsButton({
             actions: cfg.criticalActions,
             consultTitle: TITLE,
-            onJumpToNode: (id) => router.navigate(`/tree/${ONC_TREE_ID}/node/${id}`),
+            onJumpToNode: (id) => router.navigate(`/tree/${active.cfg.treeId}/node/${id}`),
         }));
         body.insertBefore(bar, body.firstChild);
     }
@@ -251,34 +258,37 @@ export async function renderOncConsult(main, nodeId) {
 // -------------------------------------------------------------------
 function countLabel(n) { return `${n} ${n === 1 ? 'drug' : 'drugs'}`; }
 function renderHome(body, data) {
+    const cfg = active.cfg;
+    const browse = data.browseClasses ?? data.classes;
     const classCount = new Map();
     const cancerCount = new Map();
     for (const d of data.drugs) {
-        for (const c of d.classIds)
+        for (const c of d.browseClassIds ?? d.classIds)
             classCount.set(c, (classCount.get(c) ?? 0) + 1);
         for (const c of d.cancers)
             cancerCount.set(c, (cancerCount.get(c) ?? 0) + 1);
     }
     const filter = el('input', 'onc-filter');
     filter.type = 'search';
-    filter.placeholder = 'Drug, brand, class, cancer, complaint';
+    filter.placeholder = cfg.filterPlaceholder;
     filter.setAttribute('aria-label', 'Filter');
     filter.autocomplete = 'off';
     filter.setAttribute('autocapitalize', 'off');
     const tabs = el('div', 'onc-tabs');
     tabs.setAttribute('role', 'tablist');
     const out = el('div', 'onc-list');
-    const defs = [['complaint', 'Complaint'], ['class', 'Class'], ['cancer', 'Cancer'], ['regimen', 'Regimen']];
+    const defs = [['complaint', 'Complaint'], ['class', 'Class'], ['cancer', cfg.indicationTab], ['regimen', 'Regimen']];
     const tabBtns = defs.map(([id, label]) => {
         const b = el('button', 'onc-tab', label);
         b.type = 'button';
         b.setAttribute('role', 'tab');
-        b.addEventListener('click', () => { homeTab = id; paint(); });
+        b.addEventListener('click', () => { homeTabs.set(cfg.treeId, id); paint(); });
         tabs.appendChild(b);
         return { id, b };
     });
     // Only the list is rebuilt while typing: re-rendering the input would drop focus and the keyboard.
     function paint() {
+        const homeTab = homeTabs.get(cfg.treeId) ?? 'complaint';
         for (const { id, b } of tabBtns) {
             b.classList.toggle('onc-tab--on', id === homeTab);
             b.setAttribute('aria-selected', String(id === homeTab));
@@ -299,7 +309,7 @@ function renderHome(body, data) {
             if (matched) {
                 out.appendChild(el('h2', 'onc-section', 'Drugs and regimens'));
                 for (const d of drugs)
-                    out.appendChild(linkRow(d.generic, [d.brands.join(', '), data.classes.find((c) => d.classIds[0] === c.id)?.name].filter(Boolean).join(' \u00B7 '), routeFor('drug', d.id), true));
+                    out.appendChild(linkRow(d.generic, [d.brands.join(', '), browse.find((c) => (d.browseClassIds ?? d.classIds)[0] === c.id)?.name].filter(Boolean).join(' \u00B7 '), routeFor('drug', d.id), true));
                 for (const r of regs)
                     out.appendChild(linkRow(`${r.acronym} (${r.expansion})`, 'Regimen', routeFor('reg', r.id)));
             }
@@ -314,13 +324,15 @@ function renderHome(body, data) {
                 out.appendChild(emptyNote(data.complaints.length === 0, q));
         }
         else if (homeTab === 'class') {
-            const items = data.classes.filter((c) => has(c.name));
+            const items = browse.filter((c) => has(c.name));
             // sections by class id prefix only (no clinical grouping): cyto- / tgt- / horm- / bio- and the checkpoint-inhibitor classes
             const section = (id) => id.startsWith('cyto-') ? 'Cytotoxic chemotherapy' : id.startsWith('tgt-') ? 'Targeted therapy' : id.startsWith('horm-') ? 'Hormonal therapy'
                 : id.startsWith('bio-') ? 'Antibodies and cell therapies' : ['pd1', 'pdl1', 'ctla4', 'lag3-pd1'].includes(id) ? 'Immune checkpoint inhibitors' : 'Other classes';
-            const order = ['Cytotoxic chemotherapy', 'Targeted therapy', 'Hormonal therapy', 'Antibodies and cell therapies', 'Immune checkpoint inhibitors', 'Other classes'];
+            const txSections = cfg.classSections;
+            const sectionOf = txSections ? (id) => txSections[id] ?? 'Other classes' : section;
+            const order = txSections ? [...cfg.classSectionOrder, 'Other classes'] : cfg.classSectionOrder;
             for (const name of order) {
-                const group = items.filter((c) => section(c.id) === name);
+                const group = items.filter((c) => sectionOf(c.id) === name);
                 if (!group.length)
                     continue;
                 out.appendChild(el('h3', 'onc-letter', `${name} (${group.length})`));
@@ -328,7 +340,7 @@ function renderHome(body, data) {
                     out.appendChild(linkRow(c.name, countLabel(classCount.get(c.id) ?? 0), routeFor('class', c.id)));
             }
             if (!items.length && !matched)
-                out.appendChild(emptyNote(data.classes.length === 0, q));
+                out.appendChild(emptyNote(browse.length === 0, q));
         }
         else if (homeTab === 'regimen') {
             // every regimen, alphabetical by acronym, whether or not its acronym is pinned in Home search
@@ -339,12 +351,27 @@ function renderHome(body, data) {
                 out.appendChild(emptyNote(data.regimens.length === 0, q));
         }
         else {
-            // browse by plain cancer type (alphabetical, with drug counts); entries with no type sit under "Other label indications"
-            const rows = typeRows(data).filter((r) => has(r.name, ...r.cancers.flatMap((c) => [c.name, ...(c.aliases ?? [])]), ...r.drugs.flatMap((d) => searchNames(d))));
-            for (const r of rows)
-                out.appendChild(linkRow(r.name, countLabel(r.drugs.length), routeFor('ctype', r.id)));
-            if (!rows.length && !matched)
-                out.appendChild(emptyNote(data.cancers.length === 0, q));
+            if (cfg.indicationTypes) {
+                // browse by plain cancer type (alphabetical, with drug counts); entries with no type sit under "Other label indications"
+                const rows = typeRows(data).filter((r) => has(r.name, ...r.cancers.flatMap((c) => [c.name, ...(c.aliases ?? [])]), ...r.drugs.flatMap((d) => searchNames(d))));
+                for (const r of rows)
+                    out.appendChild(linkRow(r.name, countLabel(r.drugs.length), routeFor('ctype', r.id)));
+                if (!rows.length && !matched)
+                    out.appendChild(emptyNote(data.cancers.length === 0, q));
+            }
+            else {
+                // no grouping: a flat list of the indications (organs), with drug counts
+                const rows = data.cancers.map((c) => ({ c, drugs: data.drugs.filter((d) => d.cancers.includes(c.id)) }))
+                    .filter((r) => r.drugs.length > 0 && has(r.c.name, ...(r.c.aliases ?? []), ...r.drugs.flatMap((d) => searchNames(d))));
+                for (const r of rows)
+                    out.appendChild(linkRow(r.c.name, countLabel(r.drugs.length), routeFor(cfg.indicationKind, r.c.id)));
+                // organ consults: cards whose label names no organ sit in one group (absent when there is no such card)
+                const noOrgan = cfg.indicationKind === 'organ' ? data.drugs.filter((d) => d.cancers.length === 0 && has(NO_ORGAN_NAME, ...searchNames(d))) : [];
+                if (noOrgan.length)
+                    out.appendChild(linkRow(NO_ORGAN_NAME, countLabel(noOrgan.length), routeFor('organ', NO_ORGAN_SLUG)));
+                if (!rows.length && !noOrgan.length && !matched)
+                    out.appendChild(emptyNote(data.cancers.length === 0, q));
+            }
         }
     }
     filter.addEventListener('input', paint);
@@ -372,7 +399,8 @@ function renderVirtual(body, data, refs, cfg, kind, slug) {
             return renderRegimen(body, data, refs, r), true;
         }
         case 'class': return renderClass(body, data, refs, slug);
-        case 'cancer': return renderCancer(body, data, refs, slug);
+        case 'cancer':
+        case 'organ': return renderCancer(body, data, refs, slug);
         case 'ctype': return renderCancerType(body, data, refs, slug);
         case 'cx': return renderComplaint(body, data, refs, slug, cfg);
     }
@@ -380,7 +408,7 @@ function renderVirtual(body, data, refs, cfg, kind, slug) {
 /** Open a toxicity page; back from it returns to the page the user is on now. */
 function openTox(tox) {
     try {
-        sessionStorage.setItem(RETURN_ROUTE_KEY, window.location.hash.replace(/^#/, '') || `/tree/${ONC_TREE_ID}`);
+        sessionStorage.setItem(RETURN_ROUTE_KEY, window.location.hash.replace(/^#/, '') || `/tree/${active.cfg.treeId}`);
     }
     catch { /* private mode: back falls through to the category */ }
     router.navigate(`/tree/${tox.page.tree}/node/${tox.page.node}`);
@@ -394,10 +422,11 @@ function treeOf(tree) {
     }
     return p;
 }
-const OPEN_KEY = 'medkitt-onc-open:';
+/** Per consult; oncology's stored strings are exactly 'medkitt-onc-open:<id>'. */
+const openKeyPrefix = () => `medkitt-${active.cfg.key}-open:`;
 function readOpen(key) {
     try {
-        const r = sessionStorage.getItem(OPEN_KEY + key);
+        const r = sessionStorage.getItem(openKeyPrefix() + key);
         return r ? new Set(JSON.parse(r)) : null;
     }
     catch {
@@ -406,7 +435,7 @@ function readOpen(key) {
 }
 function writeOpen(key, set) {
     try {
-        sessionStorage.setItem(OPEN_KEY + key, JSON.stringify([...set]));
+        sessionStorage.setItem(openKeyPrefix() + key, JSON.stringify([...set]));
     }
     catch { /* private mode: state just resets */ }
 }
@@ -481,9 +510,11 @@ function renderDrug(body, data, refs, d) {
     if (d.brandSource)
         refs.fromSource(d.brandSource); // listed in the card's references, nothing else shown
     const classes = d.classIds.map((c) => data.classes.find((x) => x.id === c)).filter((c) => !!c);
-    if (classes.length) {
+    const browseList = data.browseClasses ?? data.classes;
+    const chipClasses = (d.browseClassIds ?? d.classIds).map((c) => browseList.find((x) => x.id === c)).filter((c) => !!c);
+    if (chipClasses.length) {
         const row = el('div', 'onc-identity__chips');
-        for (const c of classes)
+        for (const c of chipClasses)
             row.appendChild(chipLink(c.name, routeFor('class', c.id)));
         row.appendChild(refs.chips([refs.fromSource(d.label)])); // the FDA label this card is anchored to
         id.appendChild(row);
@@ -528,7 +559,7 @@ function renderDrug(body, data, refs, d) {
                 if (i)
                     list.appendChild(document.createTextNode(', '));
                 const a = el('a', 'onc-link', c.name);
-                a.href = `#${routeFor('cancer', c.id)}`;
+                a.href = `#${routeFor(active.cfg.indicationKind, c.id)}`;
                 list.appendChild(a);
             });
             more.setAttribute('aria-expanded', String(open));
@@ -543,6 +574,10 @@ function renderDrug(body, data, refs, d) {
         id.appendChild(row);
     }
     card.appendChild(id);
+    if (active.cfg.cardNote)
+        card.appendChild(el('p', 'onc-card-note', active.cfg.cardNote));
+    for (const note of active.cfg.drugNotes?.[d.id] ?? [])
+        card.appendChild(el('p', 'onc-card-note onc-card-note--drug', note));
     // FDA boxed warning: collapsed to one compact block (label, item count, each item's head), full items with chips on demand.
     // The head is the text before the item's first colon; an item with no colon is shown in full (the gate reports those).
     const boxed = boxedItems(d);
@@ -574,12 +609,14 @@ function renderDrug(body, data, refs, d) {
         card.appendChild(bw);
     }
     // serious adverse effects: compact rows, most lethal first; tap a row to open it in place
-    const all = resolveEffects(d, data);
+    const split = splitEffects(resolveEffects(d, data), active.cfg.rowCategories);
+    const all = split.rows;
+    const plainLines = split.plain;
     const effects = all.filter((e) => e.basis !== 'postmarketing');
     const reported = all.filter((e) => e.basis === 'postmarketing');
     if (effects.length)
         card.appendChild(el('h2', 'onc-section', 'Serious adverse effects'));
-    else if (!reported.length && !boxedItems(d).length && d.alsoOnLabel?.length)
+    else if (!reported.length && !boxedItems(d).length && (d.alsoOnLabel?.length || plainLines.length))
         card.appendChild(el('p', 'onc-no-effects', 'No label warning with an emergency presentation; see below.'));
     const open = readOpen(d.id) ?? new Set();
     const addRow = (parent, e) => {
@@ -620,15 +657,38 @@ function renderDrug(body, data, refs, d) {
         });
         card.append(head, box);
     }
+    // drug interactions: its own collapsed section (lines in array order), directly under the effect rows and above "Also on the label"
+    if (d.interactions?.length) {
+        const sec = el('section', 'onc-label onc-interactions');
+        const head = el('button', 'onc-group-toggle');
+        head.type = 'button';
+        head.setAttribute('aria-expanded', 'false');
+        head.appendChild(el('span', 'onc-group-toggle__label', `Drug interactions (${d.interactions.length})`));
+        head.appendChild(el('span', 'onc-effect__chev', '\u203A'));
+        const ul = el('ul', 'onc-label__list');
+        ul.hidden = true;
+        for (const it of d.interactions)
+            ul.appendChild(refs.citedHead('li', 'onc-label__item', it));
+        head.addEventListener('click', () => {
+            const next = head.getAttribute('aria-expanded') !== 'true';
+            head.setAttribute('aria-expanded', String(next));
+            ul.hidden = !next;
+        });
+        sec.append(head, ul);
+        card.appendChild(sec);
+    }
     // also on the label: warnings and interactions with no management page; plain styling (danger colours are for the boxed warning)
-    if (d.alsoOnLabel?.length) {
+    if (d.alsoOnLabel?.length || plainLines.length) {
         const SHOW = 3;
         const sec = el('section', 'onc-label');
         sec.appendChild(el('h2', 'onc-section', 'Also on the label'));
         const ul = el('ul', 'onc-label__list');
         const extra = [];
-        d.alsoOnLabel.forEach((it, i) => {
+        const items = [...plainLines.map((e) => ({ it: plainEffectLine(e), boxed: e.boxed === true })), ...(d.alsoOnLabel ?? []).map((it) => ({ it, boxed: false }))];
+        items.forEach(({ it, boxed }, i) => {
             const li = refs.citedHead('li', 'onc-label__item', it);
+            if (boxed)
+                li.insertBefore(el('span', 'onc-boxed-mark', 'Boxed warning'), li.firstChild);
             if (i >= SHOW) {
                 li.hidden = true;
                 extra.push(li);
@@ -682,7 +742,7 @@ function effectRow(refs, e, startOpen, onToggle) {
     }
     toggle.appendChild(left);
     if (e.timing) {
-        const badgeText = shortTiming(e.timing.v);
+        const badgeText = shortTiming(e.timing.v, active.cfg.timingTimeUnits === true);
         // a long badge (a whole sentence) drops to its own full-width line under the name, so it wraps cleanly and the chevron stays on screen
         toggle.appendChild(el('span', badgeText.length > 60 ? 'onc-badge onc-badge--long' : 'onc-badge', badgeText)); // no stated onset: no badge
     }
@@ -774,15 +834,15 @@ function renderRegimen(body, data, refs, r) {
         card.appendChild(refs.cited('p', 'onc-note', r.note));
     const cancers = r.cancers.map((c) => data.cancers.find((x) => x.id === c)).filter((c) => !!c);
     if (cancers.length) {
-        card.appendChild(el('h2', 'onc-section', 'Cancers'));
+        card.appendChild(el('h2', 'onc-section', active.cfg.indicationHeading));
         for (const c of cancers)
-            card.appendChild(linkRow(c.name, undefined, routeFor('cancer', c.id)));
+            card.appendChild(linkRow(c.name, undefined, routeFor(active.cfg.indicationKind, c.id)));
     }
     body.appendChild(card);
     refs.render(body);
 }
 function renderClass(body, data, refs, slug) {
-    const c = data.classes.find((x) => x.id === slug);
+    const c = (data.browseClasses ?? data.classes).find((x) => x.id === slug);
     if (!c)
         return false;
     const card = el('article', 'onc-card');
@@ -791,7 +851,7 @@ function renderClass(body, data, refs, slug) {
     id.appendChild(refs.cited('p', 'onc-identity__mech', c.mechanism));
     card.appendChild(id);
     card.appendChild(el('h2', 'onc-section', 'Drugs'));
-    for (const d of data.drugs.filter((x) => x.classIds.includes(c.id)))
+    for (const d of data.drugs.filter((x) => (x.browseClassIds ?? x.classIds).includes(c.id)))
         card.appendChild(linkRow(cardTitle(d), undefined, routeFor('drug', d.id)));
     body.appendChild(card);
     refs.render(body);
@@ -799,6 +859,7 @@ function renderClass(body, data, refs, slug) {
 }
 /** Cancer types that have at least one drug, alphabetical, "Other label indications" last. */
 function typeRows(data) {
+    const { types: ONC_CANCER_TYPES, other: OTHER_CANCER_TYPE } = active.cfg.indicationTypes;
     const typeOf = (c) => (c.type && ONC_CANCER_TYPES.some((t) => t.id === c.type) ? c.type : OTHER_CANCER_TYPE.id);
     const byType = new Map();
     for (const c of data.cancers)
@@ -811,6 +872,8 @@ function typeRows(data) {
 }
 /** A cancer type page: its member drugs, each with the label's own indication wording beside it. */
 function renderCancerType(body, data, refs, slug) {
+    if (!active.cfg.indicationTypes)
+        return false;
     const row = typeRows(data).find((r) => r.id === slug);
     if (!row)
         return false;
@@ -827,7 +890,26 @@ function renderCancerType(body, data, refs, slug) {
     refs.render(body);
     return true;
 }
+const NO_ORGAN_SLUG = 'all-organs';
+const NO_ORGAN_NAME = 'All organs (label names none)';
+function renderNoOrgan(body, data, refs) {
+    const drugs = data.drugs.filter((x) => x.cancers.length === 0);
+    if (!drugs.length)
+        return false;
+    const card = el('article', 'onc-card');
+    const id = el('section', 'onc-identity');
+    id.appendChild(el('h1', 'onc-identity__name', NO_ORGAN_NAME));
+    card.appendChild(id);
+    card.appendChild(el('h2', 'onc-section', 'Drugs'));
+    for (const d of drugs)
+        card.appendChild(linkRow(cardTitle(d), undefined, routeFor('drug', d.id)));
+    body.appendChild(card);
+    refs.render(body);
+    return true;
+}
 function renderCancer(body, data, refs, slug) {
+    if (active.cfg.indicationKind === 'organ' && slug === NO_ORGAN_SLUG && !data.cancers.some((x) => x.id === slug))
+        return renderNoOrgan(body, data, refs);
     const c = data.cancers.find((x) => x.id === slug);
     if (!c)
         return false;
@@ -855,7 +937,7 @@ function renderComplaint(body, data, refs, slug, _cfg) {
     const card = el('article', 'onc-card');
     const id = el('section', 'onc-identity');
     id.appendChild(el('h1', 'onc-identity__name', cx.label));
-    id.appendChild(el('p', 'onc-cx-note', 'Drug causes only. The usual workup (infection, progression, clot) still applies.'));
+    id.appendChild(el('p', 'onc-cx-note', active.cfg.complaintNote));
     card.appendChild(id);
     // One row per toxicity. Order: lethality first (1 = most lethal), so a life-threatening cause is never buried; then how
     // directly the complaint points at it (its position in the toxicity's complaints list, first = primary); then data
@@ -863,7 +945,7 @@ function renderComplaint(body, data, refs, slug, _cfg) {
     // Timing is read from each class, never copied.
     const rows = data.toxicities
         .map((tox, i) => ({ tox, i, direct: tox.complaints.indexOf(cx.id) }))
-        .filter((r) => r.direct >= 0)
+        .filter((r) => r.direct >= 0 && (!active.cfg.rowCategories || active.cfg.rowCategories.includes(r.tox.id)))
         .sort((a, b) => a.tox.lethality - b.tox.lethality || a.direct - b.direct || a.i - b.i);
     for (const { tox } of rows) {
         // classes with the same timing share one line
@@ -893,7 +975,7 @@ function renderComplaint(body, data, refs, slug, _cfg) {
                 chips.appendChild(el('span', 'onc-tag', data.classes.find((c) => c.id === cid)?.name ?? cid));
             line.appendChild(chips);
             if (g.timing)
-                line.appendChild(refs.cited('span', 'onc-cxrow__timing', { v: shortTiming(g.timing.v), cite: g.timing.cite }));
+                line.appendChild(refs.cited('span', 'onc-cxrow__timing', { v: shortTiming(g.timing.v, active.cfg.timingTimeUnits === true), cite: g.timing.cite }));
             meta.appendChild(line);
         }
         wrap.appendChild(meta);

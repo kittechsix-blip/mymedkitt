@@ -781,6 +781,16 @@ export const DEFAULT_CATEGORIES: Category[] = [
         displayCategoryId: 'cardiology',
       },
       {
+        id: 'transplant-patient-ed',
+        title: 'Transplant Patient in the ED',
+        subtitle: 'Adult solid-organ recipients \u00b7 low counts \u00b7 heart \u00b7 lung \u00b7 liver \u00b7 kidney \u00b7 calcineurin inhibitors \u00b7 CMV \u00b7 BK',
+        categoryId: 'nephro-rheum-endo',
+        version: '1.0',
+        nodeCount: 57,
+        entryNodeId: 'tpe-start',
+        displayCategoryId: 'nephro-rheum-endo',
+      },
+      {
         id: 'dyspnea-hub',
         title: 'Shortness of Breath Hub',
         subtitle: 'Sick Check → Time-Critical Exclusions → Rescue/Reassess → Imaging → Dispo',
@@ -1990,6 +2000,24 @@ export const DEFAULT_CATEGORIES: Category[] = [
   "nodeCount": 38,
   "entryNodeId": "hg-start"
 },
+      {
+        id: 'transplant-drug-side-effects',
+        title: 'Transplant Drugs Side-effects',
+        subtitle: 'Search a drug \u2192 serious adverse effects ranked by severity \u2192 workup & treatment',
+        categoryId: 'nephro-rheum-endo',
+        version: '1.0',
+        nodeCount: 1,
+        entryNodeId: 'tdse-start',
+      },
+      {
+        id: 'transplant-patient-ed',
+        title: 'Transplant Patient in the ED',
+        subtitle: 'Adult solid-organ recipients \u00b7 low counts \u00b7 heart \u00b7 lung \u00b7 liver \u00b7 kidney \u00b7 calcineurin inhibitors \u00b7 CMV \u00b7 BK',
+        categoryId: 'nephro-rheum-endo',
+        version: '1.0',
+        nodeCount: 57,
+        entryNodeId: 'tpe-start',
+      },
       {
         id: 'potassium',
         title: 'Potassium Disorders',

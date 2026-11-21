@@ -98,6 +98,11 @@ for (const f of fs.readdirSync(path.join(DOCS, 'data', 'trees'))) {
 const oncDocs = (await imp('data/onc-drugs/index.js')).oncSearchDocs();
 extraNodes.push(...oncDocs.nodes);
 const onc = oncDocs.onc;
+// Transplant drug cards (src/data/transplant-drugs): same shape, key `tdse`, pushed after oncology's so every oncology entry is unchanged.
+const tdseMod = await imp('data/transplant-drugs/index.js');
+const tdseDocs = (await imp('data/onc-drugs/index.js')).oncSearchDocs(tdseMod.TX_DATA, tdseMod.TX_CONSULT);
+extraNodes.push(...tdseDocs.nodes);
+const tdse = tdseDocs.onc;
 
 // Reviewed synonym pairs (engine >= 1.7): only the rows Andy marked `y` in scripts/synonyms.review.tsv ship. Blank and `n` never do.
 // Separate from the app-side CLINICAL_SYNONYMS (consult/drug aliases). scripts/search-synonyms.test.ts gates this list.
@@ -120,6 +125,6 @@ function readSynonyms() {
 const synonyms = readSynonyms();
 
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
-fs.writeFileSync(OUT, JSON.stringify({ count: { info: info.length, pages: pages.length, extraNodes: extraNodes.length, onc: onc.length, synonyms: synonyms.length }, info, pages, extraNodes, onc, synonyms }));
+fs.writeFileSync(OUT, JSON.stringify({ count: { info: info.length, pages: pages.length, extraNodes: extraNodes.length, onc: onc.length, tdse: tdse.length, synonyms: synonyms.length }, info, pages, extraNodes, onc, tdse, synonyms }));
 const kb = (fs.statSync(OUT).size / 1024).toFixed(1);
 console.log(`✅ Wrote ${info.length} info sections + ${pages.length} pages + ${extraNodes.length} extra nodes + ${synonyms.length} synonym pairs → ${path.relative(ROOT, OUT)} (${kb} KB)`);

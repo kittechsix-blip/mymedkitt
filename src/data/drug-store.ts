@@ -15036,10 +15036,61 @@ const CHLORHEXIDINE_OPHTHALMIC: DrugEntry = {
   ]
 };
 
+const GANCICLOVIR_IV: DrugEntry = {
+  id: 'ganciclovir',
+  name: 'Ganciclovir (IV)',
+  genericName: 'Ganciclovir',
+  drugClass: 'Antiviral',
+  route: 'IV',
+  indications: ['CMV treatment (adult solid organ transplant recipients)'],
+  dosing: [
+    {
+      indication: 'CMV treatment, adult solid organ transplant recipients',
+      regimen: "Normal kidney function: 5 mg/kg IV every 12 h, first-line for initial and recurrent CMV disease in adults (strong, moderate); IV ganciclovir is recommended in life-threatening and severe disease (strong, low). Dose by Cockcroft-Gault creatinine clearance (mL/min), not a normalized GFR, and monitor kidney function often. Treatment dose by creatinine clearance: 70 mL/min or more: 5.0 mg/kg every 12 h; 50-69: 2.5 mg/kg every 12 h; 25-49: 2.5 mg/kg every 24 h; 10-24: 1.25 mg/kg every 24 h; below 10: 1.25 mg/kg three times a week after hemodialysis. Guideline: “Antiviral dosage reductions are only recommended during the treatment phase to adjust for worsening kidney function, as suboptimal dosing may be associated with increased risk of clinical failure and/or antiviral resistance”. Do not reduce the dose for leukopenia alone (strong, moderate). The dose bands above are the consensus's (Table 5) for treatment of CMV disease. The transplant treatment doses rest on the guideline; the labels' transplant indication is prevention. Ganciclovir for injection label, indication: “indicated for the treatment of cytomegalovirus (CMV) retinitis in immunocompromised adult patients, including patients with acquired immunodeficiency syndrome (AIDS)”; “indicated for the prevention of CMV disease in adult transplant recipients at risk for CMV disease”. Ganciclovir for injection label, hemodialysis: “Induction dosing for ganciclovir in patients undergoing hemodialysis should not exceed 1.25 mg/kg 3 times per week”; the guideline's band for under 10 mL/min is 1.25 mg/kg 3 times a week after hemodialysis. Ganciclovir for injection label, blood counts: “Ganciclovir is not recommended if the absolute neutrophil count is less than 500 cells/µL, hemoglobin is less than 8 g/dL, or the platelet count is less than 25,000 cells/µL.” CMV consensus 2025: “We do not recommend reducing the dose of valganciclovir or ganciclovir based on leukopenia alone (strong, moderate)”; options include G-CSF and adjusting other myelosuppressive therapies. The guideline and the labels differ here. Ganciclovir for injection label, boxed warning: Hematologic toxicity: granulocytopenia, anemia, thrombocytopenia and pancytopenia reported in patients treated with ganciclovir; Impairment of fertility: ganciclovir may cause temporary or permanent inhibition of spermatogenesis in males and suppression of fertility in females, based on animal data and limited human data; Fetal toxicity: based on animal data, ganciclovir has the potential to cause birth defects in humans; Mutagenesis and carcinogenesis: based on animal data, ganciclovir has the potential to cause cancers in humans. Ganciclovir for injection label, contraindications: clinically significant hypersensitivity (e.g., anaphylaxis) to ganciclovir, valganciclovir or any component of the formulation.",
+      weightCalc: [
+        { dosePerKg: 5, unit: 'mg', label: "IV, CrCl 70 mL/min or more: 5.0 mg/kg every 12 h" },
+        { dosePerKg: 2.5, unit: 'mg', label: "IV, CrCl 50-69 mL/min: 2.5 mg/kg every 12 h" },
+        { dosePerKg: 2.5, unit: 'mg', label: "IV, CrCl 25-49 mL/min: 2.5 mg/kg every 24 h" },
+        { dosePerKg: 1.25, unit: 'mg', label: "IV, CrCl 10-24 mL/min: 1.25 mg/kg every 24 h" },
+        { dosePerKg: 1.25, unit: 'mg', label: "IV, CrCl below 10 mL/min (hemodialysis, after dialysis): 1.25 mg/kg three times a week" }
+      ],
+    },
+  ],
+  monitoring: 'Weekly CMV DNAemia during treatment; complete blood counts at regular intervals; kidney function monitored often because the dose is set by Cockcroft-Gault creatinine clearance.',
+  notes: '',
+  citations: [
+    "Kotton CN, Kumar D, Manuel O, Chou S, Hayden RT, Danziger-Isakov L, Asberg A, Tedesco-Silva H, Humar A; The Transplantation Society International CMV Consensus Group. The Fourth International Consensus Guidelines on the Management of Cytomegalovirus in Solid Organ Transplantation. Transplantation. 2025;109(7):1066-1110. doi:10.1097/TP.0000000000005374. https://pmc.ncbi.nlm.nih.gov/articles/PMC12180710/",
+    "Ganciclovir for injection, prescribing information. Par Pharmaceutical. DailyMed set id 87afd103-6e64-444f-971d-0e732e9ae995; label effective 2026-09-25 (Revised 09/2026).",
+  ],
+};
+
+const VALGANCICLOVIR: DrugEntry = {
+  id: 'valganciclovir',
+  name: 'Valganciclovir',
+  genericName: 'Valganciclovir',
+  drugClass: 'Antiviral',
+  route: 'PO',
+  indications: ['CMV treatment (adult solid organ transplant recipients)'],
+  dosing: [
+    {
+      indication: 'CMV treatment, adult solid organ transplant recipients',
+      regimen: "Normal kidney function: 900 mg by mouth every 12 h, first-line for initial and recurrent CMV disease in adults (strong, moderate); recommended for mild to moderate disease in a patient who tolerates and adheres to oral therapy (strong, moderate). Dose by Cockcroft-Gault creatinine clearance (mL/min), not a normalized GFR, and monitor kidney function often. Treatment dose by creatinine clearance: 60 mL/min or more: 900 mg every 12 h; 40-59: 450 mg every 12 h; 25-39: 450 mg every 24 h; 10-24: 450 mg every 48 h; below 10: 200 mg three times a week after hemodialysis (oral solution must be used in this instance, as valganciclovir tablets cannot be split). Guideline: “Antiviral dosage reductions are only recommended during the treatment phase to adjust for worsening kidney function, as suboptimal dosing may be associated with increased risk of clinical failure and/or antiviral resistance”. Do not reduce the dose for leukopenia alone (strong, moderate). The dose bands above are the consensus's (Table 5) for treatment of CMV disease. The transplant treatment doses rest on the guideline; the labels' transplant indication is prevention. Valcyte label, indication: “VALCYTE is indicated for the prevention of CMV disease in kidney, heart, and kidney-pancreas transplant patients at high risk (Donor CMV seropositive/Recipient CMV seronegative [D+/R-])”; “VALCYTE is indicated for the treatment of CMV retinitis in patients with acquired immunodeficiency syndrome (AIDS)”. Valcyte label, general adult dosing: “Adult patients should use VALCYTE tablets, not VALCYTE for oral solution.” The guideline's valganciclovir band for clearance under 10 mL/min uses the oral solution; the label's hemodialysis statement is that tablets should not be used and no dose recommendation can be given. Valcyte label, hemodialysis: “For adult patients on hemodialysis (CrCl less than 10 mL/min), VALCYTE tablets should not be used.”; “a dose recommendation for VALCYTE cannot be given”. Valcyte label, blood counts: “VALCYTE should be avoided if the absolute neutrophil count is less than 500 cells/µL, the platelet count is less than 25,000/µL, or the hemoglobin is less than 8 g/dL.” CMV consensus 2025: “We do not recommend reducing the dose of valganciclovir or ganciclovir based on leukopenia alone (strong, moderate)”; options include G-CSF and adjusting other myelosuppressive therapies. The guideline and the labels differ here. Valcyte label, boxed warning: Hematologic toxicity: severe leukopenia, neutropenia, anemia, thrombocytopenia, pancytopenia and bone marrow failure including aplastic anemia reported in patients treated with Valcyte; Impairment of fertility: Valcyte may cause temporary or permanent inhibition of spermatogenesis in males and suppression of fertility in females, based on animal data and limited human data; Fetal toxicity: based on animal data, Valcyte has the potential to cause birth defects in humans; Mutagenesis and carcinogenesis: based on animal data, Valcyte has the potential to cause cancers in humans. Valcyte label, contraindications: clinically significant hypersensitivity (e.g., anaphylaxis) to valganciclovir, ganciclovir or any component of the formulation.",
+    },
+  ],
+  monitoring: 'Weekly CMV DNAemia during treatment; complete blood counts at regular intervals; kidney function monitored often because the dose is set by Cockcroft-Gault creatinine clearance.',
+  notes: '',
+  citations: [
+    "Kotton CN, Kumar D, Manuel O, Chou S, Hayden RT, Danziger-Isakov L, Asberg A, Tedesco-Silva H, Humar A; The Transplantation Society International CMV Consensus Group. The Fourth International Consensus Guidelines on the Management of Cytomegalovirus in Solid Organ Transplantation. Transplantation. 2025;109(7):1066-1110. doi:10.1097/TP.0000000000005374. https://pmc.ncbi.nlm.nih.gov/articles/PMC12180710/",
+    "Valcyte (valganciclovir) tablets and for oral solution, prescribing information. H2-Pharma. DailyMed set id 4c517a39-2ded-4c5a-8d56-276853414b31; label effective 2025-12-08 (Revised 04/2023).",
+  ],
+};
+
 export const ALL_DRUGS: DrugEntry[] = [
   VANCOMYCIN_OPHTHALMIC,
   TOBRAMYCIN_OPHTHALMIC,
   GANCICLOVIR_OPHTHALMIC,
+  GANCICLOVIR_IV,
+  VALGANCICLOVIR,
   NATAMYCIN_OPHTHALMIC,
   PHMB_OPHTHALMIC,
   CHLORHEXIDINE_OPHTHALMIC,

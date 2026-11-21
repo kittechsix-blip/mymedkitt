@@ -291,6 +291,8 @@ export const TREE_REGISTRY = {
   'diabetic-foot-wounds': { prefix: 'DIABETIC_FOOT_WOUNDS', entryNodeId: 'dfw-start',  categoryId: 'orthopedics' },
   'onc-drug-side-effects': { prefix: 'ONC_DRUG_SIDE_EFFECTS', entryNodeId: 'odse-start', categoryId: 'heme-onc' },
   'oncological-emergencies': { prefix: 'ONCOLOGICAL_EMERGENCIES', entryNodeId: 'onc-start', categoryId: 'heme-onc' },
+  'transplant-drug-side-effects': { prefix: 'TRANSPLANT_DRUG_SIDE_EFFECTS', entryNodeId: 'tdse-start', categoryId: 'nephro-rheum-endo' },
+  'transplant-patient-ed': { prefix: 'TRANSPLANT_PATIENT_ED', entryNodeId: 'tpe-start', categoryId: 'nephro-rheum-endo' },
   'pediatric-arthritis': { prefix: 'PEDIATRIC_ARTHRITIS', entryNodeId: 'peds-arth-start', categoryId: 'pediatrics' },
   'gout':             { prefix: 'GOUT',                entryNodeId: 'gout-start',         categoryId: 'orthopedics' },
   'hop-killers':      { prefix: 'HOP_KILLERS',         entryNodeId: 'hop-start',          categoryId: 'critical-care' },

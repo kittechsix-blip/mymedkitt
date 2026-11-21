@@ -1,0 +1,38 @@
+# Trim re-verification: tpe-cni-hypertension (3 nodes + overlay tpe-cni-htn-agents)
+
+Read-only. Checked against the six labels, consensus Table 2, ISHLT 2023 (e15, e44, e64, e65), AASLD/AST non-graft Question 15, and the current src/data/trees/hypertensive-emergency-adult.ts. Ledger rows (35) all found in their stated node or overlay (substring test).
+
+VERDICT: READY AFTER LISTED FIXES.
+
+## 1. Earlier findings (7)
+Fixed: 1 (entry node now quotes the full Prograf sentence with its "though careful consideration ... hyperkalemia" clause and adds Sandimmune's "However ... potassium-sparing diuretics should not be used"; but see new items 1 and 2); 2 (the "no source gives a threshold" claim is restated as "for a hypertensive emergency"; the overlay shows the liver figures with scope: "defined as systolic ... 140 ... and/or diastolic ... 90" and "The goal ... is to lower BP to <=130/80 mm Hg", rationale, not graded: both exact); 3 (preceding sentence "Beta blockers, calcium antagonists, adenosine and amiodarone can be used safely after HT" added; but see new item 3); 4 (source-difference bullet in node and overlay); 5 (overlay splits Neoral/Gengraf "which may persist" from Sandimmune and locates "antihypertensive therapy may be required" in Precautions for all three); 7 (CAs are 13 to 19 words). Item 6 was a "supported" confirmation.
+Not fixed: none. New errors introduced: items 1 to 3 below.
+
+## 2. Node sentences
+
+| # | Node | Sentence | Class | Source + locator | Fix |
+|---|---|---|---|---|---|
+| 1 | tpe-cni-htn-agents bullet 3 | "...the liver guideline recommends a renin-angiotensin system inhibitor in the long-term regimen of liver recipients with cardiovascular or kidney disease (Strong, Level 5). The sources differ; none is chosen." | LOST A SAFETY QUALIFIER | Q15: "...should include a renin-angiotensin system inhibitor, unless contraindicated due to difficult-to-control hyperkalemia (Strong, Level 5)". The dropped clause is the one that bears on potassium; also "cardiovascular disease and/or chronic kidney disease". | Add "unless contraindicated due to difficult-to-control hyperkalemia". The overlay has it. |
+| 2 | tpe-cni-hypertension bullet 2 | "Sandimmune adds: 'However, since cyclosporine may cause hyperkalemia, potassium-sparing diuretics should not be used', and calcium antagonists need care because they may require a dosage adjustment." | MERGED + BROADER/FIRMER | Sandimmune: "care should be taken since interference with cyclosporine metabolism may require a dosage adjustment" (the cyclosporine dose, not the calcium antagonist). The potassium-sparing sentence is in Neoral, Gengraf and Sandimmune alike, so "Sandimmune adds" understates its reach. | "Neoral, Gengraf and Sandimmune say potassium-sparing diuretics should not be used; calcium antagonists can interfere with cyclosporine metabolism and may require a cyclosporine dosage adjustment (Sandimmune)". |
+| 3 | tpe-cni-htn-dispo bullet 2 | "Heart guideline: 'Beta blockers, calcium antagonists, adenosine and amiodarone can be used safely after HT'" | BROADER (scope lost) | ISHLT e15: the sentence sits in the arrhythmia paragraph ("Arrhythmias are also common after HT ..."); it is not a hypertension statement. In a blood-pressure disposition node it reads as an agent endorsement. | Prefix "for arrhythmias after heart transplant" or move to the overlay only. |
+| 4 | tpe-cni-htn-agents bullet 1 | "...the cyclosporine labels name diltiazem, nicardipine, verapamil." | LOST (direction) | Cyclosporine labels list them as drugs that increase cyclosporine concentrations. "Name" does not say raise. | "raise cyclosporine concentrations". |
+| 5 | CA3 | "tacrolimus labels ask careful consideration" | WRONG PRODUCT (minor) | "careful consideration" is Prograf 5.7/5.8; Astagraf XL and Envarsus XR say concomitant agents "may increase the risk for hyperkalemia". | "Prograf asks careful consideration; Astagraf XL and Envarsus XR say it may raise the risk". |
+| 6 | tpe-cni-hypertension bullet 1 | hypertension "may require antihypertensive therapy" [1,2,3,4] | MERGED (minor) | Quote is the tacrolimus wording; cyclosporine labels say "antihypertensive therapy may be required". | Split or drop the quote marks. |
+| 7 | Overlay, liver figures | "(adult liver recipients, long-term management)" for the >=140/90 and <=130/80 figures | BROADER wording (minor) | Q15 rationale: "Initial management of HTN (defined as ...)"; "long-term" is in the first statement only. | "adult liver recipients (Question 15)". |
+
+FAITHFUL: calcium-channel blocker bullet quote "require dosage reduction" (Prograf "therefore require"; Astagraf/Envarsus "and require": all three label sentences carry it); tacrolimus names of the four CCBs; "Heart recipients, PRES (Class I, C)" quote exact; summary and recommendation; dispo bullet 1.
+
+## 3. Overlay numbers and attribution
+Grades: heart PRES Class I, C (2023) and the 2010 wording Class I, C; Q15 both "(Strong, Level 5)"; "approximately 50%". Liver BP figures read from the saved HTML: exact, ungraded (rationale). Heart Table 5 CCB row (amiodarone, diltiazem, verapamil; no nicardipine or nifedipine) re-read by column position: matches. Consensus Table 2 (diltiazem, nicardipine, verapamil, mibefradil): matches. 7.2 rows and cyclosporine lists: match. "No label names beta blockers, labetalol, hydralazine, nitroglycerin, nitroprusside, clevidipine, amlodipine or felodipine": still true (zero hits in all six labels). The source-difference paragraph on RAS inhibitors vs potassium cautions quotes both sides correctly and chooses neither.
+
+## 4. Safety items that should be in a node
+Present in nodes: CCBs raise levels; potassium-sparing diuretics should not be used with cyclosporine; PRES heart statement. Add to the node: the "unless contraindicated ... hyperkalemia" clause (item 1) and the direction for cyclosporine (item 4). Nothing else needs to return.
+
+## 5. Editor notes (3)
+Entry: "call the transplant team before changing, holding or stopping any immunosuppressant; these labels and guidelines are written for prescribers and transplant teams and do not address the emergency department." NEW CLAIM (same as Page A; Prograf Medication Guide directs overdose to the emergency room); delete the second clause. Agents: "tell the transplant team which blood pressure drug is being given or planned, and any calcineurin inhibitor level drawn." Practical, no claim. Final: exact. The Medication Guide sentence is not on this page. CA5 repeats the entry note.
+
+## 6. Existing consult
+Still accurate, re-read now: node `hypertensive-emergency-adult-agent-nicardipine` id line 165, body line 169: "**Nicardipine IV infusion** is a common titratable choice when no exception applies." (page quote exact; clevidipine alternative is on the same line 169); recommendation line 170 exact; `hypertensive-emergency-adult-agent-by-organ` id line 149, option "General or brain, no exception" / "Calcium-channel blocker infusion" line 156. No transplant or calcineurin text in the file.
+
+## 7. Readability and mechanics
+Body words: entry 129, agents 184, dispo 82 (recommendation 68). Action in first two lines: entry no (frequency first), agents yes (CCB then nicardipine), dispo yes. CAs 13, 19, 13, 17, 13 words. Entry has summary and citation; all ids and the `#/info/tpe-cni-htn-agents` link resolve; final body and recommendation end exactly "Editor note: disposition is decided with the treating transplant team." outside bold; no "dreaded"; no dashes. Citation numbering differs between node file (7 = heart, 8 = Sharma) and overlay (8 = heart, 9, 10): each is local, but one page now has two meanings for [8]; renumber the node file to match the overlay.

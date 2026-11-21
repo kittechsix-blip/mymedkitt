@@ -1,0 +1,27 @@
+# Biologics and induction group: author report, fix round (src/data/transplant-drugs/drugs/biologics-induction.ts)
+Labels re-read from saved SPL XML (research/transplant-sources/dailymed/). tsc --noEmit clean; no line over 200; all effect categories are on the TAXONOMY.md usable list.
+
+## Verifier findings (1-21)
+1 DONE Atgam boxed row on tx-infusion-anaphylaxis, boxed, rank 1, "potentially life-threatening" restored. 2 DONE belatacept box order PTLD, EBV, infection, malignancy, liver, prescribing; liver is boxed item with no row; liver also-line moved down. 3 DONE basiliximab blockade: "not known"; saturation 36 days with cyclosporine and steroids, longer with azathioprine or MMF (one figure). 4 DONE basiliximab "Raises level:" line (clearance lowered 22% and 51%; no dose adjustment necessary). 5 DONE belatacept mycophenolate as plain line (cyclosporine lowers MPA, belatacept does not; both switch directions). 6 DONE belatacept ATG line: postmarketing, de novo kidney, "suggests" 12-hour interval. 7 DONE basiliximab hypersensitivity row. 8 DONE pregnancy and nursing lines on all four cards. 9 DONE PML and BK lines quoting the label with graft-risk wording. 10 DONE PTLD risk-factor line; CNS infections named in infection row. 11 DONE "pooled across regimens". 12 DONE "may be at particular risk", "extreme caution". 13 DONE basiliximab malignancy row limited to lymphoproliferative disorder. 14 DONE serum sickness and anaphylactic shock split. 15 DONE Atgam serum sickness 0.6% of 476 plus aplastic anemia population. 16 DONE masked infection and "previously masked reactions" as plain last interaction line. 17 DONE Atgam mechanism "not determined; published data indicate". 18 DONE leukopenia in cytopenia row; arthralgia, edema, bradycardia in a line. 19 DONE hyperkalemia row on rabbit ATG (57% vs 51%). 20 DONE low IgG and Guillain-Barre dropped. 21 NOT RESOLVED: tx-tma kept on rabbit ATG ("particularly with calcineurin inhibitors"); the TMA page summary names tacrolimus and cyclosporine only, confirm its page covers ATG or drop the row.
+
+## Per card (rows / non-interaction lines / interactions / longest / mechanism); first three non-interaction lines
+- belatacept: 2 / 12 / 3 / 198 / 102; New neurologic signs, Rejection (steroid minimization), PML. Boxed: PTLD | EBV serostatus | Serious infection | Malignancy | Liver transplant | Prescribing. Heads: Avoid together (live vaccines), then plain ATG line, plain mycophenolate line.
+- basiliximab: 3 / 7 / 1 / 200 / 88; Re-exposure, Reported after approval, Blockade. Boxed: Prescribing only. Heads: Raises level.
+- rabbit ATG: 6 / 10 / 1 / 195 / 117; Serum sickness, Anaphylactic shock, Not for antibody-mediated rejection. No box. Heads: Avoid together.
+- equine ATG: 3 / 10 / 2 / 193 / 109; CRS, Infusion-associated reactions, Serum sickness. Boxed: Anaphylaxis (boxed row, rank 1). Heads: Avoid together, then plain corticosteroid line last.
+Rows: belatacept malignancy (boxed, rank 1), infection (boxed, rank 2); basiliximab anaphylaxis, infection, malignancy; rabbit anaphylaxis, infection, cytopenia, hyperkalemia, TMA, malignancy; equine anaphylaxis (boxed, 1), infection, cytopenia.
+
+## Timings used (badge, label sentence)
+- Basiliximab: "Onset within 24 hours (first or repeat course)" (46): "Severe acute (onset within 24 hours) hypersensitivity reactions, including anaphylaxis have been observed both on initial exposure ... and/or following re-exposure after several months."
+- Rabbit ATG: "During or within 24 hours of an infusion" (40): Table 3, "Adverse reactions that occurred during or within 24 hours of an infusion"; infusion-related reactions are "within 24 hours after the completion".
+- None on belatacept; none on Atgam (serum sickness 6-18 days is a plain line with its aplastic anemia population).
+
+## Stayed plain lines
+Serum sickness (both ATG), anaphylactic shock count, CRS and infusion-associated reactions on Atgam (category already has one row), belatacept rejection (steroid minimization, CNI conversion), renal vein thrombosis with ATG (coordinator: no category; TAXONOMY lists tx-kidney-graft-thrombosis as ALLOWED with an unwritten page, so it could move to a row if wanted), PML and BK reduction statements, liver transplant box item, pregnancy, postmarketing, tests.
+
+## Registration
+drugs/index.ts: `import * as biologicsInduction from './biologics-induction.js';` and `'biologics-induction.ts': biologicsInduction,` (exports DRUGS, CLASSES, SOURCES). classSections: 'tx-costimulation-blocker': 'Maintenance'; 'tx-il2-receptor-antagonist' and 'tx-lymphocyte-depleting-antibody': 'Induction and rejection'.
+Editor aliases: bela; rATG, thymo; eATG; ATG on both cards, unpinned on both (rabbit unpinnedNames ['ATG']; equine also unpins the bare generic names). IL-2RA dropped.
+
+## Last corrections (D1-D9, item 3): all DONE; tsc clean; no line over 200
+Final (non-interaction lines / interactions / longest): belatacept 12 / 4 / 198; basiliximab 7 / 1 / 200; rabbit ATG 12 / 1 / 195; equine ATG 11 / 2 / 193. Rabbit TMA is now a plain line (first in also-lines), `tx-tma` row removed. Belatacept interaction order: Avoid together (live vaccines), then three plain lines (ATG event, cell-depleting induction 12-hour interval, mycophenolate). Basiliximab clearance line is plain. Highlights wording ("may cause fetal harm") is not in the SPL XML, so could not be checked; the pregnancy line follows 8.1.

@@ -543,7 +543,7 @@ export const DRUGS: OncDrug[] = [
     ],
   },
   {
-    id: 'everolimus', generic: 'everolimus', brands: ['Afinitor', 'Afinitor Disperz'], searchOnlyBrands: ['Zortress'], brandSource: 'fda-drugsfda', classIds: ['tgt-mtor-inhibitor'], label: 'pi-everolimus', tier: 'full',
+    id: 'everolimus', generic: 'everolimus', brands: ['Afinitor', 'Afinitor Disperz'], brandSource: 'fda-drugsfda', classIds: ['tgt-mtor-inhibitor'], label: 'pi-everolimus', tier: 'full',
     mechanism: c('Inhibitor of mammalian target of rapamycin (mTOR), a serine-threonine kinase downstream of the PI3K/AKT pathway; binds the intracellular protein FKBP-12 and forms an inhibitory complex with mTOR complex 1 (mTORC1).', 'pi-everolimus'),
     cancers: ['breast-hrpos-her2neg-postmenopausal', 'pnet-progressive', 'net-gi-lung-nonfunctional', 'rcc-after-sunitinib-sorafenib', 'tsc-renal-angiomyolipoma', 'tsc-sega'],
     alsoOnLabel: [
