@@ -798,7 +798,7 @@ function effectRow(refs, e, startOpen, onToggle) {
                 refs.render(host);
             }
         }
-    });
+    }).catch(() => line.remove()); // a preview that cannot be built is dropped, never an unhandled error
     panel.appendChild(button('onc-btn onc-btn--full', 'Workup & treatment →', () => openTox(e.tox)));
     for (const m of e.tox.more ?? []) {
         panel.appendChild(button('onc-more', m.label, () => router.navigate(m.anchor ? `/info/${m.info}/at/${m.anchor}` : `/info/${m.info}`)));

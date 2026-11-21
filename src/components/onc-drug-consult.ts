@@ -757,7 +757,7 @@ function effectRow(refs: Refs, e: ResolvedEffect, startOpen: boolean, onToggle: 
       const old = line.closest('.onc-body')?.querySelector('.reference-citations-inline');
       if (old) { const host = old.parentElement as HTMLElement; old.remove(); refs.render(host); }
     }
-  });
+  }).catch(() => line.remove()); // a preview that cannot be built is dropped, never an unhandled error
 
   panel.appendChild(button('onc-btn onc-btn--full', 'Workup & treatment →', () => openTox(e.tox)));
   for (const m of e.tox.more ?? []) {
