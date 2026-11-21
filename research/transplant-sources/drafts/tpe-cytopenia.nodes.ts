@@ -12,7 +12,7 @@ export const CRITICAL_ACTIONS: CriticalAction[] = [
   { text: "Editor note: give the Sepsis consult's empiric antibiotics without delay; the febrile neutropenia pathway's risk score is written for cancer patients; call the transplant team.", nodeId: "tpe-cytopenia-fever" },
   { text: "CellCept label: if ANC is below 1.3 x 10^3/\u00b5L, interrupt or reduce the dose (call the transplant team first).", nodeId: "tpe-cytopenia-drug" },
   { text: "Myfortic label: if ANC is below 1.3 x 10^3/mcL or anemia occurs, interrupt or reduce the dose (call the transplant team first).", nodeId: "tpe-cytopenia-drug" },
-  { text: "CMV consensus 2025, CMV-disease treatment (strong, moderate): attempt to continue valganciclovir or ganciclovir; dose reduction for leukopenia alone not recommended (call the transplant team first).", nodeId: "tpe-cytopenia-differ" },
+  { text: "CMV consensus 2025 treatment: attempt to continue valganciclovir or ganciclovir (ungraded); dose reduction for leukopenia alone not recommended (strong, moderate) (call the transplant team first).", nodeId: "tpe-cytopenia-differ" },
   { text: "Sources differ: Valcyte label: should be avoided if ANC is below 500/\u00b5L, platelets below 25,000/\u00b5L or hemoglobin below 8 g/dL (call the transplant team first).", nodeId: "tpe-cytopenia-differ" },
   { text: "Sources differ: ganciclovir label: not recommended if ANC is below 500/\u00b5L, hemoglobin below 8 g/dL or platelets below 25,000/\u00b5L (call the transplant team first).", nodeId: "tpe-cytopenia-differ" },
   { text: "Bactrim label (any use): discontinue if a significant electrolyte abnormality, renal insufficiency or reduction in the count of any formed blood element is noted.", nodeId: "tpe-cytopenia-drug" },
@@ -31,7 +31,7 @@ export const NODES: DecisionNode[] = [
     options: [
       {"label": "Fever with low neutrophils", "description": "Editor note, Sepsis consult, febrile neutropenia pathway", "next": "tpe-cytopenia-fever", "urgency": "critical"},
       {"label": "What each drug's label says to do", "description": "Counts, thresholds and actions, by label", "next": "tpe-cytopenia-drug", "urgency": "urgent"},
-      {"label": "Where the sources differ", "description": "Valganciclovir, G-CSF, allopurinol", "next": "tpe-cytopenia-differ"},
+      {"label": "Where the sources differ", "description": "Valganciclovir, G-CSF, allopurinol, febuxostat", "next": "tpe-cytopenia-differ"},
       {"label": "Not in the sources; disposition", "description": "Admission, transfusion", "next": "tpe-cytopenia-dispo"},
     ],
   },
@@ -63,9 +63,9 @@ export const NODES: DecisionNode[] = [
     module: 0,
     title: "Where the sources differ",
     safetyLevel: "warning",
-    summary: "Valganciclovir or ganciclovir: labels say avoid or not recommended at ANC below 500/\u00b5L; CMV consensus 2025, treating CMV disease: attempt to continue (strong, moderate) (call the transplant team first).",
-    body: "\n\u2022 Valcyte label: should be avoided at ANC below 500/\u00b5L; ganciclovir label: not recommended at that count (call the transplant team first). [5,6]\n\u2022 CMV consensus 2025, treatment of CMV disease (statement graded strong, moderate): with leukopenia, attempts should be made to continue valganciclovir or ganciclovir; reducing the dose for leukopenia alone is not recommended (call the transplant team first). [19]\n\u2022 Valganciclovir prophylaxis, AASLD/AST 2025, liver (Strong, Level 2): without HSV and VZV seropositivity, letermovir can replace valganciclovir if neutropenia is persistent (call the transplant team first). [20]\n\u2022 G-CSF: CMV consensus 2025, CMV-disease treatment (ungraded): CSFs could be considered. [19] KDIGO 2009, kidney (ungraded): one case report suggested CSFs may have been associated with worsening graft function. [18] KDIGO, citing an oncology review (ungraded): febrile neutropenia benefits from CSFs plus antibiotics with pneumonia, fungal infection, hypotension, sepsis or organ failure. [18]\n\u2022 Imuran label: with allopurinol the Imuran dose should be reduced; KDIGO 2009, kidney (1B): avoiding allopurinol in patients receiving azathioprine is recommended (call the transplant team first). [4,18]\n\u2022 More: [Guideline statements and source differences](#/info/tpe-cytopenia-detail).",
-    citation: [4, 5, 6, 18, 19, 20],
+    summary: "Labels advise against valganciclovir or ganciclovir below ANC 500/\u00b5L; CMV consensus 2025 treatment: attempt to continue (ungraded), no dose reduction for leukopenia alone (strong, moderate) (call the transplant team first).",
+    body: "\n\u2022 Valcyte label: should be avoided at ANC below 500/\u00b5L; ganciclovir label: not recommended (call the transplant team first). [5,6]\n\u2022 CMV consensus 2025, treating CMV disease: attempt to continue valganciclovir or ganciclovir (ungraded); no dose reduction for leukopenia alone (strong, moderate). On intolerance: maribavir or foscarnet (strong, low) (call the transplant team first). [19]\n\u2022 Prophylaxis, intolerance, D+/R- or R+ lung, heart, liver or kidney: preemptive therapy or letermovir (CMV consensus 2025, weak, low). AASLD/AST, liver, in the absence of HSV and VZV seropositivity: letermovir for persistent neutropenia (Strong, Level 2) (call the transplant team first). [19,20]\n\u2022 No source read gives a blood-count threshold at which to switch.\n\u2022 G-CSF: CMV consensus 2025 (ungraded): CSFs could be considered. KDIGO 2009 rationale, kidney recipients (ungraded): evidence is case reports; potential for harm; one report of worsening graft function. [18,19]\n\u2022 KDIGO 2009, kidney (1B): avoid allopurinol with azathioprine. Imuran label, used together: reduce azathioprine to about 1/3 to 1/4 of the usual dose; KDIGO rationale: reduce by at least 50% and monitor counts (call the transplant team first). [4,18]\n\u2022 Febuxostat: Uloric label, contraindicated with azathioprine; Imuran label, not recommended. [4,25]\n[Detail](#/info/tpe-cytopenia-detail)",
+    citation: [4, 5, 6, 18, 19, 20, 25],
     next: "tpe-cytopenia-dispo",
   },
   {
@@ -107,4 +107,5 @@ export const CITATIONS: Citation[] = [
   { num: 22, text: "PENTAM 300 (pentamidine isethionate for injection). FDA prescribing information. SPL effective 2022-09-13. Setid cc2b635e-4840-4dc3-a177-5484371680e8. https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=cc2b635e-4840-4dc3-a177-5484371680e8" },
   { num: 23, text: "Velleca A, et al. The International Society for Heart and Lung Transplantation (ISHLT) guidelines for the care of heart transplant recipients. J Heart Lung Transplant. 2023;42(5):e1-e141. doi:10.1016/j.healun.2022.10.015. Malignancy topic; the recommendation text is printed in the 2010 column and continued in 2023 without change." },
   { num: 24, text: "Te H, et al. AASLD/AST practice guideline on adult liver transplantation: graft-related complications (immunosuppressant table). Liver Transpl. 2026;32(3):444-490. doi:10.1097/LVT.0000000000000715." },
+  { num: 25, text: "ULORIC (febuxostat). FDA prescribing information. DailyMed page revised April 2023, SPL published December 2025. Setid 54de10ef-fe5f-4930-b91d-6bbb04c664bd. https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/54de10ef-fe5f-4930-b91d-6bbb04c664bd.xml" },
 ];

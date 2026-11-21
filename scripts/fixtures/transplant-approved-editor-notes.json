@@ -23,5 +23,9 @@
  "Editor note: write down the time of the last immunosuppressant dose next to the level.",
  "Editor note: write the time of the last dose and the time of the blood draw on the lab request.",
  "Editor note: give the Sepsis consult's empiric antibiotics without delay; the febrile neutropenia pathway's risk score is written for cancer patients; call the transplant team.",
- "Editor note: run the Status Epilepticus consult's first-line treatment unchanged; before a second-line agent, check it against the list on this page; tell the transplant team which agent was given."
+ "Editor note: run the Status Epilepticus consult's first-line treatment unchanged; before a second-line agent, check it against the list on this page; tell the transplant team which agent was given.",
+ "Editor note: establish the organ transplanted, the date of transplant, and the transplant centre and how to reach it.",
+ "Editor note: list every immunosuppressant with its dose and the time of the last dose, and any dose missed or vomited.",
+ "Editor note: ask what changed in the last month: new drugs including antibiotics and antifungals, a rejection episode or its treatment, or a change of immunosuppressant.",
+ "Editor note: ask which infection prophylaxis the patient takes or recently stopped."
 ]

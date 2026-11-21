@@ -1086,3 +1086,6 @@ Bullets are built from the ledger CLAIM text with the grade or (rationale) marke
   - rows: K377
 - [bullet] • concerns about intrauterine devices include infection and possibly lower effectiveness in recipients; whether current devices are safer is unknown (rationale) [1]
   - rows: K378
+
+## Forks settled 2026-11-21 (allopurinol, febuxostat, pyelonephritis, calcium-channel blockers)
+New citations 9 Imuran, 10 Uloric, 11 IDSA 2025 cUTI page, 12 KDIGO 2021 BP. tpe-kidney-drugs: allopurinol with azathioprine now carries the KDIGO rationale (reduce by at least 50%, monitor counts), the Imuran label 1/3 to 1/4 statement, and the febuxostat line. tpe-kidney-infection and tpe-kidney-dispo: KDIGO early-infection sentence (first 4-6 months, rationale). tpe-kidney-dispo: IDSA 2025 (general population) line; the Adult UTI App content line (inpatient list names immunocompromised patients) confirmed. Overlays: drugs-detail (allopurinol, febuxostat, Sources differ), chronic-detail (Sources differ), infection-detail (IDSA 2025).

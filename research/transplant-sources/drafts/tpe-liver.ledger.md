@@ -231,3 +231,6 @@ Rejection presentation, ED triage, imaging time windows, bile leak care, cholang
 ## Pack error (corrected on the page)
 
 Pack 3.5 omitted that extra waitlist priority applies only to DCD-graft recipients with 2 of the 3 findings (G Q6 [P91]). Pack quotes also drop mid-sentence footnote numerals.
+
+## Forks settled 2026-11-21 (8-12 ng/dL)
+The "8-12 ng/dL" figure and unit are removed from tpe-liver-immunosuppression; the guideline's qualitative finding stays (delayed low-dose tacrolimus with induction: improved median eGFR, no significant difference in acute cellular rejection), no number. Rows C80 and the verify notes that quote the figure describe the earlier text.

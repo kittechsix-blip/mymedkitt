@@ -67,3 +67,6 @@ Rejected candidates now also include: atropine in heart recipients, allopurinol 
 ## Final edits
 - Page A: herbal and dietary supplements item dropped (patient-directed advice, not an ED clinician pitfall); the page now has 9 items. Its source (tpe-liver-disposition, "Recipients should not use herbal and dietary supplements ... (Strong, Level 4)") joins the rejected list.
 - Page B citations 1-18 are copied from the SOURCES entry each card line cites: text, label revision date (where the entry has one) and the DailyMed url built from its set id. Entries: Vfend (azoles V), sirolimus (mtor SRL), Noxafil (azoles P), Prograf, Astagraf XL, Envarsus XR, Neoral, Gengraf, Sandimmune (sources.ts), Zortress (mtor EVR), CellCept, Myfortic (antimetabolites), Nulojix, Thymoglobulin, Atgam (biologics-induction), Solu-Medrol (corticosteroids SM; the card's vaccine line also cites Medrol), dapsone, Bactrim (pjp-prophylaxis). Astagraf, Gengraf, Nulojix, Thymoglobulin and Atgam entries carry no revision date, so none is given.
+
+## Forks settled 2026-11-21
+Page A gains a tenth item, "Do NOT give febuxostat to a patient on azathioprine": Uloric label (contraindicated) and Imuran label (not recommended), link `#/node/tpe-cytopenia-differ`, citations 10 and 11. Page A is at the 10-item limit.

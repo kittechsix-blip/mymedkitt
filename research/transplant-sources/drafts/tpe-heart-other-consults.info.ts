@@ -12,7 +12,7 @@ export const TPE_TPE_HEART_OTHER_CONSULTS: InfoPage = {
     },
     {
       "heading": "SVT: vagal manoeuvres, adenosine, rate control",
-      "body": "Related consults: [SVT](#/tree/svt). App content: its critical action gives adenosine 6 mg then 12 mg; its adenosine step says 3 mg for a transplanted heart. Heart guideline: adenosine \"may be considered\" in heart transplant recipients with supraventricular tachyarrhythmias if closely monitored at low doses (25 mcg/kg: 1.5 mg if \u226560 kg; early postoperative care table, Class IIb, C); \"e.g., 3 mg in adults\" (arrhythmia narrative, ungraded); the two figures are unresolved. [1]"
+      "body": "Related consults: [SVT](#/tree/svt). App content: its critical action gives adenosine 6 mg then 12 mg; its adenosine step says 3 mg for a transplanted heart. Heart guideline: adenosine \"may be considered\" in heart transplant recipients with supraventricular tachyarrhythmias if closely monitored at low doses (25 mcg/kg: 1.5 mg if \u226560 kg; early postoperative care table, Class IIb, C). The arrhythmia narrative gives \"e.g., 3 mg in adults\" as an example of a low dose (ungraded). [1]"
     },
     {
       "heading": "AF with RVR: rate and rhythm control",

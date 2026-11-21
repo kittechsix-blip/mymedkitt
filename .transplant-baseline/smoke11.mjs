@@ -1,0 +1,14 @@
+import { chromium } from 'playwright'; import fs from 'node:fs'; import path from 'node:path';
+const base='http://127.0.0.1:8795/app.html';
+const cacheDir=path.join(process.env.HOME,'Library/Caches/ms-playwright'); const cached=fs.readdirSync(cacheDir).filter(d=>d.startsWith('chromium_headless_shell-')).sort().reverse();
+const exe=fs.existsSync(chromium.executablePath())?undefined:path.join(cacheDir,cached[0],'chrome-headless-shell-mac-arm64/chrome-headless-shell');
+const b=await chromium.launch(exe?{executablePath:exe}:{}); const ctx=await b.newContext({serviceWorkers:'block',viewport:{width:390,height:844}}); await ctx.route(/supabase\.co/, r=>r.abort()); const p=await ctx.newPage();
+await p.addInitScript(()=>{try{localStorage.clear()}catch{}}); await p.goto(base+'#/tree/transplant-patient-ed/node/tpe-diarrhea-cni'); await p.waitForSelector('main .decision-card'); await p.waitForTimeout(600);
+await p.evaluate(()=>document.querySelectorAll('details.card-accordion').forEach(d=>d.open=true));
+const id=await p.evaluate(()=>{const e=[...document.querySelectorAll('.decision-card--active [data-link-type="tree"]')].find(x=>/tpe-cni-level/.test(x.getAttribute('data-link-id'))); e.click(); return e.getAttribute('data-link-id');}); await p.waitForTimeout(1500);
+console.log('diarrhea->level',id,'->',await p.evaluate(()=>({h:location.hash,t:[...document.querySelectorAll('.decision-card__title')].pop()?.textContent.trim().slice(0,60)})));
+await p.goto(base+'#/tree/transplant-patient-ed'); await p.waitForSelector('main .decision-card'); await p.waitForTimeout(600);
+await p.evaluate(()=>{[...document.querySelectorAll('button, a')].find(x=>/\u{1F6D1}/u.test(x.textContent||'')&&x.closest('[class*="toolbar"]')).click()}); await p.waitForTimeout(800); await p.evaluate(()=>document.querySelectorAll('.info-modal-overlay details').forEach(d=>d.open=true));
+const r=await p.evaluate(()=>{const o=document.querySelector('.info-modal-overlay'); const items=[...o.querySelectorAll('.info-page-stop-item')]; const feb=items.find(i=>/febuxostat/i.test(i.textContent)); const l=feb?.querySelector('[data-link-type]'); let id=null; if(l){id=l.getAttribute('data-link-type')+':'+l.getAttribute('data-link-id'); l.click();} return {items:items.length,feb:!!feb,id};}); await p.waitForTimeout(1200);
+console.log('STOP',JSON.stringify(r),'->',await p.evaluate(()=>({h:location.hash,t:[...document.querySelectorAll('.decision-card__title')].pop()?.textContent.trim().slice(0,50)})));
+await b.close();

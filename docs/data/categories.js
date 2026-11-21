@@ -780,10 +780,10 @@ export const DEFAULT_CATEGORIES = [
             {
                 id: 'transplant-patient-ed',
                 title: 'Transplant Patient in the ED',
-                subtitle: 'Adult solid-organ recipients \u00b7 low counts \u00b7 heart \u00b7 lung \u00b7 liver \u00b7 kidney \u00b7 calcineurin inhibitors \u00b7 CMV \u00b7 BK',
+                subtitle: 'Adult solid-organ recipients \u00b7 fever and low counts \u00b7 lung \u00b7 heart \u00b7 PJP \u00b7 liver \u00b7 kidney \u00b7 calcineurin inhibitors \u00b7 CMV \u00b7 diarrhea \u00b7 BK \u00b7 PTLD',
                 categoryId: 'nephro-rheum-endo',
                 version: '1.0',
-                nodeCount: 57,
+                nodeCount: 72,
                 entryNodeId: 'tpe-start',
                 displayCategoryId: 'nephro-rheum-endo',
             },
@@ -2009,10 +2009,10 @@ export const DEFAULT_CATEGORIES = [
             {
                 id: 'transplant-patient-ed',
                 title: 'Transplant Patient in the ED',
-                subtitle: 'Adult solid-organ recipients \u00b7 low counts \u00b7 heart \u00b7 lung \u00b7 liver \u00b7 kidney \u00b7 calcineurin inhibitors \u00b7 CMV \u00b7 BK',
+                subtitle: 'Adult solid-organ recipients \u00b7 fever and low counts \u00b7 lung \u00b7 heart \u00b7 PJP \u00b7 liver \u00b7 kidney \u00b7 calcineurin inhibitors \u00b7 CMV \u00b7 diarrhea \u00b7 BK \u00b7 PTLD',
                 categoryId: 'nephro-rheum-endo',
                 version: '1.0',
-                nodeCount: 57,
+                nodeCount: 72,
                 entryNodeId: 'tpe-start',
             },
             {

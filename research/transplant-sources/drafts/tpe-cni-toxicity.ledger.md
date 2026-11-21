@@ -554,3 +554,6 @@ Final tables (script output):
 | 8 | 23 | tpe-cni-brain | Editor note: use the Hypertensive Emergency (Adult) consult unchanged; tell the transplant team which agent was started; the drug level is rechecked afterwards. |
 | 9 | 23 | tpe-cni-drugs | Strong CYP3A inhibitor started (e.g., clarithromycin, voriconazole): tacrolimus labels say reduce the tacrolimus dose, trough within 1-3 days (call the transplant team first). |
 | 10 | 22 | tpe-cni-drugs | Prograf and cyclosporine are not used together: stop one at least 24 hours before starting the other (call the transplant team first). |
+
+## Forks settled 2026-11-21 (tacrolimus targets)
+Added: tpe-cni-targets overlay, first section "What a target depends on" (IATDMCT 2019 [7]; Prograf label 2.6 [1]); tpe-cni-level one line. No range chosen; no new citation.

@@ -2,7 +2,7 @@ import assert from 'node:assert';
 const ROOT='/Users/kittechsix/Developer/mymedkitt-transplant/';
 const t=await import(ROOT+'src/data/trees/transplant-patient-ed.ts');
 const cm=t.TRANSPLANT_PATIENT_ED_CITATIONS; const byNum=Object.fromEntries(cm.map(c=>[c.num,c.text]));
-const PAGES=[['heart',2],['liver',2],['lung',2],['cmv',3],['kidney',2],['bk',3],['cni-toxicity',4],['cni-hypertension',4],['cytopenia',4]];
+const PAGES=[['heart',2],['liver',2],['lung',2],['cmv',3],['kidney',2],['bk',3],['cni-toxicity',4],['cni-hypertension',4],['cytopenia',4],['pjp',3],['ptld',3],['diarrhea',4]];
 const markers=s=>[...s.matchAll(/\[(\d+(?:\s*,\s*\d+)*)\]/g)].flatMap(m=>m[1].split(',').map(x=>+x.trim()));
 let nodeChecks=0;
 const strip=(o)=>JSON.parse(JSON.stringify(o));

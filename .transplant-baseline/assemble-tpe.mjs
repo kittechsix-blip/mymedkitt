@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 const ROOT='/Users/kittechsix/Developer/mymedkitt-transplant/';
 const D=ROOT+'research/transplant-sources/drafts/';
-const PAGES=[['heart',2],['liver',2],['lung',2],['kidney',2],['cmv',3],['bk',3],['cni-toxicity',4],['cni-hypertension',4],['cytopenia',4]];
+const PAGES=[['heart',2],['liver',2],['lung',2],['kidney',2],['cmv',3],['bk',3],['cni-toxicity',4],['cni-hypertension',4],['cytopenia',4],['pjp',3],['ptld',3],['diarrhea',4]];
 const slice=(src,name)=>{ const re=new RegExp('export const '+name+'\\b[^=]*=\\s*\\['); const m=re.exec(src); if(!m) throw new Error('no '+name);
   const start=m.index+m[0].length; const end=src.indexOf('\n];',start); return src.slice(start,end); };
 const unified=[]; // {text,num}
@@ -24,24 +24,39 @@ for (const [p,mod] of PAGES) {
   nodesText+=`  // ---- page: tpe-${p} (assembled from research/transplant-sources/drafts/tpe-${p}.nodes.ts) ----`+remapText(nt,map).replace(/^\n?/,'\n')+'\n';
   caText+=remapText(ca,map).replace(/^\n?/,'\n');
 }
+const titleOf=(f)=>{ const t=fs.readFileSync(D+f,'utf8'); const i=t.indexOf('export const NODES'); return JSON.parse('"'+/title:\s*(["'`])((?:(?!\1)[^\\]|\\.)*)\1/.exec(t.slice(i))[2].replace(/\\'/g,"'").replace(/"/g,'\\"')+'"'); };
+const nodeTitle=(file,id)=>{ const t=fs.readFileSync(D+file,'utf8'); const i=t.indexOf(`id: "${id}"`); return JSON.parse('"'+/title:\s*(["'`])((?:(?!\1)[^\\]|\\.)*)\1/.exec(t.slice(i))[2].replace(/\\'/g,"'").replace(/"/g,'\\"')+'"'); };
+const OPTS=[ // [label source, next, urgency]  (order by danger, owner 2026-11-21; urgency as the pages set them: critical page = critical, fever option critical, BK none)
+  [nodeTitle('tpe-cytopenia.nodes.ts','tpe-cytopenia-fever'),'tpe-cytopenia-fever','critical'],
+  [titleOf('tpe-lung.nodes.ts'),'tpe-lung','critical'],
+  [titleOf('tpe-heart.nodes.ts'),'tpe-heart','urgent'],
+  [titleOf('tpe-pjp.nodes.ts'),'tpe-pjp','urgent'],
+  [titleOf('tpe-liver.nodes.ts'),'tpe-liver','urgent'],
+  [titleOf('tpe-kidney.nodes.ts'),'tpe-kidney','urgent'],
+  [titleOf('tpe-cni-toxicity.nodes.ts'),'tpe-cni-toxicity','urgent'],
+  [titleOf('tpe-cni-hypertension.nodes.ts'),'tpe-cni-hypertension','urgent'],
+  [titleOf('tpe-cmv.nodes.ts'),'tpe-cmv','urgent'],
+  [titleOf('tpe-diarrhea.nodes.ts'),'tpe-diarrhea','urgent'],
+  [titleOf('tpe-cytopenia.nodes.ts'),'tpe-cytopenia','urgent'],
+  [titleOf('tpe-bk.nodes.ts'),'tpe-bk',null],
+  [titleOf('tpe-ptld.nodes.ts'),'tpe-ptld','urgent'],
+];
+const START_BODY=['Editor note: call the transplant team before changing, holding or stopping any immunosuppressant.','',
+ 'First questions (editor content, not from a guideline):',
+ 'Editor note: establish the organ transplanted, the date of transplant, and the transplant centre and how to reach it.',
+ 'Editor note: list every immunosuppressant with its dose and the time of the last dose, and any dose missed or vomited.',
+ 'Editor note: ask what changed in the last month: new drugs including antibiotics and antifungals, a rejection episode or its treatment, or a change of immunosuppressant.',
+ 'Editor note: ask which infection prophylaxis the patient takes or recently stopped.','',
+ 'Not yet in this consult: fever and infection by time since transplant, and pancreas, intestine or islet recipients. Related consults: [Sepsis](#/tree/sepsis).'].join('\n');
 const start=`  {
     id: 'tpe-start',
     type: 'question',
     module: 1,
     title: 'Transplant Patient in the ED',
     summary: 'Adult solid organ transplant recipient in the ED: pick the organ or the problem below.',
-    body: 'Editor note: call the transplant team before changing, holding or stopping any immunosuppressant.\\n\\nNot yet in this consult: fever and infection by time since transplant, Pneumocystis pneumonia, post-transplant lymphoproliferative disorder, diarrhea, and pancreas, intestine or islet recipients. Related consults: [Sepsis](#/tree/sepsis).',
+    body: ${JSON.stringify(START_BODY)},
     options: [
-      { label: 'Fever with low neutrophils', next: 'tpe-cytopenia-fever', urgency: 'critical' },
-      { label: 'Low blood counts on a transplant drug', next: 'tpe-cytopenia', urgency: 'urgent' },
-      { label: 'Heart transplant recipient in the ED', next: 'tpe-heart', urgency: 'urgent' },
-      { label: 'Lung transplant recipient: acute respiratory decline', next: 'tpe-lung', urgency: 'critical' },
-      { label: 'Liver transplant recipient with a possible graft problem', next: 'tpe-liver', urgency: 'urgent' },
-      { label: 'Kidney transplant recipient: rejection and graft emergencies', next: 'tpe-kidney', urgency: 'urgent' },
-      { label: 'Transplant patient on tacrolimus or cyclosporine: possible drug toxicity', next: 'tpe-cni-toxicity', urgency: 'urgent' },
-      { label: 'High blood pressure on tacrolimus or cyclosporine', next: 'tpe-cni-hypertension', urgency: 'urgent' },
-      { label: 'Transplant recipient with possible CMV', next: 'tpe-cmv', urgency: 'urgent' },
-      { label: 'BK polyomavirus in the kidney transplant recipient', next: 'tpe-bk' },
+${OPTS.map(([l,n,u])=>`      { label: ${JSON.stringify(l)}, next: '${n}'${u?`, urgency: '${u}'`:''} },`).join('\n')}
     ],
     calculatorLinks: [{ id: 'transplant-drug-side-effects', label: 'Transplant Drugs Side-effects', kind: 'tree' }],
   },

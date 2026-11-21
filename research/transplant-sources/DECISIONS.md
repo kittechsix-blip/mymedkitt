@@ -228,3 +228,30 @@ The owner approved the full list below on 2026-11-21, including "Editor note: re
 - Hepatic artery thrombosis becomes a row on the sirolimus and Zortress cards (category `tx-hepatic-artery-thrombosis`, tier 1, page tpe-liver-vascular).
 - Serious infection on the rituximab and alemtuzumab cards links to the transplant infection page once that page is written; until then it stays a plain boxed line.
 - STILL OPEN (shown as "sources differ"): forks between numbers: adenosine, tacrolimus targets, G-CSF.
+
+## Forks settled 2026-11-21 (owner accepted the researched recommendations)
+
+Evidence: FORKS-EVIDENCE-2026-11-21.md. Applied to the drafts the same day.
+
+1. Adenosine (heart): the page leads with the ISHLT 2023 graded figure, 25 mcg/kg (1.5 mg if 60 kg or more), IIb C, may be considered, closely monitored, starting low. The narrative 3 mg is detail, as an example of a low dose. The Flyer 2017 study (80 recipients, 6 months to 25 years, central line, not in tachycardia, none needed pacing) and its authors' limits are in the denervated-drugs overlay. "Unresolved" removed.
+2. "8-12 ng/dL" (liver immunosuppression overlay): figure and unit removed; the guideline's qualitative finding (delayed low-dose tacrolimus with induction: better median eGFR, no significant difference in acute cellular rejection) kept with no number.
+3. Tacrolimus targets: sourced statement added (IATDMCT consensus 2019; Prograf label 2.6) that a target depends on organ, regimen, immunological risk, time after transplant and assay; no range chosen. Overlay first section; one line in tpe-cni-level.
+4. G-CSF: KDIGO 2009 rationale statements (case reports, potential for harm, one report of worsening graft function, febrile neutropenia below 500 conditions) added beside CMV consensus 2025, marked rationale, kidney recipients, 2009. Turgeon abstract not used.
+5. Antivirals at low counts: switch options added (CMV 2025: maribavir or foscarnet on intolerance during treatment, strong, low; preemptive therapy or letermovir on prophylaxis, weak, low; AASLD/AST: letermovir for persistent neutropenia, Strong, Level 2), each with the call-first phrase, and the line "No source read gives a blood-count threshold at which to switch." Paediatric statement not used.
+6. Allopurinol with azathioprine: KDIGO leads (avoid, 1B); Imuran label (about 1/3 to 1/4 of the usual dose) and KDIGO rationale (reduce by at least 50%, monitor counts) follow; febuxostat line (Uloric label contraindicated; Imuran label not recommended) added; "Sources differ" only for avoid versus reduce. Cytopenia differ node and overlays; kidney drugs node and overlays.
+7. Stop page: item "Do NOT give febuxostat to a patient on azathioprine" added (10 items), linking tpe-cytopenia-differ; two label citations.
+8. Graft pyelonephritis: KDIGO early-infection sentence (first 4-6 months, rationale) in the kidney infection node and disposition node; IDSA 2025 complicated-UTI statement (trials mostly excluded immunocompromised states; marked general population) in the infection overlay and the disposition node. The Adult UTI App content line (inpatient list names immunocompromised patients) confirmed present.
+9. Calcium-channel blockers: KDIGO 2021 Recommendation 4.1 (dihydropyridine CCB or ARB first-line, kidney recipients, 1C) added to the Sources differ lines (htn-agents node and overlay; kidney chronic and drugs overlays), plus the line on what the labels name (verapamil, diltiazem, nifedipine, nicardipine named in the tacrolimus labels; amlodipine and felodipine in none of the eight labels searched).
+
+Fork 8 of the evidence report (fever with low neutrophils in a non-cancer recipient) is unchanged: the approved editor note stands as is.
+
+## Front door editor notes (owner approved in advance, unseen, 2026-11-21)
+
+Four editor-written first-assessment notes on the entry node tpe-start, approved in advance by the owner before he saw the text. Fixed text; the enforcing copy is `scripts/fixtures/transplant-approved-editor-notes.json`. They sit after the line "First questions (editor content, not from a guideline):".
+
+1. Editor note: establish the organ transplanted, the date of transplant, and the transplant centre and how to reach it.
+2. Editor note: list every immunosuppressant with its dose and the time of the last dose, and any dose missed or vomited.
+3. Editor note: ask what changed in the last month: new drugs including antibiotics and antifungals, a rejection episode or its treatment, or a change of immunosuppressant.
+4. Editor note: ask which infection prophylaxis the patient takes or recently stopped.
+
+The scope line now reads: "Not yet in this consult: fever and infection by time since transplant, and pancreas, intestine or islet recipients. Related consults: [Sepsis](#/tree/sepsis)."

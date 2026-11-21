@@ -199,6 +199,9 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'tpe-cni-btn', label: 'CNI', icon: '\u{1F48A}', action: 'jump', target: 'tpe-cni-toxicity' },
     { id: 'tpe-cni-htn-btn', label: 'CNI HTN', icon: '\u{1FA78}', action: 'jump', target: 'tpe-cni-hypertension' },
     { id: 'tpe-cytopenia-btn', label: 'Counts', icon: '\u{1FA78}', action: 'jump', target: 'tpe-cytopenia' },
+    { id: 'tpe-pjp-btn', label: 'PJP', icon: '\u{1FAC1}', action: 'jump', target: 'tpe-pjp' },
+    { id: 'tpe-diarrhea-btn', label: 'Diarrhea', icon: '\u{1F4A7}', action: 'jump', target: 'tpe-diarrhea' },
+    { id: 'tpe-ptld-btn', label: 'PTLD', icon: '\u{1F9EC}', action: 'jump', target: 'tpe-ptld' },
   ],
   'oncological-emergencies': [
     { id: 'summary', label: 'Onc Steps', icon: '📋', action: 'overlay', target: 'onc-emergency-summary' },

@@ -194,3 +194,6 @@ tpe-cni-htn-dispo now carries, once, directly beside the link to the Hypertensiv
 | 4 | 8 | tpe-cni-htn-agents | Cyclosporine labels: potassium-sparing diuretics should not be used. |
 | 5 | 25 | tpe-cni-htn-dispo | Heart recipients with PRES (ISHLT, Class I, C): gradual blood pressure reduction, CNI withdrawal or reduction, alternate immunosuppressant or CNI (call the transplant team first). |
 | 6 | 23 | tpe-cni-htn-dispo | Editor note: use the Hypertensive Emergency (Adult) consult unchanged; tell the transplant team which agent was started; the drug level is rechecked afterwards. |
+
+## Forks settled 2026-11-21 (calcium-channel blockers)
+tpe-cni-htn-agents node: Sources differ line adds KDIGO 2021 Recommendation 4.1 (dihydropyridine CCB or ARB first-line, kidney recipients, 1C; new citation 9) and a line that amlodipine and felodipine are named in none of the eight labels searched; two cyclosporine bullets shortened to stay within 180 words (no content dropped from the detail overlay). Overlay tpe-cni-htn-agents: KDIGO 2021 quote and a "what the labels name" bullet (new citation 11).

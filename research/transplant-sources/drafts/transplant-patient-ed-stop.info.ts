@@ -43,6 +43,10 @@ const PAGE: InfoPage = {
       heading: '🛑 Do NOT use peripheral blood biomarkers developed as a noninvasive alternative to biopsy, alone, to diagnose or exclude rejection in an adult liver recipient',
       body: `AASLD/AST 2025, liver recipients (Question 16): peripheral blood biomarkers alone should not be used to diagnose or exclude T-cell-mediated rejection and other forms of allograft injury (Strong, Level 4). [2] [Liver transplant recipient](#/node/tpe-liver).`,
     },
+    {
+      heading: '🛑 Do NOT give febuxostat to a patient on azathioprine',
+      body: `Uloric label (Contraindications): febuxostat is contraindicated in patients being treated with azathioprine or mercaptopurine. [10] Imuran label (Drug Interactions): concomitant use of Imuran and febuxostat is not recommended. [11] [Allopurinol, febuxostat and azathioprine: low counts](#/node/tpe-cytopenia-differ).`,
+    },
   ],
   citations: [
     { num: 1, text: 'Velleca A, Shullo MA, Dhital K, et al. The International Society for Heart and Lung Transplantation (ISHLT) guidelines for the care of heart transplant recipients. J Heart Lung Transplant. 2023;42(5):e1-e141. doi:10.1016/j.healun.2022.10.015' },
@@ -54,6 +58,8 @@ const PAGE: InfoPage = {
     { num: 7, text: 'NEORAL (cyclosporine capsules and oral solution, USP, MODIFIED). FDA prescribing information, SPL effective 2026-08-10. DailyMed set ID 94461af3-11f1-4670-95d4-2965b9538ae3.' },
     { num: 8, text: 'GENGRAF (cyclosporine capsules, USP [MODIFIED]). FDA prescribing information, SPL effective 2024-08-21. DailyMed set ID e896cbfe-4745-4088-82a3-8dc10b75c41f.' },
     { num: 9, text: 'SANDIMMUNE (cyclosporine capsules and injection). FDA prescribing information, SPL effective 2026-07-10. DailyMed set ID 5e5926a7-1de0-4b54-a5c0-286b6200ff82.' },
+    { num: 10, text: 'ULORIC (febuxostat). FDA prescribing information. DailyMed page revised April 2023, SPL published December 2025. Setid 54de10ef-fe5f-4930-b91d-6bbb04c664bd. Cited by section (Contraindications 4).' },
+    { num: 11, text: 'IMURAN (azathioprine). FDA prescribing information. SPL effective 2026-03-19. Setid 4d62b6e4-a9d4-4818-e063-6394a90aa208. Cited by section (Drug Interactions).' },
   ],
 };
 

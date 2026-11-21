@@ -9,7 +9,7 @@ import type { Citation } from './neurosyphilis.js';
 export const CRITICAL_ACTIONS: CriticalAction[] = [
   { text: "Editor note: call the transplant team before changing, holding or stopping any immunosuppressant.", nodeId: "tpe-heart" },
   { text: "Relative, symptomatic bradycardia: \"will not respond to atropine\"; isoproterenol infusion and pacing \"usual modes of management\" (ISHLT anaesthesia section, I C).", nodeId: "tpe-heart-brady" },
-  { text: "Adenosine may be considered, closely monitored, low-dose 25 mcg/kg (1.5 mg if \u226560 kg; IIb C) or 3 mg (narrative); unresolved; standard doses risk asystole.", nodeId: "tpe-heart-tachy" },
+  { text: "Adenosine may be considered, closely monitored, starting low: 25 mcg/kg (1.5 mg if 60 kg or more) (ISHLT 2023, IIb C).", nodeId: "tpe-heart-tachy" },
   { text: "New-onset heart failure: evaluate for acute cellular and antibody-mediated rejection; consider CAV (ISHLT graft failure narrative).", nodeId: "tpe-heart-compromise" },
   { text: "Compromising pericardial effusion: percutaneous or surgical drainage (ISHLT early postoperative care table, I C).", nodeId: "tpe-heart-compromise" },
   { text: "Suspected symptomatic acute rejection: biopsy as early as possible (I C). High-dose IV steroid first-line (call the transplant team first).", nodeId: "tpe-heart-rejection" },
@@ -50,11 +50,11 @@ export const NODES: DecisionNode[] = [
     module: 0,
     title: "Fast or irregular rhythm",
     safetyLevel: "critical",
-    body: "\u2022 Atrial or ventricular arrhythmia: consider biopsy and coronary angiography to exclude rejection, assess for CAV (arrhythmia section, I B); sustained VT: both (early postoperative care table, I B). [1]\n\u2022 Adenosine, two figures, unresolved: 25 mcg/kg (1.5 mg if 60 kg or more), \"may be considered\" if closely monitored (early postoperative care table, IIb C); \"e.g., 3 mg in adults\" (caution: \"severe bradycardia or asystole\") (arrhythmia narrative, ungraded). \"Standard doses\" \"may result in prolonged asystole\" (anaesthesia section, I C). [Adenosine](#/drug/adenosine/heart transplant) [1]\n\u2022 Non-dihydropyridine calcium channel blockers, beta-blockers may be used for rate control (early postoperative care table, IIa B) and atrial fibrillation with preserved ejection fraction (arrhythmia section, IIa B). [1]\n\u2022 The guideline describes amiodarone as having minimal interaction with immunosuppressants in one place (IIa C); Table 5 lists amiodarone, diltiazem, verapamil as raising calcineurin and mTOR inhibitor levels. Guideline: monitor levels and adjust doses (call the transplant team first). [1]\nApp content: the SVT consult's critical action gives adenosine 6 mg then 12 mg; its adenosine node says 3 mg for a transplanted heart.\n[Detail](#/info/tpe-heart-rhythm-detail)",
+    body: "\u2022 Atrial or ventricular arrhythmia: consider biopsy and coronary angiography to exclude rejection, assess for CAV (arrhythmia section, I B); sustained VT: both (early postoperative care table, I B). [1]\n\u2022 Adenosine may be considered, closely monitored, starting low: 25 mcg/kg (1.5 mg if 60 kg or more) (early postoperative care table, ISHLT 2023, IIb C). Study behind the figure: central line, not in tachycardia, ages 6 months to 25 years (detail: [denervated drugs](#/info/tpe-heart-denervated-drugs)). \"standard doses to treat atrial tachyarrhythmias may result in prolonged asystole\" (anaesthesia section, I C). [Adenosine](#/drug/adenosine/heart transplant) [1, 2]\n\u2022 Non-dihydropyridine calcium channel blockers, beta-blockers may be used for rate control (early postoperative care table, IIa B) and atrial fibrillation with preserved ejection fraction (arrhythmia section, IIa B). [1]\n\u2022 The guideline describes amiodarone as having minimal interaction with immunosuppressants in one place (IIa C); Table 5 lists amiodarone, diltiazem, verapamil as raising calcineurin and mTOR inhibitor levels. Guideline: monitor levels and adjust doses (call the transplant team first). [1]\nApp content: the SVT consult's critical action gives adenosine 6 mg then 12 mg; its adenosine node says 3 mg for a transplanted heart.\n[Detail](#/info/tpe-heart-rhythm-detail)",
     next: "tpe-heart-dispo",
     calculatorLinks: [{"id": "afib-rvr", "label": "Atrial Fibrillation with RVR", "kind": "tree"}, {"id": "svt", "label": "SVT", "kind": "tree"}, {"id": "ventricular-tachycardia", "label": "Ventricular Tachycardia", "kind": "tree"}],
-    summary: "Heart recipients: adenosine may be considered, closely monitored, low dose 25 mcg/kg (1.5 mg if \u226560 kg; early postoperative, IIb C) or 3 mg (narrative); unresolved; standard doses risk asystole.",
-    citation: [1],
+    summary: "ISHLT, heart recipients: adenosine may be considered, closely monitored, low-dose 25 mcg/kg (1.5 mg if \u226560 kg; IIb C); standard doses to treat atrial tachyarrhythmias may result in prolonged asystole.",
+    citation: [1, 2],
   },
 
   {
@@ -125,4 +125,5 @@ export const NODES: DecisionNode[] = [
 
 export const CITATIONS: Citation[] = [
   { num: 1, text: 'Velleca A, Shullo MA, Dhital K, Azeka E, Colvin M, DePasquale E, Farrero M, Garcia-Guereta L, Jamero G, Khush K, Lavee J, Pouch S, Patel J, Michaud CJ, Schubert S, Angelini A, Carlos L, Mirabet S, Pham M, Urschel S, Kim KH, Miyamoto S, Chih S, Daly K, Grossi P, Jennings DL, Kim IC, Lim HS. The International Society for Heart and Lung Transplantation (ISHLT) guidelines for the care of heart transplant recipients. J Heart Lung Transplant. 2023;42(5):e1-e141. doi:10.1016/j.healun.2022.10.015' },
+  { num: 2, text: 'Flyer JN, et al. Prospective study of adenosine on atrioventricular nodal conduction in pediatric and young adult patients after heart transplant. Circulation. 2017;135(25):2485-2493. PMID 28450351' },
 ];

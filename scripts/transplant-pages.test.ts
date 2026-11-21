@@ -32,6 +32,9 @@ const PAGES: Record<string, { entry: string; final: string; prefix: string }> = 
   liver: { entry: 'tpe-liver', final: 'tpe-liver-disposition', prefix: 'tpe-liver' },
   lung: { entry: 'tpe-lung', final: 'tpe-lung-dispo', prefix: 'tpe-lung' },
   kidney: { entry: 'tpe-kidney', final: 'tpe-kidney-dispo', prefix: 'tpe-kidney' },
+  pjp: { entry: 'tpe-pjp', final: 'tpe-pjp-dispo', prefix: 'tpe-pjp' },
+  ptld: { entry: 'tpe-ptld', final: 'tpe-ptld-dispo', prefix: 'tpe-ptld' },
+  diarrhea: { entry: 'tpe-diarrhea', final: 'tpe-diarrhea-dispo', prefix: 'tpe-diarrhea' },
   cmv: { entry: 'tpe-cmv', final: 'tpe-cmv-dispo', prefix: 'tpe-cmv' },
   bk: { entry: 'tpe-bk', final: 'tpe-bk-team', prefix: 'tpe-bk' },
   'cni-toxicity': { entry: 'tpe-cni-toxicity', final: 'tpe-cni-dispo', prefix: 'tpe-cni-' },
@@ -41,7 +44,7 @@ const PAGES: Record<string, { entry: string; final: string; prefix: string }> = 
 const pageOfNode = (id: string): string | null => {
   if (id.startsWith('tpe-cni-htn') || id === 'tpe-cni-hypertension') return 'cni-hypertension';
   if (id.startsWith('tpe-cni-')) return 'cni-toxicity';
-  for (const k of ['heart', 'liver', 'lung', 'kidney', 'cmv', 'bk', 'cytopenia']) if (id === `tpe-${k}` || id.startsWith(`tpe-${k}-`)) return k;
+  for (const k of ['heart', 'liver', 'lung', 'kidney', 'cmv', 'bk', 'cytopenia', 'pjp', 'ptld', 'diarrhea']) if (id === `tpe-${k}` || id.startsWith(`tpe-${k}-`)) return k;
   return null;
 };
 const isPlaceholder = (n: Node): boolean => n.title.startsWith('[NOT WRITTEN]');
@@ -240,7 +243,7 @@ function checkCitations(nodes: FNode[], cites: { num: number }[], cas: CA[], ove
   }
   return errs;
 }
-const PAGE_FILES: string[] = ['heart', 'liver', 'lung', 'kidney', 'cmv', 'bk', 'cni-toxicity', 'cni-hypertension', 'cytopenia'];
+const PAGE_FILES: string[] = ['heart', 'liver', 'lung', 'kidney', 'cmv', 'bk', 'cni-toxicity', 'cni-hypertension', 'cytopenia', 'pjp', 'ptld', 'diarrhea'];
 const DRAFTS: Record<string, { NODES: FNode[]; CRITICAL_ACTIONS: CA[]; CITATIONS: { num: number; text: string }[] }> = {};
 for (const p of PAGE_FILES) DRAFTS[p] = await import(pathToFileURL(path.join(ROOT, 'research', 'transplant-sources', 'drafts', `tpe-${p}.nodes.ts`)).href);
 const strip = (t: string): string => t.replace(MARK, '');
@@ -277,11 +280,11 @@ test('real: every critical action is 25 words or fewer', () => { const e = check
 test('real: the call-the-transplant-team sentence is in every page entry node and once in each page\'s critical actions', () => { assert.deepEqual(checkCall(NODES, CAS), []); });
 test('real: the final node of every page ends, in body and recommendation, with the disposition sentence', () => { assert.deepEqual(checkEnd(NODES), []); });
 test('real: "dreaded" appears nowhere in the transplant consults, overlays or drug data', () => { assert.deepEqual(checkDreaded(dreadParts()), []); });
-test('real: the checks look at something (9 pages, 42 overlays, 5 cards)', () => {
-  assert.equal(Object.keys(PAGES).length, 9);
-  assert.equal(Object.keys(OVERLAYS).length, 42);
+test('real: the checks look at something (12 pages, 45 overlays, 5 cards)', () => {
+  assert.equal(Object.keys(PAGES).length, 12);
+  assert.equal(Object.keys(OVERLAYS).length, 45);
   assert.equal(tx.TX_DATA.drugs.length >= 5, true);
-  assert.ok(NODES.filter((n) => !isPlaceholder(n)).length >= 56);
+  assert.ok(NODES.filter((n) => !isPlaceholder(n)).length >= 71);
 });
 
 // ------------------------------------------------------------ each rule can fail (in-memory mutation of a clone)
@@ -430,7 +433,7 @@ test('break STOP: a missing page, 11 sections, a wrong heading, no link, a dead 
 });
 
 // ------------------------------------------------------------ shippable front door and no unfinished wording
-const SCOPE_LINE = 'Not yet in this consult: fever and infection by time since transplant, Pneumocystis pneumonia, post-transplant lymphoproliferative disorder, diarrhea, and pancreas, intestine or islet recipients. Related consults: [Sepsis](#/tree/sepsis).';
+const SCOPE_LINE = 'Not yet in this consult: fever and infection by time since transplant, and pancreas, intestine or islet recipients. Related consults: [Sepsis](#/tree/sepsis).';
 const SHARED_NOTE = 'Editor note: call the transplant team before changing, holding or stopping any immunosuppressant.';
 const UNFINISHED = /\[NOT WRITTEN\]|preview|TODO|placeholder/i;
 function checkStart(nodes: (Node & { options?: { next: string }[] })[]): string[] {
@@ -466,7 +469,7 @@ test('real: the start node has the scope line verbatim, the approved note first 
 test('real: nothing clinician-visible in either consult says "[NOT WRITTEN]", "preview", "TODO" or "placeholder"', () => { const all = visibleText(); assert.ok(Object.keys(all).length > 150, 'the scan looks at something'); const e = checkUnfinished(all); assert.deepEqual(e, [], e.slice(0, 20).join('\n')); });
 test('break START/UNFINISHED: a changed scope line, a missing option, and each unfinished word planted in a node, overlay, card or Stop page fail', () => {
   const n = clone(NODES) as (Node & { options?: { next: string }[] })[]; const st = n.find((x) => x.id === 'tpe-start')!;
-  st.body = st.body.replace('Pneumocystis pneumonia', 'PJP'); assert.ok(checkStart(n).some((x) => x.includes('scope line')));
+  st.body = st.body.replace('pancreas, intestine or islet', 'pancreas'); assert.ok(checkStart(n).some((x) => x.includes('scope line')));
   const m = clone(NODES) as (Node & { options?: { next: string }[] })[]; const ms = m.find((x) => x.id === 'tpe-start')!; ms.options = ms.options!.filter((o) => o.next !== 'tpe-bk'); assert.ok(checkStart(m).some((x) => x.includes('tpe-bk')));
   for (const [word, where] of [['[NOT WRITTEN]', 'node tpe-bk'], ['Preview build', 'overlay tpe-cmv-dosing'], ['TODO', 'card tacrolimus'], ['placeholder', 'overlay transplant-drug-side-effects-stop']] as const) {
     const all = clone(visibleText()); all[where].push(`some text ${word} here`); assert.ok(checkUnfinished(all).some((x) => x.includes(where)), `${word} in ${where}`);
