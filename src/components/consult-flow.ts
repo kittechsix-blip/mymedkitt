@@ -15,7 +15,7 @@ import { rapidLive } from '../services/rapid-service.js';
 import { router } from '../services/router.js';
 import { getAllCategories } from '../services/category-service.js';
 import { addRecentConsult } from './dashboard.js';
-import { trackConsultOpen, trackNodeVisit } from '../services/kittmd-analytics.js';
+import { trackConsultOpen, trackNodeVisit, sinkTrack } from '../services/kittmd-analytics.js';
 import { isPinned, togglePin } from '../services/pins.js';
 import { recordConsultOpen } from '../services/consult-usage.js';
 import { showToast } from './toast.js';
@@ -86,17 +86,38 @@ function scrollCardBelowHeader(card: Element): void {
 }
 
 /** Initialize and render the consult flow for a given tree */
-export async function renderConsultFlow(
-  container: HTMLElement,
-  treeId: string,
-  options?: { jumpToNodeId?: string; openRapid?: boolean }
-): Promise<void> {
+type FlowOptions = { jumpToNodeId?: string; openRapid?: boolean };
+
+/** Which step of opening a consult was running, so a failure report says where it broke. */
+let flowStage = 'start';
+
+/**
+ * Opens a consult. Any failure inside (content load, saved session, first render) ends on a
+ * "did not load" screen with Try again, never on the blank page the router left behind.
+ * The error event carries the stage and error class only (ids and enums, no message text).
+ */
+export async function renderConsultFlow(container: HTMLElement, treeId: string, options?: FlowOptions): Promise<void> {
+  const requestedRoute = window.location.hash;
+  flowStage = 'start';
+  try {
+    await openConsultFlow(container, treeId, options);
+  } catch (err) {
+    const name = String((err as Error | null)?.name || 'unknown').toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 24) || 'unknown';
+    sinkTrack('error', { screen_id: requestedRoute.replace(/^#\/?/, ''), props: { kind: `cf-${flowStage}-${name}` } });
+    console.error(`[consult-flow] ${treeId} failed at ${flowStage}`, err);
+    if (window.location.hash !== requestedRoute) return;
+    renderLoadFailed(container, () => { void renderConsultFlow(container, treeId, options); });
+  }
+}
+
+async function openConsultFlow(container: HTMLElement, treeId: string, options?: FlowOptions): Promise<void> {
   const requestedRoute = window.location.hash;
   // One-shot: consumed here so a stale value can never redirect a later visit or another consult.
   returnRoute = null;
   jumpBack = [];
   const pendingReturn = sessionStorage.getItem(RETURN_ROUTE_KEY);
   sessionStorage.removeItem(RETURN_ROUTE_KEY);
+  flowStage = 'config';
   const config = await getTreeConfig(treeId);
   // A slow reference fetch must not overwrite the procedure screen after Back.
   if (window.location.hash !== requestedRoute) return;
@@ -105,6 +126,7 @@ export async function renderConsultFlow(
     return;
   }
 
+  flowStage = 'setup';
   currentConfig = config;
   currentTreeId = treeId;
   controller = new ConsultFlowController(config.nodes);
@@ -156,6 +178,7 @@ export async function renderConsultFlow(
   currentEntryNodeId = entryNodeId;
 
   // Restore or start fresh
+  flowStage = 'session';
   if (entryOverride && entryOverride !== config.entryNodeId) {
     controller.startConsult(treeId, entryNodeId);
   } else {
@@ -167,6 +190,7 @@ export async function renderConsultFlow(
 
   // Deep-link to a specific node if requested (from search results).
   // Silently falls back to entry node if nodeId is not valid in this tree.
+  flowStage = 'jump';
   const jumpId = options?.jumpToNodeId;
   const jumpValid = !!jumpId && config.nodes.some(n => n.id === jumpId);
   if (jumpValid && jumpId) {
@@ -175,14 +199,17 @@ export async function renderConsultFlow(
   }
 
   // Back gesture = Back button: one history entry per card (see services/consult-history.ts)
+  flowStage = 'history';
   beginConsultHistory(treeId, (steps) => {
     if (!controller || !delegatedContainer) return;
     for (let i = 0; i < steps && controller.canGoBack(); i++) controller.goBack();
     renderFlow(delegatedContainer);
   });
 
+  flowStage = 'render';
   renderFlow(container);
 
+  flowStage = 'rapid';
   // #/tree/<id>/rapid: the consult loads exactly as /tree/<id> does, then the card opens on top.
   if (options?.openRapid && rapidLive(treeId, config)) openRapid(container);
 
@@ -775,6 +802,32 @@ function onInlineLinkClick(e: Event): void {
 }
 
 /** Render unavailable state */
+/** Opening a consult page failed: say so, and offer Try again (a second read usually succeeds). Also used by app.ts. */
+export function renderLoadFailed(container: HTMLElement, retry: () => void): void {
+  try { leaveConsultHistory(); } catch { /* still show the message */ }
+  removeContextualToolbar();
+  container.innerHTML = '';
+
+  const backBtn = document.createElement('button');
+  backBtn.className = 'btn-text';
+  backBtn.textContent = '\u2190 Categories';
+  backBtn.addEventListener('click', () => router.navigate('/'));
+  container.appendChild(backBtn);
+
+  const empty = document.createElement('div');
+  empty.className = 'empty-state consult-load-failed';
+  const title = document.createElement('h3');
+  title.textContent = 'This page did not load';
+  const body = document.createElement('p');
+  body.textContent = 'Something went wrong opening this consult. Try again, or go back.';
+  const retryBtn = document.createElement('button');
+  retryBtn.className = 'btn-primary';
+  retryBtn.textContent = 'Try again';
+  retryBtn.addEventListener('click', () => { container.innerHTML = ''; retry(); });
+  empty.append(title, body, retryBtn);
+  container.appendChild(empty);
+}
+
 function renderUnavailable(container: HTMLElement, treeId: string): void {
   leaveConsultHistory();
   removeContextualToolbar(); // Clear any lingering toolbar from previous consult

@@ -7,7 +7,7 @@ import { router } from './services/router.js';
 import type { RouteParams } from './services/router.js';
 import { renderDashboard } from './components/dashboard.js';
 import { renderSpecialtyView } from './components/specialty-view.js';
-import { renderConsultFlow } from './components/consult-flow.js';
+import { renderConsultFlow, renderLoadFailed } from './components/consult-flow.js';
 import { renderHubsHome } from './components/hubs-home.js';
 import { renderTricksHome, renderTricksSpecialty } from './components/tricks-home.js';
 import { renderReferencePanel } from './components/reference-table.js';
@@ -170,7 +170,7 @@ function handleTree(params: RouteParams): void {
   const main = clearMain();
   removeContextualToolbar();
   if (renderProcedureApp(main, id)) return;
-  if (DRUG_CONSULT_VIRTUAL_ID[id]) { void import('./components/onc-drug-consult.js').then((m) => m.renderOncConsult(main, undefined, id)); return; }
+  if (DRUG_CONSULT_VIRTUAL_ID[id]) { openDrugConsult(main, undefined, id); return; }
   void renderConsultFlow(main, id);
 }
 
@@ -187,6 +187,17 @@ function handleTreeRapid(params: RouteParams): void {
   void renderConsultFlow(main, id, { openRapid: true });
 }
 
+/** Drug-consult pages load lazily; a failed load ends on Try again, never a blank screen. */
+function openDrugConsult(main: HTMLElement, nodeId: string | undefined, treeId: string): void {
+  const requested = window.location.hash;
+  import('./components/onc-drug-consult.js')
+    .then((m) => m.renderOncConsult(main, nodeId, treeId))
+    .catch((err) => {
+      console.error('[drug-consult] failed to open', treeId, err);
+      if (window.location.hash === requested) renderLoadFailed(main, () => openDrugConsult(main, nodeId, treeId));
+    });
+}
+
 function handleTreeNode(params: RouteParams): void {
   hideGlobalTabBar();
   const treeId = params['id'] ?? 'unknown';
@@ -197,7 +208,7 @@ function handleTreeNode(params: RouteParams): void {
   // Real odse-tox-* nodes fall through to the normal consult flow.
   if (DRUG_CONSULT_VIRTUAL_ID[treeId]?.test(nodeId)) {
     removeContextualToolbar();
-    void import('./components/onc-drug-consult.js').then((m) => m.renderOncConsult(main, nodeId, treeId));
+    openDrugConsult(main, nodeId, treeId);
     return;
   }
   void renderConsultFlow(main, treeId, { jumpToNodeId: nodeId });

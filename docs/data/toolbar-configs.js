@@ -41,6 +41,13 @@ export const TOOLBAR_OVERFLOW = new Set([
 // toolbar validation entirely (the validator warned and skipped ~1,264 targets)
 // and is the root cause of the 2026-07-27 dead-toolbar-button CRITICAL.
 export const TOOLBAR_CONFIGS = {
+    'sudden-hearing-loss': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'hearing-loss-steps' },
+        { id: 'fork', label: 'Fork Lab', icon: '👂', action: 'calculator', target: 'hearing-fork', pinned: true },
+        { id: 'steroids', label: 'Steroids', icon: '💊', action: 'overlay', target: 'hearing-loss-steroids', pinned: true },
+        { id: 'timeline', label: 'Timeline', icon: '⏱️', action: 'overlay', target: 'hearing-loss-timeline' },
+        { id: 'workup', label: 'Workup', icon: '🔎', action: 'overlay', target: 'hearing-loss-workup' },
+    ],
     'acute-keratitis': [
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'keratitis-steps' },
         { id: 'atlas', label: 'Stain Atlas', icon: '👁️', action: 'overlay', target: 'keratitis-stain-atlas' },
@@ -168,6 +175,7 @@ export const TOOLBAR_CONFIGS = {
     ],
     'oncological-emergencies': [
         { id: 'summary', label: 'Onc Steps', icon: '📋', action: 'overlay', target: 'onc-emergency-summary' },
+        { id: 'drug-side-effects', label: 'Drug Tox', icon: '💉', action: 'route', target: 'onc-drug-side-effects' },
         { id: 'chemo', label: 'Chemo Ref', icon: '💊', action: 'overlay', target: 'chemo-regimens' },
         { id: 'crs-icans-protocol', label: 'CRS/ICANS', icon: '🧬', action: 'overlay', target: 'crs-icans-protocol' },
         { id: 'ici-algo', label: 'ICI Tox', icon: '🛡️', action: 'overlay', target: 'ici-toxicity-algorithm' },
@@ -2348,6 +2356,7 @@ export const TOOLBAR_CONFIGS = {
     // Cervical Spine — Non-Traumatic (Radiculopathy / Myelopathy)
     // ---------------------------------------------------------------
     'radiculopathies': [
+        { id: 'nerve-root', label: 'Nerve Root', icon: '🌿', action: 'infographic', target: 'nerve-root', pinned: true },
         { id: 'reflex', label: 'Reflex exam', icon: '🔨', action: 'overlay', target: 'rad-reflex' },
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'rad-steps' },
         { id: 'roots', label: 'Localize', icon: '🗺️', action: 'jump', target: 'rad-region' },

@@ -1,3 +1,4 @@
+import { HEARING_LOSS_INFO_PAGES } from './new-content/sudden-hearing-loss-info.js';
 import { ACUTE_KERATITIS_INFO_PAGES } from './new-content/acute-keratitis-info.js';
 import { HG_INFO_PAGES } from './new-content/hyperglycemia-info.js';
 import { TPE_INFO_PAGES } from './new-content/transplant-patient-ed-info.js';
@@ -30371,6 +30372,7 @@ const ONC_DSE_STOP_CYTOTOXIC_PAGE = {
     ],
 };
 export const INFO_PAGES = {
+    ...HEARING_LOSS_INFO_PAGES,
     ...ACUTE_KERATITIS_INFO_PAGES,
     'rad-reflex': {
         id: 'rad-reflex', title: 'Deep tendon reflexes', subtitle: 'Compare the response on both sides with the limb relaxed',

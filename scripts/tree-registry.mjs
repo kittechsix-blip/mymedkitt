@@ -3,6 +3,7 @@
 // When adding a new consult, ADD IT HERE (and only here).
 
 export const TREE_REGISTRY = {
+  'sudden-hearing-loss': { prefix: 'HEARING_LOSS', entryNodeId: 'sudden-hearing-loss-start', categoryId: 'ent' },
   'acute-keratitis': { prefix: 'ACUTE_KERATITIS', entryNodeId: 'acute-keratitis-start', categoryId: 'ophthalmology' },
   'sialolithiasis': { prefix: 'SIALOLITHIASIS', entryNodeId: 'sialo-start', categoryId: 'ent' },
   'peritonsillar-abscess': { prefix: 'PERITONSILLAR_ABSCESS', entryNodeId: 'quinsy-start', categoryId: 'ent' },
