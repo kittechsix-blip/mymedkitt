@@ -16,5 +16,21 @@
     "placement": "Bedside classification and Fork Lab",
     "approval": "Andy: Approved, following outline and actual SVG previews in this conversation",
     "sha256": "48149be2976608538855e643c4c441bc9ce053f934fefc0fe0955fdb66c475e9"
+  },
+  "weber-realistic.png": {
+    "title": "Weber clinical technique illustration",
+    "author": "OpenAI image generation for myMedKitt",
+    "provenance": "Original AI-generated synthetic medical illustration; no real patient photograph or third-party source image",
+    "placement": "Bedside classification node and Fork Lab",
+    "approval": "Andy approved final replacement images and instructed commit and push, 2026-11-21",
+    "sha256": "06d1017516e01a1c02ad020e8eb726cf0c1ae9dd2dab6060bf50fd3afa324c7b"
+  },
+  "rinne-realistic.png": {
+    "title": "Rinne clinical technique illustration",
+    "author": "OpenAI image generation for myMedKitt",
+    "provenance": "Original AI-generated synthetic medical illustration; no real patient photograph or third-party source image",
+    "placement": "Bedside classification node and Fork Lab",
+    "approval": "Andy approved final replacement images and instructed commit and push, 2026-11-21",
+    "sha256": "722bc8d4a21a9222f1fd0aab4c4fa297322b5ea0bd70775917ed88d0cbd762c0"
   }
 }

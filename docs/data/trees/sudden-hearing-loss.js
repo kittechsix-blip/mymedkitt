@@ -125,14 +125,14 @@ export const HEARING_LOSS_NODES = [
         next: "hearing-loss-classification",
         images: [
             {
-                src: "images/sudden-hearing-loss/weber.svg",
+                src: "images/sudden-hearing-loss/weber-realistic.png",
                 alt: "Weber technique and lateralization toward a conductive-loss ear or away from a sensorineural-loss ear",
-                caption: "Original myMedKitt teaching schematic. Interpret with Rinne, otoscopy and audiometry."
+                caption: "Original AI-generated myMedKitt clinical illustration. Interpret with Rinne, otoscopy and audiometry."
             },
             {
-                src: "images/sudden-hearing-loss/rinne.svg",
+                src: "images/sudden-hearing-loss/rinne-realistic.png",
                 alt: "Rinne sequence comparing mastoid bone conduction with air conduction beside the ear canal",
-                caption: "Original myMedKitt teaching schematic. Positive Rinne does not mean hearing is normal."
+                caption: "Original AI-generated myMedKitt clinical illustration. Positive Rinne does not mean hearing is normal."
             }
         ],
         calculatorLinks: [
