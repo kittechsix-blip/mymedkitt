@@ -493,7 +493,7 @@ export const BETA_BLOCKER_OD_CRITICAL_ACTIONS = [
     { text: 'Consider hemodialysis for atenolol/nadolol (hydrophilic, dialyzable)', nodeId: 'bb-dialysis' },
 ];
 export const BETA_BLOCKER_OD_CITATIONS = [
-    { num: 1, text: 'Graudins A, Lee HM, Druda D. Calcium Channel Blocker and Beta-Blocker Toxicity. Emerg Med Clin North Am. 2022;40(3):531-546.' },
+    { num: 1, text: 'Graudins A, Lee HM, Druda D. Calcium channel antagonist and beta-blocker overdose: antidotes and adjunct therapies. Br J Clin Pharmacol. 2016;81(3):453-461. doi:10.1111/bcp.12763' },
     { num: 2, text: 'Levine M, Hoffman RS, Lavergne V, et al. Systematic review of the effect of intravenous lipid emulsion therapy for non-local anesthetic toxicity. Clin Toxicol. 2016;54(3):194-221.' },
     { num: 3, text: 'Love JN, Howell JM, Litovitz TL, Klein-Schwartz W. Acute beta blocker overdose: factors associated with the development of cardiovascular morbidity. J Toxicol Clin Toxicol. 2000;38(3):275-281.' },
     { num: 4, text: 'St-Onge M, Anseeuw K, Cantrell FL, et al. Experts Consensus Recommendations for the Management of Calcium Channel Blocker Poisoning in Adults. Crit Care Med. 2017;45(3):e306-e315.' },
