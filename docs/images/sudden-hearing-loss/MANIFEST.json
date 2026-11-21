@@ -1,0 +1,20 @@
+{
+  "weber.svg": {
+    "title": "Weber tuning-fork teaching schematic",
+    "author": "myMedKitt original vector artwork",
+    "license": "Original project artwork; no third-party imagery",
+    "source_url": "docs/reviews/sudden-hearing-loss/weber.svg",
+    "placement": "Bedside classification and Fork Lab",
+    "approval": "Andy: Approved, following outline and actual SVG previews in this conversation",
+    "sha256": "bd1cf5a11aaf409898f98330cbb224f4adddeb857aff85821042dd053114280d"
+  },
+  "rinne.svg": {
+    "title": "Rinne tuning-fork teaching schematic",
+    "author": "myMedKitt original vector artwork",
+    "license": "Original project artwork; no third-party imagery",
+    "source_url": "docs/reviews/sudden-hearing-loss/rinne.svg",
+    "placement": "Bedside classification and Fork Lab",
+    "approval": "Andy: Approved, following outline and actual SVG previews in this conversation",
+    "sha256": "48149be2976608538855e643c4c441bc9ce053f934fefc0fe0955fdb66c475e9"
+  }
+}

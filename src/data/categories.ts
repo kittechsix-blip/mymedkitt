@@ -4452,6 +4452,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
     name: 'ENT',
     icon: 'ophthalmology.png',
     decisionTrees: [
+      { id: 'sudden-hearing-loss', title: 'Sudden Hearing Loss (SSNHL)', subtitle: 'SSNHL · Weber / Rinne · Early steroids · Urgent audiometry and ENT', categoryId: 'ent', version: '1.0', nodeCount: 19, entryNodeId: 'sudden-hearing-loss-start' },
       {
         id: 'otalgia-hub',
         title: 'Otalgia Hub',

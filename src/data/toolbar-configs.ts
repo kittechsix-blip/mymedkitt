@@ -78,6 +78,13 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
 // toolbar validation entirely (the validator warned and skipped ~1,264 targets)
 // and is the root cause of the 2026-07-27 dead-toolbar-button CRITICAL.
 export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
+  'sudden-hearing-loss': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'hearing-loss-steps' },
+    { id: 'fork', label: 'Fork Lab', icon: '👂', action: 'calculator', target: 'hearing-fork', pinned: true },
+    { id: 'steroids', label: 'Steroids', icon: '💊', action: 'overlay', target: 'hearing-loss-steroids', pinned: true },
+    { id: 'timeline', label: 'Timeline', icon: '⏱️', action: 'overlay', target: 'hearing-loss-timeline' },
+    { id: 'workup', label: 'Workup', icon: '🔎', action: 'overlay', target: 'hearing-loss-workup' },
+  ],
   'acute-keratitis': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'keratitis-steps' },
     { id: 'atlas', label: 'Stain Atlas', icon: '👁️', action: 'overlay', target: 'keratitis-stain-atlas' },

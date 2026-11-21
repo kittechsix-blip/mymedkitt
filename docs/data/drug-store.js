@@ -5587,8 +5587,13 @@ const PREDNISONE = {
     genericName: 'Prednisone',
     drugClass: 'Corticosteroid (glucocorticoid)',
     route: 'PO',
-    indications: ['Cluster headache — bridge therapy', 'COPD exacerbation', 'Asthma exacerbation', 'Gout flare', 'Rheumatoid arthritis flare', 'SLE flare', 'Allergic reactions', 'Inflammatory conditions', 'IRIS in TB/HIV coinfection', 'Warm autoimmune hemolytic anemia'],
+    indications: ['Sudden sensorineural hearing loss (adult)', 'Cluster headache — bridge therapy', 'COPD exacerbation', 'Asthma exacerbation', 'Gout flare', 'Rheumatoid arthritis flare', 'SLE flare', 'Allergic reactions', 'Inflammatory conditions', 'IRIS in TB/HIV coinfection', 'Warm autoimmune hemolytic anemia'],
     dosing: [
+        {
+            indication: 'Sudden sensorineural hearing loss (adult)',
+            regimen: 'Initial treatment option within 2 weeks of onset, after shared decision-making. Prednisone 1 mg/kg PO once daily, usual maximum 60 mg/day. AAO-HNS Table 10 describes full dose for 7–14 days, then taper over a similar period; coordinate duration and taper with ENT because protocols vary. Standard low-dose steroid dose packs are inadequate. Do not delay urgent ENT/audiometry or wait for routine MRI. Check systemic infection, glucose control, prior severe psychiatric steroid effects and GI bleeding risk. Discuss intratympanic therapy with ENT when systemic risk is unacceptable. [AAO-HNS 2019, Table 10]',
+            weightCalc: { dosePerKg: 1, unit: 'mg', maxDose: 60, label: 'Adult SSNHL: PO once daily; initial full dose, not taper' },
+        },
         {
             indication: 'Cluster Headache — bridge therapy',
             regimen: '**60 mg PO daily × 5 days, then taper by 10 mg every 2 days (50 → 40 → 30 → 20 → 10 → 0 over 10 days).** Total course ~15 days.\n\n**ROLE:** Bridges the patient from cluster-period onset to therapeutic verapamil levels (which require 2-4 weeks to titrate). Suppresses ~70-80% of attacks within 24-48 h.\n\n**ALTERNATIVE:** Greater occipital nerve block — comparable efficacy to oral prednisone bridge (Leroux Lancet Neurol 2011) with fewer systemic side effects. Prefer ONB if patient is pregnant, diabetic, has osteoporosis, or has had prior steroid complications.\n\n**MONITORING:** Glucose (especially diabetic patients), BP, mood (rare steroid psychosis), insomnia, AVN risk with repeated courses.\n\n**DO NOT:** Repeat full-dose steroid bridge more than 2-3 times per year due to cumulative AVN, cataract, osteoporosis risk.',
@@ -5644,6 +5649,7 @@ const PREDNISONE = {
     monitoring: 'Blood glucose. Clinical response. For COPD: respiratory status, SpO2.',
     notes: 'Prednisone is a prodrug that is converted to prednisolone (active form) in the liver. Equivalent anti-inflammatory potency: prednisone 5 mg = prednisolone 5 mg = methylprednisolone 4 mg = dexamethasone 0.75 mg. For short courses (≤7 days), no taper is required. The REDUCE trial confirmed that 5 days of systemic steroids is non-inferior to 14 days for COPD exacerbation.',
     citations: [
+        'Chandrasekhar SS, Tsai Do BS, Schwartz SR, et al. Clinical Practice Guideline: Sudden Hearing Loss (Update). Otolaryngol Head Neck Surg. 2019;161(1_suppl):S1-S45. Table 10. https://doi.org/10.1177/0194599819859885',
         'GOLD 2024. Global Strategy for Diagnosis, Management, and Prevention of COPD. goldcopd.org.',
         'Leuppi JD, et al. Short-term vs Conventional Glucocorticoid Therapy in Acute Exacerbations of COPD: The REDUCE Trial. JAMA. 2013;309(21):2223-2231.',
         'Qaseem A, et al. Diagnosis and Management of Stable COPD: ACP Clinical Practice Guideline. Ann Intern Med. 2011;155(3):179-191.',
