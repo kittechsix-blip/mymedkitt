@@ -585,7 +585,7 @@ export const HYPOTENSION_WORKUP_CITATIONS: Citation[] = [
   { num: 7, text: 'Rushworth RL, Torpy DJ, Falhammar H. Adrenal Crisis. N Engl J Med. 2019;381(9):852-861.' },
   { num: 8, text: 'van Diepen S, Katz JN, Albert NM, et al. Contemporary Management of Cardiogenic Shock. Circulation. 2017;136(16):e265-e298.' },
   { num: 9, text: 'ATLS Subcommittee. Advanced Trauma Life Support (ATLS). 10th ed. American College of Surgeons; 2018.' },
-  { num: 10, text: 'Adler Y, Charron P, Imazio M, et al. 2015 ESC Guidelines for the Diagnosis and Management of Pericardial Diseases. Eur Heart J. 2015;36(42):2921-2964.' },
+  { num: 10, text: 'Schulz-Menger J, et al. 2025 ESC Guidelines for the management of myocarditis and pericarditis. Eur Heart J. 2025;46(40):3952-4041. doi:10.1093/eurheartj/ehaf192' },
   { num: 11, text: 'Creager MA, et al. 2026 AHA/ACC/ACCP/ACEP/CHEST/SCAI/SHM/SIR/SVM/SVN Guideline for the Evaluation and Management of Acute Pulmonary Embolism in Adults. Circulation. 2026;153(12):e977-e1051.' },
   { num: 12, text: 'Monnet X, Marik PE, Teboul JL. Prediction of Fluid Responsiveness. Crit Care Med. 2016;44(5):994-1002.' },
   { num: 13, text: 'Scheeren TWL, Bakker J, Kaufmann T, et al. Current Thinking About Norepinephrine in Septic Shock. J Crit Care. 2021;66:153-157.' },
