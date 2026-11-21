@@ -579,7 +579,7 @@ export const HYPOTENSION_WORKUP_CITATIONS: Citation[] = [
   { num: 1, text: 'Richards JB, Wilcox SR. Diagnosis and Management of Shock in the Emergency Department. Emerg Med Pract. 2014;16(3):1-22.' },
   { num: 2, text: 'Holler JG, Jensen HK, Henriksen DP, et al. Shock Index as a Predictor of Mortality in the Emergency Department. Ann Emerg Med. 2016;68(4):S15.' },
   { num: 3, text: 'Perera P, Mailhot T, Riley D, Mandavia D. The RUSH Exam: Rapid Ultrasound in Shock. Emerg Med Clin North Am. 2010;28(1):29-56.' },
-  { num: 4, text: 'Millington SJ, Arntfield RT, Guo RJ, et al. Expert Agreement in the Interpretation of Critical Care Ultrasonography. Crit Ultrasound J. 2018;10(1):18.' },
+  { num: 4, text: 'Monnet X, Marik P, Teboul JL. Passive leg raising for predicting fluid responsiveness: a systematic review and meta-analysis. Intensive Care Med. 2016;42(12):1935-1947.' },
   { num: 5, text: 'Evans L, Rhodes A, Alhazzani W, et al. Surviving Sepsis Campaign: International Guidelines 2021. Crit Care Med. 2021;49(11):e1063-e1143.' },
   { num: 6, text: 'Prescott HC, Antonelli M, Alhazzani W, et al. Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2026. Crit Care Med. 2026;54(4):725-812.' },
   { num: 7, text: 'Rushworth RL, Torpy DJ, Falhammar H. Adrenal Crisis. N Engl J Med. 2019;381(9):852-861.' },
