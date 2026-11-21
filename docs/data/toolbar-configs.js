@@ -2345,6 +2345,7 @@ export const TOOLBAR_CONFIGS = {
     // Cervical Spine — Non-Traumatic (Radiculopathy / Myelopathy)
     // ---------------------------------------------------------------
     'radiculopathies': [
+        { id: 'nerve-root', label: 'Nerve Root', icon: '🌿', action: 'infographic', target: 'nerve-root', pinned: true },
         { id: 'reflex', label: 'Reflex exam', icon: '🔨', action: 'overlay', target: 'rad-reflex' },
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'rad-steps' },
         { id: 'roots', label: 'Localize', icon: '🗺️', action: 'jump', target: 'rad-region' },
