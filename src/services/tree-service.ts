@@ -1619,6 +1619,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/cauda-equina.js');
       return { nodes: m.CAUDA_EQUINA_NODES, entryNodeId: 'ces-start', categoryId: 'trauma-surg', moduleLabels: m.CAUDA_EQUINA_MODULE_LABELS, citations: m.CAUDA_EQUINA_CITATIONS, criticalActions: m.CAUDA_EQUINA_CRITICAL_ACTIONS };
     },
+    'radiculopathies': async () => {
+      const m = await import('../data/trees/radiculopathies.js');
+      return { nodes: m.RADICULOPATHIES_NODES, entryNodeId: 'rad-start', categoryId: 'neurology', moduleLabels: m.RADICULOPATHIES_MODULE_LABELS, citations: m.RADICULOPATHIES_CITATIONS };
+    },
     'cervical-spine-nontraumatic': async () => {
       const m = await import('../data/trees/cervical-spine-nontraumatic.js');
       return { nodes: m.CERVICAL_SPINE_NONTRAUMATIC_NODES, entryNodeId: 'csnt-start', categoryId: 'emergency-medicine', moduleLabels: m.CERVICAL_SPINE_NONTRAUMATIC_MODULE_LABELS, citations: m.CERVICAL_SPINE_NONTRAUMATIC_CITATIONS, criticalActions: m.CERVICAL_SPINE_NONTRAUMATIC_CRITICAL_ACTIONS };

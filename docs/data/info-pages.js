@@ -30372,6 +30372,25 @@ const ONC_DSE_STOP_CYTOTOXIC_PAGE = {
 };
 export const INFO_PAGES = {
     ...ACUTE_KERATITIS_INFO_PAGES,
+    'rad-reflex': {
+        id: 'rad-reflex', title: 'Deep tendon reflexes', subtitle: 'Compare the response on both sides with the limb relaxed',
+        sections: [
+            { heading: 'Hammer placement', image: { src: 'images/radiculopathies/tendon-reflex-exam.webp', alt: 'Biceps, brachioradialis, triceps, patellar and Achilles tendon tap sites', caption: 'Kittech Six · AI-assisted illustration.' }, body: '[Enlarge reflex plate](#/image/radiculopathies/tendon-reflex-exam.webp)' },
+            { heading: 'Upper limb', body: '**Biceps (C5–C6).** Tap your thumb over the tendon in the elbow crease. Feel the biceps contract and watch for elbow flexion.\n\n**Brachioradialis (C5–C6).** Tap the radial forearm just proximal to the styloid. Look for elbow flexion, sometimes with slight supination.\n\n**Triceps (mainly C7).** Support the arm with the elbow flexed. Tap just above the olecranon and watch for elbow extension. [1]' },
+            { heading: 'Lower limb', body: '**Patellar (L2–L4, chiefly L4).** With the leg dangling, tap between the patella and tibial tuberosity. Watch for quadriceps contraction and knee extension.\n\n**Achilles (chiefly S1).** Gently dorsiflex the ankle. Tap above the calcaneus and watch or feel for plantarflexion. [1]' },
+            { heading: 'Image credits', body: 'Dermatomes labeled, female-male front-back 3d-shaded by Goran tek-en. Kittech corrected two posterior Co1 labels and rendered the image on white. [Original atlas](https://commons.wikimedia.org/wiki/File:Dermatomes_labeled,_female-male_front-back_3d-shaded.svg) · [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The three examination plates are original AI-assisted Kittech Six illustrations.' },
+        ],
+        citations: [{ num: 1, text: 'Stanford Medicine 25. Deep Tendon Reflexes. https://stanfordmedicine25.stanford.edu/the25/tendon.html' }],
+    },
+    'rad-steps': {
+        id: 'rad-steps', title: 'Radiculopathies', subtitle: 'Bedside steps',
+        sections: [
+            { heading: 'Screen', body: '[Identify emergency features](#/node/rad-start) before provocative maneuvers.' },
+            { heading: 'Localize', body: '[Choose the symptomatic region](#/node/rad-region) and compare sensation, power and reflexes on both sides.' },
+            { heading: 'Act', body: '[Select workup and treatment](#/node/rad-decision) from the objective deficit and its trajectory.' },
+        ],
+        citations: [],
+    },
     ...HG_INFO_PAGES,
     // Transplant Patient in the ED overlays (33)
     ...TPE_INFO_PAGES,

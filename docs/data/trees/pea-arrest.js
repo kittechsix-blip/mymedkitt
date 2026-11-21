@@ -420,7 +420,7 @@ export const PEA_ARREST_NODES = [
 ];
 export const PEA_ARREST_MODULE_LABELS = [
     'PEA Recognition',
-    'No Cardiac Activity',
+    'PREM vs PRES',
     'QRS Width Analysis',
     'Treatable Causes',
     'CPR & Medications',

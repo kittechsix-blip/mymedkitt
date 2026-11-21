@@ -2224,6 +2224,15 @@ export const DEFAULT_CATEGORIES = [
         icon: 'neurology.png',
         decisionTrees: [
             {
+                id: 'radiculopathies',
+                title: 'Radiculopathies',
+                subtitle: 'Cervical, thoracic and lumbosacral root localization, exam and treatment',
+                categoryId: 'neurology',
+                version: '1.0',
+                nodeCount: 26,
+                entryNodeId: 'rad-start',
+            },
+            {
                 id: 'vertigo',
                 title: 'Vertigo',
                 subtitle: 'TITRATE Triage \u2192 Central Screen \u2192 BPPV \u2192 HINTS \u2192 VM \u2192 Disposition',
