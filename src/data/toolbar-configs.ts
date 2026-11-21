@@ -202,6 +202,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   ],
   'oncological-emergencies': [
     { id: 'summary', label: 'Onc Steps', icon: '📋', action: 'overlay', target: 'onc-emergency-summary' },
+    { id: 'drug-side-effects', label: 'Drug Tox', icon: '💉', action: 'route', target: 'onc-drug-side-effects' },
     { id: 'chemo', label: 'Chemo Ref', icon: '💊', action: 'overlay', target: 'chemo-regimens' },
     { id: 'crs-icans-protocol', label: 'CRS/ICANS', icon: '🧬', action: 'overlay', target: 'crs-icans-protocol' },
     { id: 'ici-algo', label: 'ICI Tox', icon: '🛡️', action: 'overlay', target: 'ici-toxicity-algorithm' },
