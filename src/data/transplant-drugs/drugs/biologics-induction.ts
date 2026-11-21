@@ -1,4 +1,4 @@
-import type { Cited, DrugClass, DrugEffectOverride, OncDrug, OncSource } from '../../onc-drugs/types.js';
+import type { Cited, DrugClass, OncDrug, OncSource } from '../../onc-drugs/types.js';
 
 // Belatacept and the induction / rejection biologics for the Transplant Drugs Side-effects consult. Every line is paraphrased from the drug's own FDA label
 // (DailyMed SPL XML saved in research/transplant-sources/dailymed/) and cites that label. Nothing from outside the labels. No doses.

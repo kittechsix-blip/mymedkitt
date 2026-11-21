@@ -1,5 +1,4 @@
 import type { Cited, DrugEffectOverride, OncDrug } from '../../onc-drugs/types.js';
-import type { TxGroup } from '../types.js';
 
 // Calcineurin inhibitors for the Transplant Drugs Side-effects consult. Every line is paraphrased from the drug's own FDA label
 // (DailyMed SPL XML saved in research/transplant-sources/dailymed/) and cites that label. Nothing from outside the labels. No doses.
