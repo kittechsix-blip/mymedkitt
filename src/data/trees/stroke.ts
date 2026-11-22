@@ -34,7 +34,7 @@ export const STROKE_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Deficit Severity',
-    body: 'Is a **disabling deficit** present?\n\nUse the NIHSS calculator below to score the deficit. **NIHSS >5 = disabling.** Use the [Syndrome Calculator](#/calculator/stroke-syndrome-calculator) when the pattern matters more than the number: aphasia, neglect, field cut, posterior circulation signs, retinal ischemia, or lacunar-appearing deficits.\n\nDisabling = deficit that would impair activities of daily living (e.g., limb weakness, aphasia, neglect, visual field cut, gait impairment).\n\nNondisabling = isolated minor symptoms (e.g., mild sensory change, mild dysarthria, isolated facial droop without other deficits).',
+    body: 'Is a **disabling deficit** present?\n\nUse the NIHSS calculator below to score the deficit, but **the NIHSS number does not decide this. A low score (0-5) can still be disabling** (e.g., aphasia, hemianopia, hand weakness, gait impairment). Judge whether the deficit would impair work or activities of daily living. Use the [Syndrome Calculator](#/calculator/stroke-syndrome-calculator) when the pattern matters more than the number: aphasia, neglect, field cut, posterior circulation signs, retinal ischemia, or lacunar-appearing deficits.\n\nDisabling = deficit that would impair activities of daily living (e.g., limb weakness, aphasia, neglect, visual field cut, gait impairment).\n\nNondisabling = isolated minor symptoms (e.g., mild sensory change, mild dysarthria, isolated facial droop without other deficits).',
     citation: [2, 3],
     calculatorLinks: [
       { id: 'nihss', label: 'NIHSS Calculator' },
@@ -43,16 +43,16 @@ export const STROKE_NODES: DecisionNode[] = [
     options: [
       {
         label: 'Yes \u2014 Disabling deficit',
-        description: 'NIHSS \u22656 or functionally significant deficit',
+        description: 'Any deficit that would impair ADLs or work, regardless of NIHSS (most NIHSS \u22656 qualify)',
         next: 'stroke-timing',
       },
       {
         label: 'No \u2014 Minor / nondisabling',
-        description: 'NIHSS 0\u20135, nondisabling symptoms',
+        description: 'Low NIHSS (typically 0-5) AND clearly nondisabling symptoms',
         next: 'stroke-minor',
       },
     ],
-    summary: 'Classify deficit severity by NIHSS — disabling (>=6) routes to reperfusion, minor to DAPT pathway',
+    summary: 'Classify the deficit as disabling or nondisabling by function, not by NIHSS alone. Disabling routes to reperfusion, minor nondisabling to the DAPT pathway',
   },
 
   {
