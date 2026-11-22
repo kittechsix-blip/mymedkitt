@@ -484,7 +484,7 @@ export const WIDE_COMPLEX_TACHYCARDIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Torsades de Pointes',
-    body: '🛑 **DO NOT give amiodarone or procainamide**\n— They prolong QT → worsen Torsades → may be lethal\n\n**Treatment:**\n• [Magnesium sulfate](#/drug/magnesium-sulfate/torsades) 2 g IV over 5-15 min, repeat 2 g at 5-15 min if it persists\n• Can push over 1-2 min in arrest\n• Then start a continuous infusion — a bolus alone wears off and TdP recurs\n\n**If recurrent:**\n• Overdrive pacing to 90-110 bpm (shortens QT)\n• Isoproterenol if pacing unavailable (2-10 mcg/min)\n\n**Correct precipitants:**\n• Stop ALL QT-prolonging meds\n• Potassium target >4.5 mEq/L\n• Magnesium target >2.0 mEq/L\n\n→ See [Torsades de Pointes](#/tree/torsades-de-pointes) for full protocol',
+    body: '🛑 **DO NOT give amiodarone or procainamide**\n— They prolong QT → worsen Torsades → may be lethal\n\n**Treatment:**\n• [Magnesium sulfate](#/drug/magnesium-sulfate/torsades) 2 g IV over 5-15 min, repeat 2 g at 5-15 min if it persists\n• Can push over 1-2 min in arrest\n• Then start a continuous infusion — a bolus alone wears off and TdP recurs\n\n**If recurrent:**\n• Overdrive pacing to 90-110 bpm (shortens QT)\n• Isoproterenol if pacing unavailable (2-10 mcg/min)\n\n**Correct precipitants:**\n• Stop ALL QT-prolonging meds\n• Potassium target >4.5 mEq/L\n• Magnesium target >2.0 mg/dL\n\n→ See [Torsades de Pointes](#/tree/torsades-de-pointes) for full protocol',
     citation: [3, 8],
     next: 'wct-disposition',
 
