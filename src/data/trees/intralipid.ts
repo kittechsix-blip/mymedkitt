@@ -446,7 +446,7 @@ export const INTRALIPID_CITATIONS: Citation[] = [
   },
   {
     num: 13,
-    text: 'Grunbaum AM, Gilfix BM, Bhojani RK, et al. Laboratory Interference from Lipid Emulsion. Ann Emerg Med. 2012;60(3):255-261.',
+    text: 'Grunbaum AM, Gilfix BM, Gosselin S, Blank DW. Analytical interferences resulting from intravenous lipid emulsion. Clin Toxicol (Phila). 2012;50(9):812-817.',
   },
   {
     num: 14,
