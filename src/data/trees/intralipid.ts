@@ -430,7 +430,7 @@ export const INTRALIPID_CITATIONS: Citation[] = [
   },
   {
     num: 9,
-    text: 'Shenoy S, Coleman J, Engelbrecht L, et al. Lipid Emulsion for Beta-Blocker Toxicity: A Systematic Review. Clin Toxicol. 2019;57(7):561-573.',
+    text: 'Rotella JA, Greene SL, Koutsogiannis Z, et al. Treatment for beta-blocker poisoning: a systematic review. Clin Toxicol (Phila). 2020;58:943-983.',
   },
   {
     num: 10,
