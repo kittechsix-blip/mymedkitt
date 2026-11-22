@@ -642,7 +642,7 @@ export const WIDE_COMPLEX_TACHYCARDIA_CITATIONS: Citation[] = [
   { num: 4, text: 'Brugada P, et al. Differential diagnosis of regular tachycardia with wide QRS. Circulation. 1991;83:1649-1659.' },
   { num: 5, text: 'Ortiz M, et al. PROCAMIO Trial: Procainamide vs Amiodarone for Stable WCT. Eur Heart J. 2017;38:1329-1335.' },
   { num: 6, text: 'LITFL: VT versus SVT. litfl.com' },
-  { num: 7, text: 'Vereckei A, et al. New algorithm for wide QRS complex tachycardia. Eur Heart J. 2007;28:589-600.' },
+  { num: 7, text: 'Vereckei A, et al. New algorithm using only lead aVR for differential diagnosis of wide QRS complex tachycardia. Heart Rhythm. 2008;5(1):89-98. PMID 18180024' },
   { num: 8, text: 'Al-Khatib SM, et al. 2017 AHA/ACC/HRS VT Guidelines. Circulation. 2018;138:e272-e391.' },
   { num: 9, text: 'Core EM: Ventricular Tachycardia. coreem.net' },
   { num: 10, text: 'Issa ZF, et al. Clinical Arrhythmology and Electrophysiology. 3rd ed. Elsevier; 2019.' },
