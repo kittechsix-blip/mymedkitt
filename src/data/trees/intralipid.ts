@@ -450,7 +450,7 @@ export const INTRALIPID_CITATIONS: Citation[] = [
   },
   {
     num: 14,
-    text: 'Walker BJ, Long JB, De Oliveira GS, et al. Peripheral Nerve Blockade and Local Anesthetic Systemic Toxicity in Pediatric Patients. Reg Anesth Pain Med. 2018;43(2):162-170.',
+    text: 'Walker BJ, Long JB, Sathyamoorthy M, et al. Complications in pediatric regional anesthesia: an analysis of more than 100,000 blocks from the Pediatric Regional Anesthesia Network. Anesthesiology. 2018;129(4):721-732.',
   },
   {
     num: 15,
