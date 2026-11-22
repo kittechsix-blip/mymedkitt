@@ -434,7 +434,7 @@ export const INTRALIPID_CITATIONS: Citation[] = [
   },
   {
     num: 10,
-    text: 'Varney SM, Manthey DE, Culpepper VE, et al. Intravenous Lipid Emulsion Therapy Does Not Improve Hypotension Compared to Sodium Bicarbonate for TCA Toxicity. Acad Emerg Med. 2014;21(11):1212-1219.',
+    text: 'Varney SM, Bebarta VS, Vargas TE, Boudreau S, Castaneda M. Intravenous lipid emulsion therapy does not improve hypotension compared to sodium bicarbonate for tricyclic antidepressant toxicity: a randomized, controlled pilot study in a swine model. Acad Emerg Med. 2014;21:1212-1219.',
   },
   {
     num: 11,
