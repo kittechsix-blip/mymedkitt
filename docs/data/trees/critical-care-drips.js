@@ -613,7 +613,7 @@ export const CRITICAL_CARE_DRIPS_CITATIONS = [
     { num: 4, text: 'Mathew R, et al. Milrinone vs Dobutamine in Cardiogenic Shock. NEJM 2021;385:516-525.' },
     { num: 5, text: 'De Backer D, et al. Comparison of Dopamine and Norepinephrine. NEJM 2010;362:779-789.' },
     { num: 6, text: 'EMCrit Project. Hypertensive Emergency Management. emcrit.org/ibcc/htn' },
-    { num: 7, text: 'Peacock WF, et al. CLUE Trial: Clevidipine vs Standard Care. Am Heart J 2013;165:701-707.' },
+    { num: 7, text: 'Peacock WF, et al. CLUE: a randomized comparative effectiveness trial of IV nicardipine versus labetalol use in the emergency department. Crit Care 2011;15(3):R157.' },
     { num: 8, text: 'EMCrit Project. Analgesia and Sedation for Critically Ill. emcrit.org/ibcc/pain' },
     { num: 9, text: 'Hughes CG, et al. Dexmedetomidine vs Propofol in Sepsis. NEJM 2021;385:2302-2311.' },
     { num: 10, text: 'Perbet S, et al. Ketamine in the ICU: Hemodynamic Effects. Anaesthesia 2011;66:368-377.' },

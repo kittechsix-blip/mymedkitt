@@ -348,7 +348,7 @@ export const NEONATAL_RESUS_NODES = [
         type: 'info',
         module: 5,
         title: 'Umbilical Venous Catheter (UVC)',
-        body: 'UVC PROCEDURE [1][2]\n\n**Umbilical cord anatomy:**\n• **2 arteries** — thick-walled, small lumen (at top of cross-section)\n• **1 vein** — thin-walled, large lumen (at bottom of cross-section)\n• **Catheterize the VEIN** — larger, easier to cannulate\n\n**Catheter size:**\n• **3.5 French** if <1.5 kg\n• **5 French** if ≥1.5 kg\n\n**Procedure:**\n1. Tie **umbilical tape** at base of stump — gentle tie to control bleeding\n2. Cut cord 1–2 cm above skin\n3. Identify the single large-lumen vein\n4. **Prime catheter** with NS\n5. Insert gently — **only 2–4 cm** until blood aspirates freely\n6. Do NOT advance further — risk of hepatic injury\n\n**IO access** is an acceptable alternative if UVC cannot be placed quickly.\n\n**Once access is established:** give IV epinephrine (preferred over ET route). [1][2]',
+        body: 'UVC PROCEDURE [1][2]\n\n**Umbilical cord anatomy:**\n• **2 arteries** — thick-walled, small lumen\n• **1 vein** — thin-walled, large, often gaping lumen\n• **Catheterize the VEIN** — larger, easier to cannulate\n\n**Catheter size:**\n• **3.5 French** if <1.5 kg\n• **5 French** if ≥1.5 kg\n\n**Procedure:**\n1. Tie **umbilical tape** at base of stump — gentle tie to control bleeding\n2. Cut cord 1–2 cm above skin\n3. Identify the single large-lumen vein\n4. **Prime catheter** with NS\n5. Insert gently — **only 2–4 cm** until blood aspirates freely\n6. Do NOT advance further — risk of hepatic injury\n\n**IO access** is an acceptable alternative if UVC cannot be placed quickly.\n\n**Once access is established:** give IV epinephrine (preferred over ET route). [1][2]',
         citation: [1, 2],
         images: [
             {
@@ -510,11 +510,11 @@ export const NEONATAL_RESUS_MODULE_LABELS = [
 // Evidence Citations (8 references)
 // -------------------------------------------------------------------
 export const NEONATAL_RESUS_CITATIONS = [
-    { num: 1, text: 'Lee HC, Strand ML, et al. Part 5: Neonatal Resuscitation. Circulation 2025;152(16 suppl 2):S385-S423. PMID 41122887.' },
+    { num: 1, text: 'Lee HC, Strand ML, Finan E, et al. Part 5: Neonatal Resuscitation: 2025 AHA and AAP Guidelines for CPR and ECC. Circulation. 2025;152(16 suppl 2):S385-S423. doi:10.1161/CIR.0000000000001367. https://www.ahajournals.org/doi/10.1161/CIR.0000000000001367' },
     { num: 2, text: 'Weiner GM, ed. Textbook of Neonatal Resuscitation (NRP). 8th ed. AAP; 2021.' },
     { num: 3, text: 'Aziz K, Lee HC, Escobedo MB, et al. Part 5: Neonatal Resuscitation. Circulation. 2020;142(16 suppl 2):S524-S550.' },
     { num: 4, text: 'Wyckoff MH, et al. Neonatal Life Support: 2020 ILCOR Consensus. Circulation. 2020;142(16 suppl 1):S185-S221.' },
-    { num: 5, text: 'ACOG Committee Opinion No. 684: Delayed Umbilical Cord Clamping. Obstet Gynecol. 2017;129(1):e5-e10.' },
+    { num: 5, text: 'ACOG Committee Opinion No. 814: Delayed Umbilical Cord Clamping After Birth. Obstet Gynecol. 2020;136(6):e100-e106. https://www.acog.org/clinical/clinical-guidance/committee-opinion/articles/2020/12/delayed-umbilical-cord-clamping-after-birth' },
     { num: 6, text: 'Perlman JM, et al. Part 7: Neonatal Resuscitation. 2015 ILCOR Consensus. Circulation. 2015;132(16 suppl 1):S204-S241.' },
     { num: 7, text: 'Kattwinkel J, et al. Part 15: Neonatal Resuscitation. Circulation. 2010;122(18 suppl 3):S909-S919.' },
     { num: 8, text: 'McFarlin A. ED Management of Precipitous Delivery and Neonatal Resuscitation. Emerg Med Rep. 2019;40(11).' },

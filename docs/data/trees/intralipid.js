@@ -388,11 +388,11 @@ export const INTRALIPID_CITATIONS = [
     },
     {
         num: 9,
-        text: 'Shenoy S, Coleman J, Engelbrecht L, et al. Lipid Emulsion for Beta-Blocker Toxicity: A Systematic Review. Clin Toxicol. 2019;57(7):561-573.',
+        text: 'Rotella JA, Greene SL, Koutsogiannis Z, et al. Treatment for beta-blocker poisoning: a systematic review. Clin Toxicol (Phila). 2020;58:943-983.',
     },
     {
         num: 10,
-        text: 'Varney SM, Manthey DE, Culpepper VE, et al. Intravenous Lipid Emulsion Therapy Does Not Improve Hypotension Compared to Sodium Bicarbonate for TCA Toxicity. Acad Emerg Med. 2014;21(11):1212-1219.',
+        text: 'Varney SM, Bebarta VS, Vargas TE, Boudreau S, Castaneda M. Intravenous lipid emulsion therapy does not improve hypotension compared to sodium bicarbonate for tricyclic antidepressant toxicity: a randomized, controlled pilot study in a swine model. Acad Emerg Med. 2014;21:1212-1219.',
     },
     {
         num: 11,
@@ -404,11 +404,11 @@ export const INTRALIPID_CITATIONS = [
     },
     {
         num: 13,
-        text: 'Grunbaum AM, Gilfix BM, Bhojani RK, et al. Laboratory Interference from Lipid Emulsion. Ann Emerg Med. 2012;60(3):255-261.',
+        text: 'Grunbaum AM, Gilfix BM, Gosselin S, Blank DW. Analytical interferences resulting from intravenous lipid emulsion. Clin Toxicol (Phila). 2012;50(9):812-817.',
     },
     {
         num: 14,
-        text: 'Walker BJ, Long JB, De Oliveira GS, et al. Peripheral Nerve Blockade and Local Anesthetic Systemic Toxicity in Pediatric Patients. Reg Anesth Pain Med. 2018;43(2):162-170.',
+        text: 'Walker BJ, Long JB, Sathyamoorthy M, et al. Complications in pediatric regional anesthesia: an analysis of more than 100,000 blocks from the Pediatric Regional Anesthesia Network. Anesthesiology. 2018;129(4):721-732.',
     },
     {
         num: 15,
