@@ -559,7 +559,7 @@ export const NEONATAL_RESUS_CITATIONS: Citation[] = [
   { num: 2, text: 'Weiner GM, ed. Textbook of Neonatal Resuscitation (NRP). 8th ed. AAP; 2021.' },
   { num: 3, text: 'Aziz K, Lee HC, Escobedo MB, et al. Part 5: Neonatal Resuscitation. Circulation. 2020;142(16 suppl 2):S524-S550.' },
   { num: 4, text: 'Wyckoff MH, et al. Neonatal Life Support: 2020 ILCOR Consensus. Circulation. 2020;142(16 suppl 1):S185-S221.' },
-  { num: 5, text: 'ACOG Committee Opinion No. 684: Delayed Umbilical Cord Clamping. Obstet Gynecol. 2017;129(1):e5-e10.' },
+  { num: 5, text: 'ACOG Committee Opinion No. 814: Delayed Umbilical Cord Clamping After Birth. Obstet Gynecol. 2020;136(6):e100-e106. https://www.acog.org/clinical/clinical-guidance/committee-opinion/articles/2020/12/delayed-umbilical-cord-clamping-after-birth' },
   { num: 6, text: 'Perlman JM, et al. Part 7: Neonatal Resuscitation. 2015 ILCOR Consensus. Circulation. 2015;132(16 suppl 1):S204-S241.' },
   { num: 7, text: 'Kattwinkel J, et al. Part 15: Neonatal Resuscitation. Circulation. 2010;122(18 suppl 3):S909-S919.' },
   { num: 8, text: 'McFarlin A. ED Management of Precipitous Delivery and Neonatal Resuscitation. Emerg Med Rep. 2019;40(11).' },
