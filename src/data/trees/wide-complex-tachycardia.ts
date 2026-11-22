@@ -432,7 +432,7 @@ export const WIDE_COMPLEX_TACHYCARDIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Stable Monomorphic VT Treatment',
-    body: '**First-line: Procainamide** (PROCAMIO trial — superior to amiodarone)\n• [Procainamide](#/drug/procainamide/vt) 20-50 mg/min IV\n• OR 10 mg/kg over 20 min\n• Max: 17 mg/kg total\n\n🛑 **STOP infusion if:**\n• QRS widens >50% from baseline\n• Hypotension develops\n• Arrhythmia terminates\n\n**PROCAMIO results:** 67% termination vs 38% amiodarone, fewer adverse events (9% vs 41%)\n\n**Alternative: Amiodarone**\n• [Amiodarone](#/drug/amiodarone/vt) 150 mg IV over 10 min\n• Then 1 mg/min × 6h → 0.5 mg/min × 18h\n• May re-bolus 150 mg PRN\n\n**If fails:** Synchronized cardioversion',
+    body: '**First-line: Procainamide** (PROCAMIO trial: more terminations and fewer major adverse events than amiodarone)\n\n⚠️ **Do NOT use procainamide if:** prolonged QT or torsades, heart failure, complete heart block (or 2nd-degree AV block without a pacemaker), or known lupus. Use amiodarone or synchronized cardioversion instead.\n\n• [Procainamide](#/drug/procainamide/vt) 20-50 mg/min IV\n• OR 10 mg/kg over 20 min\n• Max: 17 mg/kg total\n\n🛑 **STOP infusion if:**\n• QRS widens >50% from baseline\n• Hypotension develops\n• Arrhythmia terminates\n\n**PROCAMIO results:** 67% termination vs 38% amiodarone, fewer adverse events (9% vs 41%)\n\n**Alternative: Amiodarone**\n• [Amiodarone](#/drug/amiodarone/vt) 150 mg IV over 10 min\n• Then 1 mg/min × 6h → 0.5 mg/min × 18h\n• May re-bolus 150 mg PRN\n\n**If fails:** Synchronized cardioversion',
     citation: [5, 8],
     next: 'wct-vt-refractory',
 
