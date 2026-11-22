@@ -555,7 +555,7 @@ export const NEONATAL_RESUS_MODULE_LABELS = [
 // -------------------------------------------------------------------
 
 export const NEONATAL_RESUS_CITATIONS: Citation[] = [
-  { num: 1, text: 'Lee HC, Strand ML, et al. Part 5: Neonatal Resuscitation. Circulation 2025;152(16 suppl 2):S385-S423. PMID 41122887.' },
+  { num: 1, text: 'Lee HC, Strand ML, Finan E, et al. Part 5: Neonatal Resuscitation: 2025 AHA and AAP Guidelines for CPR and ECC. Circulation. 2025;152(16 suppl 2):S385-S423. doi:10.1161/CIR.0000000000001367. https://www.ahajournals.org/doi/10.1161/CIR.0000000000001367' },
   { num: 2, text: 'Weiner GM, ed. Textbook of Neonatal Resuscitation (NRP). 8th ed. AAP; 2021.' },
   { num: 3, text: 'Aziz K, Lee HC, Escobedo MB, et al. Part 5: Neonatal Resuscitation. Circulation. 2020;142(16 suppl 2):S524-S550.' },
   { num: 4, text: 'Wyckoff MH, et al. Neonatal Life Support: 2020 ILCOR Consensus. Circulation. 2020;142(16 suppl 1):S185-S221.' },
