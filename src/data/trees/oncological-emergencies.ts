@@ -789,7 +789,7 @@ export const ONCOLOGICAL_EMERGENCIES_NODES: DecisionNode[] = [
     module: 11,
     title: 'ICI Hepatitis',
     body: '**Presentation:** asymptomatic LFT elevation → fulminant failure. [28][29]\n\n**Workup:**\n• AST/ALT/Alk Phos/T.bili/INR\n• Viral hepatitis panel (HAV, HBV, HCV, HEV, EBV, CMV)\n• Autoimmune workup (ANA, ASMA, AMA)\n• RUQ US to exclude obstruction/mets\n\n**Management by grade:**\n• **Grade 1** (AST/ALT ≤3× ULN): monitor, continue ICI cautiously\n• **Grade 2** (3-5× ULN): hold ICI, [prednisone](#/drug/prednisone/irae) 0.5-1 mg/kg/day\n• **Grade 3** (5-20× ULN): hold ICI, [methylprednisolone](#/drug/methylprednisolone/irae) 1-2 mg/kg/day IV, hepatology consult\n• **Grade 4** (>20× ULN OR INR >1.5): ICU, **mycophenolate 1g BID added** (avoid infliximab — hepatotoxic), transplant evaluation if fulminant',
-    recommendation: '**Hep panel + autoimmune + RUQ US. G3 IV methylpred + heme. G4 ICU + MMF (NOT infliximab). Transplant eval if fulminant.**',
+    recommendation: '**Hep panel + autoimmune + RUQ US. G3 IV methylpred + hepatology. G4 ICU + MMF (NOT infliximab). Transplant eval if fulminant.**',
     confidence: 'definitive',
     citation: [28, 30],
     summary: 'ICI hepatitis: r/o viral; G3 IV methylpred + hep consult; G4 ICU + MMF (avoid infliximab); transplant if fulminant',
