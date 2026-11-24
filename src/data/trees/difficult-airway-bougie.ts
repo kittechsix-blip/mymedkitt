@@ -525,7 +525,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_CITATIONS: Citation[] = [
   { num: 4, text: 'Matchett G, et al. Ketamine versus Etomidate for Endotracheal Intubation of Critically Ill Adults (KeNIK). N Engl J Med. 2023.' },
   { num: 5, text: 'Systematic Review and Meta-Analysis: Effect of Bougie Use on First-Attempt Success in Tracheal Intubations (18 studies, 9,151 patients). Ann Emerg Med. 2023.' },
   { num: 6, text: 'Cook TM, et al. Major Complications of Airway Management in the UK: Results of the Fourth National Audit Project (NAP4). Br J Anaesth. 2011;106(5):632-42.' },
-  { num: 7, text: 'Frerk C, et al. Difficult Airway Society 2015 Guidelines for Management of Unanticipated Difficult Intubation in Adults. Br J Anaesth. 2015;115(6):827-48.' },
+  { num: 7, text: 'Ahmad I, et al. Difficult Airway Society 2025 guidelines for management of unanticipated difficult tracheal intubation in adults. Br J Anaesth. 2026;136(1):283-307. doi:10.1016/j.bja.2025.10.006' },
   { num: 8, text: 'Ahmad I, et al. Difficult Airway Society Guidelines for Awake Tracheal Intubation (ATI) in Adults. Anaesthesia. 2020;75:509-528.' },
   { num: 9, text: 'Cormack RS, Lehane J. Difficult Tracheal Intubation in Obstetrics. Anaesthesia. 1984;39:1105-1111.' },
   { num: 10, text: 'Yentis SM, Lee DJH. Evaluation of an Improved Scoring System for the Grading of Direct Laryngoscopy. Anaesthesia. 1998;53:1041-1044.' },
