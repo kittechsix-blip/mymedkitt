@@ -610,7 +610,7 @@ export const ONCOLOGICAL_EMERGENCIES_NODES = [
         module: 10,
         title: 'ICANS — ICE Score + ASTCT Grading',
         body: '[Full CRS / ICANS Protocol](#/info/crs-icans-protocol)\n\n**ICANS** (Immune Effector Cell-Associated Neurotoxicity) typically follows CRS (median onset day 5, range 1-21 post-CAR-T). [23][24]\n\n**ICE Score (10 points)** — administered q4-8h during high-risk window:\n• Orientation: year, month, city, hospital (4 pts)\n• Naming: 3 objects (3 pts)\n• Following commands (1 pt)\n• Writing: standard sentence (1 pt)\n• Attention: count backward from 100 by 10 (1 pt)\n\n**ASTCT ICANS Grade:**\n| Grade | ICE Score / Findings |\n|-------|---------------------|\n| 1 | ICE 7-9, awakens spontaneously |\n| 2 | ICE 3-6 OR awakens to voice |\n| 3 | ICE 0-2 OR awakens to tactile only OR seizure (non-life-threatening) |\n| 4 | Unarousable, refractory seizure, motor weakness, OR cerebral edema |\n\n**CRITICAL PEARL:** Tocilizumab does NOT cross the BBB and does NOT treat ICANS. Use steroids. Tocilizumab only for concurrent CRS.\n\nUse the calculator to grade.',
-        citation: [23, 24, 27],
+        citation: [23, 24, 26],
         calculatorLinks: [
             { id: 'ice-icans', label: 'ICE / ICANS Score' },
         ],
@@ -643,7 +643,7 @@ export const ONCOLOGICAL_EMERGENCIES_NODES = [
         module: 10,
         title: 'ICANS Treatment Ladder',
         body: '**Universal:** Baseline EEG + MRI brain. Aspiration precautions, hold driving / sharp objects. [Levetiracetam](#/drug/levetiracetam/seizure-prophylaxis) 750 mg IV BID for seizure prophylaxis once Grade 2+. Treat concurrent CRS with [tocilizumab](#/drug/tocilizumab/crs) (does NOT treat ICANS itself).\n\n**Grade 1:**\n• Supportive: aspiration precautions, IV fluids\n• Baseline EEG + MRI brain\n• Hold driving / sharp objects\n• ICE q4h\n• Consider dexamethasone if no improvement in 24h\n\n**Grade 2:**\n• **[Dexamethasone](#/drug/dexamethasone/icans) 10 mg IV q6h** (or methylprednisolone 1 mg/kg IV q12h)\n• EEG + MRI brain\n• Levetiracetam 750 mg IV BID prophylaxis\n• Step-down or ICU\n• NPO\n• ICE q4h\n\n**Grade 3:**\n• **ICU admission**\n• Dexamethasone 10 mg IV q6h\n• MRI brain + EEG\n• Levetiracetam prophylaxis\n• Anti-seizure escalation if seizure: [lorazepam](#/drug/lorazepam/seizure) → levetiracetam load → phenobarbital\n• Neurology consult\n• Airway monitoring\n\n**Grade 4 (life-threatening):**\n• **ICU**\n• **Methylprednisolone 1000 mg IV daily × 3 days**, then 250 mg q12h × 2 days, then taper\n• Intubate for airway protection if obtunded\n• STAT MRI brain + neurosurgery if cerebral edema (hyperventilation, [hypertonic saline 3%](#/drug/hypertonic-saline/cerebral-edema), [mannitol](#/drug/mannitol/cerebral-edema))\n• Continuous EEG\n• Status epilepticus protocol if refractory seizures\n• **Anakinra 100 mg SC q6h** as add-on for refractory ICANS',
-        citation: [23, 24, 27],
+        citation: [23, 24, 26],
         calculatorLinks: [
             { id: 'ice-icans', label: 'ICE / ICANS Score' },
         ],
@@ -659,7 +659,7 @@ export const ONCOLOGICAL_EMERGENCIES_NODES = [
         body: '**Disposition:**\n• Grade 1: step-down with q4h ICE\n• Grade 2: ICU vs step-down (depends on trajectory and concurrent CRS)\n• Grade 3-4: ICU + neurology consult + neurosurgery if edema\n\n**Long-term considerations:**\n• Most ICANS resolves within 14 days; some neurocognitive deficits can persist months\n• BCMA-targeted CAR-T (ide-cel, cilta-cel) has higher rate of delayed neurotoxicity and parkinsonism (months out)\n• Coordinate with treating CAR-T center for follow-up',
         recommendation: '**G1 step-down, G2+ ICU. Steroids (NOT tocilizumab). Lev prophylaxis. Neurology + neurosurg if Grade 4.**',
         confidence: 'definitive',
-        citation: [23, 24, 27],
+        citation: [23, 24, 26],
         summary: 'ICANS dispo: G1 step-down, G2+ ICU; coordinate with CAR-T center for follow-up',
     },
     // =====================================================================
@@ -712,7 +712,7 @@ export const ONCOLOGICAL_EMERGENCIES_NODES = [
         body: '**Most lethal pulmonary irAE.** Presents with new dyspnea, dry cough, hypoxia. CT: ground-glass opacities, consolidation, NSIP/COP/AIP patterns. [28][29]\n\n**Workup:**\n• CT chest with contrast\n• Infectious workup: sputum, blood cultures, viral PCR, **PJP PCR**\n• Trend O2 sat, ABG if hypoxic\n• Rule out cardiac cause (BNP, troponin, echo)\n\n**Management by grade:**\n• **Grade 1** (radiographic only, asymp): hold ICI, repeat imaging 3-4 weeks\n• **Grade 2** (symptomatic, ADL not limited): [prednisone](#/drug/prednisone/irae) 1 mg/kg/day, hold ICI\n• **Grade 3** (severe, ADL limited, hospitalization): **[methylprednisolone](#/drug/methylprednisolone/irae) 1-2 mg/kg/day IV**, ICU if hypoxic\n• **Grade 4** (life-threatening, intubation): same as Grade 3 + ICU\n• If no improvement in 48h → add **infliximab 5 mg/kg IV** OR mycophenolate 1g BID OR IVIG\n\n**Pulmonology consult.** Permanent ICI discontinuation for Grade 3-4. PJP prophylaxis (sulfa) for prolonged steroid course.',
         recommendation: '**G2 PO pred. G3-4 IV methylpred 1-2 mg/kg/day + ICU + pulm consult; add infliximab/MMF/IVIG if no response 48h.**',
         confidence: 'definitive',
-        citation: [28, 29, 30],
+        citation: [28, 30],
         summary: 'ICI pneumonitis: CT + PJP PCR; G2 PO pred; G3-4 IV methylpred + pulm + add infliximab/MMF if refractory; permanent d/c G3-4',
     },
     {
@@ -723,7 +723,7 @@ export const ONCOLOGICAL_EMERGENCIES_NODES = [
         body: '**Presentation:** ≥3 stools/day above baseline, abdominal pain, blood/mucus. [28][29]\n\n**Workup:**\n• Stool studies: **C. diff PCR** + cultures + ova/parasites\n• CBC, BMP, lactate, CRP\n• Sigmoidoscopy/colonoscopy if Grade 2+\n• CT abdomen if peritoneal signs (rule out perforation)\n\n**Management by grade:**\n• **Grade 1**: [loperamide](#/drug/loperamide/diarrhea), hydration, hold ICI if persistent\n• **Grade 2** (4-6 stools above baseline): hold ICI, [prednisone](#/drug/prednisone/irae) 1 mg/kg/day; if no improvement in 48-72h, **infliximab 5 mg/kg IV** or vedolizumab 300 mg IV\n• **Grade 3-4** (≥7 stools, severe pain, hospitalization): hospitalize, **IV methylprednisolone 1-2 mg/kg/day**, **infliximab 5 mg/kg IV** (avoid in perforation — use vedolizumab); GI + ID consult; permanent ICI d/c\n• **Bowel perforation** = surgical emergency — surgery consult, broad antibiotics',
         recommendation: '**Stool studies + C. diff PCR. G2 PO pred + infliximab if no response 48-72h. G3-4 IV methylpred + infliximab + GI consult. Perf = surgery.**',
         confidence: 'definitive',
-        citation: [28, 29, 30],
+        citation: [28, 30],
         summary: 'ICI colitis: r/o C. diff first; G2 PO pred ± infliximab; G3-4 IV methylpred + infliximab; perf = surgery',
     },
     {
@@ -732,9 +732,9 @@ export const ONCOLOGICAL_EMERGENCIES_NODES = [
         module: 11,
         title: 'ICI Hepatitis',
         body: '**Presentation:** asymptomatic LFT elevation → fulminant failure. [28][29]\n\n**Workup:**\n• AST/ALT/Alk Phos/T.bili/INR\n• Viral hepatitis panel (HAV, HBV, HCV, HEV, EBV, CMV)\n• Autoimmune workup (ANA, ASMA, AMA)\n• RUQ US to exclude obstruction/mets\n\n**Management by grade:**\n• **Grade 1** (AST/ALT ≤3× ULN): monitor, continue ICI cautiously\n• **Grade 2** (3-5× ULN): hold ICI, [prednisone](#/drug/prednisone/irae) 0.5-1 mg/kg/day\n• **Grade 3** (5-20× ULN): hold ICI, [methylprednisolone](#/drug/methylprednisolone/irae) 1-2 mg/kg/day IV, hepatology consult\n• **Grade 4** (>20× ULN OR INR >1.5): ICU, **mycophenolate 1g BID added** (avoid infliximab — hepatotoxic), transplant evaluation if fulminant',
-        recommendation: '**Hep panel + autoimmune + RUQ US. G3 IV methylpred + heme. G4 ICU + MMF (NOT infliximab). Transplant eval if fulminant.**',
+        recommendation: '**Hep panel + autoimmune + RUQ US. G3 IV methylpred + hepatology. G4 ICU + MMF (NOT infliximab). Transplant eval if fulminant.**',
         confidence: 'definitive',
-        citation: [28, 29, 30],
+        citation: [28, 30],
         summary: 'ICI hepatitis: r/o viral; G3 IV methylpred + hep consult; G4 ICU + MMF (avoid infliximab); transplant if fulminant',
     },
     {
@@ -745,7 +745,7 @@ export const ONCOLOGICAL_EMERGENCIES_NODES = [
         body: '**Multiple distinct entities:** [28][29]\n\n**Hypophysitis** (often ipi): headache, vision changes, fatigue, hypotension. MRI pituitary (enlarged stalk). **Replace cortisol FIRST then thyroid** (reverse order can precipitate adrenal crisis). Steroids only for mass effect.\n\n**Adrenal insufficiency**: treat as adrenal crisis — [hydrocortisone](#/drug/hydrocortisone/adrenal-crisis) 100 mg IV bolus then 50 mg q6h. See [Adrenal Insufficiency consult](#/tree/adrenal-insufficiency).\n\n**Thyroiditis**: thyrotoxic phase (transient) → hypothyroid (often permanent). [Levothyroxine](#/drug/levothyroxine/hypothyroidism) replacement. Beta-blocker for symptomatic thyrotoxicosis ([propranolol](#/drug/propranolol/thyrotoxicosis)).\n\n**Type 1 DM**: new DKA presentation. ICU, [insulin regular](#/drug/insulin-regular/dka) drip, fluids, K replacement. Permanent insulin therapy after recovery.\n\n**Workup any suspected ICI endocrine:** TSH, free T4, AM cortisol, ACTH, glucose, BMP. Endocrinology consult.',
         recommendation: '**Cortisol FIRST then thyroid (avoid adrenal crisis). Adrenal: hydrocortisone 100 IV. T1DM: ICU + insulin drip. Endo consult.**',
         confidence: 'definitive',
-        citation: [28, 29, 30],
+        citation: [28, 30],
         summary: 'ICI endo: cortisol BEFORE thyroid; adrenal crisis = hydrocortisone 100 IV; T1DM = DKA pathway; permanent hormone replacement common',
     },
     {
@@ -768,7 +768,7 @@ export const ONCOLOGICAL_EMERGENCIES_NODES = [
         body: '**Less common but important irAEs:** [28][29]\n\n**Renal (interstitial nephritis):** rising Cr, sterile pyuria, eosinophiluria. Hold ICI, [prednisone](#/drug/prednisone/irae) 1 mg/kg/day. Renal biopsy if Grade 3+.\n\n**Neurologic (Guillain-Barré, myasthenia, encephalitis, transverse myelitis):** ICU, IVIG, plasmapheresis, steroids. Neurology consult. Permanent ICI hold.\n\n**Skin (toxic epidermal necrolysis, SJS, DRESS):** burn unit, supportive care, IVIG; rare but life-threatening.\n\n**Hematologic** (ITP, AIHA, aplastic anemia, HLH): hematology consult, steroids ± IVIG/rituximab.\n\n**Ocular (uveitis, scleritis):** ophtho consult, topical steroids; if severe, systemic steroids.\n\n**Pancreatitis (asymptomatic lipase elevation):** monitor; treat clinically only.\n\n**Universal:** hold ICI for Grade 2+, escalate steroids per algorithm, involve appropriate specialist.',
         recommendation: '**Other irAEs: hold ICI for Grade 2+, steroids per algorithm, specialty consult (renal/neuro/derm/heme/ophtho as appropriate).**',
         confidence: 'recommended',
-        citation: [28, 29, 30],
+        citation: [28, 30],
         summary: 'Other irAEs: AIN, GBS, SJS/TEN, ITP, uveitis, pancreatitis; hold ICI G2+, steroids, specialty consult',
     },
     // =====================================================================
@@ -780,7 +780,7 @@ export const ONCOLOGICAL_EMERGENCIES_NODES = [
         module: 12,
         title: 'Chemotherapy Reference — Nadirs & Toxicities',
         body: '[Oncology Drug Side-effects](#/tree/onc-drug-side-effects): every drug, class and regimen, browsable by complaint | [Comprehensive Chemotherapy Regimens & Side Effects](#/info/chemo-regimens)\n\n**ED-Critical Toxicity Patterns:**\n\n**Cardiotoxicity:**\n* Anthracyclines (doxorubicin, daunorubicin) — cumulative dose-dependent CHF\n* Trastuzumab — reversible LV dysfunction\n* 5-FU, capecitabine — coronary vasospasm\n* Immune checkpoint inhibitors — myocarditis (rare but lethal)\n\n**Pulmonary:**\n* Bleomycin — pulmonary fibrosis (avoid high FiO2)\n* Methotrexate — pneumonitis\n* Checkpoint inhibitors — pneumonitis (steroids)\n\n**Nephrotoxicity:**\n* Cisplatin — tubular injury\n* Methotrexate — crystalluria (alkalinize, leucovorin rescue)\n* Ifosfamide — Fanconi syndrome\n\n**Neurotoxicity:**\n* Vincristine — peripheral neuropathy, never IT (fatal)\n* Oxaliplatin — cold-triggered dysesthesia\n* Ifosfamide — encephalopathy (methylene blue rescue) [34]\n* Cisplatin — ototoxicity\n\n**Hematologic Nadirs:**\n* Most cytotoxics: nadir day 7-14, recovery day 21-28\n* Carboplatin/cisplatin: nadir day 14-21\n* Mitomycin: delayed nadir day 28-42\n* Always check date of last cycle and nadir expectation\n\n**Immune-Related Adverse Events (ICI):**\n* Can occur weeks to months after dose\n* Colitis (steroids + infliximab if refractory)\n* Hepatitis\n* Endocrinopathies (thyroiditis, hypophysitis, adrenalitis)\n* Pneumonitis\n* Myocarditis\n\n**Extravasation Emergencies:**\n* Anthracyclines, vinca alkaloids → severe tissue necrosis\n* Stop infusion, aspirate, do NOT flush\n* Anthracycline: dexrazoxane antidote within 6h [33]\n* Vinca: hyaluronidase + warm compress [33]\n* Mitomycin: cold compress + DMSO [33]',
-        citation: [18, 19, 33, 34],
+        citation: [19, 33, 34],
         next: 'onc-disposition-summary',
         summary: 'Chemo toxicities: cardiotox (anthracyclines), pulm (bleo), neuro (vinca), nadir d7-14; ICI = irAEs weeks-months later',
     },
