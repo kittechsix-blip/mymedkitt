@@ -80,6 +80,8 @@ export const GOLD: GoldQuestion[] = [
   { q: 'hyponatremia correction rate', expect: ['node:sodium/na-hypo-correction-limits', 'tree:sodium', 'tree:hypertonic-saline-protocol', 'calc:corrected-na'] },
   { q: 'acs chest pain risk stratification', expect: ['calc:heart-score', 'tree:nstemi'] },
   { q: 'afib rvr diltiazem dose', expect: ['tree:afib-rvr', 'drug:diltiazem'] },
+  { q: 'afib rvr hfref what to give', expect: ['node:afib-rvr/afib-hfref-drugs'] },
+  { q: 'afib rvr pulmonary edema rate control', expect: ['node:afib-rvr/afib-hfref-drugs'] },
   { q: 'sbp goal in sah', expect: ['tree:sah'] },
   // Febrile neutropenia (engine 1.6.0: fever after/on a treatment, ANC readings, neutropenic/neutropenia). Pins: the FN steps, never the afebrile card.
   { q: 'fever after chemo', expect: ['node:oncological-emergencies/onc-fn-recognize', 'node:oncological-emergencies/onc-fn-high-risk'] },

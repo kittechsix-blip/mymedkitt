@@ -126,8 +126,8 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
     id: 'afib-hfref-drugs',
     type: 'info',
     module: 3,
-    title: 'Rate Control in HFrEF (EF ≤40%)',
-    body: 'RATE CONTROL IN HEART FAILURE WITH REDUCED EF\n\n⚠️ **CONTRAINDICATED in HFrEF:**\n• Diltiazem — Class 3: Harm\n• Verapamil — Class 3: Harm\n• Non-dihydropyridine CCBs worsen HF outcomes and increase mortality\n\n**FIRST-LINE — Beta-Blockers:**\n• [Metoprolol](#/drug/metoprolol) 2.5–5 mg IV q5min, up to 15 mg total\n• Use lower initial doses in decompensated HF\n• [Esmolol](#/drug/esmolol) if rapid titration needed or hemodynamic uncertainty\n• Beta-blockers are guideline-directed therapy for HFrEF — safe when carefully dosed\n\n**SECOND-LINE — Digoxin:**\n• [Digoxin](#/drug/digoxin/a-fib rate control) 0.25–0.5 mg IV\n• Particularly useful in HFrEF — positive inotropic effect may be beneficial\n• Slow onset (~3 hours) — use as adjunct, not sole agent\n• Use low doses to avoid toxicity\n\n**ALTERNATIVE — Amiodarone:**\n• [Amiodarone](#/drug/amiodarone/a-fib rate control) 150 mg IV bolus, then 1 mg/min\n• Hemodynamically stable, safe in HFrEF\n• May achieve chemical cardioversion\n• Consider if beta-blocker contraindicated or insufficient\n\n**ADJUNCTIVE:**\n• IV [Magnesium Sulfate](#/drug/magnesium-sulfate) 2–4g — safe in all patients',
+    title: 'First-Line Rate Control in HFrEF (EF ≤40%)',
+    body: 'RATE CONTROL IN HEART FAILURE WITH REDUCED EJECTION FRACTION\n\n⚠️ **CONTRAINDICATED in HFrEF:**\n• Diltiazem — Class 3: Harm\n• Verapamil — Class 3: Harm\n• Non-dihydropyridine CCBs worsen HF outcomes and increase mortality\n\n🫁 **DECOMPENSATED HF (pulmonary edema, hypotension, or low-output signs) — use digoxin or amiodarone, not an IV beta-blocker:**\n• IV beta-blockers are negative inotropes and can worsen pulmonary edema and hypotension; the guideline notes decompensated HF and hypotension may limit otherwise effective agents\n• [Digoxin](#/drug/digoxin/a-fib rate control) 0.25–0.5 mg IV — Class 2a when beta-blockers are ineffective or contraindicated\n• [Amiodarone](#/drug/amiodarone/a-fib rate control) 150 mg IV over 10 min, then 1 mg/min — Class 2b in decompensated HF or critical illness; weigh the risk of chemical cardioversion and stroke if not anticoagulated\n• Shock or ongoing ischemia: synchronized cardioversion\n\n**FIRST-LINE (compensated HFrEF) — Beta-Blockers:**\n• [Metoprolol](#/drug/metoprolol) 2.5–5 mg IV q5min, up to 15 mg total\n• Not in decompensated HF (see above)\n• [Esmolol](#/drug/esmolol) if rapid titration needed or hemodynamic uncertainty\n• Beta-blockers are guideline-directed therapy for HFrEF — safe when carefully dosed\n\n**SECOND-LINE — Digoxin:**\n• [Digoxin](#/drug/digoxin/a-fib rate control) 0.25–0.5 mg IV\n• Particularly useful in HFrEF — positive inotropic effect may be beneficial\n• Slow onset (~3 hours) — use as adjunct, not sole agent\n• Use low doses to avoid toxicity\n\n**ALTERNATIVE — Amiodarone:**\n• [Amiodarone](#/drug/amiodarone/a-fib rate control) 150 mg IV bolus, then 1 mg/min\n• Hemodynamically stable, safe in HFrEF\n• May achieve chemical cardioversion\n• Consider if beta-blocker contraindicated or insufficient\n\n**ADJUNCTIVE:**\n• IV [Magnesium Sulfate](#/drug/magnesium-sulfate) 2–4g — safe in all patients',
     citation: [1, 2, 3],
     treatment: {
       firstLine: {
@@ -136,7 +136,7 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
         route: 'IV',
         frequency: 'q5min',
         duration: 'Up to 15 mg total',
-        notes: 'Use lower initial doses in decompensated HF. Guideline-directed therapy for HFrEF.',
+        notes: 'Compensated HFrEF only. In decompensated HF use digoxin or IV amiodarone instead. Guideline-directed therapy for HFrEF.',
       },
       alternative: {
         drug: 'Amiodarone',
@@ -150,7 +150,7 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
     },
     next: 'afib-hfref-controlled',
 
-    summary: 'CCBs CONTRAINDICATED in HFrEF — use metoprolol, digoxin (positive inotropy), or amiodarone; IV Mg as adjunct',
+    summary: 'CCBs CONTRAINDICATED in HFrEF — metoprolol if compensated; decompensated heart failure: digoxin (2a) or IV amiodarone (2b), not a beta-blocker; IV Mg as adjunct',
     safetyLevel: 'critical',
   },
 
