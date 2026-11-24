@@ -434,7 +434,7 @@ export const PROXIMAL_WEAKNESS_HUB_CRITICAL_ACTIONS = [
 ];
 
 export const PROXIMAL_WEAKNESS_HUB_CITATIONS: Citation[] = [
-  { num: 1, text: 'Asimos A, Birnbaumer D, Karas S, Shah S. Weakness: a systematic approach to acute, non-traumatic, neurologic and neuromuscular causes. Emerg Med Pract. 2002;4(12):1-26 (not PubMed-indexed); CDEM/SAEM M4 Curriculum "Weakness"; Tintinalli\u2019s Emergency Medicine, Weakness chapter, 9th ed.' },
+  { num: 1, text: 'Khamees D, Meurer W. Approach to acute weakness. Emerg Med Clin North Am. 2021;39(1):173-180. PMID: 33218656.' },
   { num: 2, text: 'Leonhard SE, Mandarakas MR, Gondim FAA, et al. Diagnosis and management of Guillain-Barré syndrome in ten steps. Nat Rev Neurol. 2019;15(11):671-683. PMID: 31541214. Hughes RAC, Wijdicks EFM, Benson E, et al. Supportive care for patients with Guillain-Barré syndrome. Arch Neurol. 2005;62(8):1194-1198. PMID: 16087757.' },
   { num: 3, text: 'Narayanaswami P, Sanders DB, Wolfe G, et al. International Consensus Guidance for Management of Myasthenia Gravis: 2020 Update. Neurology. 2021;96(3):114-122. PMID: 33144515. (Supersedes Sanders DB, et al. Neurology. 2016;87(4):419-425, PMID 27358333.) Wendell LC, Levine JM. Myasthenic crisis. Neurohospitalist. 2011;1(1):16-22. PMID: 23983833.' },
   { num: 4, text: 'Rao AK, Sobel J, Chatham-Stephens K, Luquez C. Clinical Guidelines for Diagnosis and Treatment of Botulism, 2021. MMWR Recomm Rep. 2021;70(2):1-30. PMID: 33956777.' },
