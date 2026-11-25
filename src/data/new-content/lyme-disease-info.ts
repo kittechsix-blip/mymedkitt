@@ -3,13 +3,13 @@ import type { InfoPage } from '../info-pages.js';
 const T = '#/tree/lyme-disease/node/';
 
 const CITES = [
-  { num: 1, text: 'Lantos PM, Rumbaugh J, Bockenstedt LK, et al. Clinical Practice Guidelines by IDSA, AAN, and ACR: 2020 Guidelines for the Prevention, Diagnosis and Treatment of Lyme Disease. Clin Infect Dis. 2021;72(1):e1-e48.' },
+  { num: 1, text: 'Lantos PM, Rumbaugh J, Bockenstedt LK, et al. Clinical Practice Guidelines by IDSA, AAN, and ACR: 2020 Guidelines for the Prevention, Diagnosis and Treatment of Lyme Disease. Clin Infect Dis. 2021;72(1):e1-e48. DOI 10.1093/cid/ciaa1215.' },
   { num: 2, text: 'CDC. Lyme Carditis (Clinical Care). cdc.gov/lyme/hcp/clinical-care/lyme-carditis.html' },
   { num: 3, text: 'CDC. Erythema Migrans / Neurologic Lyme / Lyme Arthritis clinical care pages. cdc.gov/lyme/hcp/clinical-care/' },
   { num: 4, text: 'CDC. Caring for Patients after a Tick Bite (2021) and Prophylaxis poster.' },
   { num: 5, text: 'CDC. Lyme Disease Diagnosis and Testing. cdc.gov/lyme/hcp/diagnosis-testing/' },
-  { num: 6, text: 'Kusumoto FM, Schoenfeld MH, et al. 2018 ACC/AHA/HRS Guideline on the Evaluation and Management of Patients With Bradycardia and Cardiac Conduction Delay. Circulation. 2019;140:e382-e482.' },
-  { num: 7, text: 'Besant G, Wan D, Yeung C, et al. Suspicious index in Lyme carditis: systematic review and proposed new risk score. Clin Cardiol. 2018;41(12):1611-1616.' },
+  { num: 6, text: 'Kusumoto FM, Schoenfeld MH, et al. 2018 ACC/AHA/HRS Guideline on the Evaluation and Management of Patients With Bradycardia and Cardiac Conduction Delay. Circulation. 2019;140:e382-e482. DOI 10.1161/CIR.0000000000000628.' },
+  { num: 7, text: 'Besant G, Wan D, Yeung C, et al. Suspicious index in Lyme carditis: systematic review and proposed new risk score. Clin Cardiol. 2018;41(12):1611-1616. DOI 10.1002/clc.23102.' },
   { num: 8, text: 'Yeung C, Baranchuk A. Diagnosis and Treatment of Lyme Carditis: JACC Review Topic of the Week. J Am Coll Cardiol. 2019;73(6):717-726.' },
   { num: 9, text: 'Biggs HM, et al. Diagnosis and Management of Tickborne Rickettsial Diseases. MMWR Recomm Rep. 2016;65(2):1-44.' },
 ];
