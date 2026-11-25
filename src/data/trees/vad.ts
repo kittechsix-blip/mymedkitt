@@ -641,7 +641,7 @@ export const VAD_CITATIONS: Citation[] = [
   { num: 12, text: 'Cameli M, et al. A multidisciplinary approach for the emergency care of patients with left ventricular assist devices. Front Cardiovasc Med. 2022;9:975352. https://pmc.ncbi.nlm.nih.gov/articles/PMC9441753/' },
   { num: 13, text: 'Draper KV, et al. Bleeding and von Willebrand Disease in Continuous-Flow Left Ventricular Assist Devices. Arterioscler Thromb Vasc Biol. 2018;38(11):e198-e204.' },
   { num: 14, text: 'Marsano J, et al. Gastrointestinal Bleeding in Left Ventricular Assist Device Patients: Octreotide and Other Treatment Modalities. ASAIO J. 2018;64(4):e48-e52.' },
-  { num: 15, text: 'Starling RC, et al. Unexpected Abrupt Increase in Left Ventricular Assist Device-Related Infections. JHLT. 2014;33(1):12-22.' },
+  { num: 15, text: 'Starling RC, et al. Unexpected Abrupt Increase in Left Ventricular Assist Device Thrombosis. N Engl J Med. 2014;370(1):33-40. https://pubmed.ncbi.nlm.nih.gov/24283197/' },
   { num: 16, text: 'Najjar SS, et al. An Analysis of Pump Thrombus Events in Patients in the HeartWare ADVANCE Bridge-to-Transplant and Continued Access Protocol Trial. JHLT. 2014;33(1):23-34.' },
   { num: 17, text: 'Nienaber JJC, et al. Clinical Manifestations and Management of Left Ventricular Assist Device Infections. Clin Infect Dis. 2013;57(10):1438-1448.' },
   { num: 18, text: 'Hanff TC, et al. Emergency Department Evaluation and Management of Patients with Left Ventricular Assist Devices. Emerg Med Clin North Am. 2022;40(4):699-714.' },
