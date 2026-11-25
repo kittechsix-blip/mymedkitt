@@ -594,7 +594,7 @@ export const RESUSCITATIVE_HYSTEROTOMY_CITATIONS: Citation[] = [
   { num: 12, text: 'Panchal AR, Bartos JA, Cabañas JG, et al. Part 3: Adult Basic and Advanced Life Support: 2020 American Heart Association Guidelines for CPR and Emergency Cardiovascular Care. Circulation. 2020;142(suppl 2):S366-S468.' },
   { num: 13, text: 'Rose CH, Faksh A, Traynor KD, Cabrera D, Arendt KW, Brost BC. Challenging the 4- to 5-minute rule: from perimortem cesarean to resuscitative hysterotomy. Am J Obstet Gynecol. 2015;215(5):653-656.e1. doi:10.1016/j.ajog.2015.07.019' },
   { num: 14, text: 'Morris S, Stacey M. Resuscitation in pregnancy. BMJ. 2003;327(7426):1277-1279. doi:10.1136/bmj.327.7426.1277' },
-  { num: 15, text: 'Katz VL, Dotters DJ, Droegemueller W. Perimortem cesarean delivery. Obstet Gynecol. 1986;68(4):571-576.' },
+  { num: 15, text: 'Katz VL, Dotters DJ, Droegemueller W. Perimortem cesarean delivery. Obstet Gynecol. 1986;68(4):571-576. PMID 3528956' },
   { num: 16, text: 'Benson MD, Padovano A, Bourjeily G, Zhou Y. Maternal collapse: Challenging the four-minute rule. EBioMedicine. 2016;6:253-257. doi:10.1016/j.ebiom.2016.02.042' },
   { num: 17, text: 'Parry R, Asmussen T, Smith JE. Perimortem caesarean section. Emerg Med J. 2016;33(3):224-229. doi:10.1136/emermed-2014-204466' },
   { num: 18, text: 'Weiner GM, ed. Textbook of Neonatal Resuscitation (NRP). 8th ed. American Academy of Pediatrics; 2021.' },
