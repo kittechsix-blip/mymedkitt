@@ -52,7 +52,7 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Neonatal UTI — Confirmed Diagnosis',
-    body: 'This pathway applies to infants **<48 weeks postmenstrual age** and **>7 days of life** with UTI defined as >50,000 CFU/mL in catheter-obtained specimen.\n\n**Exclusion criteria:**\n• History of Candida infection (consult Infectious Disease)\n• Concomitant bacteremia or meningitis\n• >48 weeks PMA\n• <7 days of age\n\nAlter antibiotic therapy based on culture-specific antimicrobial susceptibility.\n\n**DO NOT repeat urine culture for test of cure UNLESS Candida or ESBL.**',
+    body: '**STOP: this pathway is ONLY for culture-CONFIRMED UTI in which bacteremia and meningitis have already been excluded.** A febrile or ill-appearing young infant with suspected UTI needs a full sepsis evaluation first (catheter urine culture, blood culture, and CSF per the AAP 2021 febrile infant guideline; CSF and admission are expected at 8-21 days) and empiric broad-spectrum parenteral antibiotics. Do NOT start cefazolin monotherapy until those cultures are resulted.\n\nThis pathway applies to infants **<48 weeks postmenstrual age** and **>7 days of life** with UTI defined as >50,000 CFU/mL in catheter-obtained specimen.\n\n**Exclusion criteria:**\n• History of Candida infection (consult Infectious Disease)\n• Concomitant bacteremia or meningitis\n• >48 weeks PMA\n• <7 days of age\n\nAlter antibiotic therapy based on culture-specific antimicrobial susceptibility.\n\n**DO NOT repeat urine culture for test of cure UNLESS Candida or ESBL.**',
     citation: [2],
     next: 'uti-neo-abx',
 
