@@ -999,6 +999,10 @@ const AZITHROMYCIN = {
             indication: 'CAP atypical coverage',
             regimen: '500 mg IV on day 1, then 250 mg PO daily for 4 additional days (total 5 days). Covers atypical organisms (Legionella, Mycoplasma, Chlamydophila). Add to beta-lactam backbone when pneumonia is suspected source of sepsis. QTc prolongation risk — monitor ECG.',
         },
+        {
+            indication: 'Early Lyme disease, erythema migrans (second-line, adult)',
+            regimen: '500 mg PO once daily × 7 days. Only when doxycycline, amoxicillin and cefuroxime cannot be used; less effective, so arrange close follow-up. IDSA/AAN/ACR 2020 (doi:10.1093/cid/ciaa1215).',
+        },
     ],
     contraindications: [
         'Known hypersensitivity to azithromycin or macrolides',

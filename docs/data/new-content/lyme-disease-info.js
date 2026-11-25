@@ -106,7 +106,7 @@ export const LYME_DISEASE_INFO_PAGES = {
             },
             {
                 heading: 'Early localized: erythema migrans',
-                body: 'Adult: doxycycline 100 mg BID x 10 days (IDSA; CDC 10 to 14 days); amoxicillin 500 mg TID x 14 days; cefuroxime 500 mg BID x 14 days.\nChild: doxycycline 4.4 mg/kg/day divided BID (max 100 mg/dose); amoxicillin 50 mg/kg/day divided TID (max 500 mg/dose); cefuroxime 30 mg/kg/day divided BID (max 500 mg/dose).\nPregnancy: amoxicillin or cefuroxime. Azithromycin is second-line and less effective. [1,3]',
+                body: 'Adult: doxycycline 100 mg BID x 10 days (IDSA; CDC 10 to 14 days); amoxicillin 500 mg TID x 14 days; cefuroxime 500 mg BID x 14 days.\nChild: doxycycline 4.4 mg/kg/day divided BID (max 100 mg/dose); amoxicillin 50 mg/kg/day divided TID (max 500 mg/dose); cefuroxime 30 mg/kg/day divided BID (max 500 mg/dose).\nPregnancy: amoxicillin or cefuroxime. Azithromycin 500 mg PO once daily x 7 days (IDSA 2020) is second-line and less effective. [1,3]',
             },
             {
                 heading: 'Facial palsy',
