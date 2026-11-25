@@ -701,7 +701,7 @@ export const CITATIONS: Citation[] = [
   { num: 5, text: 'Caird MS, Flynn JM, Leung YL, et al. Factors Distinguishing Septic Arthritis from Transient Synovitis of the Hip in Children. A Prospective Study. J Bone Joint Surg Am. 2006;88(6):1251-1257. PMID: 16757758' },
   { num: 6, text: 'Sultan J, Hughes PJ. Septic Arthritis or Transient Synovitis of the Hip in Children: The Value of Clinical Prediction Algorithms. J Bone Joint Surg Br. 2010;92(9):1289-1293. PMID: 20798450' },
   { num: 7, text: 'PIDS/IDSA. Clinical Practice Guidelines for the Evaluation and Treatment of Acute Bacterial Arthritis in Pediatrics. 2023. https://www.idsociety.org/practice-guideline/acute-bacterial-arthritis-in-pediatrics2/' },
-  { num: 8, text: 'Nigrovic LE, Thompson KM. The Lyme Vaccine: A Cautionary Tale. Epidemiol Infect. 2007;135(1):1-8. PMID: 16893489. AAP Lyme Management Guidelines 2022.' },
+  { num: 8, text: 'Lantos PM, Rumbaugh J, Bockenstedt LK, et al. Clinical Practice Guidelines by the IDSA, AAN, and ACR: 2020 Guidelines for the Prevention, Diagnosis and Treatment of Lyme Disease. Clin Infect Dis. 2021;72(1):e1-e48. https://academic.oup.com/cid/article/72/1/e1/6010179' },
   { num: 9, text: 'Ozen S, et al. EULAR/PRINTO/PRES Criteria for Henoch-Schönlein Purpura. Ann Rheum Dis. 2010;69(5):798-806. PMID: 20413568' },
   { num: 10, text: 'Gewitz MH, et al. Revision of the Jones Criteria for the Diagnosis of Acute Rheumatic Fever. Circulation. 2015;131(20):1806-1818. PMID: 25908771' },
   { num: 11, text: 'Cabral DA, Tucker LB. Malignancies in Children Who Initially Present with Rheumatic Complaints. J Pediatr. 1999;134(1):53-57. PMID: 9880449' },
