@@ -146,6 +146,19 @@ The clinical images in `docs/images/` are under review for licensing compliance.
 
 Provenance, hashes and approval: `docs/images/acute-keratitis/MANIFEST.json`.
 
+### Lyme Disease (Rash & Tick Atlas)
+
+| File | Author | Source | License |
+|------|--------|--------|---------|
+| docs/images/lyme-disease/em-classic.jpg | James Gathany, CDC (PHIL #9874) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Bullseye_rash_linked_to_Lyme_disease.jpg) | Public domain (US Gov, CDC); downscaled |
+| docs/images/lyme-disease/em-solid.jpg | Boyce RM, Pretsch P, Tyrlik K, Schulz A, Giandomenico DA, Barbarin AM, Williams C (Emerg Infect Dis 2024) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Solid_erythema_migrans_rash_on_the_neck_of_a_woman_with_Lyme_disease.jpg) | Public domain (CDC journal); cropped by Commons uploader, unmodified by us |
+| docs/images/lyme-disease/em-late.jpg | Mikael Häggström | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Approximately_8_weeks_old_erythema_migrans_on_the_thigh.jpg) | CC0; downscaled |
+| docs/images/lyme-disease/em-atypical.jpg | Mikael Häggström | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Atypical_erythema_migrans_1_week_after_initial_presentation.jpg) | CC0; downscaled |
+| docs/images/lyme-disease/tick-stages.jpg | CDC | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Deer_tick_Ixodes_scapularis.jpg) | Public domain (US Gov, CDC), unmodified |
+| docs/images/lyme-disease/tick-engorged.jpg | NIAID | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Engorged_Adult_Deer_Tick_(33651733580).jpg) | CC BY 2.0; downscaled |
+
+Provenance, hashes and approval: `docs/images/lyme-disease/MANIFEST.json`.
+
 ---
 
 ## Fair Use Notice

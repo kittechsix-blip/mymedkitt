@@ -227,15 +227,24 @@ const AMOXICILLIN = {
     genericName: 'Amoxicillin',
     drugClass: 'Aminopenicillin',
     route: 'PO',
-    indications: ['UTI in pregnancy', 'Asymptomatic bacteriuria in pregnancy', 'Early Lyme disease'],
+    indications: ['UTI in pregnancy', 'Asymptomatic bacteriuria in pregnancy', 'Early Lyme disease', 'Lyme arthritis', 'Lyme carditis (mild or oral step-down)'],
     dosing: [
+        {
+            indication: 'Lyme arthritis',
+            regimen: '500 mg PO TID × 28 days (child: 50 mg/kg/day PO divided TID, max 500 mg/dose). Child under 8: amoxicillin or cefuroxime per CDC. Rule out septic arthritis first. [IDSA/AAN/ACR 2020; CDC Lyme arthritis]',
+            weightCalc: { dosePerKg: 50, unit: 'mg', maxDose: 500, dailyDivided: 3 },
+        },
+        {
+            indication: 'Lyme carditis (mild or oral step-down)',
+            regimen: '500 mg PO TID as an oral option for mild carditis, or after IV ceftriaxone once high-grade block resolves; total 14–21 days. [IDSA/AAN/ACR 2020; CDC Lyme carditis]',
+        },
         {
             indication: 'UTI / Asymptomatic bacteriuria in pregnancy',
             regimen: '875 mg PO BID × 7 days. First-line option for UTI in pregnancy. Guided by local resistance patterns and culture sensitivities.',
         },
         {
             indication: 'Early Lyme disease (adult)',
-            regimen: '500 mg PO TID × 14 days. Alternative when doxycycline contraindicated (pregnancy, age <8). Treats erythema migrans, early disseminated Lyme without neurologic involvement. IDSA/AAN/ACR 2020.',
+            regimen: '500 mg PO TID × 14 days. First-line option for erythema migrans alongside doxycycline and cefuroxime; preferred in pregnancy. Treats erythema migrans and early disseminated Lyme without neurologic involvement. IDSA/AAN/ACR 2020.',
         },
         {
             indication: 'Early Lyme disease (pediatric)',
@@ -256,6 +265,8 @@ const AMOXICILLIN = {
     citations: [
         'Pedigo R. First Trimester Pregnancy Emergencies. Emergency Medicine Practice. 2019;21(1):1-28.',
         'ACOG Committee Opinion No. 717: Sulfonamides, Nitrofurantoin, and Risk of Birth Defects. Obstet Gynecol. 2017;130(3):e150-e152.',
+        'Lantos PM, et al. IDSA/AAN/ACR 2020 Guidelines for Prevention, Diagnosis and Treatment of Lyme Disease. Clin Infect Dis. 2021;72(1):e1-e48.',
+        'CDC. Clinical care of Lyme disease (carditis, neurologic, arthritis). cdc.gov/lyme/hcp/clinical-care/.',
     ],
 };
 const AMOXICILLIN_CLAVULANATE = {
@@ -1628,8 +1639,28 @@ const CEFTRIAXONE = {
     genericName: 'Ceftriaxone',
     drugClass: 'Third-generation cephalosporin',
     route: 'IV',
-    indications: ['Neurosyphilis (PCN allergy alternative)', 'Bacterial meningitis', 'Various serious infections', 'Pediatric sepsis / neonatal fever', 'Pediatric meningitis', 'Pediatric UTI', 'Pyelonephritis in pregnancy', 'SCD febrile illness', 'SCD meningitis', 'Community sepsis (empiric coverage)', 'Sexual assault STI prophylaxis', 'Acute otitis media (treatment failure)', 'Endocarditis - streptococci / HACEK / enterococcal synergy'],
+    indications: ['Neurosyphilis (PCN allergy alternative)', 'Bacterial meningitis', 'Various serious infections', 'Pediatric sepsis / neonatal fever', 'Pediatric meningitis', 'Pediatric UTI', 'Pyelonephritis in pregnancy', 'SCD febrile illness', 'SCD meningitis', 'Community sepsis (empiric coverage)', 'Sexual assault STI prophylaxis', 'Acute otitis media (treatment failure)', 'Endocarditis - streptococci / HACEK / enterococcal synergy', 'Lyme carditis (severe)', 'Lyme neuroborreliosis (meningitis / CNS)', 'Lyme arthritis (refractory)'],
     dosing: [
+        {
+            indication: 'Lyme carditis (severe)',
+            regimen: 'Adult: 2 g IV daily. Start NOW for suspected severe carditis; do not wait for Lyme serology (CDC). Switch to oral (doxycycline 100 mg BID, amoxicillin or cefuroxime) once high-grade block and symptoms resolve; total 14–21 days. Child: 50–75 mg/kg IV daily, max 2 g. [IDSA/AAN/ACR 2020; CDC Lyme carditis]',
+            weightCalc: [
+                { dosePerKg: 50, unit: 'mg', maxDose: 2000, label: 'Lyme carditis, child (low end of 50–75 mg/kg)' },
+                { dosePerKg: 75, unit: 'mg', maxDose: 2000, label: 'Lyme carditis, child (high end of 50–75 mg/kg)' },
+            ],
+        },
+        {
+            indication: 'Lyme neuroborreliosis (meningitis / CNS)',
+            regimen: 'Adult: 2 g IV daily for 14–21 days (meningitis: oral doxycycline is an acceptable alternative; parenchymal brain or spinal cord disease: IV preferred, ID consult). Child: 50–75 mg/kg IV daily, max 2 g. [IDSA/AAN/ACR 2020; CDC neurologic Lyme]',
+            weightCalc: [
+                { dosePerKg: 50, unit: 'mg', maxDose: 2000, label: 'Lyme neuro, child (low end of 50–75 mg/kg)' },
+                { dosePerKg: 75, unit: 'mg', maxDose: 2000, label: 'Lyme neuro, child (high end of 50–75 mg/kg)' },
+            ],
+        },
+        {
+            indication: 'Lyme arthritis (refractory)',
+            regimen: '2 g IV daily for 2–4 weeks when arthritis persists after an oral course; IDSA prefers this to a second oral course. Persistent symptoms after IV therapy: rheumatology, not more antibiotics. [IDSA/AAN/ACR 2020]',
+        },
         {
             indication: 'Neurosyphilis (if desensitization not feasible)',
             regimen: '2 g IV daily \u00D7 10\u201314 days.',
@@ -1716,6 +1747,8 @@ const CEFTRIAXONE = {
     citations: [
         'CDC. Sexually Transmitted Infections Treatment Guidelines. 2021.',
         'Marra CM, et al. Ceftriaxone for Neurosyphilis. Clin Infect Dis. 2019.',
+        'Lantos PM, et al. IDSA/AAN/ACR 2020 Guidelines for Prevention, Diagnosis and Treatment of Lyme Disease. Clin Infect Dis. 2021;72(1):e1-e48.',
+        'CDC. Clinical care of Lyme disease (carditis, neurologic, arthritis). cdc.gov/lyme/hcp/clinical-care/.',
     ],
 };
 const CEPHALEXIN = {
@@ -1758,6 +1791,43 @@ const CEPHALEXIN = {
         'Dell Children\'s EBOC. First Febrile Urinary Tract Infection Clinical Pathway. May 2017.',
         'Dell Children\'s EBOC. UTI Management Pathway (Neonatal). September 2024.',
         'Roberts KB. Urinary tract infection: clinical practice guideline for febrile infants and children 2 to 24 months. Pediatrics. 2011;128(3):595-610.',
+    ],
+};
+const CEFUROXIME = {
+    id: 'cefuroxime',
+    name: 'Cefuroxime axetil',
+    genericName: 'Cefuroxime axetil',
+    drugClass: 'Second-generation cephalosporin',
+    route: 'PO',
+    indications: ['Early Lyme disease', 'Lyme arthritis', 'Lyme carditis (mild or oral step-down)'],
+    dosing: [
+        {
+            indication: 'Early Lyme disease',
+            regimen: '500 mg PO BID × 14 days (erythema migrans). Child: 30 mg/kg/day PO divided BID (max 500 mg/dose). Pregnancy: amoxicillin or cefuroxime (CDC). [IDSA/AAN/ACR 2020; CDC erythema migrans]',
+            weightCalc: { dosePerKg: 30, unit: 'mg', maxDose: 500, dailyDivided: 2 },
+        },
+        {
+            indication: 'Lyme arthritis',
+            regimen: '500 mg PO BID × 28 days. Child: 30 mg/kg/day PO divided BID (max 500 mg/dose). Rule out septic arthritis first. [IDSA/AAN/ACR 2020; CDC Lyme arthritis]',
+            weightCalc: { dosePerKg: 30, unit: 'mg', maxDose: 500, dailyDivided: 2 },
+        },
+        {
+            indication: 'Lyme carditis (mild or oral step-down)',
+            regimen: '500 mg PO BID as an oral option for mild carditis, or after IV ceftriaxone once high-grade block resolves; total 14–21 days. [IDSA/AAN/ACR 2020; CDC Lyme carditis]',
+        },
+    ],
+    contraindications: [
+        'IgE-mediated cephalosporin allergy',
+    ],
+    cautions: [
+        'Adjust for renal impairment',
+        'GI side effects common',
+    ],
+    monitoring: 'Clinical response; return precautions for new rash, fever, palsy, syncope or joint swelling.',
+    notes: 'Oral Lyme alternative when doxycycline is contraindicated (pregnancy, lactation, young children, allergy).',
+    citations: [
+        'Lantos PM, et al. IDSA/AAN/ACR 2020 Guidelines for Prevention, Diagnosis and Treatment of Lyme Disease. Clin Infect Dis. 2021;72(1):e1-e48.',
+        'CDC. Clinical care of Lyme disease: erythema migrans, Lyme arthritis, Lyme carditis. cdc.gov/lyme/hcp/clinical-care/.',
     ],
 };
 const DARUNAVIR = {
@@ -2765,8 +2835,27 @@ const DOXYCYCLINE = {
     genericName: 'Doxycycline',
     drugClass: 'Tetracycline antibiotic',
     route: 'PO',
-    indications: ['Syphilis (PCN allergy alternative)', 'Chlamydia', 'Tick-borne diseases', 'Acne', 'Malaria prophylaxis', 'Community-acquired pneumonia atypical coverage', 'Sexual assault STI prophylaxis', 'Early Lyme disease'],
+    indications: ['Syphilis (PCN allergy alternative)', 'Chlamydia', 'Tick-borne diseases', 'Acne', 'Malaria prophylaxis', 'Community-acquired pneumonia atypical coverage', 'Sexual assault STI prophylaxis', 'Early Lyme disease', 'Lyme prophylaxis after high-risk tick bite', 'Lyme facial palsy / meningitis (oral)', 'Lyme carditis (mild or oral step-down)', 'Lyme arthritis'],
     dosing: [
+        {
+            indication: 'Lyme prophylaxis after high-risk tick bite',
+            regimen: 'Adult: 200 mg PO once. Child under 45 kg: 4.4 mg/kg PO once (max 200 mg). Only for a high-risk bite (Ixodes adult or nymph, highly endemic area, attached 36 h or more, within 72 h of removal). Safe at all ages per CDC. Does NOT prevent anaplasmosis, babesiosis, ehrlichiosis or RMSF. [IDSA/AAN/ACR 2020; CDC tick bite]',
+            weightCalc: { dosePerKg: 4.4, unit: 'mg', maxDose: 200, label: 'Prophylaxis, child under 45 kg: single dose' },
+        },
+        {
+            indication: 'Lyme facial palsy / meningitis (oral)',
+            regimen: 'Facial palsy: 100 mg PO BID × 14–21 days. Meningitis: 200 mg/day PO in 1–2 doses × 14–21 days (oral acceptable; IV ceftriaxone is the alternative). Child: 4.4 mg/kg/day PO divided BID (max 100 mg/dose). [IDSA/AAN/ACR 2020; CDC neurologic Lyme]',
+            weightCalc: { dosePerKg: 4.4, unit: 'mg', maxDose: 100, dailyDivided: 2, label: 'Lyme neuro, child: per dose' },
+        },
+        {
+            indication: 'Lyme carditis (mild or oral step-down)',
+            regimen: '100 mg PO BID as the oral option for mild carditis (PR under 300 ms, outpatient if asymptomatic with reliable follow-up), or after IV ceftriaxone once high-grade block and symptoms resolve; total 14–21 days. [IDSA/AAN/ACR 2020; CDC Lyme carditis]',
+        },
+        {
+            indication: 'Lyme arthritis',
+            regimen: '100 mg PO BID × 28 days (child: 4.4 mg/kg/day divided BID, max 100 mg/dose; under 8 years: amoxicillin or cefuroxime per CDC). Rule out septic arthritis first. [IDSA/AAN/ACR 2020; CDC Lyme arthritis]',
+            weightCalc: { dosePerKg: 4.4, unit: 'mg', maxDose: 100, dailyDivided: 2 },
+        },
         {
             indication: 'Primary / Secondary / Early latent syphilis (PCN allergy)',
             regimen: '100 mg PO BID \u00D7 14 days.',
@@ -2785,7 +2874,7 @@ const DOXYCYCLINE = {
         },
         {
             indication: 'Early Lyme disease (adult)',
-            regimen: '100 mg PO BID × 10-14 days for erythema migrans without neurologic involvement. × 14-21 days if early disseminated disease (multiple EM, mild carditis, isolated facial palsy). First-line per IDSA/AAN/ACR 2020. Also covers possible Anaplasma co-infection.',
+            regimen: '100 mg PO BID × 10 days for erythema migrans, single or multiple (IDSA 2020; CDC 10–14 days). Facial palsy or mild carditis: 14–21 days. First-line per IDSA/AAN/ACR 2020. Also covers possible Anaplasma co-infection.',
         },
         {
             indication: 'Early Lyme disease (pediatric ≥8 yr)',
@@ -2798,8 +2887,8 @@ const DOXYCYCLINE = {
         },
     ],
     contraindications: [
-        'Pregnancy \u2014 tetracyclines cause fetal bone/teeth abnormalities',
-        'Children < 8 years (tooth discoloration)',
+        'Pregnancy \u2014 avoid for treatment courses; single-dose Lyme prophylaxis is individualized (CDC)',
+        'Children < 8 years \u2014 avoid prolonged courses; single-dose Lyme prophylaxis and short courses are acceptable (CDC lists doxycycline at any age for prophylaxis and neurologic Lyme)',
     ],
     cautions: [
         'Photosensitivity \u2014 advise sun protection',
@@ -2810,6 +2899,8 @@ const DOXYCYCLINE = {
     notes: 'Alternative for non-pregnant PCN-allergic patients with early syphilis. Evidence is weaker than for penicillin G.',
     citations: [
         'CDC. Sexually Transmitted Infections Treatment Guidelines. 2021.',
+        'Lantos PM, et al. IDSA/AAN/ACR 2020 Guidelines for Prevention, Diagnosis and Treatment of Lyme Disease. Clin Infect Dis. 2021;72(1):e1-e48.',
+        'CDC. Caring for Patients after a Tick Bite (2021); Clinical care of Lyme disease. cdc.gov/lyme/hcp/clinical-care/.',
     ],
 };
 const DOXYLAMINE = {
@@ -14743,6 +14834,7 @@ export const ALL_DRUGS = [
     CEFEPIME,
     CEFTRIAXONE,
     CEPHALEXIN,
+    CEFUROXIME,
     CETIRIZINE,
     CHLORDIAZEPOXIDE,
     CHOLESTYRAMINE,

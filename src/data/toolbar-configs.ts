@@ -70,6 +70,7 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
   'pprom',
   'blood-draw',
   'pedi-resus-numbers',
+  'lyme-disease',
   // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 
@@ -78,6 +79,14 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
 // toolbar validation entirely (the validator warned and skipped ~1,264 targets)
 // and is the root cause of the 2026-07-27 dead-toolbar-button CRITICAL.
 export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
+  'lyme-disease': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'lyme-steps' },
+    { id: 'atlas', label: 'Rash & Tick Atlas', icon: '🔬', action: 'overlay', target: 'lyme-atlas' },
+    { id: 'carditis', label: 'Carditis', icon: '❤️', action: 'jump', target: 'lyme-carditis-recognize', pinned: true },
+    { id: 'silc', label: 'SILC', icon: '🧮', action: 'calculator', target: 'silc-score', pinned: true },
+    { id: 'rx', label: 'Rx Guide', icon: '💊', action: 'overlay', target: 'lyme-rx-guide' },
+    { id: 'testing', label: 'Testing', icon: '🧪', action: 'overlay', target: 'lyme-testing-guide' },
+  ],
   'sudden-hearing-loss': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'hearing-loss-steps' },
     { id: 'fork', label: 'Fork Lab', icon: '👂', action: 'calculator', target: 'hearing-fork', pinned: true },

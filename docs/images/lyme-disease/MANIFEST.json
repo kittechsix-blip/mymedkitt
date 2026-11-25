@@ -1,0 +1,74 @@
+{
+  "em-classic.jpg": {
+    "title": "Bullseye rash linked to Lyme disease",
+    "author": "James Gathany, CDC (PHIL #9874)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Bullseye_rash_linked_to_Lyme_disease.jpg",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Bullseye_rash_linked_to_Lyme_disease.jpg",
+    "license_tag": "PD-USGov-HHS-CDC",
+    "modifications": "Downscaled to 1200 px longest side; no other change",
+    "placement": "Rash & Tick Atlas; lyme-em",
+    "retrieval_timestamp": "2026-11-25T12:56:33.681Z",
+    "andy_approval_commit": "Approved by Andy in chat 2026-11-25 (\"Yes, ship\") after license + placement review",
+    "sha256": "ab828691481e7d02864c7fcb3b5cf0ef83526b4cd58528fed3494902f7d985b9"
+  },
+  "em-solid.jpg": {
+    "title": "Solid erythema migrans rash on the neck of a woman with Lyme disease",
+    "author": "Boyce RM, Pretsch P, Tyrlik K, Schulz A, Giandomenico DA, Barbarin AM, Williams C (Emerg Infect Dis 2024)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Solid_erythema_migrans_rash_on_the_neck_of_a_woman_with_Lyme_disease.jpg",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Solid_erythema_migrans_rash_on_the_neck_of_a_woman_with_Lyme_disease.jpg",
+    "license_tag": "PD-USGov-HHS-CDC",
+    "modifications": "None by us (slightly cropped by the Commons uploader)",
+    "placement": "Rash & Tick Atlas; lyme-em",
+    "retrieval_timestamp": "2026-11-25T12:56:33.682Z",
+    "andy_approval_commit": "Approved by Andy in chat 2026-11-25 (\"Yes, ship\") after license + placement review",
+    "sha256": "f21b62fe386d10e5cf52bbdff1f489faee11766624acc35518359f761e1b11e7"
+  },
+  "em-late.jpg": {
+    "title": "Approximately 8 weeks old erythema migrans on the thigh",
+    "author": "Mikael Häggström",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Approximately_8_weeks_old_erythema_migrans_on_the_thigh.jpg",
+    "license_evidence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "license_tag": "CC0",
+    "modifications": "Downscaled to 1200 px longest side; no other change",
+    "placement": "Rash & Tick Atlas",
+    "retrieval_timestamp": "2026-11-25T12:56:33.682Z",
+    "andy_approval_commit": "Approved by Andy in chat 2026-11-25 (\"Yes, ship\") after license + placement review",
+    "sha256": "04f0c491e9e881cc65c074ab30b01e88f860a12f553902ffe0663b202ce1c5cb"
+  },
+  "em-atypical.jpg": {
+    "title": "Atypical erythema migrans 1 week after initial presentation",
+    "author": "Mikael Häggström",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Atypical_erythema_migrans_1_week_after_initial_presentation.jpg",
+    "license_evidence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "license_tag": "CC0",
+    "modifications": "Downscaled to 1200 px longest side; no other change",
+    "placement": "Rash & Tick Atlas",
+    "retrieval_timestamp": "2026-11-25T12:56:33.682Z",
+    "andy_approval_commit": "Approved by Andy in chat 2026-11-25 (\"Yes, ship\") after license + placement review",
+    "sha256": "3570260fb383a5079e85ef979abed3ac09be5f8724d695ddac59f3ad8d29b3ca"
+  },
+  "tick-stages.jpg": {
+    "title": "Deer tick Ixodes scapularis",
+    "author": "CDC",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Deer_tick_Ixodes_scapularis.jpg",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Deer_tick_Ixodes_scapularis.jpg",
+    "license_tag": "PD-USGov-HHS-CDC",
+    "modifications": "None",
+    "placement": "Rash & Tick Atlas; lyme-start",
+    "retrieval_timestamp": "2026-11-25T12:56:33.683Z",
+    "andy_approval_commit": "Approved by Andy in chat 2026-11-25 (\"Yes, ship\") after license + placement review",
+    "sha256": "42a75b031411c4637de41a7b84157bc40d4041ec9d6c03b6ec05979a0277e9ea"
+  },
+  "tick-engorged.jpg": {
+    "title": "Engorged Adult Deer Tick (33651733580)",
+    "author": "NIAID",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Engorged_Adult_Deer_Tick_(33651733580).jpg",
+    "license_evidence_url": "https://creativecommons.org/licenses/by/2.0/",
+    "license_tag": "CC-BY-2.0",
+    "modifications": "Downscaled to 1200 px longest side; no other change",
+    "placement": "Rash & Tick Atlas; lyme-tick-bite",
+    "retrieval_timestamp": "2026-11-25T12:56:33.683Z",
+    "andy_approval_commit": "Approved by Andy in chat 2026-11-25 (\"Yes, ship\") after license + placement review",
+    "sha256": "3a9d94cbd9291cf70d2eef24bd858844fa7b7dbc36b18b2218a97799bff0042a"
+  }
+}

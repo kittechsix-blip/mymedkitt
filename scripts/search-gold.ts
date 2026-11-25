@@ -92,4 +92,11 @@ export const GOLD: GoldQuestion[] = [
   { q: 'chemo patient fever what antibiotic', expect: ['node:oncological-emergencies/onc-fn-high-risk', 'node:oncological-emergencies/onc-fn-recognize'] },
   { q: 'fever low ANC cefepime', expect: ['node:oncological-emergencies/onc-fn-high-risk', 'node:oncological-emergencies/onc-fn-recognize'] },
   { q: 'fever on chemotherapy', expect: ['node:oncological-emergencies/onc-fn-recognize', 'node:oncological-emergencies/onc-fn-high-risk'] },
+  // Lyme disease
+  { q: 'lyme carditis first line treatment', expect: ['node:lyme-disease/lyme-carditis-severe'] },
+  { q: 'lyme carditis', expect: ['node:lyme-disease/lyme-carditis-recognize', 'node:lyme-disease/lyme-carditis-severe'] },
+  { q: 'tick bite prophylaxis doxycycline', expect: ['node:lyme-disease/lyme-prophylaxis'] },
+  { q: 'erythema migrans treatment', expect: ['node:lyme-disease/lyme-em-treatment'] },
+  { q: 'lyme facial palsy', expect: ['node:lyme-disease/lyme-facial-palsy'] },
+  { q: 'lyme arthritis treatment', expect: ['node:lyme-disease/lyme-arthritis'] },
 ];

@@ -5,6 +5,7 @@
 
 /** Alternative names that should resolve directly in the Home title lookup. */
 export const CONSULT_TITLE_ALIASES: Record<string, string[]> = {
+  'lyme-disease': ['Lyme', 'borreliosis', 'Borrelia', 'erythema migrans', 'tick bite'],
   'sudden-hearing-loss': ['SSNHL', 'sudden sensorineural hearing loss', 'sudden deafness'],
   'radiculopathies': [
     'radiculoapthies', 'radiculopathy', 'cervical radiculopathy', 'thoracic radiculopathy',
@@ -15,6 +16,7 @@ export const CONSULT_TITLE_ALIASES: Record<string, string[]> = {
 
 /** Clinical synonyms for common queries */
 export const CLINICAL_SYNONYMS: Record<string, string[]> = {
+  'lyme-disease': ['Lyme', 'borrelia', 'borreliosis', 'erythema migrans', 'bull\'s eye rash', 'bullseye rash', 'deer tick', 'blacklegged tick', 'ixodes', 'tick bite', 'tick bite prophylaxis', 'Lyme carditis', 'Lyme facial palsy', 'Lyme arthritis', 'SILC score'],
   'sudden-hearing-loss': ['sudden sensorineural hearing loss', 'SSNHL', 'sudden deafness', 'idiopathic hearing loss', 'sudden hearing loss first line treatment', 'Weber', 'Rinne', 'Rhrine', 'tuning fork', 'conductive versus sensorineural', 'blocked ear normal otoscopy', 'urgent audiometry', 'hearing loss steroids'],
   'acute-keratitis': ['keratitis', 'corneal ulcer', 'contact lens infection', 'dendritic ulcer', 'HSV keratitis', 'pseudodendrite', 'herpes zoster ophthalmicus', 'photokeratitis', 'welding flash', 'Acanthamoeba keratitis', 'fungal keratitis', 'fluorescein uptake patterns'],
   'radiculopathies': [...CONSULT_TITLE_ALIASES['radiculopathies'], 'pinched nerve', 'nerve root localization'],

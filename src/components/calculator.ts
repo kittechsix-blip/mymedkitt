@@ -197,6 +197,35 @@ const CHA2DS2VASC_CALCULATOR: CalculatorDefinition = {
 };
 
 // -------------------------------------------------------------------
+// SILC (Suspicious Index in Lyme Carditis) Calculator Definition
+// -------------------------------------------------------------------
+
+const SILC_CALCULATOR: CalculatorDefinition = {
+  id: 'silc-score',
+  title: 'SILC Score',
+  subtitle: 'Suspicious Index in Lyme Carditis',
+  description: 'Use for a patient with high-degree AV block to judge how likely Lyme carditis is the cause. Proposed, not prospectively validated (derived from a systematic review of published cases). Score ranges from 0 to 12. Mnemonic: COSTAR.',
+  fields: [
+    { name: 'constitutional', label: 'Constitutional symptoms', type: 'toggle', points: 2, description: 'Fever, malaise, arthralgia, dyspnea, pre-syncope or syncope' },
+    { name: 'outdoor', label: 'Outdoor activity / endemic area', type: 'toggle', points: 1 },
+    { name: 'male', label: 'Male sex', type: 'toggle', points: 1 },
+    { name: 'tick', label: 'Tick bite', type: 'toggle', points: 3, description: 'History of a tick bite' },
+    { name: 'age50', label: 'Age under 50 years', type: 'toggle', points: 1 },
+    { name: 'em', label: 'Erythema migrans', type: 'toggle', points: 4, description: 'Current or recent expanding rash' },
+  ],
+  results: [
+    { min: -Infinity, max: 3, label: 'Score 0\u20132', risk: 'Low suspicion', mortality: 'Follow standard high-degree AV block management; keep Lyme in mind if new features appear.', colorVar: '--color-primary' },
+    { min: 3, max: 7, label: 'Score 3\u20136', risk: 'Intermediate suspicion', mortality: 'Send Lyme serology. If symptomatic or high-grade block, treat as severe Lyme carditis now: do not wait for serology; avoid a permanent pacemaker acutely.', colorVar: '--color-warning' },
+    { min: 7, max: Infinity, label: 'Score 7\u201312', risk: 'High suspicion', mortality: 'Send Lyme serology. If symptomatic or high-grade block, treat as severe Lyme carditis now: do not wait for serology; avoid a permanent pacemaker acutely.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Per the SILC authors: 0\u20132 low risk, 3\u20136 intermediate, 7\u201312 high; send Lyme serology if intermediate or high. Treatment of suspected severe carditis (IV ceftriaxone, monitored bed, temporary pacing if needed) should not wait for the test.',
+  citations: [
+    'Besant G, Wan D, Yeung C, et al. Suspicious index in Lyme carditis: systematic review and proposed new risk score. Clin Cardiol. 2018;41(12):1611-1616.',
+    'Yeung C, Baranchuk A. Systematic Approach to the Diagnosis and Treatment of Lyme Carditis and High-Degree Atrioventricular Block. Healthcare (Basel). 2018;6(4):119. Table 1.',
+  ],
+};
+
+// -------------------------------------------------------------------
 // NIHSS Calculator Definition
 // -------------------------------------------------------------------
 
@@ -46788,6 +46817,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'alteplase-pe-dosing': ALTEPLASE_PE_DOSING_CALCULATOR,
   'pe-resus-checklist': PE_RESUS_CHECKLIST_CALCULATOR,
   'cha2ds2vasc': CHA2DS2VASC_CALCULATOR,
+  'silc-score': SILC_CALCULATOR,
   'nihss': NIHSS_CALCULATOR,
   'nihss-calculator': NIHSS_CALCULATOR,
   'stroke-syndrome-calculator': STROKE_SYNDROME_CALCULATOR,

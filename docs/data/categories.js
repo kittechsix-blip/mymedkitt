@@ -1763,6 +1763,7 @@ export const DEFAULT_CATEGORIES = [
         name: 'Infectious Disease',
         icon: 'infectious-disease.png',
         decisionTrees: [
+            { id: 'lyme-disease', title: 'Lyme Disease', subtitle: 'Tick bite · Erythema migrans · Lyme carditis · Neurologic · Arthritis', categoryId: 'infectious-disease', version: '1.0', nodeCount: 19, entryNodeId: 'lyme-start' },
             {
                 id: 'neurosyphilis',
                 title: 'Neurosyphilis Workup',

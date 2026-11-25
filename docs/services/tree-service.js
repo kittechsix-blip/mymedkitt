@@ -1136,6 +1136,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/nail-bed-injuries.js');
             return { nodes: m.NAIL_BED_INJURIES_NODES, entryNodeId: 'nail-start', categoryId: 'procedures', moduleLabels: m.NAIL_BED_INJURIES_MODULE_LABELS, citations: m.NAIL_BED_INJURIES_CITATIONS, criticalActions: m.NAIL_BED_INJURIES_CRITICAL_ACTIONS };
         },
+        'lyme-disease': async () => {
+            const m = await import('../data/trees/lyme-disease.js');
+            return { nodes: m.LYME_DISEASE_NODES, entryNodeId: 'lyme-start', categoryId: 'infectious-disease', moduleLabels: m.LYME_DISEASE_MODULE_LABELS, citations: m.LYME_DISEASE_CITATIONS, criticalActions: m.LYME_DISEASE_CRITICAL_ACTIONS };
+        },
         'sudden-hearing-loss': async () => {
             const m = await import('../data/trees/sudden-hearing-loss.js');
             return { nodes: m.HEARING_LOSS_NODES, entryNodeId: 'sudden-hearing-loss-start', categoryId: 'ent', moduleLabels: m.HEARING_LOSS_MODULE_LABELS, citations: m.HEARING_LOSS_CITATIONS, criticalActions: m.HEARING_LOSS_CRITICAL_ACTIONS };
