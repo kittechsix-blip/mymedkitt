@@ -129,7 +129,7 @@ export const PEDIATRIC_ARTHRITIS_NODES = [
         module: 2,
         title: 'Low Risk Hip (0 Kocher Criteria)',
         body: '**With 0 criteria present, probability of septic arthritis is <0.2%.**\n\n**This is likely transient synovitis if:**\n- Child appears well\n- Afebrile or low-grade fever only\n- Will bear weight (even with limp)\n- CRP <20 mg/L\n- Recent viral illness\n\n**Management:**\n1. **NSAIDs** - Ibuprofen 10 mg/kg q6-8h or Naproxen 5-7 mg/kg q12h\n2. **Rest** - limit activity until pain-free\n3. **Follow-up** in 24-48 hours if not improving\n\n**Return precautions:**\n- Fever develops (>38.5C)\n- Unable to bear weight\n- Symptoms worsening rather than improving\n- Not significantly better in 3-5 days\n\n**Expected course:** Self-limiting, resolves in 1-2 weeks. Full recovery expected.\n\n**Red flag:** If no improvement in 48-72 hours, reconsider diagnosis and obtain labs/imaging. [5][6]',
-        recommendation: 'Likely transient synovitis. Trial of NSAIDs, rest, and close follow-up in 24-48 hours. Return if fever, unable to bear weight, or worsening. Expect resolution in 1-2 weeks.',
+        recommendation: 'Likely transient synovitis ONLY if age 3-8 years. Age 8 or older, obese, or symptoms >1-2 weeks: obtain AP + frog-leg lateral radiographs of BOTH hips before discharge to exclude SCFE (cross-table lateral instead of frog-leg if unable to bear weight); if SCFE, strict non-weight bearing and urgent orthopedics. Otherwise: trial of NSAIDs, rest, and close follow-up in 24-48 hours. Return if fever, unable to bear weight, or worsening. Expect resolution in 1-2 weeks.',
         confidence: 'recommended',
         citation: [5, 6],
     },
