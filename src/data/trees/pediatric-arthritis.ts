@@ -694,8 +694,8 @@ export const MODULE_LABELS = [
 ];
 
 export const CITATIONS: Citation[] = [
-  { num: 1, text: 'Pääkkönen M, Peltola H. Management of Septic Arthritis in Children. Pediatr Health Med Ther. 2017;8:65-68. PMID: 29388612' },
-  { num: 2, text: 'Mathison DJ, Teach SJ. Approach to Pediatric Joint Pain. Pediatr Clin North Am. 2012;59(2):359-378. PMID: 22560575' },
+  { num: 1, text: 'Pääkkönen M. Septic arthritis in children: diagnosis and treatment. Pediatric Health Med Ther. 2017;8:65-68. PMID: 29388627. https://pmc.ncbi.nlm.nih.gov/articles/PMC5774603/' },
+  { num: 2, text: 'Royal Children\'s Hospital Melbourne. Clinical Practice Guidelines: The acutely swollen joint. Updated October 2021. https://www.rch.org.au/clinicalguide/guideline_index/The_acutely_swollen_joint/' },
   { num: 3, text: 'Petty RE, et al. International League of Associations for Rheumatology Classification of Juvenile Idiopathic Arthritis: Second Revision, Edmonton 2001. J Rheumatol. 2004;31(2):390-392. PMID: 14760812' },
   { num: 4, text: 'Kocher MS, Zurakowski D, Kasser JR. Differentiating Between Septic Arthritis and Transient Synovitis of the Hip in Children: An Evidence-Based Clinical Prediction Algorithm. J Bone Joint Surg Am. 1999;81(12):1662-1670. PMID: 10608376' },
   { num: 5, text: 'Caird MS, Flynn JM, Leung YL, et al. Factors Distinguishing Septic Arthritis from Transient Synovitis of the Hip in Children. A Prospective Study. J Bone Joint Surg Am. 2006;88(6):1251-1257. PMID: 16757758' },
@@ -707,7 +707,7 @@ export const CITATIONS: Citation[] = [
   { num: 11, text: 'Cabral DA, Tucker LB. Malignancies in Children Who Initially Present with Rheumatic Complaints. J Pediatr. 1999;134(1):53-57. PMID: 9880449' },
   { num: 12, text: 'Novais EN, Millis MB. Slipped Capital Femoral Epiphysis: Prevalence, Pathogenesis, and Natural History. Clin Orthop Relat Res. 2012;470(12):3432-3438. PMID: 23054509' },
   { num: 13, text: 'Kim HKW, Herring JA. Pathophysiology, Classifications, and Natural History of Perthes Disease. Orthop Clin North Am. 2011;42(3):285-295. PMID: 21742140' },
-  { num: 14, text: 'Evans AM, Scutter SD. Prevalence of "Growing Pains" in Young Children. J Pediatr. 2004;145(2):255-258. PMID: 15289779' },
+  { num: 14, text: 'Evans AM, Scutter SD. Prevalence of "growing pains" in young children. J Pediatr. 2004;145(2):255-258. PMID: 15289780. https://doi.org/10.1016/j.jpeds.2004.04.045' },
 ];
 
 // Alias exports for push script compatibility
