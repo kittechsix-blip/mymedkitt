@@ -64,14 +64,14 @@ export const RAPID_CCB_OD: RapidStrip = {
           id: 'wbi',
           layout: 'steps',
           action: 'Whole bowel irrigation',
-          figure: 'GoLYTELY 1.5-2 L/hr',
+          figure: 'PEG-ELS 1.5-2 L/hr',
           condition: 'Extended-release CCB',
           nodeIds: ['ccb-gi-decon'],
           warning: { nodeId: 'ccb-gi-decon', text: 'Contraindicated if ileus, obstruction, or hemodynamic instability precluding positioning' },
           lines: [
             { nodeId: 'ccb-gi-decon', text: 'Whole bowel irrigation (WBI):' },
             { nodeId: 'ccb-gi-decon', text: 'Strongly recommended for extended-release CCB' },
-            { nodeId: 'ccb-gi-decon', text: 'GoLYTELY 1.5-2 L/hr via NG until clear rectal effluent' },
+            { nodeId: 'ccb-gi-decon', text: 'Polyethylene glycol electrolyte solution (PEG-ELS) 1.5-2 L/hr via NG until clear rectal effluent' },
           ],
         },
         {

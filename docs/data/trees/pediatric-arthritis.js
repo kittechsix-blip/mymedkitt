@@ -472,7 +472,7 @@ export const PEDIATRIC_ARTHRITIS_NODES = [
         type: 'info',
         module: 5,
         title: 'Malignancy Workup',
-        body: '**When to investigate for malignancy in child with MSK complaints.**\n\n**Hard stops requiring immediate evaluation:**\n- Hepatosplenomegaly or lymphadenopathy + MSK complaints\n- Any unexplained cytopenia\n- Pancytopenia\n\n**Consider heme/onc referral if >1 month MSK pain PLUS:**\n- Hepatomegaly, splenomegaly, or LAD, OR\n- Fever + non-articular bone pain + systemic symptoms (fatigue, weight loss) + neutrophils <2 x 10^9/L or platelets <300 x 10^9/L\n\n**Workup:**\n1. **CBC with manual differential** - look for blasts\n2. **Peripheral blood smear** - technician review\n3. **LDH, uric acid** - tumor lysis markers\n4. **CMP** - renal/liver function\n5. **X-ray** of painful areas - lytic lesions, periosteal reaction\n\n**If concerning findings:**\n- Hematology/oncology consultation\n- Bone marrow aspiration/biopsy\n- Do NOT start steroids (masks diagnosis)\n\n**Pearl:** A normal CBC does NOT rule out leukemia. Peripheral smear review and clinical suspicion are key. [11]',
+        body: '**When to investigate for malignancy in child with MSK complaints.**\n\n**Hard stops requiring immediate evaluation:**\n- Hepatosplenomegaly or lymphadenopathy + MSK complaints\n- Any unexplained cytopenia\n- Pancytopenia\n\n**Consider heme/onc referral if >1 month MSK pain PLUS:**\n- Hepatomegaly, splenomegaly, or LAD, OR\n- Fever + non-articular bone pain + systemic symptoms (fatigue, weight loss) + neutrophils <2 x 10^9/L or platelets <300 x 10^9/L\n\n**Workup:**\n1. **CBC with manual differential** - look for blasts\n2. **Peripheral blood smear** - request pathologist/hematologist review\n3. **LDH, uric acid** - tumor lysis markers\n4. **CMP** - renal/liver function\n5. **X-ray** of painful areas - lytic lesions, periosteal reaction\n\n**If concerning findings:**\n- Hematology/oncology consultation\n- Bone marrow aspiration/biopsy\n- Do NOT start steroids (masks diagnosis)\n\n**Pearl:** A normal CBC does NOT rule out leukemia. Peripheral smear review and clinical suspicion are key. [11]',
         citation: [11],
         calculatorLinks: [
             { id: 'peds-arth-malignancy-flags', label: 'Malignancy Red Flag Checker' },
@@ -616,20 +616,20 @@ export const MODULE_LABELS = [
     'Treatment & Disposition',
 ];
 export const CITATIONS = [
-    { num: 1, text: 'Pääkkönen M, Peltola H. Management of Septic Arthritis in Children. Pediatr Health Med Ther. 2017;8:65-68. PMID: 29388612' },
-    { num: 2, text: 'Mathison DJ, Teach SJ. Approach to Pediatric Joint Pain. Pediatr Clin North Am. 2012;59(2):359-378. PMID: 22560575' },
+    { num: 1, text: 'Pääkkönen M. Septic arthritis in children: diagnosis and treatment. Pediatric Health Med Ther. 2017;8:65-68. PMID: 29388627. https://pmc.ncbi.nlm.nih.gov/articles/PMC5774603/' },
+    { num: 2, text: 'Royal Children\'s Hospital Melbourne. Clinical Practice Guidelines: The acutely swollen joint. Updated October 2021. https://www.rch.org.au/clinicalguide/guideline_index/The_acutely_swollen_joint/' },
     { num: 3, text: 'Petty RE, et al. International League of Associations for Rheumatology Classification of Juvenile Idiopathic Arthritis: Second Revision, Edmonton 2001. J Rheumatol. 2004;31(2):390-392. PMID: 14760812' },
     { num: 4, text: 'Kocher MS, Zurakowski D, Kasser JR. Differentiating Between Septic Arthritis and Transient Synovitis of the Hip in Children: An Evidence-Based Clinical Prediction Algorithm. J Bone Joint Surg Am. 1999;81(12):1662-1670. PMID: 10608376' },
     { num: 5, text: 'Caird MS, Flynn JM, Leung YL, et al. Factors Distinguishing Septic Arthritis from Transient Synovitis of the Hip in Children. A Prospective Study. J Bone Joint Surg Am. 2006;88(6):1251-1257. PMID: 16757758' },
     { num: 6, text: 'Sultan J, Hughes PJ. Septic Arthritis or Transient Synovitis of the Hip in Children: The Value of Clinical Prediction Algorithms. J Bone Joint Surg Br. 2010;92(9):1289-1293. PMID: 20798450' },
     { num: 7, text: 'PIDS/IDSA. Clinical Practice Guidelines for the Evaluation and Treatment of Acute Bacterial Arthritis in Pediatrics. 2023. https://www.idsociety.org/practice-guideline/acute-bacterial-arthritis-in-pediatrics2/' },
-    { num: 8, text: 'Nigrovic LE, Thompson KM. The Lyme Vaccine: A Cautionary Tale. Epidemiol Infect. 2007;135(1):1-8. PMID: 16893489. AAP Lyme Management Guidelines 2022.' },
+    { num: 8, text: 'Lantos PM, Rumbaugh J, Bockenstedt LK, et al. Clinical Practice Guidelines by the IDSA, AAN, and ACR: 2020 Guidelines for the Prevention, Diagnosis and Treatment of Lyme Disease. Clin Infect Dis. 2021;72(1):e1-e48. https://academic.oup.com/cid/article/72/1/e1/6010179' },
     { num: 9, text: 'Ozen S, et al. EULAR/PRINTO/PRES Criteria for Henoch-Schönlein Purpura. Ann Rheum Dis. 2010;69(5):798-806. PMID: 20413568' },
     { num: 10, text: 'Gewitz MH, et al. Revision of the Jones Criteria for the Diagnosis of Acute Rheumatic Fever. Circulation. 2015;131(20):1806-1818. PMID: 25908771' },
     { num: 11, text: 'Cabral DA, Tucker LB. Malignancies in Children Who Initially Present with Rheumatic Complaints. J Pediatr. 1999;134(1):53-57. PMID: 9880449' },
     { num: 12, text: 'Novais EN, Millis MB. Slipped Capital Femoral Epiphysis: Prevalence, Pathogenesis, and Natural History. Clin Orthop Relat Res. 2012;470(12):3432-3438. PMID: 23054509' },
     { num: 13, text: 'Kim HKW, Herring JA. Pathophysiology, Classifications, and Natural History of Perthes Disease. Orthop Clin North Am. 2011;42(3):285-295. PMID: 21742140' },
-    { num: 14, text: 'Evans AM, Scutter SD. Prevalence of "Growing Pains" in Young Children. J Pediatr. 2004;145(2):255-258. PMID: 15289779' },
+    { num: 14, text: 'Evans AM, Scutter SD. Prevalence of "growing pains" in young children. J Pediatr. 2004;145(2):255-258. PMID: 15289780. https://doi.org/10.1016/j.jpeds.2004.04.045' },
 ];
 // Alias exports for push script compatibility
 export const PEDIATRIC_ARTHRITIS_MODULE_LABELS = MODULE_LABELS;

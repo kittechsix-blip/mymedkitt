@@ -164,7 +164,7 @@ export const CCB_OD_NODES = [
         type: 'info',
         module: 3,
         title: 'GI Decontamination',
-        body: '**Activated charcoal:**\n• 1 g/kg PO (max 50g) if presenting within 1-2 hours\n• Consider even later for extended-release formulations\n• Protect airway first if altered mental status\n\n**Whole bowel irrigation (WBI):**\n• **Strongly recommended for extended-release CCB** [1]\n• GoLYTELY 1.5-2 L/hr via NG until clear rectal effluent\n• Contraindicated if ileus, obstruction, or hemodynamic instability precluding positioning\n\n**Duration:**\n• May require 4-12 hours for complete bowel evacuation\n• STOP WBI if the patient deteriorates (hypotension/shock, vomiting, ileus, or loss of airway protection). Resuscitation takes priority; WBI is contraindicated in hemodynamic instability or an unprotected airway\n\nProceed to definitive treatment based on shock phenotype.',
+        body: '**Activated charcoal:**\n• 1 g/kg PO (max 50g) if presenting within 1-2 hours\n• Consider even later for extended-release formulations\n• Protect airway first if altered mental status\n\n**Whole bowel irrigation (WBI):**\n• **Strongly recommended for extended-release CCB** [1]\n• Polyethylene glycol electrolyte solution (PEG-ELS) 1.5-2 L/hr via NG until clear rectal effluent\n• Contraindicated if ileus, obstruction, or hemodynamic instability precluding positioning\n\n**Duration:**\n• May require 4-12 hours for complete bowel evacuation\n• STOP WBI if the patient deteriorates (hypotension/shock, vomiting, ileus, or loss of airway protection). Resuscitation takes priority; WBI is contraindicated in hemodynamic instability or an unprotected airway\n\nProceed to definitive treatment based on shock phenotype.',
         citation: [1],
         next: 'ccb-hiet-intro',
         summary: 'WBI with GoLYTELY 2L/hr for extended-release — removing drug load is critical',
@@ -409,9 +409,10 @@ export const CCB_OD_MODULE_LABELS = [
     'Disposition',
 ];
 export const CCB_OD_CITATIONS = [
-    { num: 1, text: 'St-Onge M, Dubé PA, Gosselin S, et al. Treatment for Calcium Channel Blocker Poisoning: A Systematic Review. Clin Toxicol. 2014;52(9):926-944. AACT Position Statement.' },
+    { num: 1, text: 'St-Onge M, Dubé PA, Gosselin S, et al. Treatment for calcium channel blocker poisoning: a systematic review. Clin Toxicol (Phila). 2014;52(9):926-944.' },
     { num: 2, text: 'Levine M, Curry SC, Padilla-Jones A, Ruha AM. Critical Care Management of Verapamil and Diltiazem Overdose With a Focus on Vasopressors: A 25-Year Experience at a Single Center. Ann Emerg Med. 2013;62(3):252-258.' },
     { num: 3, text: 'Graudins A, Lee HM, Druda D. Calcium channel antagonist and beta-blocker overdose: antidotes and adjunct therapies. Br J Clin Pharmacol. 2016;81(3):453-461.' },
     { num: 4, text: 'Engebretsen KM, Kaczmarek KM, Morgan J, Holger JS. High-Dose Insulin Therapy in Beta-Blocker and Calcium Channel Blocker Poisoning. Clin Toxicol. 2011;49(4):277-283.' },
     { num: 5, text: 'Gosselin S, Hoegberg LC, Hoffman RS, et al. Evidence-based recommendations on the use of intravenous lipid emulsion therapy in poisoning. Clin Toxicol (Phila). 2016;54(10):899-923.' },
+    { num: 6, text: 'St-Onge M, Anseeuw K, Cantrell FL, et al. Experts consensus recommendations for the management of calcium channel blocker poisoning in adults. Crit Care Med. 2017;45(3):e306-e315.' },
 ];
