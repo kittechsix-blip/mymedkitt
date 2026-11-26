@@ -147,7 +147,7 @@ export const RHF_NODES = [
         recommendation: '**Heparin/LMWH + monitor. Transition to DOAC at 24-48h if stable. 3-mo CTEPH screen.**',
         confidence: 'definitive',
         citation: [4],
-        summary: 'Int-low: anticoag + monitor + DOAC bridge + 3-mo CTEPH screen.',
+        summary: 'Int-low: anticoag + monitor + switch to DOAC + 3-mo CTEPH screen.',
     },
     {
         id: 'rhf-pe-lowrisk',
@@ -305,7 +305,7 @@ export const RHF_MODULE_LABELS = [
 export const RHF_CITATIONS = [
     { num: 1, text: 'Farkas J. Internet Book of Critical Care: Right Ventricular Failure. EMCrit/IBCC. Updated 2024.' },
     { num: 2, text: 'Konstam MA, Kiernan MS, Bernstein D, et al. Evaluation and Management of Right-Sided Heart Failure: A Scientific Statement From the AHA. Circulation. 2018;137(20):e578-e622.' },
-    { num: 3, text: 'Lavonas EJ, et al. Part 10: Special Circumstances of Resuscitation: 2020 AHA Guidelines for CPR and ECC. Circulation. 2020;142(suppl 2):S501-S518.' },
+    { num: 3, text: 'Lavonas EJ, Drennan IR, Gabrielli A, et al. Part 10: Special Circumstances of Resuscitation: 2015 AHA Guidelines Update for CPR and ECC. Circulation. 2015;132(18 Suppl 2):S501-S518.' },
     { num: 4, text: 'Konstantinides SV, Meyer G, Becattini C, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603.' },
     { num: 5, text: 'Jaff MR, McMurtry MS, Archer SL, et al. Management of Massive and Submassive PE, IFDVT, and CTEPH: AHA Scientific Statement. Circulation. 2011;123(16):1788-1830.' },
     { num: 6, text: 'Rudski LG, Lai WW, Afilalo J, et al. Guidelines for the Echocardiographic Assessment of the Right Heart in Adults: A Report from the ASE. J Am Soc Echocardiogr. 2010;23(7):685-713.' },
@@ -324,6 +324,6 @@ export const RHF_CITATIONS = [
     { num: 19, text: 'Mekontso Dessap A, Boissier F, Charron C, et al. Acute cor pulmonale during protective ventilation for ARDS. Intensive Care Med. 2016;42(5):862-870.' },
     { num: 20, text: 'Russ MA, Prondzinsky R, Carter JM, et al. Right ventricular function in myocardial infarction complicated by cardiogenic shock. Crit Care Med. 2009;37(12):3017-3023.' },
     { num: 21, text: 'Wilcox SR, Kabrhel C, Channick RN. Pulmonary Hypertension and Right Ventricular Failure in Emergency Medicine. Ann Emerg Med. 2015;66(6):619-628.' },
-    { num: 22, text: 'Rosenfield K, Pulmonary Embolism Response Team Consortium. PERT Consortium consensus practice. Vasc Med. 2019;24(1):54-59.' },
+    { num: 22, text: 'Rivera-Lebron B, McDaniel M, Ahrar K, et al. Diagnosis, Treatment and Follow Up of Acute Pulmonary Embolism: Consensus Practice from the PERT Consortium. Clin Appl Thromb Hemost. 2019;25:1076029619853037.' },
 ];
 export const RHF_NODE_COUNT = RHF_NODES.length;
