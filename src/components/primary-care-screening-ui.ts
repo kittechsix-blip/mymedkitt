@@ -1,6 +1,6 @@
 // MedKitt: Primary Care Screening UI (added 2026-11-26).
 // One screen: age, sex and the conditions that change preventive care go in; a grouped list of what is due comes out.
-// Every rule lives in primary-care-screening-engine.ts. Pure client code, no network, nothing stored: works offline.
+// Every rule lives in primary-care-screening-engine.ts. Pure client code, no network, nothing stored: works offline. Done ticks and dates live in memory for the open screen only.
 // Registered in calculator.ts (CALCULATORS).
 import type { CalculatorDefinition } from './calculator.js';
 import {
@@ -77,6 +77,29 @@ const CSS = `
 .pcs-more summary{min-height:44px;display:flex;align-items:center;padding:6px 14px;font-size:15px;font-weight:800;cursor:pointer}
 .pcs-more .pcs-in{padding:0 12px 10px}
 .pcs-copy{width:100%;min-height:48px;margin-top:16px;font-size:16px;font-weight:800;border-radius:12px;border:2px solid var(--color-primary,#BF5700);background:var(--color-surface-card,#fff);color:var(--color-primary-dark,#8C3F00);cursor:pointer}
+.pcs-prog{margin:4px 0 10px;padding:12px 14px;border:1px solid var(--color-border,#E5E7EB);border-radius:12px;background:var(--color-surface-card,#fff)}
+.pcs-prog-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:17px;font-weight:800}
+.pcs-prog-top span{font-size:14px;font-weight:700;color:var(--color-text-secondary,#5E6A74)}
+.pcs-bar{height:10px;margin-top:8px;border-radius:999px;background:var(--color-border,#E5E7EB);overflow:hidden}
+.pcs-bar i{display:block;height:100%;border-radius:999px;background:var(--color-primary,#BF5700)}
+.pcs-sec{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:22px 0 0;padding:10px 14px;border-radius:12px;border:2px solid var(--color-primary,#BF5700)}
+.pcs-sec h2{margin:0;font-size:19px;font-weight:800;line-height:1.2}
+.pcs-sec b{flex:0 0 auto;min-width:34px;text-align:center;font-size:17px;font-weight:800;padding:2px 10px;border-radius:999px}
+.pcs-sec-todo{background:var(--color-primary,#BF5700);color:var(--color-primary-foreground,#fff)}
+.pcs-sec-todo b{background:var(--color-surface-card,#fff);color:var(--color-primary-dark,#8C3F00)}
+.pcs-sec-done{background:var(--color-surface-card,#fff);color:var(--color-text-primary,#000);border-color:var(--color-text-primary,#000);border-style:dashed}
+.pcs-sec-done b{background:var(--color-text-primary,#000);color:var(--color-surface-card,#fff)}
+.pcs-item{display:flex;gap:8px;align-items:flex-start;margin:8px 0}
+.pcs-item .pcs-col{flex:1 1 0;min-width:0}
+.pcs-item .pcs-card{margin:0}
+.pcs-check{flex:0 0 44px;width:44px;height:44px;min-height:44px;margin-top:2px;padding:0;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;line-height:1;border:2px solid var(--color-primary,#BF5700);border-radius:10px;background:var(--color-surface-card,#fff);color:transparent;cursor:pointer}
+.pcs-check[aria-checked=true]{background:var(--color-primary,#BF5700);color:var(--color-primary-foreground,#fff)}
+.pcs-check:focus-visible{outline:3px solid var(--color-text-primary,#000);outline-offset:2px}
+.pcs-isdone .pcs-card{background:var(--color-bg,#fff);border-style:dashed}
+.pcs-isdone .pcs-title,.pcs-isdone .pcs-action{color:var(--color-text-secondary,#5E6A74)}
+.pcs-card .pcs-tier.pcs-donepill{color:var(--color-text-primary,#000);background:var(--color-surface-card,#fff);border-color:var(--color-text-primary,#000)}
+.pcs-date{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:6px;font-size:14px;font-weight:700;color:var(--color-text-secondary,#5E6A74)}
+.pcs-date input{min-height:44px;padding:4px 10px;font-size:16px;font-weight:600;border:2px solid var(--color-border,#E5E7EB);border-radius:10px;background:var(--color-surface-card,#fff);color:var(--color-text-primary,#000)}
 .pcs-foot{margin-top:16px;font-size:13px;line-height:1.5;color:var(--color-text-secondary,#5E6A74)}
 `;
 
@@ -89,10 +112,11 @@ interface State {
   tobacco: PcsTobacco;
   flags: Set<PcsFlag>;
   filter: Filter;
+  done: Map<string, string>; // rec id -> date done as YYYY-MM-DD, or '' when the date is not known
 }
 
 // In memory only, for this page load. Nothing is written to storage and no identifiers are collected.
-const state: State = { age: '', sex: null, preg: null, tobacco: 'never', flags: new Set(), filter: 'all' };
+const state: State = { age: '', sex: null, preg: null, tobacco: 'never', flags: new Set(), filter: 'all', done: new Map() };
 
 const TIER_LABEL: Record<PcsTier, string> = { do: 'Recommended', discuss: 'Discuss', avoid: 'Do not screen', unknown: 'Evidence unclear' };
 const WHERE_LABEL = { today: 'Can start today', refer: 'Needs referral', either: 'Today or clinic' } as const;
@@ -135,17 +159,78 @@ function patientFrom(): PcsPatient | null {
 }
 
 // Collapsed by default: title, tier, the action and its grade. Tap to open the reasoning and the sources.
-function card(rec: PcsRec): HTMLElement {
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+/** 2026-11-26 -> "26 Nov 2026". Split by hand so no time zone can shift the day. */
+function dateLabel(iso: string): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  if (!m || !MONTHS[Number(m[2]) - 1]) return '';
+  return `${Number(m[3])} ${MONTHS[Number(m[2]) - 1]} ${m[1]}`;
+}
+
+function donePillText(iso: string): string {
+  const d = dateLabel(iso);
+  return d ? `\u2713 Done ${d}` : '\u2713 Done';
+}
+
+function todayIso(): string {
+  const n = new Date();
+  return `${n.getFullYear()}-${String(n.getMonth() + 1).padStart(2, '0')}-${String(n.getDate()).padStart(2, '0')}`;
+}
+
+const isTask = (r: PcsRec): boolean => r.tier === 'do' || r.tier === 'discuss';
+
+// A task row: a 44px tick box beside the card. Done rows also carry an optional date field.
+function taskRow(rec: PcsRec, rerender: () => void): HTMLElement {
+  const done = state.done.has(rec.id);
+  const row = el('div', `pcs-item${done ? ' pcs-isdone' : ''}`);
+  const box = el('button', 'pcs-check', '\u2713');
+  box.type = 'button';
+  box.setAttribute('role', 'checkbox');
+  box.setAttribute('aria-checked', String(done));
+  box.setAttribute('aria-label', `${done ? 'Done' : 'Mark done'}: ${rec.title}`);
+  box.addEventListener('click', () => {
+    if (state.done.has(rec.id)) state.done.delete(rec.id); else state.done.set(rec.id, '');
+    rerender();
+  });
+  row.appendChild(box);
+  const col = el('div', 'pcs-col');
+  const c = card(rec, done);
+  col.appendChild(c);
+  if (done) {
+    const wrap = el('label', 'pcs-date');
+    wrap.appendChild(document.createTextNode('Date done (optional)'));
+    const input = el('input');
+    input.type = 'date';
+    input.max = todayIso();
+    input.value = state.done.get(rec.id) ?? '';
+    // Update in place: rebuilding the list here would close the phone's date picker mid-choice.
+    const sync = (): void => {
+      state.done.set(rec.id, dateLabel(input.value) ? input.value : '');
+      const pill = c.querySelector('.pcs-donepill');
+      if (pill) pill.textContent = donePillText(state.done.get(rec.id) ?? '');
+    };
+    input.addEventListener('input', sync);
+    input.addEventListener('change', sync);
+    wrap.appendChild(input);
+    col.appendChild(wrap);
+  }
+  row.appendChild(col);
+  return row;
+}
+
+function card(rec: PcsRec, done = false): HTMLElement {
   const c = el('details', `pcs-card pcs-t-${rec.tier}`);
   const sum = el('summary', 'pcs-cs');
   const top = el('div', 'pcs-top');
   top.appendChild(el('div', 'pcs-title', rec.title));
-  top.appendChild(el('span', `pcs-tier pcs-t-${rec.tier}`, rec.tier === 'avoid' ? avoidLabel(rec) : TIER_LABEL[rec.tier]));
+  if (done) top.appendChild(el('span', 'pcs-tier pcs-donepill', donePillText(state.done.get(rec.id) ?? '')));
+  else top.appendChild(el('span', `pcs-tier pcs-t-${rec.tier}`, rec.tier === 'avoid' ? avoidLabel(rec) : TIER_LABEL[rec.tier]));
   sum.appendChild(top);
   sum.appendChild(el('div', 'pcs-action', rec.action));
   const meta = el('div', 'pcs-meta');
   meta.appendChild(el('span', 'pcs-pill', rec.strength));
-  if (rec.tier === 'do' || rec.tier === 'discuss') {
+  if (!done && (rec.tier === 'do' || rec.tier === 'discuss')) {
     meta.appendChild(el('span', `pcs-pill${rec.where === 'today' ? ' pcs-today' : ''}`, WHERE_LABEL[rec.where]));
   }
   meta.appendChild(el('span', 'pcs-more-hint', rec.other ? 'Why, other guidance, source' : 'Why and source'));
@@ -183,7 +268,7 @@ function card(rec: PcsRec): HTMLElement {
 export function mountPcs(container: HTMLElement): void {
   ensureStyle();
   // Every open starts blank: the last patient's entries must never carry over to the next.
-  state.age = ''; state.sex = null; state.preg = null; state.tobacco = 'never'; state.flags.clear(); state.filter = 'all';
+  state.age = ''; state.sex = null; state.preg = null; state.tobacco = 'never'; state.flags.clear(); state.filter = 'all'; state.done.clear();
   const root = el('div', 'pcs');
   const panel = el('div', 'pcs-panel');
   const out = el('div');
@@ -209,9 +294,30 @@ export function mountPcs(container: HTMLElement): void {
     const main = result.recs.filter(r => r.tier === 'do' || r.tier === 'discuss' || isPatientStop(r));
     const rest = result.recs.filter(r => (r.tier === 'avoid' && !isPatientStop(r)) || r.tier === 'unknown');
     const startable = (r: PcsRec): boolean => r.tier !== 'avoid' && (r.where === 'today' || r.where === 'either');
-    const count = (t: PcsTier): number => result.recs.filter(r => r.tier === t).length;
+
+    const tasks = main.filter(isTask);
+    // Forget ticks for items that no longer apply to the patient as entered.
+    for (const id of [...state.done.keys()]) if (!tasks.some(r => r.id === id)) state.done.delete(id);
+    const isDone = (r: PcsRec): boolean => state.done.has(r.id);
+    const todo = main.filter(r => !isDone(r));
+    const doneItems = tasks.filter(isDone);
+    const left = tasks.length - doneItems.length;
 
     if (result.scopeNote) out.appendChild(el('div', 'pcs-scope', result.scopeNote));
+
+    const prog = el('div', 'pcs-prog');
+    const ptop = el('div', 'pcs-prog-top');
+    ptop.appendChild(document.createTextNode(`${doneItems.length} of ${tasks.length} done`));
+    ptop.appendChild(el('span', undefined, left ? `${left} still to do` : 'Nothing left to do'));
+    prog.appendChild(ptop);
+    const bar = el('div', 'pcs-bar');
+    const fill = el('i');
+    fill.style.width = `${tasks.length ? Math.round((doneItems.length / tasks.length) * 100) : 0}%`;
+    bar.appendChild(fill);
+    prog.appendChild(bar);
+    prog.appendChild(el('div', 'pcs-hint', 'Tick the box when an item is done today or the patient reports it was done. Ticks are cleared when you leave this screen.'));
+    out.appendChild(prog);
+
     const sum = el('div', 'pcs-sum');
     const stat = (tier: PcsTier, n: number, label: string): void => {
       const s = el('div', `pcs-stat pcs-t-${tier}`);
@@ -219,12 +325,37 @@ export function mountPcs(container: HTMLElement): void {
       s.appendChild(el('span', undefined, label));
       sum.appendChild(s);
     };
-    stat('do', count('do'), 'Recommended');
-    stat('discuss', count('discuss'), 'To discuss');
-    stat('discuss', main.filter(startable).length, 'Start today');
+    stat('do', todo.filter(r => r.tier === 'do').length, 'Recommended, to do');
+    stat('discuss', todo.filter(r => r.tier === 'discuss').length, 'To discuss');
+    stat('discuss', todo.filter(startable).length, 'Can start today');
     out.appendChild(sum);
 
+    const section = (cls: string, title: string, n: number): void => {
+      const h = el('div', `pcs-sec ${cls}`);
+      h.appendChild(el('h2', undefined, title));
+      h.appendChild(el('b', undefined, String(n)));
+      out.appendChild(h);
+    };
+    const groups = (list: PcsRec[]): void => {
+      for (const g of PCS_GROUP_ORDER) {
+        const items = list.filter(r => r.group === g);
+        if (!items.length) continue;
+        const sec = el('section', 'pcs-group');
+        const gh = el('div', 'pcs-gh');
+        gh.appendChild(el('h3', undefined, PCS_GROUP_LABELS[g]));
+        gh.appendChild(el('span', undefined, String(items.length)));
+        sec.appendChild(gh);
+        // Patient-specific stops first, then recommended, then items to discuss.
+        for (const r of [...items.filter(i => i.tier === 'avoid'), ...items.filter(i => i.tier === 'do'), ...items.filter(i => i.tier === 'discuss')]) {
+          sec.appendChild(isTask(r) ? taskRow(r, renderOut) : card(r));
+        }
+        out.appendChild(sec);
+      }
+    };
+
+    section('pcs-sec-todo', 'Still to do', left);
     const filters = el('div', 'pcs-filters');
+    filters.style.paddingTop = '10px';
     const fdefs: { v: Filter; label: string }[] = [{ v: 'all', label: 'Everything due' }, { v: 'today', label: 'Can start today' }, { v: 'refer', label: 'Needs referral' }];
     for (const f of fdefs) {
       const b = el('button', 'pcs-filter', f.label);
@@ -234,21 +365,14 @@ export function mountPcs(container: HTMLElement): void {
       filters.appendChild(b);
     }
     out.appendChild(filters);
+    const shown = todo.filter(r => state.filter === 'all' || isPatientStop(r) || (state.filter === 'today' ? startable(r) : r.where === 'refer'));
+    if (!left && state.filter === 'all') out.appendChild(el('div', 'pcs-empty', 'Every item on this list is marked done.'));
+    else if (!shown.some(isTask)) out.appendChild(el('div', 'pcs-empty', 'Nothing left in this view. Switch back to Everything due.'));
+    groups(shown);
 
-    const shown = main.filter(r => state.filter === 'all' || isPatientStop(r) || (state.filter === 'today' ? startable(r) : r.where === 'refer'));
-    if (!shown.length) out.appendChild(el('div', 'pcs-empty', 'Nothing in this view. Switch back to Everything due.'));
-    for (const g of PCS_GROUP_ORDER) {
-      const items = shown.filter(r => r.group === g);
-      if (!items.length) continue;
-      const sec = el('section', 'pcs-group');
-      const gh = el('div', 'pcs-gh');
-      gh.appendChild(el('h3', undefined, PCS_GROUP_LABELS[g]));
-      gh.appendChild(el('span', undefined, String(items.length)));
-      sec.appendChild(gh);
-      // Recommended first, then items to discuss.
-      for (const r of [...items.filter(i => i.tier === 'avoid'), ...items.filter(i => i.tier === 'do'), ...items.filter(i => i.tier === 'discuss')]) sec.appendChild(card(r));
-      out.appendChild(sec);
-    }
+    section('pcs-sec-done', '\u2713 Done', doneItems.length);
+    if (!doneItems.length) out.appendChild(el('div', 'pcs-empty', 'Nothing marked done yet.'));
+    groups(doneItems);
 
     if (rest.length) {
       const d = el('details', 'pcs-more');
@@ -262,10 +386,10 @@ export function mountPcs(container: HTMLElement): void {
     const copy = el('button', 'pcs-copy', 'Copy list for the chart or discharge papers');
     copy.type = 'button';
     copy.addEventListener('click', () => {
-      const text = summaryText(p, result.recs, result.scopeNote);
-      const done = (ok: boolean): void => { copy.textContent = ok ? 'Copied' : 'Copy failed: select and copy by hand'; };
-      if (navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(() => done(true), () => done(false));
-      else done(false);
+      const text = summaryText(p, result.recs, result.scopeNote, Object.fromEntries(state.done));
+      const copied = (ok: boolean): void => { copy.textContent = ok ? 'Copied' : 'Copy failed: select and copy by hand'; };
+      if (navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(() => copied(true), () => copied(false));
+      else copied(false);
     });
     out.appendChild(copy);
   };
@@ -334,7 +458,7 @@ export function mountPcs(container: HTMLElement): void {
     const reset = el('button', 'pcs-src', 'Clear all');
     reset.type = 'button';
     reset.addEventListener('click', () => {
-      state.age = ''; state.sex = null; state.preg = null; state.tobacco = 'never'; state.flags.clear(); state.filter = 'all';
+      state.age = ''; state.sex = null; state.preg = null; state.tobacco = 'never'; state.flags.clear(); state.filter = 'all'; state.done.clear();
       rerender();
     });
     panel.appendChild(reset);

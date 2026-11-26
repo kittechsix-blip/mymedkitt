@@ -712,18 +712,34 @@ export function screenPatient(p) {
     return { recs };
 }
 /** Plain-text list for the chart or discharge papers. Carries age and sex only, no identifiers. */
-export function summaryText(p, recs, scopeNote) {
+/**
+ * Plain text for the chart or discharge papers. `done` maps a rec id to the date it was done (YYYY-MM-DD, or '' when
+ * the date is not known); done items move to their own DONE section so the remaining list is what still needs doing.
+ */
+export function summaryText(p, recs, scopeNote, done = {}) {
+    const isDone = (r) => (r.tier === 'do' || r.tier === 'discuss') && Object.prototype.hasOwnProperty.call(done, r.id);
+    const anyDone = recs.some(isDone);
     const lines = [`Preventive care due by guideline: ${p.sex}, age ${p.age}${p.preg === 'pregnant' ? ', pregnant' : ''}. Confirm what has already been done.`];
     if (scopeNote)
         lines.push(scopeNote);
     for (const tier of ['do', 'discuss']) {
-        const items = recs.filter(r => r.tier === tier);
+        const items = recs.filter(r => r.tier === tier && !isDone(r));
         if (!items.length)
             continue;
-        lines.push('', tier === 'do' ? 'RECOMMENDED' : 'TO DISCUSS');
+        const head = tier === 'do' ? 'RECOMMENDED' : 'TO DISCUSS';
+        lines.push('', anyDone ? `STILL TO DO: ${head}` : head);
         for (const g of PCS_GROUP_ORDER) {
             for (const r of items.filter(i => i.group === g))
                 lines.push(`• ${r.title}: ${r.action} (${r.strength})`);
+        }
+    }
+    if (anyDone) {
+        lines.push('', 'DONE');
+        for (const g of PCS_GROUP_ORDER) {
+            for (const r of recs.filter(i => i.group === g && isDone(i))) {
+                const d = /^\d{4}-\d{2}-\d{2}$/.test(done[r.id]) ? done[r.id] : '';
+                lines.push(`• ${r.title}: done${d ? ` ${d}` : ', date not recorded'}`);
+            }
         }
     }
     const stops = recs.filter(isPatientStop);

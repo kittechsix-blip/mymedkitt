@@ -462,3 +462,22 @@ test('consult nodes: links resolve, citations declared, calculator linked from t
   const cited = new Set(PRIMARY_CARE_SCREENING_NODES.flatMap(n => n.citation ?? []));
   for (const n of nums) assert.ok(cited.has(n), `citation ${n} is never used`);
 });
+
+test('summaryText with done items: done items leave the to-do lists and appear under DONE with an optional date', () => {
+  const p = P(58, 'female', { flags: ['diabetes'] });
+  const recs = screenPatient(p).recs;
+  const tasks = recs.filter(r => r.tier === 'do' || r.tier === 'discuss');
+  const [a, b] = tasks;
+  const stop = recs.find(r => r.tier === 'avoid');
+  const text = summaryText(p, recs, undefined, { [a.id]: '2026-11-20', [b.id]: '', [stop.id]: '2026-01-01' });
+  const [todoPart, donePart] = text.split('\nDONE\n');
+  assert.ok(donePart, 'has a DONE section');
+  assert.ok(text.includes('STILL TO DO: RECOMMENDED'));
+  assert.ok(!todoPart.includes(`• ${a.title}:`) && !todoPart.includes(`• ${b.title}:`));
+  assert.ok(donePart.includes(`• ${a.title}: done 2026-11-20`));
+  assert.ok(donePart.includes(`• ${b.title}: done, date not recorded`));
+  assert.ok(!donePart.split('\nDO NOT')[0].includes(stop.title), 'an avoid item can never be marked done');
+  for (const r of tasks.slice(2)) assert.ok(todoPart.includes(`• ${r.title}:`), `${r.id} still listed`);
+  assert.equal(summaryText(p, recs), summaryText(p, recs, undefined, {}), 'no done items: output unchanged');
+  assert.ok(!summaryText(p, recs).includes('STILL TO DO'));
+});
