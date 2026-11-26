@@ -317,7 +317,7 @@ export const RHF_MODULE_LABELS: string[] = [
 export const RHF_CITATIONS: Citation[] = [
     { num: 1, text: 'Farkas J. Internet Book of Critical Care: Right Ventricular Failure. EMCrit/IBCC. Updated 2024.' },
     { num: 2, text: 'Konstam MA, Kiernan MS, Bernstein D, et al. Evaluation and Management of Right-Sided Heart Failure: A Scientific Statement From the AHA. Circulation. 2018;137(20):e578-e622.' },
-    { num: 3, text: 'Lavonas EJ, et al. Part 10: Special Circumstances of Resuscitation: 2020 AHA Guidelines for CPR and ECC. Circulation. 2020;142(suppl 2):S501-S518.' },
+    { num: 3, text: 'Lavonas EJ, Drennan IR, Gabrielli A, et al. Part 10: Special Circumstances of Resuscitation: 2015 AHA Guidelines Update for CPR and ECC. Circulation. 2015;132(18 Suppl 2):S501-S518.' },
     { num: 4, text: 'Konstantinides SV, Meyer G, Becattini C, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603.' },
     { num: 5, text: 'Jaff MR, McMurtry MS, Archer SL, et al. Management of Massive and Submassive PE, IFDVT, and CTEPH: AHA Scientific Statement. Circulation. 2011;123(16):1788-1830.' },
     { num: 6, text: 'Rudski LG, Lai WW, Afilalo J, et al. Guidelines for the Echocardiographic Assessment of the Right Heart in Adults: A Report from the ASE. J Am Soc Echocardiogr. 2010;23(7):685-713.' },
