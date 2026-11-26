@@ -333,8 +333,8 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     body: '**MCS Device Selection:**\n\n| Device | Hemodynamic Support | Best For |\n|--------|--------------------|---------|\n| **IABP** | ~0.5 L/min | Afterload reduction, AMI |\n| **Impella CP** | 3-4 L/min | LV unloading, PCI support |\n| **Impella 5.0/5.5** | 5+ L/min | Severe LV failure |\n| **VA-ECMO** | Full support | Biventricular failure, arrest |\n| **TandemHeart** | 4-5 L/min | Alternative to Impella |\n\n**IABP (still has a role):**\n• Reduces afterload, increases diastolic coronary flow\n• Less hemodynamic support than Impella\n• IABP-SHOCK II was negative, but still used as adjunct\n\n**Impella:**\n• Direct LV unloading\n• Better hemodynamic support than IABP\n• Requires femoral artery access [1][2][7]',
     citation: [1, 2, 7],
     calculatorLinks: [
-      { id: 'ecmo-vv-va-selector', label: 'MCS Device Selection' },
-      { id: 'ecmo-ecpr-criteria', label: 'VA-ECMO Criteria' },
+      { id: 'ecmo-vv-va-selector', label: 'VV vs VA ECMO' },
+      { id: 'ecmo-ecpr-criteria', label: 'ECPR Criteria (arrest)' },
     ],
     next: 'cs-ecmo',
     summary: 'IABP 0.5L, Impella 3-4L, ECMO full — match need',
