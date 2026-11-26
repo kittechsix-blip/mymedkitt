@@ -663,9 +663,35 @@ function renderFlowHeader(container: HTMLElement, categoryId: string): void {
   });
 
   // Title
-  const title = document.createElement('div');
+  const fullTitle = getConsultTitle(currentTreeId ?? '');
+  const title = document.createElement('button');
+  title.type = 'button';
   title.className = 'consult-flow-header__title';
-  title.textContent = getConsultTitle(currentTreeId ?? '');
+  title.setAttribute('aria-expanded', 'false');
+  title.setAttribute('aria-controls', 'consult-full-title');
+  title.setAttribute('aria-label', `Show full consult title: ${fullTitle}`);
+  const titleText = document.createElement('span');
+  titleText.className = 'consult-flow-header__title-text';
+  titleText.textContent = fullTitle;
+  const chevron = document.createElement('span');
+  chevron.className = 'consult-flow-header__title-chevron';
+  chevron.textContent = '⌄';
+  chevron.setAttribute('aria-hidden', 'true');
+  title.append(titleText, chevron);
+  const titleDetails = document.createElement('div');
+  titleDetails.id = 'consult-full-title';
+  titleDetails.className = 'consult-flow-header__full-title';
+  titleDetails.hidden = true;
+  titleDetails.textContent = fullTitle;
+  const setTitleExpanded = (expanded: boolean): void => {
+    titleDetails.hidden = !expanded;
+    title.setAttribute('aria-expanded', String(expanded));
+    title.setAttribute('aria-label', `${expanded ? 'Hide' : 'Show'} full consult title: ${fullTitle}`);
+  };
+  title.addEventListener('click', () => setTitleExpanded(titleDetails.hidden === true));
+  title.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setTitleExpanded(false);
+  });
 
   // Module progress indicator
   const progress = document.createElement('div');
@@ -746,6 +772,7 @@ function renderFlowHeader(container: HTMLElement, categoryId: string): void {
   header.appendChild(progress);
   header.appendChild(shareBtn);
   header.appendChild(homeBtn);
+  header.appendChild(titleDetails);
   container.appendChild(header);
 }
 
