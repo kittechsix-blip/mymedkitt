@@ -336,7 +336,7 @@ export const RHF_CITATIONS: Citation[] = [
     { num: 19, text: 'Mekontso Dessap A, Boissier F, Charron C, et al. Acute cor pulmonale during protective ventilation for ARDS. Intensive Care Med. 2016;42(5):862-870.' },
     { num: 20, text: 'Russ MA, Prondzinsky R, Carter JM, et al. Right ventricular function in myocardial infarction complicated by cardiogenic shock. Crit Care Med. 2009;37(12):3017-3023.' },
     { num: 21, text: 'Wilcox SR, Kabrhel C, Channick RN. Pulmonary Hypertension and Right Ventricular Failure in Emergency Medicine. Ann Emerg Med. 2015;66(6):619-628.' },
-    { num: 22, text: 'Rosenfield K, Pulmonary Embolism Response Team Consortium. PERT Consortium consensus practice. Vasc Med. 2019;24(1):54-59.' },
+    { num: 22, text: 'Rivera-Lebron B, McDaniel M, Ahrar K, et al. Diagnosis, Treatment and Follow Up of Acute Pulmonary Embolism: Consensus Practice from the PERT Consortium. Clin Appl Thromb Hemost. 2019;25:1076029619853037.' },
 ];
 
 export const RHF_NODE_COUNT = RHF_NODES.length;
