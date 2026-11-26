@@ -1223,6 +1223,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/acute-keratitis.js');
       return { nodes: m.ACUTE_KERATITIS_NODES, entryNodeId: 'acute-keratitis-start', categoryId: 'ophthalmology', moduleLabels: m.ACUTE_KERATITIS_MODULE_LABELS, citations: m.ACUTE_KERATITIS_CITATIONS, criticalActions: m.ACUTE_KERATITIS_CRITICAL_ACTIONS };
     },
+    'primary-care-screening': async () => {
+      const m = await import('../data/trees/primary-care-screening.js');
+      return { nodes: m.PRIMARY_CARE_SCREENING_NODES, entryNodeId: 'pcs-start', categoryId: 'emergency-medicine', moduleLabels: m.PRIMARY_CARE_SCREENING_MODULE_LABELS, citations: m.PRIMARY_CARE_SCREENING_CITATIONS, criticalActions: m.PRIMARY_CARE_SCREENING_CRITICAL_ACTIONS };
+    },
     'decompression-sickness': async () => {
       const m = await import('../data/trees/decompression-sickness.js');
       return { nodes: m.DECOMPRESSION_SICKNESS_NODES, entryNodeId: 'dcs-start', categoryId: 'emergency-medicine', moduleLabels: m.DECOMPRESSION_SICKNESS_MODULE_LABELS, citations: m.DECOMPRESSION_SICKNESS_CITATIONS, criticalActions: m.DECOMPRESSION_SICKNESS_CRITICAL_ACTIONS };

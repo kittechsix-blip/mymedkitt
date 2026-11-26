@@ -15,6 +15,7 @@ import { LA_COMBO_CALCULATOR, laCapMg } from './la-combo-calculators.js';
 import { KAWASAKI_CRITERIA_CALCULATOR, KAWASAKI_INCOMPLETE_CALCULATOR, KAWASAKI_HIGH_RISK_CALCULATOR, KAWASAKI_CORONARY_Z_CALCULATOR, KAWASAKI_DOSES_CALCULATOR } from './kawasaki-calculators.js';
 import { RIBSCORE_CALCULATOR } from './ribscore.js';
 import { RANSON_CALCULATOR } from './ranson.js';
+import { PRIMARY_CARE_SCREENING_CALCULATOR } from './primary-care-screening-ui.js';
 import { INH_PYRIDOXINE_CALCULATOR } from '../data/inh-pyridoxine.js';
 // MedKitt — Clinical Calculator Component
 // Standalone calculators for scoring systems (PESI, sPESI, etc.)
@@ -46995,6 +46996,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Eating Disorders
   'marsipan-risk': MARSIPAN_RISK_CALCULATOR,
   'bmi-severity': BMI_SEVERITY_CALCULATOR,
+  'primary-care-screening': PRIMARY_CARE_SCREENING_CALCULATOR,
   'refeeding-risk': REFEEDING_RISK_CALCULATOR,
   // Urinary Sphincter
   'ipss': IPSS_CALCULATOR,

@@ -9,6 +9,7 @@ export const TREE_REGISTRY = {
   'acute-keratitis': { prefix: 'ACUTE_KERATITIS', entryNodeId: 'acute-keratitis-start', categoryId: 'ophthalmology' },
   'sialolithiasis': { prefix: 'SIALOLITHIASIS', entryNodeId: 'sialo-start', categoryId: 'ent' },
   'peritonsillar-abscess': { prefix: 'PERITONSILLAR_ABSCESS', entryNodeId: 'quinsy-start', categoryId: 'ent' },
+  'primary-care-screening': { prefix: 'PRIMARY_CARE_SCREENING', entryNodeId: 'pcs-start', categoryId: 'emergency-medicine' },
   'decompression-sickness': { prefix: 'DECOMPRESSION_SICKNESS', entryNodeId: 'dcs-start', categoryId: 'emergency-medicine' },
   'arterial-line': { prefix: 'ARTERIAL_LINE', entryNodeId: 'aline-start', categoryId: 'procedures' },
   'asystole': { prefix: 'ASYSTOLE', entryNodeId: 'asystole-start', categoryId: 'emergency-medicine' },

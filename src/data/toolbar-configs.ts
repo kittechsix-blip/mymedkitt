@@ -109,6 +109,12 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'rx', label: 'Rx Guide', icon: '💊', action: 'overlay', target: 'keratitis-rx-guide' },
     { id: 'escalate', label: 'Escalate', icon: '☎️', action: 'overlay', target: 'keratitis-escalate' },
   ],
+  'primary-care-screening': [
+    { id: 'pcs-calc', label: 'Screening', icon: '🧮', action: 'calculator', target: 'primary-care-screening', pinned: true },
+    { id: 'pcs-today', label: 'Today', icon: '💉', action: 'jump', target: 'pcs-today', pinned: true },
+    { id: 'pcs-conflicts', label: 'Conflicts', icon: '⚖️', action: 'jump', target: 'pcs-conflicts' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'jump', target: 'pcs-pitfalls' },
+  ],
   'decompression-sickness': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'jump', target: 'dcs-start' },
     { id: 'recompress', label: 'Recompress', icon: '🫧', action: 'jump', target: 'dcs-recompression', pinned: true },

@@ -518,6 +518,7 @@ export const DEFAULT_CATEGORIES = [
         name: 'EM',
         icon: 'em.png',
         decisionTrees: [
+            { id: 'primary-care-screening', title: 'Primary Care Screening', subtitle: 'Age, sex and conditions → vaccines, cancer screening, labs and counseling due → start today or refer', categoryId: 'emergency-medicine', version: '1.0', nodeCount: 5, entryNodeId: 'pcs-start' },
             { id: 'decompression-sickness', title: 'Decompression Sickness', subtitle: 'Diving injury · Spinal DCS / gas embolism · Oxygen · Definitive recompression · Transfer', categoryId: 'emergency-medicine', version: '1.0', nodeCount: 22, entryNodeId: 'dcs-start' },
             {
                 id: 'pedi-resus-numbers',
