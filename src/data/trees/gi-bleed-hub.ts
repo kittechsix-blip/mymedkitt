@@ -114,7 +114,7 @@ export const GI_BLEED_HUB_NODES: DecisionNode[] = [
     title: 'Melena — Upper Until Proven Otherwise',
     body: 'Melena (black, tarry, malodorous stool) is upper GI bleed ~90% of the time. Treat as UGIB workup. Right-sided colonic bleed CAN cause melena if transit >14 h, but UGIB is the safer working diagnosis.\n\nOpen [Upper GI Bleed](#/tree/upper-gi-bleed) consult.\n\n**BUN/Cr ratio >30** further supports upper source (urea from digested hemoglobin protein).\n\n**Do NOT call it lower without negative upper endoscopy.** Premature commitment to lower source delays the right scope and the right meds (PPI, octreotide if variceal).\n\n**If endoscopy is unrevealing:** push enteroscopy, capsule, or CTA depending on activity. Small bowel sources (AVM, NSAID enteropathy, tumor) get missed without dedicated workup.',
     citation: [4, 5],
-    summary: 'Open [Upper GI Bleed](#/tree/upper-gi-bleed) consult — melena is upper ~90% of the time. BUN/Cr >30 confirms.',
+    summary: 'Open [Upper GI Bleed](#/tree/upper-gi-bleed) consult — melena is upper ~90% of the time. BUN/Cr >30 supports.',
     safetyLevel: 'critical',
   },
   {
