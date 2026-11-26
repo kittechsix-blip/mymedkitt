@@ -73,15 +73,36 @@ const DOSES: InfoComparisonTable = {
 // Links keep the picker wording intact and use the modal's existing section anchors.
 const doseAnchor = (name: string): string => 'trick-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 const EXTRA_PICKER_DRUGS = ['Triamterene', 'Diltiazem', 'Verapamil', 'Atenolol', 'Nitroprusside', 'Isosorbide dinitrate'];
+// Class links open a class-specific chooser; each listed drug opens its dose section.
+const PICKER_CLASSES = [
+  { heading: 'First-line classes', aliases: ['first-line class', 'first-line classes', 'first-line drug'], drugs: ['Amlodipine', 'Chlorthalidone', 'Hydrochlorothiazide', 'Indapamide', 'Lisinopril', 'Losartan', 'Valsartan', 'Olmesartan', 'Telmisartan'], note: 'Choose the class for the patient using the Drug Picker.' },
+  { heading: 'Thiazide-type diuretics', aliases: ['thiazide-type', 'thiazides', 'thiazide'], drugs: ['Chlorthalidone', 'Hydrochlorothiazide', 'Indapamide'] },
+  { heading: 'ACE inhibitors', aliases: ['ACE inhibitor', 'ACE inhibitors'], drugs: ['Lisinopril'] },
+  { heading: 'ARBs', aliases: ['ARB', 'ARBs'], drugs: ['Losartan', 'Valsartan', 'Olmesartan', 'Telmisartan'] },
+  { heading: 'Calcium channel blockers', aliases: ['calcium channel blocker', 'calcium channel blockers'], drugs: ['Amlodipine', 'Nifedipine ER', 'Diltiazem', 'Verapamil'], note: 'Preserve the patient-specific cautions in the Drug Picker; these drugs are not interchangeable.' },
+  { heading: 'Beta blockers', aliases: ['beta blocker', 'beta blockers'], drugs: ['Carvedilol', 'Metoprolol succinate', 'Bisoprolol', 'Labetalol', 'Atenolol'], note: 'Use the compelling indication and the Drug Picker cautions to choose the agent.' },
+  { heading: 'Loop diuretics', aliases: ['loop diuretic', 'loop diuretics'], drugs: ['Torsemide', 'Furosemide'] },
+  { heading: 'Diuretics', aliases: ['diuretic', 'diuretics'], drugs: ['Chlorthalidone', 'Hydrochlorothiazide', 'Indapamide', 'Torsemide', 'Furosemide', 'Spironolactone', 'Eplerenone', 'Amiloride', 'Triamterene'] },
+  { heading: 'Mineralocorticoid receptor antagonists (MRA)', aliases: ['MRA', 'MRAs'], drugs: ['Spironolactone', 'Eplerenone'] },
+  { heading: 'Alpha-1 blockers', aliases: ['alpha-1 blocker', 'alpha-1 blockers', 'alpha blocker', 'alpha blockers'], drugs: ['Doxazosin'] },
+  { heading: 'ARNI', aliases: ['ARNI'], drugs: [], note: 'This hypertension table does not provide ARNI doses. [Open the HFrEF guidance](#/node/htn-r-hfref).' },
+  { heading: 'SGLT2 inhibitors', aliases: ['SGLT2 inhibitor', 'SGLT2 inhibitors'], drugs: [], note: 'This hypertension table does not provide SGLT2 inhibitor doses. [Open the HFrEF guidance](#/node/htn-r-hfref).' },
+  { heading: 'Renin inhibitors', aliases: ['renin inhibitor', 'renin inhibitors'], drugs: [], note: 'Mentioned in the pregnancy and combination cautions, not as a dosing option in this table. [Review combinations to avoid](#/info/htn-drugs#trick-combinations-to-avoid).' },
+  { heading: 'NSAIDs', aliases: ['NSAID', 'NSAIDs'], drugs: [], note: 'This is an avoid/watch entry. [Review medicines that raise BP](#/info/htn-raisers).' },
+  { heading: 'Potassium supplements', aliases: ['potassium supplements'], drugs: [], note: 'This is an avoid/watch entry. [Review potassium and kidney precautions](#/info/htn-kidney#trick-potassium).' },
+];
+const classTargets = Object.fromEntries(PICKER_CLASSES.flatMap(c => c.aliases.map(alias => [alias, c.heading])));
 const pickerTargets: Record<string, string> = Object.fromEntries([
   ...DOSES.rows.map(r => [r.cells.drug.replace(' (oral)', ''), r.cells.drug]),
   ...EXTRA_PICKER_DRUGS.map(name => [name, name]),
   ['extended-release nifedipine', 'Nifedipine ER'],
+  ...Object.entries(classTargets),
 ]);
 const pickerPattern = new RegExp('\\b(' + Object.keys(pickerTargets).sort((a, b) => b.length - a.length).join('|') + ')\\b', 'gi');
 const linkPickerDrugs = (text: string): string => text.replace(pickerPattern, label => {
   const key = Object.keys(pickerTargets).find(name => name.toLowerCase() === label.toLowerCase())!;
-  return `[${label}](#/info/htn-drugs#${doseAnchor(pickerTargets[key])})`;
+  const pageId = key in classTargets ? 'htn-drug-classes' : 'htn-drugs';
+  return `[${label}](#/info/${pageId}#${doseAnchor(pickerTargets[key])})`;
 });
 
 const LIFESTYLE: InfoComparisonTable = {
@@ -137,11 +158,16 @@ export const HTN_INFO_PAGES: Record<string, InfoPage> = {
   ], 'Critical pitfalls to avoid'),
 
   'htn-picker': page('htn-picker', 'Drug picker: choose by the patient', [
-    { heading: 'How to read it', body: 'Find the first patient below that fits. “Lead with” is the class the 2025 guideline favors; “avoid or watch” is the trap for that patient. Stage then decides one drug or two. Tap [Doses](#/info/htn-drugs) for ranges. [1]' },
+    { heading: 'How to read it', body: 'Find the first patient below that fits. “Lead with” is the class the 2025 guideline favors; “avoid or watch” is the trap for that patient. Stage then decides one drug or two. Tap a drug for its dose section, or a class for its agents. [Browse classes](#/info/htn-drug-classes) • [All doses](#/info/htn-drugs). [1]' },
     ...PICKER.rows.map(r => ({ heading: r.cells.who, body: linkPickerDrugs(`**Lead with:** ${r.cells.use}${r.cells.avoid ? `\n**Avoid or watch:** ${r.cells.avoid}` : ''}`) })),
     { heading: 'Race', body: 'The 2025 guideline does not select a drug class by race. Its only race-specific treatment notes are that its narrative gives non-Hispanic Black adults as an example of high-risk stage 1 patients for whom starting two drugs is recommended, and that hydralazine with isosorbide dinitrate is recommended for self-identified Black patients with advanced HFrEF. It also notes a larger DASH effect and more masked and resistant hypertension in Black adults. The older rule (thiazide or calcium channel blocker first) was not found in the 2025 text. [1,22]' },
     { heading: 'Age', body: 'No age-based drug class. Older and frail adults start with one drug at a low dose and step up, with standing BP checks; the goal stays under 130/80 when tolerated, and is individualized with limited life expectancy. [1]' },
   ]),
+
+  'htn-drug-classes': page('htn-drug-classes', 'Drug picker: classes and agents', PICKER_CLASSES.map(c => ({
+    heading: c.heading,
+    body: `${c.note ?? 'Agents with entries in this hypertension dosing reference:'}\n${c.drugs.map(name => `[${name}](#/info/htn-drugs#${doseAnchor(name)})`).join(' • ')}\n[Back to Drug Picker](#/info/htn-picker)`,
+  }))),
 
   'htn-drugs': page('htn-drugs', 'Doses: oral antihypertensives', [
     { heading: 'First-line dose cards', body: `${dl('Amlodipine', 'htn-amlodipine')} • ${dl('Chlorthalidone', 'htn-chlorthalidone')} • ${dl('Hydrochlorothiazide', 'htn-hctz')} • ${dl('Indapamide', 'htn-indapamide')} • ${dl('Lisinopril', 'htn-lisinopril')} • ${dl('Losartan', 'htn-losartan')} • ${dl('Nifedipine ER', 'htn-nifedipine-er')}` },
@@ -214,5 +240,5 @@ export const HTN_INFO_PAGES: Record<string, InfoPage> = {
 };
 
 for (const section of HTN_INFO_PAGES['htn-picker'].sections) {
-  if (section.heading === 'Race') section.body = linkPickerDrugs(section.body);
+  if (section.heading === 'Race' || section.heading === 'Age') section.body = linkPickerDrugs(section.body);
 }

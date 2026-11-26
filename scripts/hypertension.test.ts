@@ -206,3 +206,21 @@ test('picker drug links resolve to a unique dosage section and retain a return p
   const stage1 = info['htn-picker'].sections.find(s => s.heading?.includes('stage 1'))!;
   assert.ok(stage1.body.includes('[amlodipine](#/info/htn-drugs#trick-amlodipine)'));
 });
+
+test('picker accounts for every drug class, including aliases and caution-only classes', () => {
+  const classPage = info['htn-drug-classes'];
+  const aliases = ['thiazide-type', 'thiazides', 'thiazide', 'ACE inhibitor', 'ARB', 'beta blocker', 'loop diuretic', 'diuretic', 'MRA', 'ARNI', 'SGLT2 inhibitor', 'renin inhibitor', 'alpha blockers', 'alpha-1 blocker', 'calcium channel blocker', 'first-line class', 'first-line drug', 'NSAIDs', 'potassium supplements'];
+  const picker = info['htn-picker'].sections.map(s => s.body).join('\n');
+  const withoutLinks = picker.replace(/\[[^\]]+\]\([^)]+\)/g, '');
+  const slug = (name: string) => 'trick-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  for (const alias of aliases) {
+    assert.ok(picker.toLowerCase().includes(`[${alias.toLowerCase()}](#/info/htn-drug-classes#`), `${alias} has a class link`);
+    assert.ok(!new RegExp(`\\b${alias}\\b`, 'i').test(withoutLinks), `${alias} not left unlinked`);
+  }
+  for (const section of info['htn-picker'].sections) for (const match of section.body.matchAll(/#\/info\/htn-drug-classes#([^)]*)/g)) {
+    assert.equal(classPage.sections.filter(s => slug(s.heading!) === match[1]).length, 1, match[1]);
+  }
+  for (const section of classPage.sections) for (const match of section.body.matchAll(/#\/info\/htn-drugs#([^)]*)/g)) {
+    assert.equal(info['htn-drugs'].sections.filter(s => slug(s.heading!) === match[1]).length, 1, match[1]);
+  }
+});
