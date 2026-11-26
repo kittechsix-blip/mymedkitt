@@ -154,7 +154,7 @@ export const RHF_NODES: DecisionNode[] = [
     recommendation: '**Heparin/LMWH + monitor. Transition to DOAC at 24-48h if stable. 3-mo CTEPH screen.**',
     confidence: 'definitive',
     citation: [4],
-    summary: 'Int-low: anticoag + monitor + DOAC bridge + 3-mo CTEPH screen.',
+    summary: 'Int-low: anticoag + monitor + switch to DOAC + 3-mo CTEPH screen.',
   },
   {
     id: 'rhf-pe-lowrisk',
