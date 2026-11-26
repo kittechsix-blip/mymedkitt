@@ -99,6 +99,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
     name: 'Cardiology',
     icon: 'cardiology.png',
     decisionTrees: [
+{
+  "id": "hypertension",
+  "title": "Hypertension",
+  "subtitle": "Asymptomatic to emergency \u00b7 Drug choice by patient \u00b7 Kidney \u00b7 Diet \u00b7 Discharge",
+  "categoryId": "emergency-medicine",
+  "version": "1.0",
+  "nodeCount": 40,
+  "entryNodeId": "htn-start"
+},
       {
         id: 'afib-rvr',
         title: 'A-Fib RVR',
@@ -532,6 +541,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         nodeCount: 5,
         entryNodeId: 'prn-start',
       },
+{
+  "id": "hypertension",
+  "title": "Hypertension",
+  "subtitle": "Asymptomatic to emergency \u00b7 Drug choice by patient \u00b7 Kidney \u00b7 Diet \u00b7 Discharge",
+  "categoryId": "emergency-medicine",
+  "version": "1.0",
+  "nodeCount": 40,
+  "entryNodeId": "htn-start"
+},
 {
   "id": "hyperglycemia-ed",
   "title": "Hyperglycemia: ED Treatment & Bridge Care",

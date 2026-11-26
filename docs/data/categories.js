@@ -97,6 +97,15 @@ export const DEFAULT_CATEGORIES = [
         icon: 'cardiology.png',
         decisionTrees: [
             {
+                "id": "hypertension",
+                "title": "Hypertension",
+                "subtitle": "Asymptomatic to emergency \u00b7 Drug choice by patient \u00b7 Kidney \u00b7 Diet \u00b7 Discharge",
+                "categoryId": "emergency-medicine",
+                "version": "1.0",
+                "nodeCount": 40,
+                "entryNodeId": "htn-start"
+            },
+            {
                 id: 'afib-rvr',
                 title: 'A-Fib RVR',
                 subtitle: 'Stability → Rate Control → Refractory → Anticoagulation',
@@ -528,6 +537,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 5,
                 entryNodeId: 'prn-start',
+            },
+            {
+                "id": "hypertension",
+                "title": "Hypertension",
+                "subtitle": "Asymptomatic to emergency \u00b7 Drug choice by patient \u00b7 Kidney \u00b7 Diet \u00b7 Discharge",
+                "categoryId": "emergency-medicine",
+                "version": "1.0",
+                "nodeCount": 40,
+                "entryNodeId": "htn-start"
             },
             {
                 "id": "hyperglycemia-ed",

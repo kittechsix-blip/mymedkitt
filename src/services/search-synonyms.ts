@@ -5,6 +5,7 @@
 
 /** Alternative names that should resolve directly in the Home title lookup. */
 export const CONSULT_TITLE_ALIASES: Record<string, string[]> = {
+  'hypertension': ['high blood pressure', 'HTN', 'elevated blood pressure', 'asymptomatic hypertension', 'blood pressure medication'],
   'dress-syndrome': ['DRESS', 'drug reaction with eosinophilia and systemic symptoms', 'DIHS', 'drug induced hypersensitivity syndrome'],
   'lyme-disease': ['Lyme', 'borreliosis', 'Borrelia', 'erythema migrans', 'tick bite'],
   'sudden-hearing-loss': ['SSNHL', 'sudden sensorineural hearing loss', 'sudden deafness'],

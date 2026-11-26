@@ -1,4 +1,5 @@
 import { HG_DRUGS } from './new-content/hyperglycemia-drugs.js';
+import { HTN_DRUGS } from './new-content/hypertension-drugs.js';
 // MedKitt — Drug Reference Store
 // Centralized drug data for all medications used across decision trees.
 // Each entry includes class, indications, dosing, contraindications, and citations.
@@ -15198,6 +15199,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   CHLORHEXIDINE_OPHTHALMIC,
 
   ...HG_DRUGS,
+  ...HTN_DRUGS,
   ACAMPROSATE,
   ACETAMINOPHEN,
   ACETAZOLAMIDE,
