@@ -86,7 +86,7 @@ export const RAPID_SEPSIS = {
                     nodeIds: ['sepsis-vp-second'],
                     drug: { id: 'vasopressin', indication: 'Septic shock (second-line)' },
                     lines: [
-                        { nodeId: 'sepsis-vp-second', text: 'If norepinephrine alone is insufficient, add a second agent:' },
+                        { nodeId: 'sepsis-vp-second', text: 'Add vasopressin to norepinephrine when norepinephrine requirements are escalating, rather than relying only on further norepinephrine escalation.' },
                         { nodeId: 'sepsis-vp-second', text: 'Best as early second agent — add before escalating NE to high doses' },
                     ],
                 },
@@ -99,7 +99,7 @@ export const RAPID_SEPSIS = {
                     nodeIds: ['sepsis-steroids'],
                     drug: { id: 'hydrocortisone', indication: 'Septic shock' },
                     lines: [
-                        { nodeId: 'sepsis-steroids', text: 'For patients on vasopressors for septic shock:' },
+                        { nodeId: 'sepsis-steroids', text: 'Persistent vasopressor-dependent septic shock: when to start hydrocortisone' },
                         { nodeId: 'sepsis-steroids', text: 'When vasopressors discontinued, taper over 2-3 days (do not stop abruptly).' },
                     ],
                 },

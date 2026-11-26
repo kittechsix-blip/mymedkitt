@@ -294,9 +294,9 @@ export const SEPSIS_NODES = [
         id: 'sepsis-vp-second',
         type: 'question',
         module: 3,
-        title: 'Second-Line Vasopressor Selection',
-        body: '**If norepinephrine alone is insufficient**, add a second agent: [2][24]\n\n**[Vasopressin](#/drug/vasopressin/septic shock)** 0.03-0.04 units/min (fixed dose, non-titratable)\n• Reduces NE requirement, **lower AF risk** (RR 0.77) [24]\n• VASST + VANISH trials: no mortality benefit but NE-sparing [12][13]\n• Best as early second agent — add before escalating NE to high doses [23]\n\n**[Epinephrine](#/drug/epinephrine/septic shock infusion)** 0.01-0.5 mcg/kg/min\n• Alternative first-line for bradycardia or cardiac dysfunction [23]\n• CAT trial: outcomes similar to norepinephrine [23]\n• **Increases lactate** — rising lactate on epi is expected and often a positive prognostic sign [23]\n\nWhat is the clinical scenario?',
-        citation: [2, 12, 13, 23, 24],
+        title: 'Septic Shock: Refractory Hypotension / MAP Goal Not Met / Next Step',
+        body: '**Septic shock, refractory hypotension, MAP goal not met on norepinephrine: what is the next step?**\n\nAdd vasopressin to norepinephrine when norepinephrine requirements are escalating, rather than relying only on further norepinephrine escalation. [26]\n\nSSC 2021 described usual addition at norepinephrine 0.25-0.5 mcg/kg/min; this is a practice range, not a requirement to delay vasopressin. [2][26]\n\n**[Vasopressin](#/drug/vasopressin/septic shock)** 0.03-0.04 units/min (fixed dose, non-titratable)\n• Reduces NE requirement, **lower AF risk** (RR 0.77) [24]\n• VASST + VANISH trials: no mortality benefit but NE-sparing [12][13]\n• Best as early second agent — add before escalating NE to high doses [23]\n\n**[Epinephrine](#/drug/epinephrine/septic shock infusion)** 0.01-0.5 mcg/kg/min\n• Alternative first-line for bradycardia or cardiac dysfunction [23]\n• CAT trial: outcomes similar to norepinephrine [23]\n• **Increases lactate** — rising lactate on epi is expected and often a positive prognostic sign [23]\n\n**MAP still below target despite norepinephrine + vasopressin:** add epinephrine and reassess perfusion and the cause of shock. [26]\n\n**When to add steroids:** the SSC 2021 practical trigger is an ongoing norepinephrine or epinephrine requirement of at least 0.25 mcg/kg/min for at least 4 hours to maintain target MAP. Hydrocortisone is an adjunct, not a replacement for the next vasopressor. SSC 2026 suggests IV corticosteroids for septic shock without making that older threshold a mandatory cutoff; lower dose or shorter duration alone does not rule out steroids. [2][26] [Steroid timing and dose](#/node/sepsis-steroids)\n\nWhat is the clinical scenario?',
+        citation: [2, 12, 13, 23, 24, 26],
         treatment: {
             firstLine: {
                 drug: 'Vasopressin',
@@ -334,7 +334,7 @@ export const SEPSIS_NODES = [
                 urgency: 'critical',
             },
         ],
-        summary: 'Add vasopressin 0.03-0.04 units/min early before escalating NE; epinephrine for low CO/bradycardia',
+        summary: 'Septic shock next step for refractory hypotension or MAP goal not met: add vasopressin to escalating norepinephrine; assess hydrocortisone dose and duration trigger separately.',
     },
     {
         id: 'sepsis-map-target',
@@ -426,10 +426,10 @@ export const SEPSIS_NODES = [
         id: 'sepsis-steroids',
         type: 'info',
         module: 4,
-        title: 'Corticosteroid Therapy',
-        body: '**For patients on vasopressors for septic shock:** [2][14][15]\n\n**[Hydrocortisone](#/drug/hydrocortisone/septic shock)** 50 mg IV q6h OR 200 mg/day continuous infusion [2]\n\n**Evidence:**\n• **ADRENAL trial** (n=3800): Steroids reduce time on vasopressors, ICU LOS, and duration of intubation. No increase in superinfection. [14]\n• **APROCCHSS trial** (n=1241): Hydrocortisone + [Fludrocortisone](#/drug/fludrocortisone/septic shock) 50 mcg PO daily × 7 days reduced 90-day mortality (43% vs 49.1%) [15]\n• Meta-analyses confirm: shorter shock duration, earlier vasopressor weaning. Mortality benefit debated but possible if started early in sickest patients. [14][15]\n\n**Risks:**\n• Hyperglycemia (monitor and treat)\n• Steroid myopathy risk in paralyzed patients\n• No increased superinfection risk (debunked by ADRENAL) [14]\n\n**Timing:** Consider early initiation — antibiotics can trigger Jarisch-Herxheimer reaction; front-loaded steroids may blunt this. [23]\n\n**Taper:** When vasopressors discontinued, taper over 2-3 days (do not stop abruptly).\n\n**Guideline currency:** SSC 2026 suggests IV corticosteroids for adults with septic shock. [26]',
+        title: 'Septic Shock: When to Start Steroids',
+        body: '**Persistent vasopressor-dependent septic shock: when to start hydrocortisone**\n\n**Practical dose + duration trigger (SSC 2021):** ongoing norepinephrine or epinephrine at least 0.25 mcg/kg/min for at least 4 hours to maintain target MAP despite resuscitation. Record the current dose and duration of vasopressor dependence. [2]\n\n**Current guideline:** SSC 2026 suggests IV corticosteroids for adults with septic shock. The older dose/time trigger is a practical reference, not a mandatory waiting period or an exclusion rule. Consider the trajectory and other steroid indications; do not delay treatment of suspected adrenal crisis to meet this threshold. [26]\n\n**Vasopressor sequence:** if MAP is not met on escalating norepinephrine alone, [add vasopressin](#/node/sepsis-vp-second). Steroids are adjunctive and do not replace vasopressor escalation. [26]\n\n**[Hydrocortisone](#/drug/hydrocortisone/septic shock)** 50 mg IV q6h OR 200 mg/day continuous infusion [2]\n\n**Evidence:**\n• **ADRENAL trial** (n=3800): Steroids reduce time on vasopressors, ICU LOS, and duration of intubation. No increase in superinfection. [14]\n• **APROCCHSS trial** (n=1241): Hydrocortisone + [Fludrocortisone](#/drug/fludrocortisone/septic shock) 50 mcg PO daily × 7 days reduced 90-day mortality (43% vs 49.1%) [15]\n• Meta-analyses confirm: shorter shock duration, earlier vasopressor weaning. Mortality benefit debated but possible if started early in sickest patients. [14][15]\n\n**Risks:**\n• Hyperglycemia (monitor and treat)\n• Steroid myopathy risk in paralyzed patients\n• No increased superinfection risk (debunked by ADRENAL) [14]\n\n**Taper:** When vasopressors discontinued, taper over 2-3 days (do not stop abruptly).\n\n**Guideline currency:** SSC 2026 suggests IV corticosteroids for adults with septic shock. [26]',
         citation: [2, 14, 15, 23, 26],
-        summary: 'Hydrocortisone 50mg IV q6h for vasopressor-dependent shock — reduces shock duration; taper over 2-3 days when off pressors',
+        summary: 'Hydrocortisone 200 mg/day for septic shock; SSC 2021 practical trigger: norepinephrine or epinephrine at least 0.25 mcg/kg/min for at least 4 hours. Not a mandatory cutoff in SSC 2026.',
         treatment: {
             firstLine: {
                 drug: 'Hydrocortisone',
