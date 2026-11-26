@@ -1136,6 +1136,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/nail-bed-injuries.js');
             return { nodes: m.NAIL_BED_INJURIES_NODES, entryNodeId: 'nail-start', categoryId: 'procedures', moduleLabels: m.NAIL_BED_INJURIES_MODULE_LABELS, citations: m.NAIL_BED_INJURIES_CITATIONS, criticalActions: m.NAIL_BED_INJURIES_CRITICAL_ACTIONS };
         },
+        'dress-syndrome': async () => {
+            const m = await import('../data/trees/dress-syndrome.js');
+            return { nodes: m.DRESS_SYNDROME_NODES, entryNodeId: 'dress-start', categoryId: 'dermatology', moduleLabels: m.DRESS_SYNDROME_MODULE_LABELS, citations: m.DRESS_SYNDROME_CITATIONS, criticalActions: m.DRESS_SYNDROME_CRITICAL_ACTIONS };
+        },
         'lyme-disease': async () => {
             const m = await import('../data/trees/lyme-disease.js');
             return { nodes: m.LYME_DISEASE_NODES, entryNodeId: 'lyme-start', categoryId: 'infectious-disease', moduleLabels: m.LYME_DISEASE_MODULE_LABELS, citations: m.LYME_DISEASE_CITATIONS, criticalActions: m.LYME_DISEASE_CRITICAL_ACTIONS };

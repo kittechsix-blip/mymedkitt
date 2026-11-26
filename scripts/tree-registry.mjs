@@ -3,6 +3,7 @@
 // When adding a new consult, ADD IT HERE (and only here).
 
 export const TREE_REGISTRY = {
+  'dress-syndrome': { prefix: 'DRESS_SYNDROME', entryNodeId: 'dress-start', categoryId: 'dermatology' },
   'lyme-disease': { prefix: 'LYME_DISEASE', entryNodeId: 'lyme-start', categoryId: 'infectious-disease' },
   'sudden-hearing-loss': { prefix: 'HEARING_LOSS', entryNodeId: 'sudden-hearing-loss-start', categoryId: 'ent' },
   'acute-keratitis': { prefix: 'ACUTE_KERATITIS', entryNodeId: 'acute-keratitis-start', categoryId: 'ophthalmology' },

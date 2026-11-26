@@ -99,4 +99,9 @@ export const GOLD: GoldQuestion[] = [
   { q: 'erythema migrans treatment', expect: ['node:lyme-disease/lyme-em-treatment'] },
   { q: 'lyme facial palsy', expect: ['node:lyme-disease/lyme-facial-palsy'] },
   { q: 'lyme arthritis treatment', expect: ['node:lyme-disease/lyme-arthritis'] },
+  // DRESS syndrome
+  { q: 'DRESS syndrome treatment dose', expect: ['node:dress-syndrome/dress-severe'] },
+  { q: 'dress steroid taper', expect: ['node:dress-syndrome/dress-severe'] },
+  { q: 'drug reaction with eosinophilia', expect: ['tree:dress-syndrome', 'node:dress-syndrome/dress-recognize'] },
+  { q: 'DRESS syndrome', expect: ['tree:dress-syndrome'] },
 ];

@@ -4422,6 +4422,7 @@ export const DEFAULT_CATEGORIES = [
         name: 'Dermatology',
         icon: 'nephro-rheum-endo.png',
         decisionTrees: [
+            { id: 'dress-syndrome', title: 'DRESS Syndrome', subtitle: 'Drug rash + eosinophilia \u00b7 Severity \u00b7 Steroids and slow taper \u00b7 Follow-up', categoryId: 'dermatology', version: '1.0', nodeCount: 10, entryNodeId: 'dress-start' },
             {
                 id: 'generalized-pruritus-hub',
                 title: 'Generalized Pruritus Hub',

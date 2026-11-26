@@ -1,3 +1,4 @@
+import { DRESS_SYNDROME_INFO_PAGES } from './new-content/dress-syndrome-info.js';
 import { LYME_DISEASE_INFO_PAGES } from './new-content/lyme-disease-info.js';
 import { HEARING_LOSS_INFO_PAGES } from './new-content/sudden-hearing-loss-info.js';
 import { ACUTE_KERATITIS_INFO_PAGES } from './new-content/acute-keratitis-info.js';
@@ -31650,6 +31651,7 @@ const ONC_DSE_STOP_CYTOTOXIC_PAGE: InfoPage = {
 };
 
 export const INFO_PAGES: Record<string, InfoPage> = {
+  ...DRESS_SYNDROME_INFO_PAGES,
   ...LYME_DISEASE_INFO_PAGES,
   ...HEARING_LOSS_INFO_PAGES,
   ...ACUTE_KERATITIS_INFO_PAGES,

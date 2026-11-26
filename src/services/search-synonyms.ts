@@ -5,6 +5,7 @@
 
 /** Alternative names that should resolve directly in the Home title lookup. */
 export const CONSULT_TITLE_ALIASES: Record<string, string[]> = {
+  'dress-syndrome': ['DRESS', 'drug reaction with eosinophilia and systemic symptoms', 'DIHS', 'drug induced hypersensitivity syndrome'],
   'lyme-disease': ['Lyme', 'borreliosis', 'Borrelia', 'erythema migrans', 'tick bite'],
   'sudden-hearing-loss': ['SSNHL', 'sudden sensorineural hearing loss', 'sudden deafness'],
   'radiculopathies': [
@@ -16,6 +17,7 @@ export const CONSULT_TITLE_ALIASES: Record<string, string[]> = {
 
 /** Clinical synonyms for common queries */
 export const CLINICAL_SYNONYMS: Record<string, string[]> = {
+  'dress-syndrome': ['DRESS', 'DRESS syndrome', 'drug reaction with eosinophilia and systemic symptoms', 'drug reaction with eosinophilia', 'DIHS', 'drug induced hypersensitivity syndrome', 'drug rash with eosinophilia', 'DRESS steroid taper', 'RegiSCAR'],
   'lyme-disease': ['Lyme', 'borrelia', 'borreliosis', 'erythema migrans', 'bull\'s eye rash', 'bullseye rash', 'deer tick', 'blacklegged tick', 'ixodes', 'tick bite', 'tick bite prophylaxis', 'Lyme carditis', 'Lyme facial palsy', 'Lyme arthritis', 'SILC score'],
   'sudden-hearing-loss': ['sudden sensorineural hearing loss', 'SSNHL', 'sudden deafness', 'idiopathic hearing loss', 'sudden hearing loss first line treatment', 'Weber', 'Rinne', 'Rhrine', 'tuning fork', 'conductive versus sensorineural', 'blocked ear normal otoscopy', 'urgent audiometry', 'hearing loss steroids'],
   'acute-keratitis': ['keratitis', 'corneal ulcer', 'contact lens infection', 'dendritic ulcer', 'HSV keratitis', 'pseudodendrite', 'herpes zoster ophthalmicus', 'photokeratitis', 'welding flash', 'Acanthamoeba keratitis', 'fungal keratitis', 'fluorescein uptake patterns'],

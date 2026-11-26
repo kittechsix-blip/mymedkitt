@@ -35,6 +35,7 @@ export const TOOLBAR_OVERFLOW = new Set([
     'blood-draw',
     'pedi-resus-numbers',
     'lyme-disease',
+    'dress-syndrome',
     // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 // Exported so scripts/validate-cross-links.mjs can validate every toolbar
@@ -42,6 +43,13 @@ export const TOOLBAR_OVERFLOW = new Set([
 // toolbar validation entirely (the validator warned and skipped ~1,264 targets)
 // and is the root cause of the 2026-07-27 dead-toolbar-button CRITICAL.
 export const TOOLBAR_CONFIGS = {
+    'dress-syndrome': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'dress-steps' },
+        { id: 'culprits', label: 'Culprits', icon: '💊', action: 'overlay', target: 'dress-culprits' },
+        { id: 'workup', label: 'Workup', icon: '🧪', action: 'jump', target: 'dress-workup', pinned: true },
+        { id: 'taper', label: 'Steroid Taper', icon: '📉', action: 'jump', target: 'dress-severe', pinned: true },
+        { id: 'regiscar', label: 'RegiSCAR', icon: '📝', action: 'overlay', target: 'dress-regiscar' },
+    ],
     'lyme-disease': [
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'lyme-steps' },
         { id: 'atlas', label: 'Rash & Tick Atlas', icon: '🔬', action: 'overlay', target: 'lyme-atlas' },
