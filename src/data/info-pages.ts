@@ -3,6 +3,7 @@ import { LYME_DISEASE_INFO_PAGES } from './new-content/lyme-disease-info.js';
 import { HEARING_LOSS_INFO_PAGES } from './new-content/sudden-hearing-loss-info.js';
 import { ACUTE_KERATITIS_INFO_PAGES } from './new-content/acute-keratitis-info.js';
 import { HG_INFO_PAGES } from './new-content/hyperglycemia-info.js';
+import { HTN_INFO_PAGES } from './new-content/hypertension-info.js';
 import { TPE_INFO_PAGES } from './new-content/transplant-patient-ed-info.js';
 import { TDSE_STOP_PAGE } from './new-content/transplant-drug-side-effects-stop.js';
 import { IO_SITES, IO_SAFETY, IO_CONFIRM, IO_SOURCES } from './io-anatomy.js';
@@ -31675,6 +31676,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
     citations: [],
   },
   ...HG_INFO_PAGES,
+  ...HTN_INFO_PAGES,
   // Transplant Patient in the ED overlays (33)
   ...TPE_INFO_PAGES,
   // Transplant Drugs Side-effects: Stop page (drug-card consult)

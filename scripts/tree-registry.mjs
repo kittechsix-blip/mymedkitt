@@ -154,6 +154,7 @@ export const TREE_REGISTRY = {
   'salicylate':       { prefix: 'SALICYLATE',          entryNodeId: 'sal-start',          categoryId: 'toxicology' },
   'dka':              { prefix: 'DKA',                 entryNodeId: 'dka-start',          categoryId: 'nephro-rheum-endo' },
   'hyperglycemia-ed': { prefix: 'HYPERGLYCEMIA_ED', entryNodeId: 'hg-start', categoryId: 'emergency-medicine' },
+  'hypertension':     { prefix: 'HYPERTENSION', entryNodeId: 'htn-start', categoryId: 'emergency-medicine' },
   'hypoglycemia':     { prefix: 'HYPOGLYCEMIA',        entryNodeId: 'hypoglycemia-start', categoryId: 'nephro-rheum-endo' },
   'sepsis':           { prefix: 'SEPSIS',              entryNodeId: 'sepsis-start',       categoryId: 'critical-care' },
   'vertigo':          { prefix: 'VERTIGO',             entryNodeId: 'vert-start',         categoryId: 'neurology' },

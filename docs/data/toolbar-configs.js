@@ -2,6 +2,7 @@
 // Maps consult IDs to their contextual toolbar items.
 import { hasInfographic } from './infographic-registry.js';
 import { TOOLBAR_HTNE } from './new-content/hypertensive-emergency-adult-toolbar.js';
+import { TOOLBAR_HTN } from './new-content/hypertension-toolbar.js';
 import { TOOLBAR_ARDS } from './new-content/ards-toolbar.js';
 import { TOOLBAR_BCT } from './new-content/blunt-chest-trauma-toolbar.js';
 import { TOOLBAR_SBOV } from './new-content/bowel-obstruction-volvulus-toolbar.js';
@@ -1312,6 +1313,7 @@ export const TOOLBAR_CONFIGS = {
         { id: 'oral-dc', label: 'Oral DC', icon: '💊', action: 'overlay', target: 'dm-oral-discharge' },
     ],
     'hypertensive-emergency-adult': TOOLBAR_HTNE,
+    'hypertension': TOOLBAR_HTN,
     'ards': TOOLBAR_ARDS,
     'blunt-chest-trauma': TOOLBAR_BCT,
     'bowel-obstruction-volvulus': TOOLBAR_SBOV,
