@@ -120,3 +120,11 @@ test('reported myxedema treatment searches land on the relevant thyroid steps', 
     assert.equal(index.search(query, 1).results[0]?.doc.id, node, query);
   }
 });
+
+
+test('septic shock escalation searches open the next vasopressor step', () => {
+  for (const q of ['septic shock MAP goal not met next step', 'sepsis next step', 'refractory hypotension', 'MAP goal not met']) {
+    assert.equal(index.search(q, 1).results[0]?.doc.id, 'sepsis/sepsis-vp-second', q);
+  }
+  assert.equal(index.search('when start steroids septic shock', 1).results[0]?.doc.id, 'sepsis/sepsis-steroids');
+});
