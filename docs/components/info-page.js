@@ -59,7 +59,8 @@ function renderInfoBodyLine(container, line) {
             btn.addEventListener('click', () => {
                 destroyOverlay();
                 if (linkType === 'info') {
-                    showInfoModal(linkId);
+                    const [pageId, anchorId] = linkId.split('#', 2);
+                    showInfoModal(pageId, anchorId);
                 }
                 else if (linkType === 'node') {
                     // Dispatch custom event for tree wizard to handle node jump

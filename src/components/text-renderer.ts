@@ -245,7 +245,8 @@ export function handleInlineLinkClick(e: Event, onNodeJump?: (nodeId: string) =>
     // Surface dead info links instead of swallowing them. A missing id used to
     // be a completely silent no-op, which is why 75 broken #/info/ refs stayed
     // invisible to click-through UX audits for months (2026-07-30 audit).
-    if (!showInfoModal(linkId)) {
+    const [pageId, anchorId] = linkId.split('#', 2);
+    if (!showInfoModal(pageId, anchorId)) {
       console.error(`[dead-link] info page "${linkId}" not found — inline body link is a no-op`);
     }
   }

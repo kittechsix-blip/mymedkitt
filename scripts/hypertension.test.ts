@@ -192,3 +192,17 @@ test('pinned: diet targets and home BP equivalents', () => {
   const home = info['htn-home-bp'].sections.map(x => x.body).join('\n');
   for (const s of ['**Office 130/80** = home 130/80 = 24-hour ambulatory 125/75', '**Office 140/90** = home 135/85 = 24-hour ambulatory 130/80', '**Office 160/100** = home 145/90 = 24-hour ambulatory 145/90']) assert.ok(home.includes(s), s);
 });
+
+test('picker drug links resolve to a unique dosage section and retain a return path', () => {
+  const sections = info['htn-drugs'].sections;
+  const slug = (name: string) => 'trick-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  const links = info['htn-picker'].sections.flatMap(s => [...s.body.matchAll(/\[([^\]]+)\]\(#\/info\/htn-drugs#([^)]+)\)/g)]);
+  assert.ok(links.length >= 20);
+  for (const [, label, anchor] of links) {
+    const matches = sections.filter(s => s.heading && slug(s.heading) === anchor);
+    assert.equal(matches.length, 1, label);
+    assert.ok(matches[0].body.includes('[Back to Drug Picker](#/info/htn-picker)'), label);
+  }
+  const stage1 = info['htn-picker'].sections.find(s => s.heading?.includes('stage 1'))!;
+  assert.ok(stage1.body.includes('[amlodipine](#/info/htn-drugs#trick-amlodipine)'));
+});

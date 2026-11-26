@@ -61,6 +61,19 @@ const DOSES = {
         { cells: { drug: 'Aprocitentan', dose: '12.5 mg once daily', note: 'Resistant hypertension; fluid retention' } },
     ],
 };
+// Links keep the picker wording intact and use the modal's existing section anchors.
+const doseAnchor = (name) => 'trick-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+const EXTRA_PICKER_DRUGS = ['Triamterene', 'Diltiazem', 'Verapamil', 'Atenolol', 'Nitroprusside', 'Isosorbide dinitrate'];
+const pickerTargets = Object.fromEntries([
+    ...DOSES.rows.map(r => [r.cells.drug.replace(' (oral)', ''), r.cells.drug]),
+    ...EXTRA_PICKER_DRUGS.map(name => [name, name]),
+    ['extended-release nifedipine', 'Nifedipine ER'],
+]);
+const pickerPattern = new RegExp('\\b(' + Object.keys(pickerTargets).sort((a, b) => b.length - a.length).join('|') + ')\\b', 'gi');
+const linkPickerDrugs = (text) => text.replace(pickerPattern, label => {
+    const key = Object.keys(pickerTargets).find(name => name.toLowerCase() === label.toLowerCase());
+    return `[${label}](#/info/htn-drugs#${doseAnchor(pickerTargets[key])})`;
+});
 const LIFESTYLE = {
     columns: [
         { key: 'what', label: 'Change' },
@@ -111,14 +124,16 @@ export const HTN_INFO_PAGES = {
     ], 'Critical pitfalls to avoid'),
     'htn-picker': page('htn-picker', 'Drug picker: choose by the patient', [
         { heading: 'How to read it', body: 'Find the first patient below that fits. “Lead with” is the class the 2025 guideline favors; “avoid or watch” is the trap for that patient. Stage then decides one drug or two. Tap [Doses](#/info/htn-drugs) for ranges. [1]' },
-        ...PICKER.rows.map(r => ({ heading: r.cells.who, body: `**Lead with:** ${r.cells.use}${r.cells.avoid ? `\n**Avoid or watch:** ${r.cells.avoid}` : ''}` })),
+        ...PICKER.rows.map(r => ({ heading: r.cells.who, body: linkPickerDrugs(`**Lead with:** ${r.cells.use}${r.cells.avoid ? `\n**Avoid or watch:** ${r.cells.avoid}` : ''}`) })),
         { heading: 'Race', body: 'The 2025 guideline does not select a drug class by race. Its only race-specific treatment notes are that its narrative gives non-Hispanic Black adults as an example of high-risk stage 1 patients for whom starting two drugs is recommended, and that hydralazine with isosorbide dinitrate is recommended for self-identified Black patients with advanced HFrEF. It also notes a larger DASH effect and more masked and resistant hypertension in Black adults. The older rule (thiazide or calcium channel blocker first) was not found in the 2025 text. [1,22]' },
         { heading: 'Age', body: 'No age-based drug class. Older and frail adults start with one drug at a low dose and step up, with standing BP checks; the goal stays under 130/80 when tolerated, and is individualized with limited life expectancy. [1]' },
     ]),
     'htn-drugs': page('htn-drugs', 'Doses: oral antihypertensives', [
         { heading: 'First-line dose cards', body: `${dl('Amlodipine', 'htn-amlodipine')} • ${dl('Chlorthalidone', 'htn-chlorthalidone')} • ${dl('Hydrochlorothiazide', 'htn-hctz')} • ${dl('Indapamide', 'htn-indapamide')} • ${dl('Lisinopril', 'htn-lisinopril')} • ${dl('Losartan', 'htn-losartan')} • ${dl('Nifedipine ER', 'htn-nifedipine-er')}` },
         { heading: 'Add-on and compelling-indication cards', body: `${dl('Spironolactone', 'htn-spironolactone')} • ${dl('Carvedilol', 'htn-carvedilol')} • ${dl('Metoprolol succinate', 'htn-metoprolol-succinate')} • ${dl('Labetalol', 'htn-labetalol')} • ${dl('Torsemide', 'htn-torsemide')}` },
-        { heading: 'Usual ranges (2025 AHA/ACC drug table)', body: `These are usual daily ranges, not first doses. Start low in the range and titrate; lower and slower in older or frail adults. [1]\n${lines(DOSES, c => `**${c.drug}:** ${c.dose}. ${c.note}`)}` },
+        { heading: 'Usual ranges (2025 AHA/ACC drug table)', body: 'These are usual daily ranges, not first doses. Start low in the range and titrate; lower and slower in older or frail adults. [1]' },
+        ...DOSES.rows.map(r => ({ heading: r.cells.drug, body: `**${r.cells.drug}:** ${r.cells.dose}. ${r.cells.note}. [1]\nUsual range, not a starting dose. [Back to Drug Picker](#/info/htn-picker)` })),
+        ...EXTRA_PICKER_DRUGS.map(name => ({ heading: name, body: 'This medicine is mentioned in the picker, but an individual dosage range is not provided in this hypertension table. Review the indication-specific guidance before prescribing. [Back to Drug Picker](#/info/htn-picker)' })),
         { heading: 'Generic single pills (mg)', body: '**ACE inhibitor or ARB + amlodipine:** benazepril + amlodipine 10/2.5, 10/5, 20/5, 20/10, 40/5, 40/10; olmesartan + amlodipine 20/5, 20/10, 40/5, 40/10; telmisartan + amlodipine 40/5, 40/10, 80/5, 80/10; valsartan + amlodipine 160/5, 160/10, 320/5, 320/10.\n**ACE inhibitor or ARB + HCTZ:** lisinopril + HCTZ 10/12.5, 20/12.5, 20/25; losartan + HCTZ 50/12.5, 100/12.5, 100/25; valsartan + HCTZ 80/12.5, 160/12.5, 160/25, 320/12.5, 320/25.\n**Triple:** olmesartan + amlodipine + HCTZ 20/5/12.5, 40/5/12.5, 40/5/25, 40/10/12.5, 40/10/25; valsartan + amlodipine + HCTZ 160/5/12.5, 160/5/25, 160/10/12.5, 160/10/25, 320/10/25. [1]' },
         { heading: 'Combinations to avoid', body: 'ACE inhibitor + ARB, or either with a renin inhibitor. Two drugs from one class. Diltiazem or verapamil with a beta blocker. Clonidine with a non-selective beta blocker (crisis if the beta blocker is withdrawn). Any antihypertensive is blunted by NSAIDs. [1]' },
     ]),
@@ -175,3 +190,7 @@ export const HTN_INFO_PAGES = {
         { heading: 'Diet', body: '**DASH-Sodium** (412): DASH with low sodium vs control diet with high sodium, systolic 11.5 mm Hg lower with hypertension and 7.1 lower without. [20]\n**SSaSS** (20,995): potassium salt substitute, stroke rate ratio 0.86, death 0.88; hyperkalemia events not increased. The trial did not target people with CKD. [19]' },
     ], 'Trials and policies'),
 };
+for (const section of HTN_INFO_PAGES['htn-picker'].sections) {
+    if (section.heading === 'Race')
+        section.body = linkPickerDrugs(section.body);
+}
