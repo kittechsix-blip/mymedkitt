@@ -454,7 +454,7 @@ export const HEAT_STROKE_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Coagulopathy & DIC',
-    body: '**DIC is common in severe heat stroke** — direct thermal injury to endothelium + systemic inflammation. [2][3]\n\n**Labs:**\n• PT/INR, PTT, fibrinogen, D-dimer\n• Platelet count\n\n**Treatment:**\n• Supportive — treat underlying heat stroke\n• FFP if INR >2 AND bleeding\n• Platelets if <50,000 AND bleeding\n• Cryoprecipitate if fibrinogen <100 AND bleeding\n• TXA 1g IV if significant hemorrhage\n\n**Do NOT give platelets or FFP prophylactically** without active bleeding. [2]',
+    body: '**DIC is common in severe heat stroke** — direct thermal injury to endothelium + systemic inflammation. [2][3]\n\n**Labs:**\n• PT/INR, PTT, fibrinogen, D-dimer\n• Platelet count\n\n**Treatment:**\n• Supportive — treat underlying heat stroke\n• FFP if INR >2 AND bleeding\n• Platelets if <50,000 AND bleeding\n• Cryoprecipitate if fibrinogen <100 AND bleeding\n• TXA: generally AVOID in DIC (risk of microvascular thrombosis). Consider 1 g IV only for severe bleeding with documented hyperfibrinolysis, with hematology input\n\n**Do NOT give platelets or FFP prophylactically** without active bleeding. [2]',
     citation: [2, 3],
     next: 'hs-disposition',
     summary: 'DIC: transfuse products as needed — coagulopathy typically resolves with temperature correction',
