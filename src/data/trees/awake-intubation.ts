@@ -745,12 +745,12 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
 - Small dose succinylcholine 20-50 mg if spasm persists
 - Let patient recover before proceeding
 
-**After Visualization Confirmed:**
+**After Tube Placement Confirmed (two-point check: tube seen through the cords or tracheal lumen seen on the scope, PLUS waveform capnography):**
 - Give ketamine 1-2 mg/kg for full induction
 - OR propofol/etomidate at standard doses
 - Then paralytic if desired
 
-**Key Point:** Never paralyze until you see cords. [1][7]`,
+**Key Point:** Never induce or paralyze until the tube is confirmed in the trachea. [1][7]`,
     citation: [1, 7],
     next: 'awake-technique-choice',
 
