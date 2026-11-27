@@ -867,7 +867,7 @@ export const HEMOPHILIA_MODULE_LABELS = [
 
 export const HEMOPHILIA_CITATIONS: Citation[] = [
   { num: 1, text: 'Singleton T, Kruse-Jarres R, Leissinger C. Emergency department care for patients with hemophilia and von Willebrand disease. J Emerg Med. 2010;39(2):158-165.' },
-  { num: 2, text: 'Treatment Guidelines Working Group. Guidelines for the management of hemophilia. 2nd ed. Montreal, Quebec: World Federation of Hemophilia. 2012.' },
+  { num: 2, text: 'Srivastava A, Santagostino E, Dougall A, et al. WFH Guidelines for the Management of Hemophilia, 3rd edition. Haemophilia. 2020;26(Suppl 6):1-158. doi:10.1111/hae.14046' },
   { num: 3, text: 'Nichols WL, Hultin MB, James AH, et al. The diagnosis, evaluation and management of von Willebrand disease. National Heart Lung and Blood Institute. NIH Publication No. 08-5832. 2012.' },
   { num: 4, text: 'Mannucci PM. Treatment of von Willebrand\'s disease. N Engl J Med. 2004;351(7):683-694.' },
   { num: 5, text: 'Josephson N. The hemophilias and their clinical management. Hematology Am Soc Hematol Educ Program. 2013;2013:261-267.' },
