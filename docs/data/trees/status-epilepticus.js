@@ -43,7 +43,7 @@ export const STATUS_EPILEPTICUS_NODES = [
                 urgency: 'critical',
             },
             {
-                label: 'Patient is actively convulsing — can\'t fully exam yet',
+                label: 'Patient is actively convulsing — can\'t fully examine yet',
                 description: 'Treat as SE; re-examine eyes between seizures or after first BZD',
                 next: 'se-is-this-se',
                 urgency: 'critical',
