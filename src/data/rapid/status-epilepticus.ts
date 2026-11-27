@@ -23,7 +23,7 @@ export const RAPID_STATUS_EPILEPTICUS: RapidStrip = {
             { nodeId: 'se-bao-mimicker', text: 'Stop chasing SE. Get the CTA. Call neuro-IR.' },
             { nodeId: 'se-bao-mimicker', text: 'CTA head and neck STAT' },
             { nodeId: 'se-bao-mimicker', text: 'Activate neuro-IR / stroke team' },
-            { nodeId: 'se-bao-mimicker', text: 'Hold further antiseizure escalation — don\'t intubate-and-paralyze the brainstem exam away if BAO is on the table.' },
+            { nodeId: 'se-bao-mimicker', text: 'Do not paralyze the brainstem exam away, and do not stop treating seizures.' },
           ],
         },
         {
