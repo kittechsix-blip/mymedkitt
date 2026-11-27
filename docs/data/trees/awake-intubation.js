@@ -582,7 +582,7 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
 - Patient sitting up or semi-recumbent
 - Gentle blade insertion
 - Minimal jaw lift needed
-- Visualize cords → confirm → then ketamine + paralytic
+- Visualize cords → pass the tube → two-point check (tube seen through the cords + waveform capnography) → only then ketamine induction ± paralytic
 
 **This is essentially "look before you leap" with VL instead of fiber.** [2]`,
         citation: [2],
@@ -699,12 +699,12 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
 - Small dose succinylcholine 20-50 mg if spasm persists
 - Let patient recover before proceeding
 
-**After Visualization Confirmed:**
+**After Tube Placement Confirmed (two-point check: tube seen through the cords or tracheal lumen seen on the scope, PLUS waveform capnography):**
 - Give ketamine 1-2 mg/kg for full induction
 - OR propofol/etomidate at standard doses
 - Then paralytic if desired
 
-**Key Point:** Never paralyze until you see cords. [1][7]`,
+**Key Point:** Never induce or paralyze until the tube is confirmed in the trachea. [1][7]`,
         citation: [1, 7],
         next: 'awake-technique-choice',
         summary: 'Ketamine 20mg IV aliquots q2min to light sedation — NEVER paralyze until you see cords; watch for apnea at high doses',
