@@ -622,7 +622,7 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
 - Patient sitting up or semi-recumbent
 - Gentle blade insertion
 - Minimal jaw lift needed
-- Visualize cords → confirm → then ketamine + paralytic
+- Visualize cords → pass the tube → two-point check (tube seen through the cords + waveform capnography) → only then ketamine induction ± paralytic
 
 **This is essentially "look before you leap" with VL instead of fiber.** [2]`,
     citation: [2],
