@@ -419,7 +419,7 @@ export const AORTIC_DISSECTION_CITATIONS: Citation[] = [
   { num: 4, text: 'Imamura H, et al. Acute aortic dissection presenting as neurological symptoms. Ann Vasc Dis. 2019;12(2):141-144.' },
   { num: 5, text: 'Rogers AM, Hermann LK, Booher AM, et al. Sensitivity of the aortic dissection detection risk score, a novel guideline-based tool for identification of acute aortic dissection at initial presentation: results from the international registry of acute aortic dissection. Circulation. 2011;123(20):2213-2218.' },
   { num: 6, text: 'Nazerian P, et al. Diagnostic accuracy of the aortic dissection detection risk score plus D-dimer for acute aortic syndromes: the ADvISED prospective multicenter study. Circulation. 2018;137(3):250-258.' },
-  { num: 7, text: 'Suzuki T, et al. Biomarkers of aortic diseases. Am Heart J. 2009;157(6):S62-S68.' },
+  { num: 7, text: 'Suzuki T, Distante A, Zizza A, et al. Diagnosis of acute aortic dissection by D-dimer: the International Registry of Acute Aortic Dissection Substudy on Biomarkers (IRAD-Bio) experience. Circulation. 2009;119(20):2702-2707.' },
   { num: 8, text: 'Goldstein SA, et al. Multimodality imaging of diseases of the thoracic aorta in adults: from the American Society of Echocardiography and the European Association of Cardiovascular Imaging. J Am Soc Echocardiogr. 2015;28(2):119-182.' },
   { num: 9, text: 'Weingart S. EMCrit Podcast 29 – Aortic Dissection. EMCrit.org. Updated 2024.' },
   { num: 10, text: 'Trimarchi S, et al. Contemporary results of surgery in acute type A aortic dissection: The International Registry of Acute Aortic Dissection experience. J Thorac Cardiovasc Surg. 2005;129(1):112-122.' },
