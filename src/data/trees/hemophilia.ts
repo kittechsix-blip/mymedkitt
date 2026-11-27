@@ -466,7 +466,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Factor VIII Dosing',
-    body: '**Formula:** Dose (units) = (Target% − Baseline%) ÷ 2 × Weight (kg)\n\n**1 unit/kg raises factor VIII by ~2%** [2]\n\n**Examples at 70 kg (assuming baseline 0%):**\n• Target 50% → 1,750 units\n• Target 80% → 2,800 units\n• Target 100% → 3,500 units\n\n**Half-life: 8–12 hours** — redose q8–12h for sustained coverage [2]\n\n**Products:** [Factor VIII](#/drug/factor-viii/hemophilia a)\n• Recombinant: Advate, Kogenate, Xyntha, Eloctate (extended half-life), Jivi, Adynovate\n• Plasma-derived: Humate-P (also contains vWF), Koate-DVI\n\n**Switching brands is acceptable in emergencies** — no clear evidence that switching increases inhibitor risk. [10]',
+    body: '**Formula:** Dose (units) = (Target% − Baseline%) ÷ 2 × Weight (kg)\n\n**1 unit/kg raises factor VIII by ~2%** [2]\n\n**Examples at 70 kg (assuming baseline 0%):**\n• Target 50% → 1,750 units\n• Target 80% → 2,800 units\n• Target 100% → 3,500 units\n\n**Half-life: 8–12 hours** — redose q8–12h for sustained coverage [2]\n\n**Products:** [Factor VIII](#/drug/factor-viii/hemophilia a)\n• Recombinant: Advate, Xyntha, Eloctate (extended half-life), Jivi, Adynovate\n• Plasma-derived: Humate-P (also contains vWF), Koate-DVI\n\n**Switching brands is acceptable in emergencies** — no clear evidence that switching increases inhibitor risk. [10]',
     citation: [2, 10, 11],
     next: 'hemo-products',
     summary: 'Factor VIII: 1 IU/kg raises level ~2%. Half-life 8-12h. Dose = weight × target rise × 0.5',
