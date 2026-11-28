@@ -663,7 +663,7 @@ export const THYROID_NODES = [
         type: 'result',
         module: 6,
         title: 'Subclinical Hyperthyroidism — Urgent Referral',
-        body: 'Suppressed TSH (<0.1 mIU/L) with normal free T4/T3. Risk depends on degree of TSH suppression and age. [14]\n\n**Risks of untreated subclinical hyperthyroidism:**\n• AFib (especially if TSH <0.1 and age >65)\n• Osteoporosis (accelerated bone turnover)\n• Progression to overt hyperthyroidism\n\n**Common causes (check first):**\n• Exogenous thyroid hormone (most common cause — is patient on levothyroxine?)\n• Amiodarone\n• Recent iodinated contrast\n\n**ED text:** No acute treatment needed.\n\n**Disposition:** Urgent endocrinology referral within 1-2 weeks. Repeat TSH + free T4/T3 to confirm (may be transient).',
+        body: 'Suppressed TSH (<0.1 mIU/L) with normal free T4/T3. Risk depends on degree of TSH suppression and age. [14]\n\n**Risks of untreated subclinical hyperthyroidism:**\n• AFib (especially if TSH <0.1 and age >65)\n• Osteoporosis (accelerated bone turnover)\n• Progression to overt hyperthyroidism\n\n**Common causes (check first):**\n• Exogenous thyroid hormone (most common cause — is patient on levothyroxine?)\n• Amiodarone\n• Recent iodinated contrast\n\n**In the ED:** No acute treatment needed.\n\n**Disposition:** Urgent endocrinology referral within 1-2 weeks. Repeat TSH + free T4/T3 to confirm (may be transient).',
         recommendation: 'Urgent endocrinology referral within 1-2 weeks. Confirm with repeat labs.',
         citation: [8, 14],
     },
